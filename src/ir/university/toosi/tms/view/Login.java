@@ -2,6 +2,8 @@ package ir.university.toosi.tms.view;
 
 import ir.university.toosi.tms.util.WebServiceClientUtil;
 
+import javax.swing.*;
+
 /**
  * @author a_ahmady
  */
@@ -44,7 +46,7 @@ public class Login extends javax.swing.JInternalFrame {
                 String[] test = new String[2];
                 test[0] = "admin";
                 test[1] = "password";
-                WebServiceClientUtil.authentication("http://localhost:8080/kernel/UserServiceImpl?wsdl", test);
+                JOptionPane.showMessageDialog(new JFrame(), WebServiceClientUtil.authentication("http://localhost:8080/kernel/UserServiceImpl?wsdl", test));
             }
         });
 
