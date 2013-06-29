@@ -1,7 +1,6 @@
 package ir.university.toosi.tms.view;
 
 import ir.university.toosi.tms.controller.LanguageAction;
-import ir.university.toosi.tms.view.person.PersonManagement;
 
 import javax.swing.*;
 import java.awt.*;
@@ -79,7 +78,6 @@ public class MainForm extends JApplet implements ActionListener {
     }
 
     private void refreshMainForm() {
-        jdpDesktop.removeAll();
         jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
         menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
         menu.setText(LanguageAction.getBundleMessage("frame"));
@@ -87,6 +85,7 @@ public class MainForm extends JApplet implements ActionListener {
         menuItem.setText(LanguageAction.getBundleMessage("salam"));
         persianItem.setText(LanguageAction.getBundleMessage("persian"));
         englishItem.setText(LanguageAction.getBundleMessage("english"));
+        jdpDesktop.removeAll();
         jdpDesktop.revalidate();
         jdpDesktop.repaint();
     }
