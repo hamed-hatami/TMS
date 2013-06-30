@@ -8,7 +8,6 @@ public class WebServiceInfo {
 
     private String serverUrl;
     private String serviceName;
-
     private String path;
 
     public WebServiceInfo() {
