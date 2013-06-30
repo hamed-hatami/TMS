@@ -46,7 +46,7 @@ public class Login extends javax.swing.JInternalFrame {
                 String[] test = new String[2];
                 test[0] = "admin";
                 test[1] = "password";
-                JOptionPane.showMessageDialog(new JFrame(), WebServiceClientUtil.authentication("http://localhost:8080/kernel/UserServiceImpl?wsdl", test));
+                JOptionPane.showMessageDialog(new JFrame(), WebServiceClientUtil.authentication("https://127.0.0.1/kernel/UserService/UserService?wsdl", test));
             }
         });
 

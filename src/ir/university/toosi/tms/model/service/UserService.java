@@ -2,7 +2,6 @@ package ir.university.toosi.tms.model.service;
 
 import ir.university.toosi.tms.model.entity.User;
 
-import javax.jws.WebService;
 import java.util.List;
 
 /**
@@ -10,12 +9,11 @@ import java.util.List;
  * @version : 0.8
  */
 
-@WebService
 public interface UserService<T extends User> {
 
     public boolean exist(String username);
 
-    public T authenticate(String username, String password);
+    public void authenticate(String username, String password);
 
     public T findById(String id);
 
@@ -40,6 +38,4 @@ public interface UserService<T extends User> {
     public boolean deleteUser(T entity);
 
     public boolean editUser(T entity);
-
-
 }

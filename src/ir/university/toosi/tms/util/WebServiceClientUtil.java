@@ -9,14 +9,15 @@ import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 
 import javax.net.ssl.*;
-import javax.xml.ws.Service;
+import javax.xml.rpc.Service;
+import javax.xml.rpc.ServiceFactory;
 import java.net.URL;
 
 
 public class WebServiceClientUtil {
 
     private static String nameSpace = "http://service.model.tms.toosi.university.ir/";
-    private static String serviceName = "UserServiceImplService";
+    private static String serviceName = "UserService";
 
     public static boolean authentication(String wsdlUrl, String[] parameters) {
         try {
@@ -45,8 +46,10 @@ public class WebServiceClientUtil {
                 }
             });
 
-            Service service = Service.create(new URL(wsdlUrl), new javax.xml.namespace.QName(nameSpace, serviceName));
-            UserService userService = service.getPort(UserService.class);
+            ServiceFactory factory = ServiceFactory.newInstance();
+            Service service = factory.createService(new URL(wsdlUrl), new javax.xml.namespace.QName(nameSpace, serviceName));
+            //Service service = Service.create(new URL(wsdlUrl), new javax.xml.namespace.QName(nameSpace, serviceName));
+            UserService userService = (UserService) service.getPort(UserService.class);
             Client client = ClientProxy.getClient(userService);
             if (client != null) {
                 HTTPConduit conduit = (HTTPConduit) client.getConduit();
@@ -60,16 +63,18 @@ public class WebServiceClientUtil {
                 policy.setAllowChunking(false);
                 conduit.setClient(policy);
             }
-            User user = userService.authenticate(parameters[0], parameters[1]);
+            userService.authenticate(parameters[0], parameters[1]);
+/*
             if (user != null) {
                 return true;
             } else {
                 return false;
             }
+*/
         } catch (Exception e) {
             return false;
         }
-
+      return false;
     }
 
 }
