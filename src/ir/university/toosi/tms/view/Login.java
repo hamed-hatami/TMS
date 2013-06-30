@@ -130,7 +130,7 @@ public class Login extends javax.swing.JInternalFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private boolean login(ActionEvent evt){
+    private boolean login(ActionEvent evt) {
 
         System.out.println("IN LOGIN");
 
@@ -145,14 +145,14 @@ public class Login extends javax.swing.JInternalFrame {
 
         User result = null;
         try {
-            result = RESTfulClientUtil.authenticateService(loginService.getServerUrl()+loginService.getPath(), loginService.getServiceName(), new ObjectMapper().writeValueAsString(user));
+            result = RESTfulClientUtil.authenticateService(loginService.getServerUrl() + loginService.getPath(), loginService.getServiceName(), new ObjectMapper().writeValueAsString(user));
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        if(result == null)
+        if (result == null)
             return false;
-        if(result.getUsername().equalsIgnoreCase("null")) {
-            new JOptionPane().createDialog("false").show();
+        if (result.getUsername().equalsIgnoreCase("null")) {
+            JOptionPane.showMessageDialog(this, "NOOOOOOOOOOOOOOOOO");
             return false;
         }
         return true;
