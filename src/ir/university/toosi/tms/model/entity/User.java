@@ -1,6 +1,8 @@
 package ir.university.toosi.tms.model.entity;
 
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 import java.io.Serializable;
 
 /**
@@ -70,213 +72,264 @@ public class User implements Serializable {
         this.enable = enable;
     }
 
+
+    @JsonProperty("address")
     public String getAddress() {
         return address;
     }
 
+    @JsonProperty("address")
     public void setAddress(String address) {
         this.address = address;
     }
 
-    public String getUserComment() {
-        return userComment;
-    }
-
+    @JsonProperty("userComment")
     public void setUserComment(String userComment) {
         this.userComment = userComment;
     }
 
-    public String getCreateDate() {
-        return createDate;
+    @JsonProperty("userComment")
+    public String getUserComment() {
+        return userComment;
     }
 
+    @JsonProperty("createDate")
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 
-    public String getDeleted() {
-        return deleted;
+    @JsonProperty("createDate")
+    public String getCreateDate() {
+        return createDate;
     }
 
+    @JsonProperty("deleted")
     public void setDeleted(String deleted) {
         this.deleted = deleted;
     }
 
-    public String getEmail() {
-        return email;
+    @JsonProperty("deleted")
+    public String getDeleted() {
+        return deleted;
     }
 
+    @JsonProperty("email")
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getFailedLoginCount() {
-        return failedLoginCount;
+    @JsonProperty("email")
+    public String getEmail() {
+        return email;
     }
 
+    @JsonProperty("failedLoginCount")
     public void setFailedLoginCount(String failedLoginCount) {
         this.failedLoginCount = failedLoginCount;
     }
 
-    public String getFirstLoginDate() {
-        return firstLoginDate;
+    @JsonProperty("failedLoginCount")
+    public String getFailedLoginCount() {
+        return failedLoginCount;
     }
 
+    @JsonProperty("firstLoginDate")
     public void setFirstLoginDate(String firstLoginDate) {
         this.firstLoginDate = firstLoginDate;
     }
 
-    public String getFirstLoginIP() {
-        return firstLoginIP;
+    @JsonProperty("firstLoginDate")
+    public String getFirstLoginDate() {
+        return firstLoginDate;
     }
 
+    @JsonProperty("firstLoginIP")
     public void setFirstLoginIP(String firstLoginIP) {
         this.firstLoginIP = firstLoginIP;
     }
 
-    public String getFirstname() {
-        return firstname;
+    @JsonProperty("firstLoginIP")
+    public String getFirstLoginIP() {
+        return firstLoginIP;
     }
 
+    @JsonProperty("firstname")
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
 
-    public long getId() {
-        return id;
+    @JsonProperty("firstname")
+    public String getFirstname() {
+        return firstname;
     }
 
+    @JsonProperty("id")
     public void setId(long id) {
         this.id = id;
     }
 
-    public String getLastLoginDate() {
-        return lastLoginDate;
+    @JsonProperty("id")
+    public long getId() {
+        return id;
     }
 
+    @JsonProperty("lastLoginDate")
     public void setLastLoginDate(String lastLoginDate) {
         this.lastLoginDate = lastLoginDate;
     }
 
-    public String getLastLoginIP() {
-        return lastLoginIP;
+    @JsonProperty("lastLoginDate")
+    public String getLastLoginDate() {
+        return lastLoginDate;
     }
 
+    @JsonProperty("lastLoginIP")
     public void setLastLoginIP(String lastLoginIP) {
         this.lastLoginIP = lastLoginIP;
     }
 
-    public String getLastname() {
-        return lastname;
+    @JsonProperty("lastLoginIP")
+    public String getLastLoginIP() {
+        return lastLoginIP;
     }
 
+    @JsonProperty("lastname")
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
 
-    public String getMobile() {
-        return mobile;
+    @JsonProperty("lastname")
+    public String getLastname() {
+        return lastname;
     }
 
+    @JsonProperty("mobile")
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
-    public String getNationalCode() {
-        return nationalCode;
+    @JsonProperty("mobile")
+    public String getMobile() {
+        return mobile;
     }
 
+    @JsonProperty("nationalCode")
     public void setNationalCode(String nationalCode) {
         this.nationalCode = nationalCode;
     }
 
-    public String getPassword() {
-        return password;
+    @JsonProperty("nationalCode")
+    public String getNationalCode() {
+        return nationalCode;
     }
 
+    @JsonProperty("password")
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getPasswordModifiedDate() {
-        return passwordModifiedDate;
+    @JsonProperty("password")
+    public String getPassword() {
+        return password;
     }
 
+    @JsonProperty("passwordModifiedDate")
     public void setPasswordModifiedDate(String passwordModifiedDate) {
         this.passwordModifiedDate = passwordModifiedDate;
     }
 
-    public String getPhone() {
-        return phone;
+    @JsonProperty("passwordModifiedDate")
+    public String getPasswordModifiedDate() {
+        return passwordModifiedDate;
     }
 
+    @JsonProperty("phone")
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getStatus() {
-        return status;
+    @JsonProperty("phone")
+    public String getPhone() {
+        return phone;
     }
 
+    @JsonProperty("status")
     public void setStatus(String status) {
         this.status = status;
     }
 
+    @JsonProperty("status")
+    public String getStatus() {
+        return status;
+    }
+
+    @JsonProperty("username")
     public String getUsername() {
         return username;
     }
 
+    @JsonProperty("username")
     public void setUsername(String username) {
         this.username = username;
     }
 
-    public WorkGroup getWorkgroup() {
-        return workgroup;
-    }
-
+    @JsonProperty("workgroup")
     public void setWorkgroup(WorkGroup workgroup) {
         this.workgroup = workgroup;
     }
 
-    public String getEnable() {
-        return enable;
+    @JsonProperty("workgroup")
+    public WorkGroup getWorkgroup() {
+        return workgroup;
     }
 
+    @JsonProperty("enable")
     public void setEnable(String enable) {
         this.enable = enable;
     }
 
-    public String getCreateTime() {
-        return createTime;
+    @JsonProperty("enable")
+    public String getEnable() {
+        return enable;
     }
 
+    @JsonProperty("createTime")
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-
-    public String getCreateBy() {
-        return createBy;
+    @JsonProperty("createTime")
+    public String getCreateTime() {
+        return createTime;
     }
 
+    @JsonProperty("createBy")
     public void setCreateBy(String createBy) {
         this.createBy = createBy;
     }
 
-    public String getFirstLogin() {
-        return isFirstLogin;
+    @JsonProperty("createBy")
+    public String getCreateBy() {
+        return createBy;
     }
 
+    @JsonProperty("isFirstLogin")
     public void setFirstLogin(String firstLogin) {
         isFirstLogin = firstLogin;
     }
 
-
-    public boolean isOnline() {
-        return online;
+    @JsonProperty("isFirstLogin")
+    public String getFirstLogin() {
+        return isFirstLogin;
     }
 
+    @JsonProperty("online")
     public void setOnline(boolean online) {
         this.online = online;
+    }
+
+    @JsonProperty("online")
+    public boolean isOnline() {
+        return online;
     }
 }

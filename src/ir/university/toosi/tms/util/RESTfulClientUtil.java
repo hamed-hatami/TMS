@@ -1,10 +1,12 @@
 package ir.university.toosi.tms.util;
 
+import ir.university.toosi.tms.model.entity.User;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -16,10 +18,12 @@ import java.io.InputStreamReader;
 
 public class RESTfulClientUtil {
 
-    public static String callReceiveFileService(String url,String serviceName, String jsonString) {
+    public static User authenticateService(String url, String serviceName, String jsonString) {
         try {
+            System.out.println("IN CLIENT");
             HttpClient client = new DefaultHttpClient();
             HttpPost postRequest = new HttpPost(url + serviceName);
+            System.out.println("AFTER HTTP POST");
             postRequest.setHeader("Content-type", "application/json");
             postRequest.setEntity(new StringEntity(jsonString));
             HttpResponse response = client.execute(postRequest);
@@ -28,18 +32,22 @@ public class RESTfulClientUtil {
                         + response.getStatusLine().getStatusCode());
             }
 
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader((response.getEntity().getContent())));
+            System.out.println("AFTER RESPONSE");
 
-            String result = "";
-            String output = "";
-            while ((output = br.readLine()) != null) {
-                result += output;
-            }
-
-            client.getConnectionManager().shutdown();
-            System.out.println(result);
-            return result;
+//            BufferedReader br = new BufferedReader(
+//                    new InputStreamReader((response.getEntity().getContent())));
+//
+//            String result = "";
+//            String output = "";
+//            while ((output = br.readLine()) != null) {
+//                result += output;
+//            }
+//
+//            client.getConnectionManager().shutdown();
+//            System.out.println(result);
+            User user = new ObjectMapper().readValue(response.getEntity().getContent(), User.class);
+            System.out.println("USER : "  + user);
+            return user;
 
         } catch (Exception e) {
             e.printStackTrace();

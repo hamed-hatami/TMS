@@ -1,8 +1,14 @@
 package ir.university.toosi.tms.view;
 
-import ir.university.toosi.tms.util.WebServiceClientUtil;
+import ir.university.toosi.tms.model.entity.User;
+import ir.university.toosi.tms.model.entity.WebServiceInfo;
+import ir.university.toosi.tms.util.RESTfulClientUtil;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  * @author a_ahmady
@@ -41,12 +47,9 @@ public class Login extends javax.swing.JInternalFrame {
         jButton1.setText("LOGIN");
         jButton1.setActionCommand("login");
 
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                String[] test = new String[2];
-                test[0] = "admin";
-                test[1] = "password";
-                JOptionPane.showMessageDialog(new JFrame(), WebServiceClientUtil.authentication("https://127.0.0.1/kernel/UserService/UserService?wsdl", test));
+        jButton1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                login(evt);
             }
         });
 
@@ -126,6 +129,34 @@ public class Login extends javax.swing.JInternalFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
 // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private boolean login(ActionEvent evt){
+
+        System.out.println("IN LOGIN");
+
+        WebServiceInfo loginService = new WebServiceInfo();
+        loginService.setServerUrl("http://192.168.240.20:8080/kernel/restful");
+        loginService.setServiceName("/authenticate");
+        loginService.setPath("/KernelWebService");
+
+        User user = new User();
+        user.setUsername(jTextField1.getText());
+        user.setPassword(jTextField2.getText());
+
+        User result = null;
+        try {
+            result = RESTfulClientUtil.authenticateService(loginService.getServerUrl()+loginService.getPath(), loginService.getServiceName(), new ObjectMapper().writeValueAsString(user));
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        if(result == null)
+            return false;
+        if(result.getUsername().equalsIgnoreCase("null")) {
+            new JOptionPane().createDialog("false").show();
+            return false;
+        }
+        return true;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
