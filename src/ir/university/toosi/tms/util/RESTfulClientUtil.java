@@ -46,7 +46,7 @@ public class RESTfulClientUtil {
 //            client.getConnectionManager().shutdown();
 //            System.out.println(result);
             User user = new ObjectMapper().readValue(response.getEntity().getContent(), User.class);
-            System.out.println("USER : "  + user);
+            System.out.println("USER : " + user);
             return user;
 
         } catch (Exception e) {
@@ -54,6 +54,7 @@ public class RESTfulClientUtil {
             return null;
         }
     }
+
     public String callInitialService() {
         try {
             HttpClient client = new DefaultHttpClient();

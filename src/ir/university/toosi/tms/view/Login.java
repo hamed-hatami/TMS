@@ -135,9 +135,9 @@ public class Login extends javax.swing.JInternalFrame {
         System.out.println("IN LOGIN");
 
         WebServiceInfo loginService = new WebServiceInfo();
-        loginService.setServerUrl("http://192.168.240.20:8080/kernel/restful");
+        loginService.setServerUrl("http://127.0.0.1:8080/kernel/restful");
+        loginService.setPath("/UserService");
         loginService.setServiceName("/authenticate");
-        loginService.setPath("/KernelWebService");
 
         User user = new User();
         user.setUsername(jTextField1.getText());
