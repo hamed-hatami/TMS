@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="TMS" default="deploy" basedir=".">
+
+    <description>TMS</description>
+
+
+    <property environment="env"/>
+    <property file="tms_fa.properties"/>
+    <property name="jaxb.home" value="."/>
+    <property name="version" value="0.1alpha"/>
+    <property name="display.name" value="TMS ${version}"/>
+    <property name="name" value="TMS"/>
+    <property name="packedName" value="TMSFinal"/>
+
+
+    <property name="bin.dir" value="bin"/>
+    <property name="signed.dir" value="signed"/>
+    <property name="classes.dir" value="${signed.dir}/classes"/>
+    <property name="resource.classes.dir" value="${classes.dir}/ir/university/toosi/tms/resources"/>
+    <property name="resources.dir" value="resources"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="packedLib.dir" value="packedLib"/>
+    <property name="src.dir" value="src"/>
+
+    <property name="classes.prefix" value="ir/university/toosi"/>
+    <property name="src.classes.prefix" value="${classes.prefix}/tms"/>
+    <property name="deploy.dir" value="/home/hatami/project/WTMS/signedLib"/>
+
+
+    <property name="javac.debug" value="true"/>
+    <property name="javac.deprecation" value="false"/>
+    <property name="javac.version" value="1.7"/>
+
+    <path id="classpath">
+        <pathelement path="."/>
+    </path>
+
+    <path id="build.classpath">
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+
+
+    <path id="compile.classpath">
+        <path refid="build.classpath"/>
+        <pathelement location="${classes.dir}"/>
+    </path>
+
+    <patternset id="meta.files">
+        <include name="**/*.dtd"/>
+        <include name="**/*.xml"/>
+        <include name="**/*.xslt"/>
+        <include name="**/*.properties"/>
+    </patternset>
+
+    <patternset id="src.files">
+        <include name="**/*.java"/>
+    </patternset>
+
+    <target name="clean" description="Cleans up the build directory">
+        <delete dir="${signed.dir}/classes/${src.classes.prefix}"/>
+        <!-- I don't clean opxi stuff, cuz they are not fast ubtainable -->
+        <delete>
+            <fileset dir="${signed.dir}">
+                <include name="TMS.*"/>
+            </fileset>
+        </delete>
+    </target>
+
+    <target name="init" description="Initialize the build">
+        <echo message="Build ${display.name}"/>
+        <tstamp/>
+        <mkdir dir="${classes.dir}"/>
+        <copy todir="${classes.dir}">
+            <fileset dir="${src.dir}">
+                <patternset refid="meta.files"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="native2ascii">
+        <native2ascii src="${resources.dir}/messages" dest="${resource.classes.dir}"
+                      includes="Messages*.properties"
+                      encoding="UTF-8"/>
+    </target>
+
+    <target name="compile" depends="init, clean" description="Compile the Java source code">
+        <javac destdir="${classes.dir}"
+               classpathref="compile.classpath"
+               debug="${javac.debug}"
+               deprecation="${javac.deprecation}"
+               encoding="UTF-8"
+               source="1.7"
+               nowarn="on">
+            <compilerarg value="-Xlint:deprecation"/>
+            <src path="${src.dir}"/>
+        </javac>
+
+    </target>
+
+    <!-- ############################ Main Tragets #############################-->
+
+    <target name="jar" depends="compile, native2ascii">
+        <delete file="${signed.dir}/${name}.jar" verbose="yes"/>
+
+        <jar jarfile="${signed.dir}/${name}.jar">
+            <fileset dir="${classes.dir}">
+                <include name="**/tms/**/*.class"/>
+                <include name="**/agent_fa.properties"/>
+            </fileset>
+            <fileset dir="${resources.dir}/images">
+                <include name="**/*.png"/>
+                <include name="**/*.gif"/>
+                <include name="**/*.jpg"/>
+            </fileset>
+
+            <zipfileset id="jar.bundle" prefix="ir/university/toosi/tms/resources"
+                        dir="${classes.dir}/ir/university/toosi/tms/resources">
+                <include name="*.properties"/>
+            </zipfileset>
+
+            <manifest>
+                <attribute name="Built-By" value="Hamed Hatami"/>
+                <attribute name="Class-Path" value="swing-layout-1.0.4.jar,jackson-mapper-asl.jar,jackson-annotations-2.0.4.jar,jackson-core-2.0.4.jar,jackson-core-asl.jar,jackson-databind-2.0.4.jar,httpclient.jar,httpcore.jar,commons-logging.jar,commons-httpclient.jar"/>
+                <attribute name="Main-Class" value="ir.university.toosi.tms.view.MainForm"/>
+            </manifest>
+        </jar>
+    </target>
+
+
+    <target name="sign" depends="jar">
+        <signjar alias="jboss" keystore="${resources.dir}/key/aria.keystore"
+                 storepass="changeit">
+            <path>
+                <fileset dir="${signed.dir}" includes="*.jar"/>
+            </path>
+        </signjar>
+    </target>
+
+    <target name="deploy" depends="sign">
+        <copy todir="${deploy.dir}" overwrite="yes" verbose="yes">
+            <fileset dir="${signed.dir}">
+                <include name="*.jar"/>
+            </fileset>
+        </copy>
+        <copy file="${resources.dir}/TMS.html" todir="${signed.dir}" overwrite="yes" verbose="yes"/>
+    </target>
+
+</project>
