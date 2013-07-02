@@ -18,7 +18,7 @@ import java.io.InputStreamReader;
 
 public class RESTfulClientUtil {
 
-    public static User authenticateService(String url, String serviceName, String jsonString) {
+    public User authenticateService(String url, String serviceName, String jsonString) {
         try {
             System.out.println("IN CLIENT");
             HttpClient client = new DefaultHttpClient();
@@ -32,19 +32,6 @@ public class RESTfulClientUtil {
                         + response.getStatusLine().getStatusCode());
             }
 
-            System.out.println("AFTER RESPONSE");
-
-//            BufferedReader br = new BufferedReader(
-//                    new InputStreamReader((response.getEntity().getContent())));
-//
-//            String result = "";
-//            String output = "";
-//            while ((output = br.readLine()) != null) {
-//                result += output;
-//            }
-//
-//            client.getConnectionManager().shutdown();
-//            System.out.println(result);
             User user = new ObjectMapper().readValue(response.getEntity().getContent(), User.class);
             System.out.println("USER : " + user);
             return user;

@@ -6,9 +6,9 @@ import ir.university.toosi.tms.util.RESTfulClientUtil;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
 
 /**
  * @author a_ahmady
@@ -47,14 +47,45 @@ public class Login extends javax.swing.JInternalFrame {
         jButton1.setText("LOGIN");
         jButton1.setActionCommand("login");
 
-        jButton1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                login(evt);
+        jButton2.setText("CANCLE");
+        jButton2.setActionCommand("cancle");
+
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+
+                loginService = new WebServiceInfo();
+                loginService.setServerUrl("http://127.0.0.1:8080/kernel/restful");
+                loginService.setPath("/UserService");
+                loginService.setServiceName("/authenticate");
+
+                user = new User();
+                user.setUsername(jTextField1.getText());
+                user.setPassword(jTextField2.getText());
+
+
+                AccessController.doPrivileged(new PrivilegedAction() {
+                    public Object run() {
+                        try {
+                            result = new RESTfulClientUtil().authenticateService(loginService.getServerUrl() + loginService.getPath(), loginService.getServiceName(), new ObjectMapper().writeValueAsString(user));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        return null;
+                    }
+                });
+
+                if (result == null)
+                    JOptionPane.showMessageDialog(new JFrame(), "user not found");
+                if (result.getUsername().equalsIgnoreCase("null")) {
+                    JOptionPane.showMessageDialog(new JFrame(), "user not found");
+                }
+                JOptionPane.showMessageDialog(new JFrame(), "user found");
+
             }
         });
 
-        jButton2.setText("CANCLE");
-        jButton2.setActionCommand("cancle");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,33 +161,6 @@ public class Login extends javax.swing.JInternalFrame {
 // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private boolean login(ActionEvent evt) {
-
-        System.out.println("IN LOGIN");
-
-        WebServiceInfo loginService = new WebServiceInfo();
-        loginService.setServerUrl("http://127.0.0.1:8080/kernel/restful");
-        loginService.setPath("/UserService");
-        loginService.setServiceName("/authenticate");
-
-        User user = new User();
-        user.setUsername(jTextField1.getText());
-        user.setPassword(jTextField2.getText());
-
-        User result = null;
-        try {
-            result = RESTfulClientUtil.authenticateService(loginService.getServerUrl() + loginService.getPath(), loginService.getServiceName(), new ObjectMapper().writeValueAsString(user));
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-        if (result == null)
-            return false;
-        if (result.getUsername().equalsIgnoreCase("null")) {
-            JOptionPane.showMessageDialog(this, "NOOOOOOOOOOOOOOOOO");
-            return false;
-        }
-        return true;
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -166,5 +170,8 @@ public class Login extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private WebServiceInfo loginService;
+    private User user, result;
+
     // End of variables declaration//GEN-END:variables
 }
