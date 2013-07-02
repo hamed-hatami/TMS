@@ -7,8 +7,6 @@ import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 
 import javax.net.ssl.*;
-import javax.xml.rpc.Service;
-import javax.xml.rpc.ServiceFactory;
 import java.net.URL;
 
 

@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 
@@ -34,10 +35,22 @@ public class MainForm extends JApplet implements ActionListener {
             frame.setTitle("Traffic Management System");
             frame.pack();
         }
+        Login frame = new Login();
+        frame.setVisible(true);
 
         jdpDesktop = new JDesktopPane();
+        jdpDesktop.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
         setContentPane(jdpDesktop);
-        setJMenuBar(createMenuBar());
+        JMenuBar jMenuBar=createMenuBar();
+        setJMenuBar(jMenuBar);
+        jMenuBar.setVisible(false);
+
         jdpDesktop.putClientProperty("JDesktopPane.dragMode", "outline");
         jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
         menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
@@ -70,13 +83,13 @@ public class MainForm extends JApplet implements ActionListener {
     }
 
     protected void showPersonEdit() {
-        Login frame = new Login();
+        /*Login frame = new Login();
         frame.setVisible(true);
-        jdpDesktop.add(frame);
-        try {
+        jdpDesktop.add(frame);*/
+   /*     try {
             frame.setSelected(true);
         } catch (java.beans.PropertyVetoException e) {
-        }
+        }*/
     }
 
     private void refreshMainForm() {
