@@ -7,8 +7,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
 
 /**
  * @author : Hamed Hatami , Javad Sarhadi , Farzad Sedaghatbin, Atefeh Ahmadi
@@ -24,7 +22,7 @@ public class MainForm extends JApplet implements ActionListener {
     private JMenuItem menuItem;
     private JMenuItem persianItem;
     private JMenuItem englishItem;
-
+    Login loginForm;
 
     @Override
     public void init() {
@@ -35,21 +33,21 @@ public class MainForm extends JApplet implements ActionListener {
             frame.setTitle("Traffic Management System");
             frame.pack();
         }
-        Login frame = new Login();
-        frame.setVisible(true);
+        loginForm = new Login(this);
+        loginForm.setVisible(true);
 
         jdpDesktop = new JDesktopPane();
-        jdpDesktop.add(frame);
+        jdpDesktop.add(loginForm);
         try {
-            frame.setSelected(true);
+            loginForm.setSelected(true);
         } catch (PropertyVetoException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
 
         setContentPane(jdpDesktop);
-        JMenuBar jMenuBar=createMenuBar();
-        setJMenuBar(jMenuBar);
-        jMenuBar.setVisible(false);
+        menuBar=createMenuBar();
+        setJMenuBar(menuBar);
+        menuBar.setVisible(false);
 
         jdpDesktop.putClientProperty("JDesktopPane.dragMode", "outline");
         jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
@@ -66,7 +64,7 @@ public class MainForm extends JApplet implements ActionListener {
         persianItem = new JMenuItem();
         englishItem = new JMenuItem();
         menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
-        menu.setText(LanguageAction.getBundleMessage("frame"));
+        menu.setText(LanguageAction.getBundleMessage("loginForm"));
         languageMenu.setText(LanguageAction.getBundleMessage("language"));
         menuItem.setText(LanguageAction.getBundleMessage("salam"));
         persianItem.setText(LanguageAction.getBundleMessage("persian"));
@@ -83,11 +81,11 @@ public class MainForm extends JApplet implements ActionListener {
     }
 
     protected void showPersonEdit() {
-        /*Login frame = new Login();
-        frame.setVisible(true);
-        jdpDesktop.add(frame);*/
+        /*Login loginForm = new Login();
+        loginForm.setVisible(true);
+        jdpDesktop.add(loginForm);*/
    /*     try {
-            frame.setSelected(true);
+            loginForm.setSelected(true);
         } catch (java.beans.PropertyVetoException e) {
         }*/
     }
@@ -95,7 +93,7 @@ public class MainForm extends JApplet implements ActionListener {
     private void refreshMainForm() {
         jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
         menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
-        menu.setText(LanguageAction.getBundleMessage("frame"));
+        menu.setText(LanguageAction.getBundleMessage("loginForm"));
         languageMenu.setText(LanguageAction.getBundleMessage("language"));
         menuItem.setText(LanguageAction.getBundleMessage("salam"));
         persianItem.setText(LanguageAction.getBundleMessage("persian"));
@@ -120,4 +118,67 @@ public class MainForm extends JApplet implements ActionListener {
         }
     }
 
+    public JDesktopPane getJdpDesktop() {
+        return jdpDesktop;
+    }
+
+    public void setJdpDesktop(JDesktopPane jdpDesktop) {
+        this.jdpDesktop = jdpDesktop;
+    }
+
+    public JMenuBar getMenuBar() {
+        return menuBar;
+    }
+
+    public void setMenuBar(JMenuBar menuBar) {
+        this.menuBar = menuBar;
+    }
+
+    public JMenu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(JMenu menu) {
+        this.menu = menu;
+    }
+
+    public JMenu getLanguageMenu() {
+        return languageMenu;
+    }
+
+    public void setLanguageMenu(JMenu languageMenu) {
+        this.languageMenu = languageMenu;
+    }
+
+    public JMenuItem getMenuItem() {
+        return menuItem;
+    }
+
+    public void setMenuItem(JMenuItem menuItem) {
+        this.menuItem = menuItem;
+    }
+
+    public JMenuItem getPersianItem() {
+        return persianItem;
+    }
+
+    public void setPersianItem(JMenuItem persianItem) {
+        this.persianItem = persianItem;
+    }
+
+    public JMenuItem getEnglishItem() {
+        return englishItem;
+    }
+
+    public void setEnglishItem(JMenuItem englishItem) {
+        this.englishItem = englishItem;
+    }
+
+    public Login getLoginForm() {
+        return loginForm;
+    }
+
+    public void setLoginForm(Login loginForm) {
+        this.loginForm = loginForm;
+    }
 }

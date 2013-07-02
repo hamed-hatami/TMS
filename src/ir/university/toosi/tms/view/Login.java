@@ -18,7 +18,9 @@ public class Login extends javax.swing.JInternalFrame {
     /**
      * Creates new form Login
      */
-    public Login() {
+    MainForm mainForm;
+    public Login(MainForm mainForm) {
+        this.mainForm=mainForm;
         initComponents();
     }
 
@@ -55,7 +57,7 @@ public class Login extends javax.swing.JInternalFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
 
                 loginService = new WebServiceInfo();
-                loginService.setServerUrl("http://127.0.0.1:8080/kernel/restful");
+                loginService.setServerUrl("http://192.168.240.20:8080/kernel/restful");
                 loginService.setPath("/UserService");
                 loginService.setServiceName("/authenticate");
 
@@ -78,10 +80,16 @@ public class Login extends javax.swing.JInternalFrame {
 
                 if (result == null)
                     JOptionPane.showMessageDialog(new JFrame(), "user not found");
-                if (result.getUsername().equalsIgnoreCase("null")) {
+                else if (result.getUsername().equalsIgnoreCase("null")) {
                     JOptionPane.showMessageDialog(new JFrame(), "user not found");
+                }else{
+                JOptionPane.showMessageDialog(new JFrame(), "Welcome");
+                mainForm.getMenuBar().setVisible(true);
+                mainForm.getLoginForm().dispose();
+
                 }
-                JOptionPane.showMessageDialog(new JFrame(), "user found");
+
+
 
             }
         });
