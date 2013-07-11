@@ -1,5 +1,8 @@
 package ir.university.toosi.tms.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.util.Set;
 
@@ -8,24 +11,34 @@ import java.util.Set;
  * @version : 0.8
  */
 
-
+@JsonIgnoreProperties(value = "@id")
 public class WorkGroup implements Serializable {
-
+    @JsonProperty
     private long id;
+    @JsonProperty
     private String name;
+    @JsonProperty
     private String persianDescription;
+    @JsonProperty
     private String englishDescription;
+    @JsonProperty
     private String enabled;
+    @JsonProperty
     private String deleted;
+    @JsonProperty
     private boolean selected;
+    @JsonProperty
     private Set<User> users;
-    private Set<Role> roles;
 
 
     public WorkGroup() {
     }
 
-    public WorkGroup(long id, String name, String persianDescription, String englishDescription, String enabled, String deleted, boolean selected, Set<User> users, Set<Role> roles) {
+    public WorkGroup(Set<User> users) {
+        this.users = users;
+    }
+
+    public WorkGroup(long id, String name, String persianDescription, String englishDescription, String enabled, String deleted, boolean selected, Set<User> users) {
         this.id = id;
         this.name = name;
         this.persianDescription = persianDescription;
@@ -34,7 +47,6 @@ public class WorkGroup implements Serializable {
         this.deleted = deleted;
         this.selected = selected;
         this.users = users;
-        this.roles = roles;
     }
 
     public long getId() {
@@ -99,13 +111,5 @@ public class WorkGroup implements Serializable {
 
     public void setUsers(Set<User> users) {
         this.users = users;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
     }
 }

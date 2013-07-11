@@ -1,9 +1,9 @@
 package ir.university.toosi.tms.view;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.User;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
-import org.codehaus.jackson.map.ObjectMapper;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -57,8 +57,8 @@ public class Login extends javax.swing.JInternalFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
 
                 loginService = new WebServiceInfo();
-                loginService.setServerUrl("http://192.168.240.20:8080/kernel/restful");
-                loginService.setPath("/UserService");
+                loginService.setServerUrl("http://127.0.0.1:8080/kernel/restful");
+                loginService.setPath("/TMSService");
                 loginService.setServiceName("/authenticate");
 
                 user = new User();
@@ -83,7 +83,7 @@ public class Login extends javax.swing.JInternalFrame {
                 else if (result.getUsername().equalsIgnoreCase("null")) {
                     JOptionPane.showMessageDialog(new JFrame(), "user not found");
                 }else{
-                JOptionPane.showMessageDialog(new JFrame(), "Welcome");
+                JOptionPane.showMessageDialog(new JFrame(), "Welcome "+result.getFirstname());
                 mainForm.getMenuBar().setVisible(true);
                 mainForm.getLoginForm().dispose();
 
