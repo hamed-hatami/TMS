@@ -12,6 +12,7 @@ import java.io.Serializable;
  */
 @JsonIgnoreProperties(value = "@id")
 public class User implements Serializable {
+
     @JsonProperty
     private long id;
     @JsonProperty
