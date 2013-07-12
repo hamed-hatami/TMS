@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 
 /**
- * @author : Hamed Hatami , Javad Sarhadi , Farzad Sedaghatbin, Atefeh Ahmadi
+ * @author : Hamed Hatami ,  Farzad Sedaghatbin, Atefeh Ahmadi
  * @version : 1.0
  */
 
@@ -45,7 +45,7 @@ public class MainForm extends JApplet implements ActionListener {
         }
 
         setContentPane(jdpDesktop);
-        menuBar=createMenuBar();
+        menuBar = createMenuBar();
         setJMenuBar(menuBar);
         menuBar.setVisible(false);
 
