@@ -29,9 +29,9 @@ package ir.university.toosi.tms.view.user;/*
  */
 
 
+import javax.swing.*;
 
-
-public class UserManagement extends javax.swing.JFrame {
+public class UserManagement extends JInternalFrame {
     
     /**
      * Creates new form ContactEditor

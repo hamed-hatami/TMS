@@ -57,7 +57,7 @@ public class Login extends javax.swing.JInternalFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
 
                 loginService = new WebServiceInfo();
-                loginService.setServerUrl("http://127.0.0.1:8080/kernel/restful");
+                loginService.setServerUrl("http://192.168.240.15:8080/kernel/restful");
                 loginService.setPath("/TMSService");
                 loginService.setServiceName("/authenticate");
 

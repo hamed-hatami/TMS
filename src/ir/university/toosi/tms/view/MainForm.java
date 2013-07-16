@@ -1,6 +1,7 @@
 package ir.university.toosi.tms.view;
 
 import ir.university.toosi.tms.controller.LanguageAction;
+import ir.university.toosi.tms.view.user.UserManagement;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,9 +20,14 @@ public class MainForm extends JApplet implements ActionListener {
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenu languageMenu;
+    private JMenu managementMenu;
     private JMenuItem menuItem;
     private JMenuItem persianItem;
     private JMenuItem englishItem;
+    private JMenuItem userManagementItem;
+    private JMenuItem roleManagementItem;
+    private JMenuItem workGroupManagementItem;
+
     Login loginForm;
 
     @Override
@@ -58,12 +64,13 @@ public class MainForm extends JApplet implements ActionListener {
 
     protected JMenuBar createMenuBar() {
         menuBar = new JMenuBar();
+        menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
         menu = new JMenu();
+
         languageMenu = new JMenu();
         menuItem = new JMenuItem();
         persianItem = new JMenuItem();
         englishItem = new JMenuItem();
-        menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
         menu.setText(LanguageAction.getBundleMessage("loginForm"));
         languageMenu.setText(LanguageAction.getBundleMessage("language"));
         menuItem.setText(LanguageAction.getBundleMessage("salam"));
@@ -75,8 +82,25 @@ public class MainForm extends JApplet implements ActionListener {
         menu.add(menuItem);
         languageMenu.add(persianItem);
         languageMenu.add(englishItem);
+
+        managementMenu = new JMenu();
+        workGroupManagementItem = new JMenuItem();
+        userManagementItem = new JMenuItem();
+        roleManagementItem = new JMenuItem();
+        workGroupManagementItem.setText(LanguageAction.getBundleMessage("workgroup_management"));
+        managementMenu.setText(LanguageAction.getBundleMessage("management"));
+        roleManagementItem.setText(LanguageAction.getBundleMessage("role_management"));
+        userManagementItem.setText(LanguageAction.getBundleMessage("user_management"));
+        userManagementItem.addActionListener(this);
+        roleManagementItem.addActionListener(this);
+        workGroupManagementItem.addActionListener(this);
+        managementMenu.add(workGroupManagementItem);
+        managementMenu.add(roleManagementItem);
+        managementMenu.add(userManagementItem);
+
         menuBar.add(menu);
         menuBar.add(languageMenu);
+        menuBar.add(managementMenu);
         return menuBar;
     }
 
@@ -88,6 +112,13 @@ public class MainForm extends JApplet implements ActionListener {
             loginForm.setSelected(true);
         } catch (java.beans.PropertyVetoException e) {
         }*/
+    }
+    private  void showUserManagement() throws PropertyVetoException {
+        UserManagement userManagement= new UserManagement();
+        userManagement.setVisible(true);
+        jdpDesktop.add(userManagement);
+        userManagement.setSelected(true);
+
     }
 
     private void refreshMainForm() {
@@ -105,17 +136,24 @@ public class MainForm extends JApplet implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        try {
+
         if (e.getSource() == menuItem) {
             showPersonEdit();
-        }
-        if (e.getSource() == persianItem) {
+        } else if (e.getSource() == persianItem) {
             LanguageAction.changeLocale("fa");
             refreshMainForm();
-        }
-        if (e.getSource() == englishItem) {
+        } else if (e.getSource() == englishItem) {
             LanguageAction.changeLocale("en");
             refreshMainForm();
+        }else if(e.getSource()==userManagementItem){
+            showUserManagement();
         }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+
     }
 
     public JDesktopPane getJdpDesktop() {
