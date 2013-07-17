@@ -114,7 +114,7 @@ public class MainForm extends JApplet implements ActionListener {
         }*/
     }
     private  void showUserManagement() throws PropertyVetoException {
-        UserManagement userManagement= new UserManagement();
+        UserManagement userManagement= new UserManagement(jdpDesktop);
         userManagement.setVisible(true);
         jdpDesktop.add(userManagement);
         userManagement.setSelected(true);
