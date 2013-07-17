@@ -29,6 +29,8 @@ public class WorkGroup implements Serializable {
     private boolean selected;
     @JsonProperty
     private Set<User> users;
+    @JsonProperty
+    private Set<WorkGroupRole> roleWorkGroup;
 
 
     public WorkGroup() {
