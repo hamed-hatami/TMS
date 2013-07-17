@@ -1,5 +1,7 @@
 package ir.university.toosi.tms.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.util.Set;
 
@@ -9,13 +11,21 @@ import java.util.Set;
  */
 
 public class Role implements Serializable {
-
+    @JsonProperty
     private long id;
+    @JsonProperty
     private String name;
+    @JsonProperty
     private String persianDescription;
+    @JsonProperty
     private String englishDescription;
+    @JsonProperty
     private boolean enabled;
+    @JsonProperty
     private String deleted;
+    @JsonProperty
+    private Set<WorkGroupRole> roleWorkGroup;
+    @JsonProperty
     private boolean selected;
 
     public Role() {
