@@ -3,7 +3,7 @@ package ir.university.toosi.tms.util;
 import java.io.*;
 
 /**
- * @author : Hamed Hatami , Javad Sarhadi , Farzad Sedaghatbin, Atefeh Ahmadi, Mostafa Rastgar
+ * @author : Hamed Hatami ,  Farzad Sedaghatbin, Atefeh Ahmadi, Mostafa Rastgar
  * @version : 0.8
  */
 

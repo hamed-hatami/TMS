@@ -1,18 +1,18 @@
 package ir.university.toosi.tms.util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.User;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 /**
- * @author : Hamed Hatami , Javad Sarhadi , Farzad Sedaghatbin, Atefeh Ahmadi, Mostafa Rastgar
+ * @author : Hamed Hatami ,  Farzad Sedaghatbin, Atefeh Ahmadi, Mostafa Rastgar
  * @version : 0.8
  */
 
@@ -20,10 +20,8 @@ public class RESTfulClientUtil {
 
     public User authenticateService(String url, String serviceName, String jsonString) {
         try {
-            System.out.println("IN CLIENT");
             HttpClient client = new DefaultHttpClient();
             HttpPost postRequest = new HttpPost(url + serviceName);
-            System.out.println("AFTER HTTP POST");
             postRequest.setHeader("Content-type", "application/json");
             postRequest.setEntity(new StringEntity(jsonString));
             HttpResponse response = client.execute(postRequest);
@@ -34,6 +32,7 @@ public class RESTfulClientUtil {
 
             User user = new ObjectMapper().readValue(response.getEntity().getContent(), User.class);
             System.out.println("USER : " + user);
+            client.getConnectionManager().shutdown();
             return user;
 
         } catch (Exception e) {

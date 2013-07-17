@@ -1,334 +1,300 @@
 package ir.university.toosi.tms.model.entity;
 
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
 /**
- * @author : Hamed Hatami , Javad Sarhadi , Farzad Sedaghatbin, Atefeh Ahmadi
+ * @author : Hamed Hatami ,  Farzad Sedaghatbin, Atefeh Ahmadi
  * @version : 0.8
  */
-
+@JsonIgnoreProperties(value = "@id")
 public class User implements Serializable {
 
+    @JsonProperty
     private long id;
+    @JsonProperty
     private String username;
+    @JsonProperty
     private String password;
+    @JsonProperty
     private String firstname;
+    @JsonProperty
     private String lastname;
+    @JsonProperty
     private String mobile;
+    @JsonProperty
     private String email;
+    @JsonProperty
     private String status;
+    @JsonProperty
     private String enable;
+    @JsonProperty
     private String address;
+    @JsonProperty
     private String phone;
+    @JsonProperty
     private String nationalCode;
+    @JsonProperty
     private String createDate;
+    @JsonProperty
     private String createTime;
+    @JsonProperty
     private String createBy;
+    @JsonProperty
     private String passwordModifiedDate;
+    @JsonProperty
     private String failedLoginCount;
+    @JsonProperty
     private String userComment;
+    @JsonProperty
     private String firstLoginDate;
-    private String isFirstLogin;
+    @JsonProperty
     private String firstLoginIP;
+    @JsonProperty
     private String lastLoginDate;
+    @JsonProperty
     private String lastLoginIP;
+    @JsonProperty
     private boolean online;
+    @JsonProperty
     private String deleted;
+    @JsonProperty
     private WorkGroup workgroup;
 
     public User() {
     }
 
-    public User(String address, String userComment, String createDate, String deleted, String email, String failedLoginCount, String firstLoginDate, String firstLoginIP, String firstname, long id, String lastLoginDate, String lastLoginIP, String lastname, String mobile, String nationalCode, String password, String passwordModifiedDate, String phone, String status, String username, boolean online) {
-        this.address = address;
-        this.userComment = userComment;
-        this.createDate = createDate;
-        this.deleted = deleted;
-        this.email = email;
-        this.failedLoginCount = failedLoginCount;
-        this.firstLoginDate = firstLoginDate;
-        this.firstLoginIP = firstLoginIP;
-        this.firstname = firstname;
+    public User(long id) {
         this.id = id;
-        this.lastLoginDate = lastLoginDate;
-        this.lastLoginIP = lastLoginIP;
+    }
+
+    public User(long id, String username, String password, String firstname, String lastname, String mobile, String email, String status, String enable, String address, String phone, String nationalCode, String createDate, String createTime, String createBy, String passwordModifiedDate, String failedLoginCount, String userComment, String firstLoginDate, String firstLoginIP, String lastLoginDate, String lastLoginIP, boolean online, String deleted, WorkGroup workgroup) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.firstname = firstname;
         this.lastname = lastname;
         this.mobile = mobile;
-        this.nationalCode = nationalCode;
-        this.password = password;
-        this.passwordModifiedDate = passwordModifiedDate;
-        this.phone = phone;
+        this.email = email;
         this.status = status;
-        this.username = username;
-        this.online = online;
-    }
-
-    public User(String username, String password, String enable) {
-        this.username = username;
-        this.password = password;
         this.enable = enable;
+        this.address = address;
+        this.phone = phone;
+        this.nationalCode = nationalCode;
+        this.createDate = createDate;
+        this.createTime = createTime;
+        this.createBy = createBy;
+        this.passwordModifiedDate = passwordModifiedDate;
+        this.failedLoginCount = failedLoginCount;
+        this.userComment = userComment;
+        this.firstLoginDate = firstLoginDate;
+        this.firstLoginIP = firstLoginIP;
+        this.lastLoginDate = lastLoginDate;
+        this.lastLoginIP = lastLoginIP;
+        this.online = online;
+        this.deleted = deleted;
+        this.workgroup = workgroup;
     }
 
-
-    @JsonProperty("address")
     public String getAddress() {
         return address;
     }
 
-    @JsonProperty("address")
     public void setAddress(String address) {
         this.address = address;
     }
 
-    @JsonProperty("userComment")
     public void setUserComment(String userComment) {
         this.userComment = userComment;
     }
 
-    @JsonProperty("userComment")
     public String getUserComment() {
         return userComment;
     }
 
-    @JsonProperty("createDate")
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 
-    @JsonProperty("createDate")
     public String getCreateDate() {
         return createDate;
     }
 
-    @JsonProperty("deleted")
     public void setDeleted(String deleted) {
         this.deleted = deleted;
     }
 
-    @JsonProperty("deleted")
     public String getDeleted() {
         return deleted;
     }
 
-    @JsonProperty("email")
     public void setEmail(String email) {
         this.email = email;
     }
 
-    @JsonProperty("email")
     public String getEmail() {
         return email;
     }
 
-    @JsonProperty("failedLoginCount")
     public void setFailedLoginCount(String failedLoginCount) {
         this.failedLoginCount = failedLoginCount;
     }
 
-    @JsonProperty("failedLoginCount")
     public String getFailedLoginCount() {
         return failedLoginCount;
     }
 
-    @JsonProperty("firstLoginDate")
     public void setFirstLoginDate(String firstLoginDate) {
         this.firstLoginDate = firstLoginDate;
     }
 
-    @JsonProperty("firstLoginDate")
     public String getFirstLoginDate() {
         return firstLoginDate;
     }
 
-    @JsonProperty("firstLoginIP")
     public void setFirstLoginIP(String firstLoginIP) {
         this.firstLoginIP = firstLoginIP;
     }
 
-    @JsonProperty("firstLoginIP")
     public String getFirstLoginIP() {
         return firstLoginIP;
     }
 
-    @JsonProperty("firstname")
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
 
-    @JsonProperty("firstname")
     public String getFirstname() {
         return firstname;
     }
 
-    @JsonProperty("id")
     public void setId(long id) {
         this.id = id;
     }
 
-    @JsonProperty("id")
     public long getId() {
         return id;
     }
 
-    @JsonProperty("lastLoginDate")
     public void setLastLoginDate(String lastLoginDate) {
         this.lastLoginDate = lastLoginDate;
     }
 
-    @JsonProperty("lastLoginDate")
     public String getLastLoginDate() {
         return lastLoginDate;
     }
 
-    @JsonProperty("lastLoginIP")
     public void setLastLoginIP(String lastLoginIP) {
         this.lastLoginIP = lastLoginIP;
     }
 
-    @JsonProperty("lastLoginIP")
     public String getLastLoginIP() {
         return lastLoginIP;
     }
 
-    @JsonProperty("lastname")
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
 
-    @JsonProperty("lastname")
     public String getLastname() {
         return lastname;
     }
 
-    @JsonProperty("mobile")
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
-    @JsonProperty("mobile")
     public String getMobile() {
         return mobile;
     }
 
-    @JsonProperty("nationalCode")
     public void setNationalCode(String nationalCode) {
         this.nationalCode = nationalCode;
     }
 
-    @JsonProperty("nationalCode")
     public String getNationalCode() {
         return nationalCode;
     }
 
-    @JsonProperty("password")
     public void setPassword(String password) {
         this.password = password;
     }
 
-    @JsonProperty("password")
     public String getPassword() {
         return password;
     }
 
-    @JsonProperty("passwordModifiedDate")
     public void setPasswordModifiedDate(String passwordModifiedDate) {
         this.passwordModifiedDate = passwordModifiedDate;
     }
 
-    @JsonProperty("passwordModifiedDate")
     public String getPasswordModifiedDate() {
         return passwordModifiedDate;
     }
 
-    @JsonProperty("phone")
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    @JsonProperty("phone")
     public String getPhone() {
         return phone;
     }
 
-    @JsonProperty("status")
     public void setStatus(String status) {
         this.status = status;
     }
 
-    @JsonProperty("status")
     public String getStatus() {
         return status;
     }
 
-    @JsonProperty("username")
     public String getUsername() {
         return username;
     }
 
-    @JsonProperty("username")
     public void setUsername(String username) {
         this.username = username;
     }
 
-    @JsonProperty("workgroup")
     public void setWorkgroup(WorkGroup workgroup) {
         this.workgroup = workgroup;
     }
 
-    @JsonProperty("workgroup")
     public WorkGroup getWorkgroup() {
         return workgroup;
     }
 
-    @JsonProperty("enable")
     public void setEnable(String enable) {
         this.enable = enable;
     }
 
-    @JsonProperty("enable")
     public String getEnable() {
         return enable;
     }
 
-    @JsonProperty("createTime")
     public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    @JsonProperty("createTime")
     public String getCreateTime() {
         return createTime;
     }
 
-    @JsonProperty("createBy")
     public void setCreateBy(String createBy) {
         this.createBy = createBy;
     }
 
-    @JsonProperty("createBy")
     public String getCreateBy() {
         return createBy;
     }
 
-    @JsonProperty("isFirstLogin")
-    public void setFirstLogin(String firstLogin) {
-        isFirstLogin = firstLogin;
-    }
-
-    @JsonProperty("isFirstLogin")
-    public String getFirstLogin() {
-        return isFirstLogin;
-    }
-
-    @JsonProperty("online")
     public void setOnline(boolean online) {
         this.online = online;
     }
 
-    @JsonProperty("online")
     public boolean isOnline() {
         return online;
     }

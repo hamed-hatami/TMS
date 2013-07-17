@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 /**
- * @author : Hamed Hatami , Javad Sarhadi , Farzad Sedaghatbin, Atefeh Ahmadi
+ * @author : Hamed Hatami ,  Farzad Sedaghatbin, Atefeh Ahmadi
  * @version : 0.8
  */
 
@@ -16,7 +16,6 @@ public class Role implements Serializable {
     private String englishDescription;
     private boolean enabled;
     private String deleted;
-    private Set<WorkGroup> workGroups;
     private boolean selected;
 
     public Role() {
@@ -29,7 +28,6 @@ public class Role implements Serializable {
         this.englishDescription = englishDescription;
         this.enabled = enabled;
         this.deleted = deleted;
-        this.workGroups = workGroups;
         this.selected = selected;
     }
 
@@ -81,13 +79,6 @@ public class Role implements Serializable {
         this.deleted = deleted;
     }
 
-    public Set<WorkGroup> getWorkGroups() {
-        return workGroups;
-    }
-
-    public void setWorkGroups(Set<WorkGroup> workGroups) {
-        this.workGroups = workGroups;
-    }
 
     public boolean isSelected() {
         return selected;

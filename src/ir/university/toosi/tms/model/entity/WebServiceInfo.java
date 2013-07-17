@@ -1,7 +1,7 @@
 package ir.university.toosi.tms.model.entity;
 
 /**
- * @author : Hamed Hatami , Javad Sarhadi , Farzad Sedaghatbin, Atefeh Ahmadi, Mostafa Rastgar
+ * @author : Hamed Hatami ,  Farzad Sedaghatbin, Atefeh Ahmadi, Mostafa Rastgar
  * @version : 0.8
  */
 public class WebServiceInfo {
