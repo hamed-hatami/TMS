@@ -11,6 +11,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +25,7 @@ import java.util.Map;
 
 public class RESTfulClientUtil {
 
-    public User authenticateService(String url, String serviceName, String jsonString) {
+    public InputStream restFullService(String url, String serviceName, String jsonString) {
         try {
             HttpClient client = new DefaultHttpClient();
             HttpPost postRequest = new HttpPost(url + serviceName);
@@ -36,10 +37,26 @@ public class RESTfulClientUtil {
                         + response.getStatusLine().getStatusCode());
             }
 
-            User user = new ObjectMapper().readValue(response.getEntity().getContent(), User.class);
-            System.out.println("USER : " + user);
-            client.getConnectionManager().shutdown();
-            return user;
+            return response.getEntity().getContent();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    public InputStream restFullService(String url, String serviceName) {
+        try {
+            HttpClient client = new DefaultHttpClient();
+            HttpPost postRequest = new HttpPost(url + serviceName);
+            postRequest.setHeader("Content-type", "application/json");
+            HttpResponse response = client.execute(postRequest);
+            if (response.getStatusLine().getStatusCode() != 200) {
+                throw new RuntimeException("Failed : HTTP error code : "
+                        + response.getStatusLine().getStatusCode());
+            }
+            return response.getEntity().getContent();
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -57,8 +57,6 @@ public class Login extends javax.swing.JInternalFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
 
                 loginService = new WebServiceInfo();
-                loginService.setServerUrl("http://127.0.0.1:8080/kernel/restful");
-                loginService.setPath("/TMSService");
                 loginService.setServiceName("/authenticate");
 
                 user = new User();
@@ -69,7 +67,7 @@ public class Login extends javax.swing.JInternalFrame {
                 AccessController.doPrivileged(new PrivilegedAction() {
                     public Object run() {
                         try {
-                            result = new RESTfulClientUtil().authenticateService(loginService.getServerUrl() + loginService.getPath(), loginService.getServiceName(), new ObjectMapper().writeValueAsString(user));
+                            result = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(loginService.getServerUrl(), loginService.getServiceName(), new ObjectMapper().writeValueAsString(user)), User.class);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
