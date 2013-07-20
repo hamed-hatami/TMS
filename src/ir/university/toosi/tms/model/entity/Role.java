@@ -97,4 +97,12 @@ public class Role implements Serializable {
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
+
+    public Set<WorkGroupRole> getRoleWorkGroup() {
+        return roleWorkGroup;
+    }
+
+    public void setRoleWorkGroup(Set<WorkGroupRole> roleWorkGroup) {
+        this.roleWorkGroup = roleWorkGroup;
+    }
 }

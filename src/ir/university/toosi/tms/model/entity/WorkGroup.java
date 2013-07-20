@@ -36,6 +36,10 @@ public class WorkGroup implements Serializable {
     public WorkGroup() {
     }
 
+    public WorkGroup(int id) {
+    }
+
+
     public WorkGroup(Set<User> users) {
         this.users = users;
     }
@@ -113,5 +117,13 @@ public class WorkGroup implements Serializable {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    public Set<WorkGroupRole> getRoleWorkGroup() {
+        return roleWorkGroup;
+    }
+
+    public void setRoleWorkGroup(Set<WorkGroupRole> roleWorkGroup) {
+        this.roleWorkGroup = roleWorkGroup;
     }
 }

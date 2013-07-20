@@ -130,7 +130,7 @@ public class Role extends javax.swing.JFrame {
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.getAccessibleContext().setAccessibleName("User");
+        jPanel1.getAccessibleContext().setAccessibleName("ADDUser");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

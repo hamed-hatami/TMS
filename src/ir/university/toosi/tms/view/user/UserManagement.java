@@ -66,7 +66,7 @@ public class UserManagement extends JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("ROLEMANAGEMENT");
+        setTitle("USERMANAGEMENT");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("USERMANAGEMENT"));
 
@@ -200,13 +200,13 @@ public class UserManagement extends JInternalFrame {
                 .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 221, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel1.getAccessibleContext().setAccessibleName("User");
+        jPanel1.getAccessibleContext().setAccessibleName("ADDUser");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void addUser() throws PropertyVetoException {
-        User  user= new User();
+        ADDUser user= new ADDUser();
         user.setVisible(true);
         jdpDesktop.add(user);
         user.setSelected(true);

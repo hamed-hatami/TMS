@@ -70,6 +70,9 @@ public class User implements Serializable {
     public User(long id) {
         this.id = id;
     }
+    public User(WorkGroup workgroup) {
+        this.workgroup = workgroup;
+    }
 
     public User(long id, String username, String password, String firstname, String lastname, String mobile, String email, String status, String enable, String address, String phone, String nationalCode, String createDate, String createTime, String createBy, String passwordModifiedDate, String failedLoginCount, String userComment, String firstLoginDate, String firstLoginIP, String lastLoginDate, String lastLoginIP, boolean online, String deleted, WorkGroup workgroup) {
         this.id = id;

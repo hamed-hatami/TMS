@@ -1,7 +1,9 @@
 package ir.university.toosi.tms.util;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.User;
+import ir.university.toosi.tms.model.entity.WorkGroup;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -10,6 +12,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author : Hamed Hatami ,  Farzad Sedaghatbin, Atefeh Ahmadi, Mostafa Rastgar
@@ -41,28 +47,20 @@ public class RESTfulClientUtil {
         }
     }
 
-    public String callInitialService() {
+    public List<WorkGroup> callListWorkGroup(String url, String serviceName) {
         try {
             HttpClient client = new DefaultHttpClient();
-            HttpPost postRequest = new HttpPost(Configuration.getProperty("processor_url") + "initial");
+            HttpPost postRequest = new HttpPost(url + serviceName);
+            postRequest.setHeader("Content-type", "application/json");
             HttpResponse response = client.execute(postRequest);
             if (response.getStatusLine().getStatusCode() != 200) {
                 throw new RuntimeException("Failed : HTTP error code : "
                         + response.getStatusLine().getStatusCode());
             }
 
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader((response.getEntity().getContent())));
-
-            String result = "";
-            String output = "";
-            while ((output = br.readLine()) != null) {
-                result += output;
-            }
-
+            List<WorkGroup> workGroupList = new ObjectMapper().readValue(response.getEntity().getContent(),  new TypeReference<List<WorkGroup>>(){} );
             client.getConnectionManager().shutdown();
-
-            return result;
+            return workGroupList;
 
         } catch (Exception e) {
             e.printStackTrace();
