@@ -29,12 +29,11 @@ package ir.university.toosi.tms.view.role;/*
  */
 
 
-import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.Role;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
-import org.hibernate.hql.internal.ast.tree.BooleanLiteralNode;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
@@ -49,8 +48,22 @@ public class RoleManagement extends JInternalFrame {
     /**
      * Creates new form ContactEditor
      */
-    public RoleManagement() throws IOException {
-        initComponents();
+    public RoleManagement() {
+        try {
+            initComponents();
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
+
+    private JDesktopPane jdpDesktop;
+    public RoleManagement(JDesktopPane jDesktopPane){
+        jdpDesktop=jDesktopPane;
+        try {
+            initComponents();
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
     }
 
     /**
@@ -83,7 +96,8 @@ public class RoleManagement extends JInternalFrame {
 
         jTable1.setAutoCreateRowSorter(true);
         roleService.setServiceName("/getAllRole");
-        roleList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName()), List.class);
+        roleList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName()), new TypeReference<List<Role>>() {
+        });
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, roleList, jTable1, "");
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
@@ -127,7 +141,7 @@ public class RoleManagement extends JInternalFrame {
         });
 
         edit.setText("EDIT");
-        add.addActionListener(new java.awt.event.ActionListener() {
+        edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
                     editActionPerformed(evt);
@@ -264,6 +278,7 @@ public class RoleManagement extends JInternalFrame {
         jdpDesktop.add(roleForm);
         roleForm.setSelected(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */

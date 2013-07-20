@@ -1,6 +1,7 @@
 package ir.university.toosi.tms.view;
 
 import ir.university.toosi.tms.controller.LanguageAction;
+import ir.university.toosi.tms.view.role.RoleManagement;
 import ir.university.toosi.tms.view.user.UserManagement;
 
 import javax.swing.*;
@@ -113,12 +114,20 @@ public class MainForm extends JApplet implements ActionListener {
         } catch (java.beans.PropertyVetoException e) {
         }*/
     }
-    private  void showUserManagement() throws PropertyVetoException {
-        UserManagement userManagement= new UserManagement(jdpDesktop);
+
+    private void showUserManagement() throws PropertyVetoException {
+        UserManagement userManagement = new UserManagement(jdpDesktop);
         userManagement.setVisible(true);
         jdpDesktop.add(userManagement);
         userManagement.setSelected(true);
 
+    }
+
+    private void showRoleManagement() throws PropertyVetoException {
+        RoleManagement roleManagement = new RoleManagement(jdpDesktop);
+        roleManagement.setVisible(true);
+        jdpDesktop.add(roleManagement);
+        roleManagement.setSelected(true);
     }
 
     private void refreshMainForm() {
@@ -138,18 +147,20 @@ public class MainForm extends JApplet implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         try {
 
-        if (e.getSource() == menuItem) {
-            showPersonEdit();
-        } else if (e.getSource() == persianItem) {
-            LanguageAction.changeLocale("fa");
-            refreshMainForm();
-        } else if (e.getSource() == englishItem) {
-            LanguageAction.changeLocale("en");
-            refreshMainForm();
-        }else if(e.getSource()==userManagementItem){
-            showUserManagement();
-        }
-        }catch (Exception ex){
+            if (e.getSource() == menuItem) {
+                showPersonEdit();
+            } else if (e.getSource() == persianItem) {
+                LanguageAction.changeLocale("fa");
+                refreshMainForm();
+            } else if (e.getSource() == englishItem) {
+                LanguageAction.changeLocale("en");
+                refreshMainForm();
+            } else if (e.getSource() == userManagementItem) {
+                showUserManagement();
+            } else if (e.getSource() == roleManagementItem) {
+                showRoleManagement();
+            }
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 

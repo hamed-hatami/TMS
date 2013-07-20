@@ -49,11 +49,9 @@ public class ADDUser extends JInternalFrame {
     public ADDUser() {
         List<WorkGroup> workGroupList;
         WebServiceInfo webServiceInfo = new WebServiceInfo();
-        webServiceInfo.setServerUrl("http://127.0.0.1:8080/kernel/restful");
-        webServiceInfo.setPath("/TMSService");
         webServiceInfo.setServiceName("/getAllWorkGroup");
 
-        workGroupList= new RESTfulClientUtil().callListWorkGroup(webServiceInfo.getServerUrl() + webServiceInfo.getPath(), webServiceInfo.getServiceName());
+        workGroupList= new RESTfulClientUtil().callListWorkGroup(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName());
         workGroupsName= new String[workGroupList.size()];
         int i=0;
         for (WorkGroup workGroup : workGroupList) {
