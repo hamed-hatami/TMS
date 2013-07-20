@@ -105,23 +105,7 @@ public class UserManagement extends JInternalFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("USERMANAGEMENT"));
 
         userTable.setAutoCreateRowSorter(true);
-        userService.setServiceName("/getAllUser");
-        List<User> userList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(userService.getServerUrl(), userService.getServiceName()), new TypeReference<List<User>>() {
-        });
-
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, userList, userTable, "");
-        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${firstname}"));
-        columnBinding.setColumnName("NAME");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${lastname}"));
-        columnBinding.setColumnName("FAMILYNAME");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${username}"));
-        columnBinding.setColumnName("USERNAME");
-        columnBinding.setColumnClass(String.class);
-        BindingGroup bindingGroup = new BindingGroup();
-        bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
+        refresh();
         userTable.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(userTable);
         userTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);

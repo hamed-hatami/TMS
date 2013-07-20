@@ -29,6 +29,7 @@ package ir.university.toosi.tms.view.role;/*
  */
 
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.Role;
@@ -106,26 +107,7 @@ public class RoleManagement extends JInternalFrame {
         mainPanel.setBorder(BorderFactory.createTitledBorder("ROLEMANAGEMENT"));
 
         mainTable.setAutoCreateRowSorter(true);
-        roleService.setServiceName("/getAllRole");
-        roleList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName()), new TypeReference<List<Role>>() {
-        });
-
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, roleList, mainTable, "");
-        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
-        columnBinding.setColumnName("NAME");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${persianDescription}"));
-        columnBinding.setColumnName("PERSIANDESCRIPSION");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${englishDescription}"));
-        columnBinding.setColumnName("ENGLISHDESCRIPSION");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${enabled}"));
-        columnBinding.setColumnName("ENABLED");
-        columnBinding.setColumnClass(Boolean.class);
-        BindingGroup bindingGroup = new BindingGroup();
-        bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
+        refresh();
 
 
         mainTable.setColumnSelectionAllowed(true);
@@ -256,6 +238,29 @@ public class RoleManagement extends JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void refresh() throws IOException {
+        roleService.setServiceName("/getAllRole");
+        roleList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName()), new TypeReference<List<Role>>() {
+        });
+
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, roleList, mainTable, "");
+        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
+        columnBinding.setColumnName("NAME");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${persianDescription}"));
+        columnBinding.setColumnName("PERSIANDESCRIPSION");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${englishDescription}"));
+        columnBinding.setColumnName("ENGLISHDESCRIPSION");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${enabled}"));
+        columnBinding.setColumnName("ENABLED");
+        columnBinding.setColumnClass(Boolean.class);
+        BindingGroup bindingGroup = new BindingGroup();
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+    }
+
     private void close() {
         if (isVisible()) {
             try {
@@ -283,7 +288,7 @@ public class RoleManagement extends JInternalFrame {
         }
 
         try {
-            initComponents();
+            refresh();
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
@@ -298,7 +303,7 @@ public class RoleManagement extends JInternalFrame {
 
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
-        Role role = roleList.get(mainTable.getSelectedColumn());
+        Role role = roleList.get(mainTable.getSelectedRow());
         RoleForm roleForm = new RoleForm(true, role, this);
         roleForm.setVisible(true);
         jdpDesktop.add(roleForm);

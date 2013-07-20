@@ -189,7 +189,7 @@ public class RoleForm extends JInternalFrame {
         }
         this.dispose();
         try {
-            roleManagement.initComponents();
+            roleManagement.refresh();
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
@@ -210,7 +210,7 @@ public class RoleForm extends JInternalFrame {
 
         this.dispose();
         try {
-            roleManagement.initComponents();
+            roleManagement.refresh();
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
