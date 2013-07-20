@@ -116,7 +116,7 @@ public class UserManagement extends JInternalFrame {
                 try {
                     addUser();
                 } catch (PropertyVetoException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    e.printStackTrace();
                 }
             }
         });
