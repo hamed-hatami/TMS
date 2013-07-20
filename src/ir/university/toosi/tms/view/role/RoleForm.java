@@ -45,9 +45,10 @@ public class RoleForm extends JInternalFrame {
      * Creates new form ContactEditor
      */
 
-    public RoleForm(boolean editMode, Role role) {
+    public RoleForm(boolean editMode, Role role, RoleManagement roleManagement) {
         this.editMode = editMode;
         this.role = role;
+        this.roleManagement = roleManagement;
         initComponents();
     }
 
@@ -77,16 +78,16 @@ public class RoleForm extends JInternalFrame {
         jLabel1.setText("ROLENAME");
 
         if (editMode)
-            jTextField1.setToolTipText(role.getName());
+            jTextField1.setText(role.getName());
         else
-            jTextField1.setToolTipText("");
+            jTextField1.setText("");
 
         jLabel3.setText("ROLEDESCRIPTION");
 
         if (editMode)
-            jTextField3.setToolTipText(role.getPersianDescription());
+            jTextField3.setText(role.getPersianDescription());
         else
-            jTextField3.setToolTipText("");
+            jTextField3.setText("");
 
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -117,11 +118,19 @@ public class RoleForm extends JInternalFrame {
         );
 
         cancel.setText("Cancel");
+        cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+               close(evt);
+            }
+        });
 
         ok.setText("OK");
         ok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addOrDelete(evt);
+                if (editMode)
+                    edit(evt);
+                else
+                    add(evt);
             }
         });
 
@@ -161,22 +170,53 @@ public class RoleForm extends JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addOrDelete(java.awt.event.ActionEvent evt) {
+    private void add(java.awt.event.ActionEvent evt) {
 
         Role newRole = new Role();
-        newRole.setName(jTextField1.toString());
-        newRole.setPersianDescription(jTextField3.toString());
+        newRole.setName(jTextField1.getText());
+        newRole.setPersianDescription(jTextField3.getText());
+        newRole.setEnglishDescription(jTextField3.getText());
+        newRole.setEnabled(true);
+        newRole.setDeleted("0");
 
-        if(editMode)
-           roleService.setServiceName("/editRole");
-        else
-            roleService.setServiceName("/createRole");
+        roleService.setServiceName("/createRole");
 
         try {
-            new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(newRole)), Boolean.class);
+            new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(newRole)), Role.class);
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
+        this.dispose();
+        try {
+            roleManagement.initComponents();
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
+
+    private void edit(java.awt.event.ActionEvent evt) {
+
+        role.setName(jTextField1.getText());
+        role.setPersianDescription(jTextField3.getText());
+
+        roleService.setServiceName("/editRole");
+
+        try {
+            new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(role)), Boolean.class);
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        this.dispose();
+        try {
+            roleManagement.initComponents();
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
+
+    private void close(java.awt.event.ActionEvent evt) {
+        this.dispose();
     }
 
 
@@ -192,6 +232,7 @@ public class RoleForm extends JInternalFrame {
 
     private boolean editMode;
     private Role role;
+    private RoleManagement roleManagement;
     private WebServiceInfo roleService = new WebServiceInfo();
     // End of variables declaration//GEN-END:variables
 
