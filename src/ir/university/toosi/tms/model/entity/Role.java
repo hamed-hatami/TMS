@@ -1,5 +1,6 @@
 package ir.university.toosi.tms.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
@@ -9,7 +10,7 @@ import java.util.Set;
  * @author : Hamed Hatami ,  Farzad Sedaghatbin, Atefeh Ahmadi
  * @version : 0.8
  */
-
+@JsonIgnoreProperties(value = "@id")
 public class Role implements Serializable {
     @JsonProperty
     private long id;

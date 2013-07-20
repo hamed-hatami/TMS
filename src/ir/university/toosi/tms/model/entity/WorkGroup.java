@@ -43,6 +43,9 @@ public class WorkGroup implements Serializable {
     public WorkGroup(Set<User> users) {
         this.users = users;
     }
+    public WorkGroup(Set<WorkGroupRole> workGroupRoles,Set<User> users) {
+        this.roleWorkGroup = workGroupRoles;
+    }
 
     public WorkGroup(long id, String name, String persianDescription, String englishDescription, String enabled, String deleted, boolean selected, Set<User> users) {
         this.id = id;

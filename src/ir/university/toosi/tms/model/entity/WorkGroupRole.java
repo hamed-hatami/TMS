@@ -1,11 +1,12 @@
 package ir.university.toosi.tms.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
-
+@JsonIgnoreProperties(value = "@id")
 public class WorkGroupRole {
 
     private long id;
@@ -13,6 +14,14 @@ public class WorkGroupRole {
     private Role role;
 
     public WorkGroupRole() {
+    }
+    public WorkGroupRole(int id) {
+    }
+
+    public WorkGroupRole(long id, WorkGroup workgroup, Role role) {
+        this.id = id;
+        this.workgroup = workgroup;
+        this.role = role;
     }
 
     public long getId() {

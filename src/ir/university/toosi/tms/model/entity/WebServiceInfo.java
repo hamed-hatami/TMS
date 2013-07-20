@@ -6,7 +6,7 @@ package ir.university.toosi.tms.model.entity;
  */
 public class WebServiceInfo {
 
-    private final String serverUrl = "http://192.168.240.20:8080/kernel/restful/TMSService";
+    private final String serverUrl = "http://192.168.240.15:8080/kernel/restful/TMSService";
     private String serviceName;
 
     public WebServiceInfo() {
