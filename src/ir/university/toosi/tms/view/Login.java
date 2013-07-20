@@ -87,10 +87,7 @@ public class Login extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(new JFrame(), "Welcome " + result.getFirstname());
                     mainForm.getMenuBar().setVisible(true);
                     mainForm.getLoginForm().dispose();
-
                 }
-
-
             }
         });
 

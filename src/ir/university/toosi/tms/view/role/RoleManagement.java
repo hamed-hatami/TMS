@@ -29,10 +29,10 @@ package ir.university.toosi.tms.view.role;/*
  */
 
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.Role;
+import ir.university.toosi.tms.model.entity.RoleSearchItems;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
@@ -40,6 +40,12 @@ import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -51,6 +57,7 @@ public class RoleManagement extends JInternalFrame {
      * Creates new form ContactEditor
      */
     public RoleManagement() {
+        fillSearchCombo();
         mainPanel = new JPanel();
         tableScroll = new JScrollPane();
         mainTable = new JTable();
@@ -58,9 +65,9 @@ public class RoleManagement extends JInternalFrame {
         delete = new JButton();
         edit = new JButton();
         searchPanel = new JPanel();
-        searchCombo = new JComboBox();
+        searchCombo = new JComboBox(searchItems);
         searchText = new JTextField();
-        search = new JLabel();
+        filter = new JLabel();
         by = new JLabel();
         try {
             initComponents();
@@ -70,6 +77,7 @@ public class RoleManagement extends JInternalFrame {
     }
 
     public RoleManagement(JDesktopPane jDesktopPane) {
+        fillSearchCombo();
         jdpDesktop = jDesktopPane;
         mainPanel = new JPanel();
         tableScroll = new JScrollPane();
@@ -78,14 +86,22 @@ public class RoleManagement extends JInternalFrame {
         delete = new JButton();
         edit = new JButton();
         searchPanel = new JPanel();
-        searchCombo = new JComboBox();
+        searchCombo = new JComboBox(searchItems);
         searchText = new JTextField();
-        search = new JLabel();
+        filter = new JLabel();
         by = new JLabel();
         try {
             initComponents();
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
+
+    private void fillSearchCombo(){
+        searchItems = new String[RoleSearchItems.values().length];
+        int i = 0;
+        for (RoleSearchItems roleSearchItem : RoleSearchItems.values()) {
+            searchItems[i++] = roleSearchItem.getDescription();
         }
     }
 
@@ -174,12 +190,26 @@ public class RoleManagement extends JInternalFrame {
         );
 
         searchPanel.setBorder(BorderFactory.createTitledBorder("SEARCHROLE"));
-
-        searchCombo.setModel(new DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
+//        searchCombo.setModel(new DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         searchText.setToolTipText("");
+        searchText.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                //To change body of implemented methods use File | Settings | File Templates.
+            }
 
-        search.setText("SEARCH");
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                //To change body of implemented methods use File | Settings | File Templates.
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
+
+        filter.setText("FILTER");
 
         by.setText("BY");
 
@@ -189,7 +219,7 @@ public class RoleManagement extends JInternalFrame {
                 jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .add(search)
+                                .add(filter)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(searchText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 122, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .add(18, 18, 18)
@@ -203,7 +233,7 @@ public class RoleManagement extends JInternalFrame {
                         .add(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                        .add(search)
+                                        .add(filter)
                                         .add(searchText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(by))
@@ -320,7 +350,7 @@ public class RoleManagement extends JInternalFrame {
     private JButton edit;
     private JComboBox searchCombo;
     private JLabel by;
-    private JLabel search;
+    private JLabel filter;
     private JPanel mainPanel;
     private JPanel searchPanel;
     private JScrollPane tableScroll;
@@ -329,6 +359,7 @@ public class RoleManagement extends JInternalFrame {
     private JTextField searchText;
     private WebServiceInfo roleService = new WebServiceInfo();
     private List<Role> roleList = new ArrayList<>();
+    private String[] searchItems;
 
     public JTable getMainTable() {
         return mainTable;

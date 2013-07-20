@@ -62,7 +62,6 @@ public class ADDUser extends JInternalFrame {
         int i = 0;
         for (WorkGroup workGroup : workGroupList) {
             workGroupsName[i++] = workGroup.getName();
-
         }
 
         buttonGroup1 = new javax.swing.ButtonGroup();
