@@ -28,8 +28,6 @@ public class WorkGroup implements Serializable {
     @JsonProperty
     private boolean selected;
     @JsonProperty
-    private Set<User> users;
-    @JsonProperty
     private Set<WorkGroupRole> roleWorkGroup;
 
 
@@ -39,10 +37,6 @@ public class WorkGroup implements Serializable {
     public WorkGroup(int id) {
     }
 
-
-    public WorkGroup(Set<User> users) {
-        this.users = users;
-    }
     public WorkGroup(Set<WorkGroupRole> workGroupRoles,Set<User> users) {
         this.roleWorkGroup = workGroupRoles;
     }
@@ -55,7 +49,6 @@ public class WorkGroup implements Serializable {
         this.enabled = enabled;
         this.deleted = deleted;
         this.selected = selected;
-        this.users = users;
     }
 
     public long getId() {
@@ -112,14 +105,6 @@ public class WorkGroup implements Serializable {
 
     public void setSelected(boolean selected) {
         this.selected = selected;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
     }
 
     public Set<WorkGroupRole> getRoleWorkGroup() {
