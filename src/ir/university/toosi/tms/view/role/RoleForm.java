@@ -35,6 +35,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.Role;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
+import ir.university.toosi.tms.util.ThreadPoolManager;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -49,6 +50,13 @@ public class RoleForm extends JInternalFrame {
         this.editMode = editMode;
         this.role = role;
         this.roleManagement = roleManagement;
+        mainPanel = new javax.swing.JPanel();
+        nameLabel = new javax.swing.JLabel();
+        roleName = new javax.swing.JTextField();
+        descLabel = new javax.swing.JLabel();
+        roleDesc = new javax.swing.JTextField();
+        cancel = new javax.swing.JButton();
+        ok = new javax.swing.JButton();
         initComponents();
     }
 
@@ -61,59 +69,52 @@ public class RoleForm extends JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        cancel = new javax.swing.JButton();
-        ok = new javax.swing.JButton();
-
+        this.addInternalFrameListener(ThreadPoolManager.mainForm);
+        setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ROLEMANAGEMENT");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("ROLE"));
+        mainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("ROLE"));
 
-        jLabel1.setText("ROLENAME");
-
-        if (editMode)
-            jTextField1.setText(role.getName());
-        else
-            jTextField1.setText("");
-
-        jLabel3.setText("ROLEDESCRIPTION");
+        nameLabel.setText("ROLENAME");
 
         if (editMode)
-            jTextField3.setText(role.getPersianDescription());
+            roleName.setText(role.getName());
         else
-            jTextField3.setText("");
+            roleName.setText("");
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
+        descLabel.setText("ROLEDESCRIPTION");
+
+        if (editMode)
+            roleDesc.setText(role.getPersianDescription());
+        else
+            roleDesc.setText("");
+
+        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
+        mainPanel.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
                 jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(jPanel1Layout.createSequentialGroup()
                                 .add(30, 30, 30)
                                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                        .add(jLabel1)
-                                        .add(jLabel3))
+                                        .add(nameLabel)
+                                        .add(descLabel))
                                 .add(18, 18, 18)
                                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                        .add(org.jdesktop.layout.GroupLayout.LEADING, jTextField3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                                        .add(jTextField1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
+                                        .add(org.jdesktop.layout.GroupLayout.LEADING, roleDesc, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                                        .add(roleName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
                                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(jPanel1Layout.createSequentialGroup()
                                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                        .add(jLabel1)
-                                        .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                        .add(nameLabel)
+                                        .add(roleName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                        .add(jTextField3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                        .add(jLabel3))
+                                        .add(roleDesc, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(descLabel))
                                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
@@ -141,7 +142,7 @@ public class RoleForm extends JInternalFrame {
                 layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(mainPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(29, Short.MAX_VALUE))
                         .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap(120, Short.MAX_VALUE)
@@ -157,7 +158,7 @@ public class RoleForm extends JInternalFrame {
                 layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(mainPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(cancel)
@@ -165,7 +166,7 @@ public class RoleForm extends JInternalFrame {
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.getAccessibleContext().setAccessibleName("User");
+        mainPanel.getAccessibleContext().setAccessibleName("User");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -173,9 +174,9 @@ public class RoleForm extends JInternalFrame {
     private void add(java.awt.event.ActionEvent evt) {
 
         Role newRole = new Role();
-        newRole.setName(jTextField1.getText());
-        newRole.setPersianDescription(jTextField3.getText());
-        newRole.setEnglishDescription(jTextField3.getText());
+        newRole.setName(roleName.getText());
+        newRole.setPersianDescription(roleDesc.getText());
+        newRole.setEnglishDescription(roleDesc.getText());
         newRole.setEnabled(true);
         newRole.setDeleted("0");
 
@@ -196,8 +197,8 @@ public class RoleForm extends JInternalFrame {
 
     private void edit(java.awt.event.ActionEvent evt) {
 
-        role.setName(jTextField1.getText());
-        role.setPersianDescription(jTextField3.getText());
+        role.setName(roleName.getText());
+        role.setPersianDescription(roleDesc.getText());
 
         roleService.setServiceName("/editRole");
 
@@ -221,14 +222,13 @@ public class RoleForm extends JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private ButtonGroup buttonGroup1;
     private JButton cancel;
     private JButton ok;
-    private JLabel jLabel1;
-    private JLabel jLabel3;
-    private JPanel jPanel1;
-    private JTextField jTextField1;
-    private JTextField jTextField3;
+    private JLabel nameLabel;
+    private JLabel descLabel;
+    private JPanel mainPanel;
+    private JTextField roleName;
+    private JTextField roleDesc;
 
     private boolean editMode;
     private Role role;

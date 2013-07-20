@@ -1,10 +1,13 @@
 package ir.university.toosi.tms.view;
 
 import ir.university.toosi.tms.controller.LanguageAction;
+import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.role.RoleManagement;
 import ir.university.toosi.tms.view.user.UserManagement;
 
 import javax.swing.*;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +18,7 @@ import java.beans.PropertyVetoException;
  * @version : 1.0
  */
 
-public class MainForm extends JApplet implements ActionListener {
+public class MainForm extends JApplet implements ActionListener, InternalFrameListener {
 
     private JDesktopPane jdpDesktop;
     private JMenuBar menuBar;
@@ -33,7 +36,7 @@ public class MainForm extends JApplet implements ActionListener {
 
     @Override
     public void init() {
-
+        ThreadPoolManager.mainForm =this;
         Frame[] frames = Frame.getFrames();
         for (Frame frame : frames) {
             frame.setMenuBar(null);
@@ -229,5 +232,40 @@ public class MainForm extends JApplet implements ActionListener {
 
     public void setLoginForm(Login loginForm) {
         this.loginForm = loginForm;
+    }
+
+    @Override
+    public void internalFrameOpened(InternalFrameEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void internalFrameClosing(InternalFrameEvent e) {
+        e.getInternalFrame().dispose();
+    }
+
+    @Override
+    public void internalFrameClosed(InternalFrameEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void internalFrameIconified(InternalFrameEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void internalFrameDeiconified(InternalFrameEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void internalFrameActivated(InternalFrameEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void internalFrameDeactivated(InternalFrameEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 }

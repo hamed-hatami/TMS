@@ -34,6 +34,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.Role;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
+import ir.university.toosi.tms.util.ThreadPoolManager;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
@@ -49,6 +50,17 @@ public class RoleManagement extends JInternalFrame {
      * Creates new form ContactEditor
      */
     public RoleManagement() {
+        mainPanel = new JPanel();
+        tableScroll = new JScrollPane();
+        mainTable = new JTable();
+        add = new JButton();
+        delete = new JButton();
+        edit = new JButton();
+        searchPanel = new JPanel();
+        searchCombo = new JComboBox();
+        searchText = new JTextField();
+        search = new JLabel();
+        by = new JLabel();
         try {
             initComponents();
         } catch (IOException e) {
@@ -56,20 +68,19 @@ public class RoleManagement extends JInternalFrame {
         }
     }
 
-    public RoleManagement(JDesktopPane jDesktopPane){
-        jdpDesktop=jDesktopPane;
-        buttonGroup1 = new ButtonGroup();
-        jPanel1 = new JPanel();
-        jScrollPane1 = new JScrollPane();
-        jTable1 = new JTable();
+    public RoleManagement(JDesktopPane jDesktopPane) {
+        jdpDesktop = jDesktopPane;
+        mainPanel = new JPanel();
+        tableScroll = new JScrollPane();
+        mainTable = new JTable();
         add = new JButton();
         delete = new JButton();
         edit = new JButton();
-        jPanel2 = new JPanel();
-        jComboBox1 = new JComboBox();
-        jTextField3 = new JTextField();
-        jLabel3 = new JLabel();
-        jLabel1 = new JLabel();
+        searchPanel = new JPanel();
+        searchCombo = new JComboBox();
+        searchText = new JTextField();
+        search = new JLabel();
+        by = new JLabel();
         try {
             initComponents();
         } catch (IOException e) {
@@ -87,19 +98,19 @@ public class RoleManagement extends JInternalFrame {
     public void initComponents() throws IOException {
 
 
-
+        this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("ROLEMANAGEMENT");
 
-        jPanel1.setBorder(BorderFactory.createTitledBorder("ROLEMANAGEMENT"));
+        mainPanel.setBorder(BorderFactory.createTitledBorder("ROLEMANAGEMENT"));
 
-        jTable1.setAutoCreateRowSorter(true);
+        mainTable.setAutoCreateRowSorter(true);
         roleService.setServiceName("/getAllRole");
         roleList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName()), new TypeReference<List<Role>>() {
         });
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, roleList, jTable1, "");
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, roleList, mainTable, "");
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
         columnBinding.setColumnName("NAME");
         columnBinding.setColumnClass(String.class);
@@ -117,9 +128,9 @@ public class RoleManagement extends JInternalFrame {
         jTableBinding.bind();
 
 
-        jTable1.setColumnSelectionAllowed(true);
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        mainTable.setColumnSelectionAllowed(true);
+        tableScroll.setViewportView(mainTable);
+        mainTable.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
 
         add.setText("ADD");
@@ -151,8 +162,8 @@ public class RoleManagement extends JInternalFrame {
             }
         });
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
+        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
+        mainPanel.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
                 jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(jPanel1Layout.createSequentialGroup()
@@ -164,7 +175,7 @@ public class RoleManagement extends JInternalFrame {
                                                 .add(delete)
                                                 .add(18, 18, 18)
                                                 .add(edit))
-                                        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                        .add(tableScroll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -176,33 +187,33 @@ public class RoleManagement extends JInternalFrame {
                                         .add(delete)
                                         .add(edit))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(tableScroll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .add(133, 133, 133))
         );
 
-        jPanel2.setBorder(BorderFactory.createTitledBorder("SEARCHROLE"));
+        searchPanel.setBorder(BorderFactory.createTitledBorder("SEARCHROLE"));
 
-        jComboBox1.setModel(new DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
+        searchCombo.setModel(new DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
-        jTextField3.setToolTipText("");
+        searchText.setToolTipText("");
 
-        jLabel3.setText("SEARCH");
+        search.setText("SEARCH");
 
-        jLabel1.setText("BY");
+        by.setText("BY");
 
-        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
+        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(searchPanel);
+        searchPanel.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
                 jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .add(jLabel3)
+                                .add(search)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jTextField3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 122, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(searchText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 122, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .add(18, 18, 18)
-                                .add(jLabel1)
+                                .add(by)
                                 .add(18, 18, 18)
-                                .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(194, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -210,10 +221,10 @@ public class RoleManagement extends JInternalFrame {
                         .add(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                        .add(jLabel3)
-                                        .add(jTextField3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                        .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                        .add(jLabel1))
+                                        .add(search)
+                                        .add(searchText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(by))
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -223,30 +234,42 @@ public class RoleManagement extends JInternalFrame {
                 layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(searchPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(mainPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap()
-                                .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(searchPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 221, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(mainPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 221, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.getAccessibleContext().setAccessibleName("ADDUser");
+        mainPanel.getAccessibleContext().setAccessibleName("ADDUser");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void close() {
+        if (isVisible()) {
+            try {
+                setClosed(true);
+            } catch (PropertyVetoException ignored) {
+            }
+            setVisible(false);
+            rootPane.getGlassPane().setVisible(false);
+        }
+    }
+
+
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {
-        int[] indexes = jTable1.getSelectedRows();
+        int[] indexes = mainTable.getSelectedRows();
         List<Role> deletedRoles = new ArrayList<>();
         for (int index : indexes) {
             deletedRoles.add(roleList.get(index));
@@ -275,7 +298,7 @@ public class RoleManagement extends JInternalFrame {
 
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
-        Role role = roleList.get(jTable1.getSelectedColumn());
+        Role role = roleList.get(mainTable.getSelectedColumn());
         RoleForm roleForm = new RoleForm(true, role, this);
         roleForm.setVisible(true);
         jdpDesktop.add(roleForm);
@@ -287,25 +310,23 @@ public class RoleManagement extends JInternalFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private ButtonGroup buttonGroup1;
     private JButton add;
     private JButton delete;
     private JButton edit;
-    private JComboBox jComboBox1;
-    private JLabel jLabel1;
-    private JLabel jLabel3;
-    private JPanel jPanel1;
-    private JPanel jPanel2;
-    private JScrollPane jScrollPane1;
-    private JTable jTable1;
+    private JComboBox searchCombo;
+    private JLabel by;
+    private JLabel search;
+    private JPanel mainPanel;
+    private JPanel searchPanel;
+    private JScrollPane tableScroll;
+    private JTable mainTable;
     private JDesktopPane jdpDesktop;
-    private JTextField jTextField3;
+    private JTextField searchText;
     private WebServiceInfo roleService = new WebServiceInfo();
     private List<Role> roleList = new ArrayList<>();
 
-    public JTable getjTable1() {
-        return jTable1;
+    public JTable getMainTable() {
+        return mainTable;
     }
     // End of variables declaration//GEN-END:variables
-
 }
