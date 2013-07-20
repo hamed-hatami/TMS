@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.User;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
+import ir.university.toosi.tms.util.ThreadPoolManager;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -19,8 +20,9 @@ public class Login extends javax.swing.JInternalFrame {
      * Creates new form Login
      */
     MainForm mainForm;
+
     public Login(MainForm mainForm) {
-        this.mainForm=mainForm;
+        this.mainForm = mainForm;
         initComponents();
     }
 
@@ -80,13 +82,13 @@ public class Login extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(new JFrame(), "user not found");
                 else if (result.getUsername().equalsIgnoreCase("null")) {
                     JOptionPane.showMessageDialog(new JFrame(), "user not found");
-                }else{
-                JOptionPane.showMessageDialog(new JFrame(), "Welcome "+result.getFirstname());
-                mainForm.getMenuBar().setVisible(true);
-                mainForm.getLoginForm().dispose();
+                } else {
+                    ThreadPoolManager.me = result;
+                    JOptionPane.showMessageDialog(new JFrame(), "Welcome " + result.getFirstname());
+                    mainForm.getMenuBar().setVisible(true);
+                    mainForm.getLoginForm().dispose();
 
                 }
-
 
 
             }

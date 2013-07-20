@@ -1,5 +1,6 @@
 package ir.university.toosi.tms.util;
 
+import ir.university.toosi.tms.model.entity.User;
 import ir.university.toosi.tms.view.MainForm;
 
 import java.util.concurrent.ExecutorService;
@@ -15,6 +16,7 @@ public class ThreadPoolManager {
 
     public static final ExecutorService executors = Executors.newCachedThreadPool();
     public static MainForm mainForm;
+    public static User me;
     public static final ForkJoinPool forkJoinPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
 
 }
