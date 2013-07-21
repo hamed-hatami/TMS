@@ -11,9 +11,9 @@ public class EventLog implements Serializable {
     @JsonProperty
     private long id;
     @JsonProperty
-    private EventTitle title;
+    private BLookup title;
     @JsonProperty
-    private EventType eventType;
+    private BLookup eventType;
     @JsonProperty
     private String objectId;
     @JsonProperty
@@ -36,20 +36,28 @@ public class EventLog implements Serializable {
         this.id = id;
     }
 
-    public EventTitle getTitle() {
+    public BLookup getTitle() {
         return title;
     }
 
-    public void setTitle(EventTitle title) {
+    public void setTitle(BLookup title) {
         this.title = title;
     }
 
-    public EventType getEventType() {
+    public String getTitleCode() {
+        return "EventTitle";
+    }
+
+    public BLookup getEventType() {
         return eventType;
     }
 
-    public void setEventType(EventType eventType) {
+    public void setEventType(BLookup eventType) {
         this.eventType = eventType;
+    }
+
+    public String getEventTypeCode() {
+        return "EventType";
     }
 
     public String getTableName() {
