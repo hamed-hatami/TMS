@@ -49,6 +49,7 @@ public class UserManagement extends JInternalFrame {
      * Creates new form ContactEditor
      */
     private JDesktopPane jdpDesktop;
+    List<User> userList;
     public UserManagement(JDesktopPane jDesktopPane) {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
@@ -71,7 +72,7 @@ public class UserManagement extends JInternalFrame {
     }
     public void refresh() throws IOException {
         userService.setServiceName("/getAllUser");
-        List<User> userList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(userService.getServerUrl(), userService.getServiceName()), new TypeReference<List<User>>() {
+        userList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(userService.getServerUrl(), userService.getServiceName()), new TypeReference<List<User>>() {
         });
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, userList, userTable, "");
@@ -101,6 +102,7 @@ public class UserManagement extends JInternalFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("USERMANAGEMENT");
+        setClosable(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("USERMANAGEMENT"));
 
@@ -130,6 +132,7 @@ public class UserManagement extends JInternalFrame {
         editButton.setText("EDIT");
         editButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editUser();
             }
         });
 
@@ -221,16 +224,25 @@ public class UserManagement extends JInternalFrame {
                 .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 221, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel1.getAccessibleContext().setAccessibleName("ADDUser");
+        jPanel1.getAccessibleContext().setAccessibleName("UserForm");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void addUser() throws PropertyVetoException {
-        ADDUser user= new ADDUser(this);
+        UserForm user= new UserForm(this);
         user.setVisible(true);
         jdpDesktop.add(user);
         user.setSelected(true);
+
+    }
+    private void editUser(){
+        User user= userList.get(userTable.convertRowIndexToModel(userTable.getSelectedRow()));
+        UserForm userForm=new UserForm(this,user);
+        userForm.setVisible(true);
+        jdpDesktop.add(userForm);
+
+
 
     }
 

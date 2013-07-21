@@ -178,7 +178,7 @@ public class WorkGroupManagement extends JInternalFrame {
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        mainPanel.getAccessibleContext().setAccessibleName("ADDUser");
+        mainPanel.getAccessibleContext().setAccessibleName("UserForm");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

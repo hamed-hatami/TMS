@@ -263,7 +263,7 @@ public class RoleManagement extends JInternalFrame {
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        mainPanel.getAccessibleContext().setAccessibleName("ADDUser");
+        mainPanel.getAccessibleContext().setAccessibleName("RoleForm");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

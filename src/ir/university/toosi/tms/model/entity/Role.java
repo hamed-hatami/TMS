@@ -32,6 +32,14 @@ public class Role implements Serializable {
     public Role() {
     }
 
+    public Role(Set<WorkGroupRole> roleWorkGroup) {
+        this.roleWorkGroup=roleWorkGroup;
+    }
+
+    public Role(long id) {
+        this.id = id;
+    }
+
     public Role(long id, String name, String persianDescription, String englishDescription, boolean enabled, String deleted, Set<WorkGroup> workGroups, boolean selected) {
         this.id = id;
         this.name = name;
@@ -45,7 +53,6 @@ public class Role implements Serializable {
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }

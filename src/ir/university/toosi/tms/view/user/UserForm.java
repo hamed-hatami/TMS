@@ -43,15 +43,17 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
 
-public class ADDUser extends JInternalFrame {
+public class UserForm extends JInternalFrame {
 
     /**
      * Creates new form ContactEditor
      */
     private String[] workGroupsName;
     private UserManagement userManagement;
+    private boolean editable = false;
+    private User user;
 
-    public ADDUser(UserManagement userManagement) {
+    public UserForm(UserManagement userManagement) {
         List<WorkGroup> workGroupList;
         this.userManagement = userManagement;
         WebServiceInfo webServiceInfo = new WebServiceInfo();
@@ -78,6 +80,45 @@ public class ADDUser extends JInternalFrame {
         workGroups = new javax.swing.JComboBox(workGroupsName);
         cancelButton = new javax.swing.JButton();
         okButton = new javax.swing.JButton();
+
+        initComponents();
+    }
+
+    public UserForm(UserManagement userManagement, User user) {
+        List<WorkGroup> workGroupList;
+        this.user=user;
+        this.userManagement = userManagement;
+        editable = true;
+
+        WebServiceInfo webServiceInfo = new WebServiceInfo();
+        webServiceInfo.setServiceName("/getAllWorkGroup");
+
+        workGroupList = new RESTfulClientUtil().callListWorkGroup(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName());
+        workGroupsName = new String[workGroupList.size()];
+        int i = 0;
+        for (WorkGroup workGroup : workGroupList) {
+            workGroupsName[i++] = workGroup.getName();
+        }
+
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        userName = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        password = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        firstName = new javax.swing.JTextField();
+        familyName = new javax.swing.JTextField();
+        workGroups = new javax.swing.JComboBox(workGroupsName);
+        cancelButton = new javax.swing.JButton();
+        okButton = new javax.swing.JButton();
+
+        userName.setText(user.getUsername());
+        firstName.setText(user.getFirstname());
+        familyName.setText(user.getLastname());
+        password.setText(user.getPassword());
 
         initComponents();
     }
@@ -173,7 +214,11 @@ public class ADDUser extends JInternalFrame {
         okButton.setText("OK");
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveUser();
+                if (!editable) {
+                    saveUser();
+                } else {
+                    updateUser();
+                }
             }
         });
 
@@ -208,7 +253,7 @@ public class ADDUser extends JInternalFrame {
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.getAccessibleContext().setAccessibleName("ADDUser");
+        jPanel1.getAccessibleContext().setAccessibleName("UserForm");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -221,7 +266,7 @@ public class ADDUser extends JInternalFrame {
         user.setFirstname(firstName.getText());
         serviceInfo.setServiceName("/findWorkGroupByName");
         try {
-            WorkGroup workGroup=new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), (String)workGroups.getSelectedItem()),WorkGroup.class);
+            WorkGroup workGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), (String) workGroups.getSelectedItem()), WorkGroup.class);
             user.setWorkgroup(workGroup);
             user.setLastname(familyName.getText());
 //        String workgroupName=workGroups.getSelectedItem();
@@ -234,6 +279,28 @@ public class ADDUser extends JInternalFrame {
             userManagement.refresh();
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+    }
+public void updateUser() {
+        WebServiceInfo serviceInfo = new WebServiceInfo();
+        user.setUsername(userName.getText());
+        user.setPassword(password.getText());
+        user.setFirstname(firstName.getText());
+        serviceInfo.setServiceName("/findWorkGroupByName");
+        try {
+            WorkGroup workGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), (String) workGroups.getSelectedItem()), WorkGroup.class);
+            user.setWorkgroup(workGroup);
+            user.setLastname(familyName.getText());
+//        String workgroupName=workGroups.getSelectedItem();
+//        user.setWorkgroup();
+            serviceInfo.setServiceName("/editUser");
+            new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), new ObjectMapper().writeValueAsString(user));
+            this.setVisible(false);
+            this.dispose();
+            userManagement.refresh();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
