@@ -30,10 +30,12 @@ package ir.university.toosi.tms.view.user;/*
 
 
 
+import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.User;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
+import ir.university.toosi.tms.model.entity.WorkGroup;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import org.jdesktop.beansbinding.BindingGroup;
@@ -128,6 +130,15 @@ public class UserManagement extends JInternalFrame {
         deleteButton.setText("DELETE");
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+               int result= JOptionPane.showConfirmDialog(null,"DELETE_USER","DELETE",JOptionPane.OK_CANCEL_OPTION);
+                if(result == JOptionPane.OK_OPTION){
+                    try {
+                        deleteUser();
+                    } catch (IOException e) {
+                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    }
+                }
+
             }
         });
 
@@ -243,9 +254,13 @@ public class UserManagement extends JInternalFrame {
         UserForm userForm=new UserForm(this,user);
         userForm.setVisible(true);
         jdpDesktop.add(userForm);
-
-
-
+    }
+    private void deleteUser() throws IOException {
+        User user= userList.get(userTable.convertRowIndexToModel(userTable.getSelectedRow()));
+        WebServiceInfo serviceInfo = new WebServiceInfo();
+            serviceInfo.setServiceName("/deleteUser");
+            new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), new ObjectMapper().writeValueAsString(user));
+        refresh();
     }
 
 

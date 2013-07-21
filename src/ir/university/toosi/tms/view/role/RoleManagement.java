@@ -97,7 +97,7 @@ public class RoleManagement extends JInternalFrame {
         }
     }
 
-    private void fillSearchCombo(){
+    private void fillSearchCombo() {
         searchItems = new String[RoleSearchItems.values().length];
         int i = 0;
         for (RoleSearchItems roleSearchItem : RoleSearchItems.values()) {
@@ -145,7 +145,12 @@ public class RoleManagement extends JInternalFrame {
         delete.setText("DELETE");
         delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteActionPerformed(evt);
+                int result = JOptionPane.showConfirmDialog(null, "DELETE_USER", "DELETE", JOptionPane.OK_CANCEL_OPTION);
+                if (result == JOptionPane.OK_OPTION) {
+                    deleteActionPerformed(evt);
+                }
+
+
             }
         });
 
@@ -307,11 +312,6 @@ public class RoleManagement extends JInternalFrame {
         roleService.setServiceName("/deleteRoleList");
         try {
             new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(deletedRoles)), Boolean.class);
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-
-        try {
             refresh();
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
