@@ -36,7 +36,6 @@ import ir.university.toosi.tms.model.entity.RoleSearchItems;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
-import org.jboss.arquillian.test.spi.event.suite.Test;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
@@ -352,7 +351,6 @@ public class RoleManagement extends JInternalFrame {
     private JTable mainTable;
     private JDesktopPane jdpDesktop;
     private JTextField searchText;
-    private Test test;
     private WebServiceInfo roleService = new WebServiceInfo();
     private List<Role> roleList = new ArrayList<>();
     private String[] searchItems;

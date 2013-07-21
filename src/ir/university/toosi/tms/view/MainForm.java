@@ -5,6 +5,7 @@ import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.eventlog.EventLogList;
 import ir.university.toosi.tms.view.role.RoleManagement;
 import ir.university.toosi.tms.view.user.UserManagement;
+import ir.university.toosi.tms.view.workgroup.WorkGroupManagement;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameEvent;
@@ -53,7 +54,7 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
         try {
             loginForm.setSelected(true);
         } catch (PropertyVetoException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
 
         setContentPane(jdpDesktop);
@@ -131,6 +132,13 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
         userManagement.setSelected(true);
 
     }
+    private void showWorkGroupManagement() throws PropertyVetoException {
+        WorkGroupManagement workGroupManagement= new WorkGroupManagement(jdpDesktop);
+        workGroupManagement.setVisible(true);
+        jdpDesktop.add(workGroupManagement);
+        workGroupManagement.setSelected(true);
+
+    }
 
     private void showRoleManagement() throws PropertyVetoException {
         RoleManagement roleManagement = new RoleManagement(jdpDesktop);
@@ -177,6 +185,8 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
                 showRoleManagement();
             } else if (e.getSource() == eventLogListItem) {
                 showEventLogList();
+            }else if (e.getSource() == workGroupManagementItem) {
+                showWorkGroupManagement();
             }
         } catch (Exception ex) {
             ex.printStackTrace();
