@@ -292,7 +292,13 @@ public class RoleManagement extends JInternalFrame {
     }
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {
-        int[] indexes = mainTable.getSelectedRows();
+
+        int[] indexes = new int[mainTable.getSelectedRows().length];
+        int j = 0;
+        for (int i : mainTable.getSelectedRows()) {
+            indexes[j++] = mainTable.convertRowIndexToModel(i);
+        }
+
         List<Role> deletedRoles = new ArrayList<>();
         for (int index : indexes) {
             deletedRoles.add(roleList.get(index));
@@ -321,7 +327,7 @@ public class RoleManagement extends JInternalFrame {
 
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
-        Role role = roleList.get(mainTable.getSelectedRow());
+        Role role = roleList.get(mainTable.convertRowIndexToModel(mainTable.getSelectedRow()));
         RoleForm roleForm = new RoleForm(true, role, this);
         roleForm.setVisible(true);
         jdpDesktop.add(roleForm);
