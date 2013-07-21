@@ -2,6 +2,7 @@ package ir.university.toosi.tms.view;
 
 import ir.university.toosi.tms.controller.LanguageAction;
 import ir.university.toosi.tms.util.ThreadPoolManager;
+import ir.university.toosi.tms.view.eventlog.EventLogList;
 import ir.university.toosi.tms.view.role.RoleManagement;
 import ir.university.toosi.tms.view.user.UserManagement;
 
@@ -31,6 +32,7 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
     private JMenuItem userManagementItem;
     private JMenuItem roleManagementItem;
     private JMenuItem workGroupManagementItem;
+    private JMenuItem eventLogListItem;
 
     Login loginForm;
 
@@ -91,16 +93,20 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
         workGroupManagementItem = new JMenuItem();
         userManagementItem = new JMenuItem();
         roleManagementItem = new JMenuItem();
+        eventLogListItem = new JMenuItem();
         workGroupManagementItem.setText(LanguageAction.getBundleMessage("workgroup_management"));
         managementMenu.setText(LanguageAction.getBundleMessage("management"));
         roleManagementItem.setText(LanguageAction.getBundleMessage("role_management"));
         userManagementItem.setText(LanguageAction.getBundleMessage("user_management"));
+        eventLogListItem.setText(LanguageAction.getBundleMessage("eventLog_list"));
         userManagementItem.addActionListener(this);
         roleManagementItem.addActionListener(this);
         workGroupManagementItem.addActionListener(this);
+        eventLogListItem.addActionListener(this);
         managementMenu.add(workGroupManagementItem);
         managementMenu.add(roleManagementItem);
         managementMenu.add(userManagementItem);
+        managementMenu.add(eventLogListItem);
 
         menuBar.add(menu);
         menuBar.add(languageMenu);
@@ -133,6 +139,13 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
         roleManagement.setSelected(true);
     }
 
+    private void showEventLogList() throws PropertyVetoException {
+        EventLogList eventLogList = new EventLogList(jdpDesktop);
+        eventLogList.setVisible(true);
+        jdpDesktop.add(eventLogList);
+        eventLogList.setSelected(true);
+    }
+
     private void refreshMainForm() {
         jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
         menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
@@ -162,6 +175,8 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
                 showUserManagement();
             } else if (e.getSource() == roleManagementItem) {
                 showRoleManagement();
+            } else if (e.getSource() == eventLogListItem) {
+                showEventLogList();
             }
         } catch (Exception ex) {
             ex.printStackTrace();
