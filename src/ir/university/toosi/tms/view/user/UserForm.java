@@ -36,6 +36,7 @@ import ir.university.toosi.tms.model.entity.User;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.model.entity.WorkGroup;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
+import ir.university.toosi.tms.util.ThreadPoolManager;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -136,6 +137,7 @@ public class UserForm extends JInternalFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("USERMANAGEMENT");
         setClosable(true);
+        this.addInternalFrameListener(ThreadPoolManager.mainForm);
 
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("USER"));

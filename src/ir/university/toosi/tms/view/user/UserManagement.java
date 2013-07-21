@@ -35,6 +35,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.User;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
+import ir.university.toosi.tms.util.ThreadPoolManager;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
@@ -102,6 +103,7 @@ public class UserManagement extends JInternalFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("USERMANAGEMENT");
+        this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("USERMANAGEMENT"));
