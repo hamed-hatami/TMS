@@ -1,7 +1,9 @@
 package ir.university.toosi.tms.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -28,7 +30,7 @@ public class WorkGroup implements Serializable {
     @JsonProperty
     private boolean selected;
     @JsonProperty
-    private Set<WorkGroupRole> roleWorkGroup;
+    private Set<Role> roles;
 
 
     public WorkGroup() {
@@ -37,9 +39,6 @@ public class WorkGroup implements Serializable {
     public WorkGroup(int id) {
     }
 
-    public WorkGroup(Set<WorkGroupRole> workGroupRoles,Set<User> users) {
-        this.roleWorkGroup = workGroupRoles;
-    }
 
     public WorkGroup(long id, String name, String persianDescription, String englishDescription, String enabled, String deleted, boolean selected, Set<User> users) {
         this.id = id;
@@ -107,11 +106,11 @@ public class WorkGroup implements Serializable {
         this.selected = selected;
     }
 
-    public Set<WorkGroupRole> getRoleWorkGroup() {
-        return roleWorkGroup;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRoleWorkGroup(Set<WorkGroupRole> roleWorkGroup) {
-        this.roleWorkGroup = roleWorkGroup;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

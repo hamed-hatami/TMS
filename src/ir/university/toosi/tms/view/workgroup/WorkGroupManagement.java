@@ -36,7 +36,6 @@ import ir.university.toosi.tms.model.entity.WorkGroup;
 import ir.university.toosi.tms.model.entity.WorkGroupSearchItems;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
-import ir.university.toosi.tms.view.workgroup.WorkGroupForm;
 import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.beansbinding.ELProperty;

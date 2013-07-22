@@ -24,17 +24,13 @@ public class Role implements Serializable {
     private boolean enabled;
     @JsonProperty
     private String deleted;
-    @JsonProperty
-    private Set<WorkGroupRole> roleWorkGroup;
+
     @JsonProperty
     private boolean selected;
 
     public Role() {
     }
 
-    public Role(Set<WorkGroupRole> roleWorkGroup) {
-        this.roleWorkGroup=roleWorkGroup;
-    }
 
     public Role(long id) {
         this.id = id;
@@ -106,11 +102,5 @@ public class Role implements Serializable {
         this.selected = selected;
     }
 
-    public Set<WorkGroupRole> getRoleWorkGroup() {
-        return roleWorkGroup;
-    }
 
-    public void setRoleWorkGroup(Set<WorkGroupRole> roleWorkGroup) {
-        this.roleWorkGroup = roleWorkGroup;
-    }
 }

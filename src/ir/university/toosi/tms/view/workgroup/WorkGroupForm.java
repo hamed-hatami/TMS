@@ -1,6 +1,9 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package ir.university.toosi.tms.view.workgroup;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.Role;
@@ -8,216 +11,334 @@ import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.model.entity.WorkGroup;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
-import org.jdesktop.beansbinding.AutoBinding;
-import org.jdesktop.beansbinding.BindingGroup;
-import org.jdesktop.beansbinding.ELProperty;
-import org.jdesktop.swingbinding.JTableBinding;
-import org.jdesktop.swingbinding.SwingBindings;
 
 import javax.swing.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
+/**
+ * @author root
+ */
 public class WorkGroupForm extends JInternalFrame {
 
     /**
-     * Creates new form ContactEditor
+     * Creates new form WorkGroupForm
      */
     private WorkGroupManagement workGroupManagement;
     private WorkGroup workGroup;
-    private boolean editable=false;
-    public WorkGroupForm() {
-        mainPanel = new JPanel();
-        workGroupNameLabel = new JLabel();
-        workGroupName = new JTextField();
-        workGroupDescLabel = new JLabel();
-        workGroupDesc = new JTextField();
-        tableScroll = new JScrollPane();
-        mainTable = new JTable();
-        cancel = new JButton();
-        ok = new JButton();
-        try {
-            initComponents();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public WorkGroupForm(WorkGroupManagement workGroupManagement , WorkGroup workGroup ) {
-        this.workGroupManagement=workGroupManagement;
-        this.workGroup=workGroup;
-        editable=true;
-        mainPanel = new JPanel();
-        workGroupNameLabel = new JLabel();
-        workGroupName = new JTextField();
-        workGroupDescLabel = new JLabel();
-        workGroupDesc = new JTextField();
-        tableScroll = new JScrollPane();
-        mainTable = new JTable();
-        cancel = new JButton();
-        ok = new JButton();
-        try {
-            initComponents();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    private Hashtable<String, Role> roles = new Hashtable<>();
+    private boolean editable = false;
+    private DefaultListModel<String> roleListModel = new DefaultListModel<>();
 
     public WorkGroupForm(WorkGroupManagement workGroupManagement) {
-        this.workGroupManagement=workGroupManagement;
-        mainPanel = new JPanel();
-        workGroupNameLabel = new JLabel();
-        workGroupName = new JTextField();
-        workGroupDescLabel = new JLabel();
-        workGroupDesc = new JTextField();
-        tableScroll = new JScrollPane();
-        mainTable = new JTable();
-        cancel = new JButton();
-        ok = new JButton();
+        roles = new Hashtable<>();
         try {
+        this.workGroupManagement = workGroupManagement;
+            workGroupService.setServiceName("/getAllRole");
+            allRoleList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName()), new TypeReference<List<Role>>() {
+            });
+
+            for (Role role : allRoleList) {
+                roleListModel.addElement(role.getPersianDescription());
+                roles.put(role.getPersianDescription(), role);
+            }
+
             initComponents();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        refreshSelectedList();
+        refreshAllList();
     }
 
+    public WorkGroupForm(WorkGroupManagement workGroupManagement, WorkGroup workGroup) {
+        roles = new Hashtable<>();
+        try {
+            initComponents();
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        this.workGroupManagement = workGroupManagement;
+        this.workGroup = workGroup;
+        nameText.setText(workGroup.getName());
+        descriptionText.setText(workGroup.getPersianDescription());
+        selectedRoleList=new ArrayList<>(workGroup.getRoles());
+        workGroupService.setServiceName("/getAllRole");
+
+        try {
+            allRoleList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName()), new TypeReference<List<Role>>() {
+            });
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        for (Role role : allRoleList) {
+            roleListModel.addElement(role.getPersianDescription());
+            roles.put(role.getPersianDescription(), role);
+        }
+
+        List<Role> allRoles=new ArrayList<>(allRoleList);
+        for (Role allRole : allRoles) {
+            for (Role role : selectedRoleList) {
+                if(role.getName().equalsIgnoreCase(allRole.getName())){
+                    allRoleList.remove(allRole);
+                }
+            }
+
+        }
+
+        editable = true;
+
+        refreshSelectedList();
+        refreshAllList();
+    }
 
     /**
-     * This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() throws IOException {
 
-        this.addInternalFrameListener(ThreadPoolManager.mainForm);
+
         setClosable(true);
+        this.addInternalFrameListener(ThreadPoolManager.mainForm);
+        jPanel1 = new javax.swing.JPanel();
+        nameLable = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        nameText = new javax.swing.JTextField();
+        descriptionText = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        allList = new javax.swing.JList();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        assignList = new javax.swing.JList();
+        add = new javax.swing.JButton();
+        remove = new javax.swing.JButton();
+        okButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("WORKGROUPMANAGEMENT");
+        setTitle("WORKGROUP");
 
-        mainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("WORKGROUP"));
+        allList.setModel(roleListModel);
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("WORKGROUP"));
+        jPanel1.setName("WORKGROUP"); // NOI18N
 
-        workGroupNameLabel.setText("WORKGROUPNAME");
+        nameLable.setText("NAME");
 
-        workGroupDescLabel.setText("WORKGROUPDESCRIPTION");
+        jLabel2.setText("DESCRIPTION");
 
-        workGroupService.setServiceName("/getAllRole");
-        RoleList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName()), new TypeReference<List<Role>>() {
-        });
 
-        JTableBinding jTableBinding = SwingBindings.createJTableBinding(AutoBinding.UpdateStrategy.READ_WRITE, RoleList, mainTable, "");
-        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(ELProperty.create("${name}"));
-        columnBinding.setColumnName("NAME");
-        columnBinding.setColumnClass(String.class);
-        columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(ELProperty.create("${persianDescription}"));
-        columnBinding.setColumnName("PERSIANDESCRIPSION");
-        columnBinding.setColumnClass(String.class);
-        columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(ELProperty.create("${selected}"));
-        columnBinding.setColumnName("SELECTED");
-        columnBinding.setEditable(false);
-        columnBinding.setColumnClass(Boolean.class);
-        BindingGroup bindingGroup = new BindingGroup();
-        bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
-        mainTable.setColumnSelectionAllowed(true);
-        tableScroll.setViewportView(mainTable);
-        mainTable.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jScrollPane1.setViewportView(allList);
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
-        mainPanel.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
-                                .add(30, 30, 30)
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, tableScroll, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
-                                        .add(jPanel1Layout.createSequentialGroup()
-                                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                                        .add(workGroupDescLabel)
-                                                        .add(workGroupNameLabel))
-                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                                        .add(workGroupDesc, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, workGroupName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))))
-                                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                        .add(workGroupNameLabel)
-                                        .add(workGroupName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                        .add(workGroupDescLabel)
-                                        .add(workGroupDesc, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                .add(18, 18, 18)
-                                .add(tableScroll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 133, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(29, Short.MAX_VALUE))
-        );
 
-        cancel.setText("Cancel");
-        cancel.addActionListener(new java.awt.event.ActionListener() {
+        jScrollPane2.setViewportView(assignList);
+
+        add.setText(">");
+        add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                close(evt);
+                addActionPerformed(evt);
             }
         });
 
-        ok.setText("OK");
+        remove.setText("<");
+        remove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeActionPerformed(evt);
+            }
+        });
+        okButton.setText("OK");
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
 
-        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
+        cancelButton.setText("CANCEL");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(remove, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                                                        .addComponent(add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(nameLable)
+                                                .addGap(82, 82, 82)
+                                                .addComponent(nameText))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel2)
+                                                .addGap(27, 27, 27)
+                                                .addComponent(descriptionText)))
+                                .addContainerGap(81, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(85, 85, 85)
+                                .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cancelButton)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(nameLable)
+                                        .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(16, 16, 16)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel2)
+                                        .addComponent(descriptionText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(6, 6, 6)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(44, 44, 44)
+                                                .addComponent(add)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(remove)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(cancelButton)
+                                        .addComponent(okButton)))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(layout.createSequentialGroup()
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                        .add(layout.createSequentialGroup()
-                                                .add(123, 123, 123)
-                                                .add(ok)
-                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                                .add(cancel))
-                                        .add(layout.createSequentialGroup()
-                                                .addContainerGap()
-                                                .add(mainPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(50, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        layout.linkSize(new java.awt.Component[]{cancel, ok}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
-
         layout.setVerticalGroup(
-                layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(layout.createSequentialGroup()
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .add(mainPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                        .add(cancel)
-                                        .add(ok))
-                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel1.getAccessibleContext().setAccessibleName("WORKGROUP");
 
         pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+        List<String> selectedRoles = allList.getSelectedValuesList();
+        for (String selectedRole : selectedRoles) {
+            Role role = roles.get(selectedRole);
+            if (!selectedRoleList.contains(role)) {
+                selectedRoleList.add(role);
+                allRoleList.remove(role);
+            }
+        }
+        refreshAllList();
+        ;
+        refreshSelectedList();
+    }//GEN-LAST:event_addActionPerformed
+
+    private void removeActionPerformed(java.awt.event.ActionEvent evt) {
+        List<String> selectedRoles = assignList.getSelectedValuesList();
+        for (String selectedRole : selectedRoles) {
+            Role role = roles.get(selectedRole);
+            if (!selectedRoleList.contains(role)) {
+                selectedRoleList.remove(role);
+                allRoleList.add(role);
+            }
+        }
+        refreshAllList();
+        ;
+        refreshSelectedList();
+    }//GEN-LAST:event_removeActionPerformed
+
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        Set<Role> roleSet = new HashSet<>(selectedRoleList);
+        try {
+            if (!editable) {
+                WorkGroup newWorkGroup = new WorkGroup();
+                newWorkGroup.setDeleted("0");
+                newWorkGroup.setName(nameText.getText());
+                newWorkGroup.setPersianDescription(descriptionText.getText());
+                newWorkGroup.setEnglishDescription(descriptionText.getText());
+                newWorkGroup.setRoles(roleSet);
+                workGroupService.setServiceName("/createWorkGroup");
+                newWorkGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName(),new ObjectMapper().writeValueAsString(newWorkGroup)), WorkGroup.class);
+                this.dispose();
+            }else{
+                workGroup.setName(nameText.getText());
+                workGroup.setPersianDescription(descriptionText.getText());
+                workGroup.setEnglishDescription(descriptionText.getText());
+                workGroup.setRoles(roleSet);
+                workGroupService.setServiceName("/createWorkGroup");
+                workGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName(),new ObjectMapper().writeValueAsString(workGroup)), WorkGroup.class);
+                this.dispose();
+            }
+            workGroupManagement.refresh();;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void close(java.awt.event.ActionEvent evt) {
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
         this.dispose();
+
     }
+
+    private void refreshSelectedList() {
+        DefaultListModel<String> roleListModel = new DefaultListModel<>();
+        for (Role role : selectedRoleList) {
+            roleListModel.addElement(role.getPersianDescription());
+            roles.put(role.getPersianDescription(), role);
+        }
+        assignList.setModel(roleListModel);
+
+    }
+
+    private void refreshAllList() {
+        DefaultListModel<String> roleListModel = new DefaultListModel<>();
+        for (Role role : allRoleList) {
+            roleListModel.addElement(role.getPersianDescription());
+            roles.put(role.getPersianDescription(), role);
+        }
+        allList.setModel(roleListModel);
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JButton cancel;
-    private JButton ok;
-    private JLabel workGroupNameLabel;
-    private JLabel workGroupDescLabel;
-    private JPanel mainPanel;
-    private JScrollPane tableScroll;
-    private JTable mainTable;
     private WebServiceInfo workGroupService = new WebServiceInfo();
-    private List<Role> RoleList = new ArrayList<>();
-    private JTextField workGroupName;
-    private JTextField workGroupDesc;
+    private List<Role> allRoleList = new ArrayList<>();
+    private List<Role> selectedRoleList = new ArrayList<>();
+    private javax.swing.JButton add;
+    private javax.swing.JList allList;
+    private javax.swing.JList assignList;
+    private javax.swing.JTextField descriptionText;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel nameLable;
+    private javax.swing.JTextField nameText;
+    private javax.swing.JButton remove;
+    private javax.swing.JButton okButton;
+    private javax.swing.JButton cancelButton;
     // End of variables declaration//GEN-END:variables
-
 }
