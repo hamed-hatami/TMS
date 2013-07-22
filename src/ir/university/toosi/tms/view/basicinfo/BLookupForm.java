@@ -186,6 +186,7 @@ public class BLookupForm extends JInternalFrame {
         bLookup.setName(nameField.getText());
         bLookup.setCode(codeField.getText());
         bLookup.setDescription(descField.getText());
+        bLookup.setLookup(lookup);
 
         blookupService.setServiceName("/editBLookup");
 
