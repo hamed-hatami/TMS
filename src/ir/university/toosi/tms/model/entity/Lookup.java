@@ -23,16 +23,27 @@ public class Lookup implements Serializable {
     private String description;
 
     @JsonProperty
-    private Set<ir.university.toosi.tms.model.entity.BLookup> BLookup = new HashSet<ir.university.toosi.tms.model.entity.BLookup>();
+    private String persianName;
 
-    public Lookup() {
-    }
+    @JsonProperty
+    private boolean definable;
+
+    @JsonProperty
+    private Set<ir.university.toosi.tms.model.entity.BLookup> BLookup = new HashSet<ir.university.toosi.tms.model.entity.BLookup>();
 
     public Lookup(String code, String name, String description, Set<ir.university.toosi.tms.model.entity.BLookup> BLookup) {
         this.code = code;
         this.name = name;
         this.description = description;
         this.BLookup = BLookup;
+    }
+
+
+    public Lookup() {
+    }
+
+    public Lookup(int id) {
+        this.id = id;
     }
 
     public long getId() {
@@ -73,5 +84,21 @@ public class Lookup implements Serializable {
 
     public void setBLookup(Set<ir.university.toosi.tms.model.entity.BLookup> BLookup) {
         this.BLookup = BLookup;
+    }
+
+    public String getPersianName() {
+        return persianName;
+    }
+
+    public void setPersianName(String persianName) {
+        this.persianName = persianName;
+    }
+
+    public boolean isDefinable() {
+        return definable;
+    }
+
+    public void setDefinable(boolean definable) {
+        this.definable = definable;
     }
 }

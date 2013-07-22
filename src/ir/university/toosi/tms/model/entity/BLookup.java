@@ -24,9 +24,16 @@ public class BLookup implements Serializable {
     private String description;
 
     @JsonProperty
+    private String persianName;
+
+    @JsonProperty
     private Lookup lookup;
 
     public BLookup() {
+    }
+
+    public BLookup(int id) {
+        this.id = id;
     }
 
     public BLookup(String code, String name, String description, Lookup lookup) {
@@ -58,6 +65,14 @@ public class BLookup implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPersianName() {
+        return persianName;
+    }
+
+    public void setPersianName(String persianName) {
+        this.persianName = persianName;
     }
 
     public String getDescription() {

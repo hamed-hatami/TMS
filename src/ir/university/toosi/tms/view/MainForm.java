@@ -1,7 +1,13 @@
 package ir.university.toosi.tms.view;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.controller.LanguageAction;
+import ir.university.toosi.tms.model.entity.Lookup;
+import ir.university.toosi.tms.model.entity.WebServiceInfo;
+import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
+import ir.university.toosi.tms.view.basicinfo.BasicInfoManagement;
 import ir.university.toosi.tms.view.eventlog.EventLogList;
 import ir.university.toosi.tms.view.role.RoleManagement;
 import ir.university.toosi.tms.view.user.UserManagement;
@@ -14,6 +20,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * @author : Hamed Hatami ,  Farzad Sedaghatbin, Atefeh Ahmadi
@@ -27,6 +35,8 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
     private JMenu menu;
     private JMenu languageMenu;
     private JMenu managementMenu;
+    private JMenu basicInfoMenu;
+    private JMenuItem[] basicInfoMenus;
     private JMenuItem menuItem;
     private JMenuItem persianItem;
     private JMenuItem englishItem;
@@ -35,11 +45,14 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
     private JMenuItem workGroupManagementItem;
     private JMenuItem eventLogListItem;
 
+    private WebServiceInfo lookupService;
+    private List<Lookup> lookups;
+
     Login loginForm;
 
     @Override
     public void init() {
-        ThreadPoolManager.mainForm =this;
+        ThreadPoolManager.mainForm = this;
         Frame[] frames = Frame.getFrames();
         for (Frame frame : frames) {
             frame.setMenuBar(null);
@@ -109,9 +122,30 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
         managementMenu.add(userManagementItem);
         managementMenu.add(eventLogListItem);
 
+        basicInfoMenu = new JMenu();
+        basicInfoMenu.setText(LanguageAction.getBundleMessage("BasicInfo"));
+        lookupService = new WebServiceInfo();
+        lookupService.setServiceName("/getAllDefinableLookup");
+        try {
+            lookups = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(lookupService.getServerUrl(), lookupService.getServiceName()), new TypeReference<List<Lookup>>() {
+            });
+            basicInfoMenus =new JMenuItem[lookups.size()];
+            int i=0;
+            for (Lookup lookup : lookups) {
+                JMenuItem jMenuItem = new JMenuItem();
+                jMenuItem.setText(LanguageAction.getBundleMessage(lookup.getName()));
+                jMenuItem.addActionListener(this);
+                basicInfoMenus[i++]=jMenuItem;
+                basicInfoMenu.add(jMenuItem);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
         menuBar.add(menu);
         menuBar.add(languageMenu);
         menuBar.add(managementMenu);
+        menuBar.add(basicInfoMenu);
         return menuBar;
     }
 
@@ -132,8 +166,9 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
         userManagement.setSelected(true);
 
     }
+
     private void showWorkGroupManagement() throws PropertyVetoException {
-        WorkGroupManagement workGroupManagement= new WorkGroupManagement(jdpDesktop);
+        WorkGroupManagement workGroupManagement = new WorkGroupManagement(jdpDesktop);
         workGroupManagement.setVisible(true);
         jdpDesktop.add(workGroupManagement);
         workGroupManagement.setSelected(true);
@@ -167,6 +202,14 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
         jdpDesktop.repaint();
     }
 
+    private void showLookupInfo(Lookup lookup) throws PropertyVetoException {
+        System.out.println("LOOKUP : " + lookup.getName());
+        BasicInfoManagement basicInfoManagement = new BasicInfoManagement(jdpDesktop, lookup);
+        basicInfoManagement.setVisible(true);
+        jdpDesktop.add(basicInfoManagement);
+        basicInfoManagement.setSelected(true);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
@@ -185,14 +228,20 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
                 showRoleManagement();
             } else if (e.getSource() == eventLogListItem) {
                 showEventLogList();
-            }else if (e.getSource() == workGroupManagementItem) {
+            } else if (e.getSource() == workGroupManagementItem) {
                 showWorkGroupManagement();
+            } else{
+                for (int i = 0; i < basicInfoMenus.length; i++) {
+                    JMenuItem infoMenu = basicInfoMenus[i];
+                    if(e.getSource() == infoMenu){
+                        showLookupInfo(lookups.get(i));
+                        break;
+                    }
+                }
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
-
     }
 
     public JDesktopPane getJdpDesktop() {
