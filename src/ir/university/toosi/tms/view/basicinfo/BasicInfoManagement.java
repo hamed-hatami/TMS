@@ -281,12 +281,19 @@ public class BasicInfoManagement extends JInternalFrame {
     }
 
     private void addActionPerformed(ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
-
+        BLookupForm bLookupForm = new BLookupForm(false, null, lookup, this);
+        bLookupForm.setVisible(true);
+        jdpDesktop.add(bLookupForm);
+        bLookupForm.setSelected(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     private void editActionPerformed(ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
-
+        BLookup bLookup = bLookups.get(mainTable.convertRowIndexToModel(mainTable.getSelectedRow()));
+        BLookupForm bLookupForm = new BLookupForm(true, bLookup, lookup, this);
+        bLookupForm.setVisible(true);
+        jdpDesktop.add(bLookupForm);
+        bLookupForm.setSelected(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
