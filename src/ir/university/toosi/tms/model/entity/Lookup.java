@@ -28,14 +28,10 @@ public class Lookup implements Serializable {
     @JsonProperty
     private boolean definable;
 
-    @JsonProperty
-    private Set<ir.university.toosi.tms.model.entity.BLookup> BLookup = new HashSet<ir.university.toosi.tms.model.entity.BLookup>();
-
-    public Lookup(String code, String name, String description, Set<ir.university.toosi.tms.model.entity.BLookup> BLookup) {
+    public Lookup(String code, String name, String description) {
         this.code = code;
         this.name = name;
         this.description = description;
-        this.BLookup = BLookup;
     }
 
 
@@ -76,14 +72,6 @@ public class Lookup implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Set<ir.university.toosi.tms.model.entity.BLookup> getBLookup() {
-        return BLookup;
-    }
-
-    public void setBLookup(Set<ir.university.toosi.tms.model.entity.BLookup> BLookup) {
-        this.BLookup = BLookup;
     }
 
     public String getPersianName() {

@@ -9,8 +9,6 @@ import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
@@ -31,7 +29,12 @@ public class BasicInfoManagement extends JInternalFrame {
         delete = new JButton();
         edit = new JButton();
         lookupPanel = new JPanel();
-        searchText = new JTextField();
+        codeField = new JTextField();
+        nameField = new JTextField();
+        descField = new JTextField();
+        codeLabel = new JLabel();
+        nameLabel = new JLabel();
+        descLabel = new JLabel();
         try {
             initComponents();
         } catch (IOException e) {
@@ -49,7 +52,12 @@ public class BasicInfoManagement extends JInternalFrame {
         delete = new JButton();
         edit = new JButton();
         lookupPanel = new JPanel();
-        searchText = new JTextField();
+        codeField = new JTextField();
+        nameField = new JTextField();
+        descField = new JTextField();
+        codeLabel = new JLabel();
+        nameLabel = new JLabel();
+        descLabel = new JLabel();
         try {
             initComponents();
         } catch (IOException e) {
@@ -147,50 +155,56 @@ public class BasicInfoManagement extends JInternalFrame {
         );
 
         lookupPanel.setBorder(BorderFactory.createTitledBorder("LOOKUP"));
-//        searchCombo.setModel(new DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
-        searchText.setToolTipText("");
-        searchText.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
+        codeField.setEditable(false);
+        codeField.setText(lookup.getCode());
+        nameField.setEditable(false);
+        nameField.setText(lookup.getName());
+        descField.setEditable(false);
+        descField.setText(lookup.getDescription());
 
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
 
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-            }
-        });
+        codeLabel.setText("CODE");
+        nameLabel.setText("NAME");
+        descLabel.setText("DESCRIPTION");
 
-        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(lookupPanel);
-      /*  lookupPanel.setLayout(jPanel2Layout);
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(lookupPanel);
+        lookupPanel.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-                jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(searchText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 122, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(18, 18, 18)
-                                .add(by)
-                                .add(18, 18, 18)
-                                .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(194, Short.MAX_VALUE))
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addContainerGap(115, Short.MAX_VALUE)
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(codeLabel)
+                                                        .addComponent(nameLabel)
+                                                        .addComponent(descLabel))
+                                                .addGap(29, 29, 29)
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(descField)
+                                                        .addComponent(nameField)
+                                                        .addComponent(codeField, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))))
+                                .addContainerGap(200, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
-                jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                        .add(filter)
-                                        .add(searchText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                        .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                        .add(by))
-                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );*/
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(codeLabel)
+                                        .addComponent(codeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(nameLabel)
+                                        .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(descLabel)
+                                        .addComponent(descField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                                .addGap(18, 18, 18))
+        );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -222,8 +236,8 @@ public class BasicInfoManagement extends JInternalFrame {
 
     public void refresh() throws IOException {
 
-        blookupService.setServiceName("/getByLookup");
-        bLookups = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(blookupService.getServerUrl(), blookupService.getServiceName(), new ObjectMapper().writeValueAsString(lookup)),  new TypeReference<List<BLookup>>() {
+        blookupService.setServiceName("/getByLookupId");
+        bLookups = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(blookupService.getServerUrl(), blookupService.getServiceName(), new ObjectMapper().writeValueAsString(lookup.getId())),  new TypeReference<List<BLookup>>() {
         });
 
         JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, bLookups, mainTable, "");
@@ -288,7 +302,12 @@ public class BasicInfoManagement extends JInternalFrame {
     private JScrollPane tableScroll;
     private JTable mainTable;
     private JDesktopPane jdpDesktop;
-    private JTextField searchText;
+    private JLabel codeLabel;
+    private JLabel nameLabel;
+    private JLabel descLabel;
+    private JTextField codeField;
+    private JTextField nameField;
+    private JTextField descField;
     private WebServiceInfo blookupService = new WebServiceInfo();
     private List<BLookup> bLookups = new ArrayList<>();
     private Lookup lookup;
