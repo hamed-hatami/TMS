@@ -202,12 +202,12 @@ public class EventLogList extends JInternalFrame {
         });
 
         JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, logs, mainTable, "");
-        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${title}"));
+        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${title.name}"));
         columnBinding.setColumnName("TITLE");
-        columnBinding.setColumnClass(EventTitle.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${eventType}"));
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${eventType.name}"));
         columnBinding.setColumnName("EVENT_TYPE");
-        columnBinding.setColumnClass(EventType.class);
+        columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${objectId}"));
         columnBinding.setColumnName("OBJECT_ID");
         columnBinding.setColumnClass(String.class);
