@@ -9,6 +9,7 @@ import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.basicinfo.BasicInfoManagement;
 import ir.university.toosi.tms.view.eventlog.EventLogList;
+import ir.university.toosi.tms.view.language.FileChooser;
 import ir.university.toosi.tms.view.role.RoleManagement;
 import ir.university.toosi.tms.view.user.UserManagement;
 import ir.university.toosi.tms.view.workgroup.WorkGroupManagement;
@@ -20,6 +21,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -40,6 +42,7 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
     private JMenuItem menuItem;
     private JMenuItem persianItem;
     private JMenuItem englishItem;
+    private JMenuItem importLanguage;
     private JMenuItem userManagementItem;
     private JMenuItem roleManagementItem;
     private JMenuItem workGroupManagementItem;
@@ -91,17 +94,21 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
         menuItem = new JMenuItem();
         persianItem = new JMenuItem();
         englishItem = new JMenuItem();
+        importLanguage = new JMenuItem();
         menu.setText(LanguageAction.getBundleMessage("loginForm"));
         languageMenu.setText(LanguageAction.getBundleMessage("language"));
         menuItem.setText(LanguageAction.getBundleMessage("salam"));
         persianItem.setText(LanguageAction.getBundleMessage("persian"));
         englishItem.setText(LanguageAction.getBundleMessage("english"));
+        importLanguage.setText(LanguageAction.getBundleMessage("importLanguage"));
         menuItem.addActionListener(this);
         persianItem.addActionListener(this);
         englishItem.addActionListener(this);
+        importLanguage.addActionListener(this);
         menu.add(menuItem);
         languageMenu.add(persianItem);
         languageMenu.add(englishItem);
+        languageMenu.add(importLanguage);
 
         managementMenu = new JMenu();
         workGroupManagementItem = new JMenuItem();
@@ -166,6 +173,13 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
         userManagement.setSelected(true);
 
     }
+    private void showFileChooser() throws PropertyVetoException {
+        FileChooser fileChooser=new FileChooser(jdpDesktop);
+        fileChooser.setVisible(true);
+        jdpDesktop.add(fileChooser);
+        fileChooser.setSelected(true);
+
+    }
 
     private void showWorkGroupManagement() throws PropertyVetoException {
         WorkGroupManagement workGroupManagement = new WorkGroupManagement(jdpDesktop);
@@ -224,6 +238,8 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
                 refreshMainForm();
             } else if (e.getSource() == userManagementItem) {
                 showUserManagement();
+            } else if (e.getSource() == importLanguage) {
+                showFileChooser();
             } else if (e.getSource() == roleManagementItem) {
                 showRoleManagement();
             } else if (e.getSource() == eventLogListItem) {

@@ -1,15 +1,5 @@
 package ir.university.toosi.tms.util;
 
-import org.apache.cxf.configuration.jsse.TLSClientParameters;
-import org.apache.cxf.endpoint.Client;
-import org.apache.cxf.frontend.ClientProxy;
-import org.apache.cxf.transport.http.HTTPConduit;
-import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
-
-import javax.net.ssl.*;
-import java.net.URL;
-
-
 public class WebServiceClientUtil {
 
     private static String nameSpace = "http://service.model.tms.toosi.university.ir/";
