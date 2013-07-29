@@ -44,15 +44,9 @@ public class User implements Serializable {
     @JsonProperty
     private String createBy;
     @JsonProperty
-    private String passwordModifiedDate;
-    @JsonProperty
     private String failedLoginCount;
     @JsonProperty
     private String userComment;
-    @JsonProperty
-    private String firstLoginDate;
-    @JsonProperty
-    private String firstLoginIP;
     @JsonProperty
     private String lastLoginDate;
     @JsonProperty
@@ -90,11 +84,8 @@ public class User implements Serializable {
         this.createDate = createDate;
         this.createTime = createTime;
         this.createBy = createBy;
-        this.passwordModifiedDate = passwordModifiedDate;
         this.failedLoginCount = failedLoginCount;
         this.userComment = userComment;
-        this.firstLoginDate = firstLoginDate;
-        this.firstLoginIP = firstLoginIP;
         this.lastLoginDate = lastLoginDate;
         this.lastLoginIP = lastLoginIP;
         this.online = online;
@@ -148,22 +139,6 @@ public class User implements Serializable {
 
     public String getFailedLoginCount() {
         return failedLoginCount;
-    }
-
-    public void setFirstLoginDate(String firstLoginDate) {
-        this.firstLoginDate = firstLoginDate;
-    }
-
-    public String getFirstLoginDate() {
-        return firstLoginDate;
-    }
-
-    public void setFirstLoginIP(String firstLoginIP) {
-        this.firstLoginIP = firstLoginIP;
-    }
-
-    public String getFirstLoginIP() {
-        return firstLoginIP;
     }
 
     public void setFirstname(String firstname) {
@@ -228,14 +203,6 @@ public class User implements Serializable {
 
     public String getPassword() {
         return password;
-    }
-
-    public void setPasswordModifiedDate(String passwordModifiedDate) {
-        this.passwordModifiedDate = passwordModifiedDate;
-    }
-
-    public String getPasswordModifiedDate() {
-        return passwordModifiedDate;
     }
 
     public void setPhone(String phone) {
