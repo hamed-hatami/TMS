@@ -4,10 +4,18 @@
  */
 package ir.university.toosi.tms.view.language;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import ir.university.toosi.tms.model.entity.Language;
+import ir.university.toosi.tms.model.entity.WebServiceInfo;
+import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 
 import javax.swing.*;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.List;
 
 /**
  * @author farzad
@@ -15,13 +23,15 @@ import java.io.File;
 public class FileChooser extends JInternalFrame {
 
     private JDesktopPane jdpDesktop;
+
     /**
      * Creates new form Language
+     *
      * @param jdpDesktop
      */
     public FileChooser(JDesktopPane jdpDesktop) {
 
-        this.jdpDesktop=jdpDesktop;
+        this.jdpDesktop = jdpDesktop;
         initComponents();
     }
 
@@ -38,7 +48,7 @@ public class FileChooser extends JInternalFrame {
         pathText = new javax.swing.JTextField();
         rtlCheckBox = new javax.swing.JCheckBox();
         okButton = new javax.swing.JButton();
-        fileChooser= new JFileChooser();
+        fileChooser = new JFileChooser();
         setClosable(true);
         this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -102,21 +112,34 @@ public class FileChooser extends JInternalFrame {
     private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
         int returnVal = fileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
+            file = fileChooser.getSelectedFile();
             pathText.setText(file.getAbsolutePath());
         } else {
         }
     }//GEN-LAST:event_browseButtonActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        // TODO add your handling code here:
+        language.setName(file.getName());
+        try {
+            language.setContent(Files.readAllBytes(file.toPath()));
+            language.setRtl(rtlCheckBox.isSelected());
+            webServiceInfo = new WebServiceInfo();
+            webServiceInfo.setServiceName("/createLanguage");
+            new RESTfulClientUtil().restFullService(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName(), new ObjectMapper().writeValueAsString(language));
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
     }//GEN-LAST:event_okButtonActionPerformed
 
-     // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton browseButton;
     private JButton okButton;
     private JTextField pathText;
     private JCheckBox rtlCheckBox;
     private JFileChooser fileChooser;
+    private Language language = new Language();
+    private File file;
+    private WebServiceInfo webServiceInfo;
     // End of variables declaration//GEN-END:variables
 }

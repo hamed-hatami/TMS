@@ -3,6 +3,7 @@ package ir.university.toosi.tms.view;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.controller.LanguageAction;
+import ir.university.toosi.tms.model.entity.Language;
 import ir.university.toosi.tms.model.entity.Lookup;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
@@ -42,11 +43,13 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
     private JMenuItem menuItem;
     private JMenuItem persianItem;
     private JMenuItem englishItem;
+    private JMenuItem otherItem;
     private JMenuItem importLanguage;
     private JMenuItem userManagementItem;
     private JMenuItem roleManagementItem;
     private JMenuItem workGroupManagementItem;
     private JMenuItem eventLogListItem;
+    private List<Language> languageList;
 
     private WebServiceInfo lookupService;
     private List<Lookup> lookups;
@@ -62,6 +65,15 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
             frame.setTitle("Traffic Management System");
             frame.pack();
         }
+        WebServiceInfo webServiceInfo = new WebServiceInfo();
+        webServiceInfo.setServiceName("/getAllLanguage");
+        try {
+            languageList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName()), new TypeReference<List<Language>>() {
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         loginForm = new Login(this);
         loginForm.setVisible(true);
 
@@ -94,20 +106,31 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
         menuItem = new JMenuItem();
         persianItem = new JMenuItem();
         englishItem = new JMenuItem();
+        otherItem = new JMenuItem();
         importLanguage = new JMenuItem();
         menu.setText(LanguageAction.getBundleMessage("loginForm"));
         languageMenu.setText(LanguageAction.getBundleMessage("language"));
         menuItem.setText(LanguageAction.getBundleMessage("salam"));
         persianItem.setText(LanguageAction.getBundleMessage("persian"));
         englishItem.setText(LanguageAction.getBundleMessage("english"));
+        otherItem.setText(LanguageAction.getBundleMessage("thirdLanguage"));
         importLanguage.setText(LanguageAction.getBundleMessage("importLanguage"));
         menuItem.addActionListener(this);
         persianItem.addActionListener(this);
         englishItem.addActionListener(this);
+        otherItem.addActionListener(this);
         importLanguage.addActionListener(this);
         menu.add(menuItem);
         languageMenu.add(persianItem);
         languageMenu.add(englishItem);
+        if (languageList != null && !languageList.isEmpty()) {
+            try {
+                LanguageAction.initProperty(languageList.get(0).getContent());
+            } catch (IOException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+            languageMenu.add(otherItem);
+        }
         languageMenu.add(importLanguage);
 
         managementMenu = new JMenu();
@@ -136,13 +159,13 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
         try {
             lookups = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(lookupService.getServerUrl(), lookupService.getServiceName()), new TypeReference<List<Lookup>>() {
             });
-            basicInfoMenus =new JMenuItem[lookups.size()];
-            int i=0;
+            basicInfoMenus = new JMenuItem[lookups.size()];
+            int i = 0;
             for (Lookup lookup : lookups) {
                 JMenuItem jMenuItem = new JMenuItem();
                 jMenuItem.setText(LanguageAction.getBundleMessage(lookup.getName()));
                 jMenuItem.addActionListener(this);
-                basicInfoMenus[i++]=jMenuItem;
+                basicInfoMenus[i++] = jMenuItem;
                 basicInfoMenu.add(jMenuItem);
             }
         } catch (IOException e) {
@@ -173,8 +196,9 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
         userManagement.setSelected(true);
 
     }
+
     private void showFileChooser() throws PropertyVetoException {
-        FileChooser fileChooser=new FileChooser(jdpDesktop);
+        FileChooser fileChooser = new FileChooser(jdpDesktop);
         fileChooser.setVisible(true);
         jdpDesktop.add(fileChooser);
         fileChooser.setSelected(true);
@@ -211,6 +235,7 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
         menuItem.setText(LanguageAction.getBundleMessage("salam"));
         persianItem.setText(LanguageAction.getBundleMessage("persian"));
         englishItem.setText(LanguageAction.getBundleMessage("english"));
+        otherItem.setText(LanguageAction.getBundleMessage("other"));
         jdpDesktop.removeAll();
         jdpDesktop.revalidate();
         jdpDesktop.repaint();
@@ -236,6 +261,9 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
             } else if (e.getSource() == englishItem) {
                 LanguageAction.changeLocale("en");
                 refreshMainForm();
+            }else if (e.getSource() == englishItem) {
+                LanguageAction.changeLocale("other");
+                refreshMainForm();
             } else if (e.getSource() == userManagementItem) {
                 showUserManagement();
             } else if (e.getSource() == importLanguage) {
@@ -246,10 +274,10 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
                 showEventLogList();
             } else if (e.getSource() == workGroupManagementItem) {
                 showWorkGroupManagement();
-            } else{
+            } else {
                 for (int i = 0; i < basicInfoMenus.length; i++) {
                     JMenuItem infoMenu = basicInfoMenus[i];
-                    if(e.getSource() == infoMenu){
+                    if (e.getSource() == infoMenu) {
                         showLookupInfo(lookups.get(i));
                         break;
                     }

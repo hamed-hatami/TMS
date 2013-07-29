@@ -13,6 +13,8 @@ public class Language implements Serializable {
     @JsonProperty
     private String name;
     @JsonProperty
+    private boolean rtl;
+    @JsonProperty
     private byte[] content;
 
     public Language() {
@@ -40,5 +42,13 @@ public class Language implements Serializable {
 
     public void setContent(byte[] content) {
         this.content = content;
+    }
+
+    public boolean isRtl() {
+        return rtl;
+    }
+
+    public void setRtl(boolean rtl) {
+        this.rtl = rtl;
     }
 }
