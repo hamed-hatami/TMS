@@ -12,6 +12,7 @@ import ir.university.toosi.tms.view.basicinfo.BasicInfoManagement;
 import ir.university.toosi.tms.view.calendar.CalendarManagement;
 import ir.university.toosi.tms.view.eventlog.EventLogList;
 import ir.university.toosi.tms.view.language.FileChooser;
+import ir.university.toosi.tms.view.person.PersonManagement;
 import ir.university.toosi.tms.view.role.RoleManagement;
 import ir.university.toosi.tms.view.user.UserManagement;
 import ir.university.toosi.tms.view.workgroup.WorkGroupManagement;
@@ -49,6 +50,7 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
     private JMenuItem roleManagementItem;
     private JMenuItem workGroupManagementItem;
     private JMenuItem calendarManagementItem;
+    private JMenuItem personManagementItem;
     private JMenuItem eventLogListItem;
     private List<Languages> languageList;
 
@@ -137,11 +139,13 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
         managementMenu = new JMenu();
         workGroupManagementItem = new JMenuItem();
         calendarManagementItem = new JMenuItem();
+        personManagementItem = new JMenuItem();
         userManagementItem = new JMenuItem();
         roleManagementItem = new JMenuItem();
         eventLogListItem = new JMenuItem();
         workGroupManagementItem.setText(LanguageAction.getBundleMessage("workgroup_management"));
         calendarManagementItem.setText(LanguageAction.getBundleMessage("calendar_management"));
+        personManagementItem.setText(LanguageAction.getBundleMessage("person_management"));
         managementMenu.setText(LanguageAction.getBundleMessage("management"));
         roleManagementItem.setText(LanguageAction.getBundleMessage("role_management"));
         userManagementItem.setText(LanguageAction.getBundleMessage("user_management"));
@@ -151,11 +155,13 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
         workGroupManagementItem.addActionListener(this);
         eventLogListItem.addActionListener(this);
         calendarManagementItem.addActionListener(this);
+        personManagementItem.addActionListener(this);
         managementMenu.add(workGroupManagementItem);
         managementMenu.add(roleManagementItem);
         managementMenu.add(userManagementItem);
         managementMenu.add(eventLogListItem);
         managementMenu.add(calendarManagementItem);
+        managementMenu.add(personManagementItem);
 
         basicInfoMenu = new JMenu();
         basicInfoMenu.setText(LanguageAction.getBundleMessage("BasicInfo"));
@@ -226,6 +232,14 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
 
     }
 
+    private void showPersonManagment() throws PropertyVetoException {
+        PersonManagement personManagement = new PersonManagement(jdpDesktop);
+        personManagement.setVisible(true);
+        jdpDesktop.add(personManagement);
+        personManagement.setSelected(true);
+
+    }
+
     private void showRoleManagement() throws PropertyVetoException {
         RoleManagement roleManagement = new RoleManagement(jdpDesktop);
         roleManagement.setVisible(true);
@@ -289,6 +303,8 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
                 showWorkGroupManagement();
             } else if (e.getSource() == calendarManagementItem) {
                 showCalendarManagment();
+            } else if (e.getSource() == personManagementItem) {
+                showPersonManagment();
             } else {
                 for (int i = 0; i < basicInfoMenus.length; i++) {
                     JMenuItem infoMenu = basicInfoMenus[i];
