@@ -26,6 +26,10 @@ public class Calendar implements Serializable {
     public Calendar() {
     }
 
+    public Calendar(long id) {
+        this.id = id;
+    }
+
     public Calendar(String code, String name, String description, boolean defaultCalendar) {
         this.code = code;
         this.name = name;
