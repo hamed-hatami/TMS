@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import ir.university.toosi.tms.model.entity.calendar.Calendar;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -29,6 +30,10 @@ public class WorkGroup implements Serializable {
     private String deleted;
     @JsonProperty
     private boolean selected;
+    @JsonProperty
+    private Calendar defaultCalendar;
+    @JsonProperty
+    private Calendar calendar;
     @JsonProperty
     private Set<Role> roles;
 
@@ -112,5 +117,21 @@ public class WorkGroup implements Serializable {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Calendar getDefaultCalendar() {
+        return defaultCalendar;
+    }
+
+    public void setDefaultCalendar(Calendar defaultCalendar) {
+        this.defaultCalendar = defaultCalendar;
+    }
+
+    public Calendar getCalendar() {
+        return calendar;
+    }
+
+    public void setCalendar(Calendar calendar) {
+        this.calendar = calendar;
     }
 }
