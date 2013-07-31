@@ -1,10 +1,10 @@
-package ir.university.toosi.tms.view.eventlog;
+package ir.university.toosi.tms.view.calendar;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ir.university.toosi.tms.model.entity.EventLog;
-import ir.university.toosi.tms.model.entity.EventLogSearchItems;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
+import ir.university.toosi.tms.model.entity.calendar.Calendar;
+import ir.university.toosi.tms.model.entity.calendar.CalendarSearchItems;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import org.jdesktop.beansbinding.BindingGroup;
@@ -13,20 +13,26 @@ import org.jdesktop.swingbinding.JTableBinding;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventLogList extends JInternalFrame {
+public class CalendarManagement extends JInternalFrame {
 
     /**
      * Creates new form ContactEditor
      */
-    public EventLogList() {
+    public CalendarManagement() {
         fillSearchCombo();
         mainPanel = new JPanel();
         tableScroll = new JScrollPane();
         mainTable = new JTable();
+        add = new JButton();
+        delete = new JButton();
+        edit = new JButton();
         searchPanel = new JPanel();
         searchCombo = new JComboBox(searchItems);
         searchText = new JTextField();
@@ -39,12 +45,15 @@ public class EventLogList extends JInternalFrame {
         }
     }
 
-    public EventLogList(JDesktopPane jDesktopPane) {
+    public CalendarManagement(JDesktopPane jDesktopPane) {
         fillSearchCombo();
         jdpDesktop = jDesktopPane;
         mainPanel = new JPanel();
         tableScroll = new JScrollPane();
         mainTable = new JTable();
+        add = new JButton();
+        delete = new JButton();
+        edit = new JButton();
         searchPanel = new JPanel();
         searchCombo = new JComboBox(searchItems);
         searchText = new JTextField();
@@ -58,10 +67,10 @@ public class EventLogList extends JInternalFrame {
     }
 
     private void fillSearchCombo() {
-        searchItems = new String[EventLogSearchItems.values().length];
+        searchItems = new String[CalendarSearchItems.values().length];
         int i = 0;
-        for (EventLogSearchItems logSearchItems : EventLogSearchItems.values()) {
-            searchItems[i++] = logSearchItems.getDescription();
+        for (CalendarSearchItems calendarSearchItem : CalendarSearchItems.values()) {
+            searchItems[i++] = calendarSearchItem.getDescription();
         }
     }
 
@@ -74,12 +83,13 @@ public class EventLogList extends JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     public void initComponents() throws IOException {
 
+
         this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("EVENTLOGLIST");
+        setTitle("CALENDARMANAGEMENT");
 
-        mainPanel.setBorder(BorderFactory.createTitledBorder("EVENTLOGLIST"));
+        mainPanel.setBorder(BorderFactory.createTitledBorder("CALENDARMANAGEMENT"));
 
         mainTable.setAutoCreateRowSorter(true);
         refresh();
@@ -87,6 +97,42 @@ public class EventLogList extends JInternalFrame {
 
         mainTable.setColumnSelectionAllowed(true);
         tableScroll.setViewportView(mainTable);
+        mainTable.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+
+        add.setText("ADD");
+        add.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                try {
+                    addActionPerformed(evt);
+                } catch (PropertyVetoException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+
+        delete.setText("DELETE");
+        delete.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                int result = JOptionPane.showConfirmDialog(null, "DELETE_USER", "DELETE", JOptionPane.OK_CANCEL_OPTION);
+                if (result == JOptionPane.OK_OPTION) {
+                    deleteActionPerformed(evt);
+                }
+
+
+            }
+        });
+
+        edit.setText("EDIT");
+        edit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                try {
+                    editActionPerformed(evt);
+                } catch (PropertyVetoException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
 
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
         mainPanel.setLayout(jPanel1Layout);
@@ -96,12 +142,11 @@ public class EventLogList extends JInternalFrame {
                                 .add(36, 36, 36)
                                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                         .add(jPanel1Layout.createSequentialGroup()
-//                                                .add(add)
+                                                .add(add)
                                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-//                                                .add(delete)
+                                                .add(delete)
                                                 .add(18, 18, 18)
-//                                                .add(edit)
-                                        )
+                                                .add(edit))
                                         .add(tableScroll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(45, Short.MAX_VALUE))
         );
@@ -110,16 +155,16 @@ public class EventLogList extends JInternalFrame {
                         .add(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-//                                        .add(add)
-//                                        .add(delete)
-//                                        .add(edit)
-                                )
+                                        .add(add)
+                                        .add(delete)
+                                        .add(edit))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .add(tableScroll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .add(133, 133, 133))
         );
 
-        searchPanel.setBorder(BorderFactory.createTitledBorder("SEARCHEVENTLOG"));
+        searchPanel.setBorder(BorderFactory.createTitledBorder("SEARCHCALENDAR"));
+//        searchCombo.setModel(new DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         searchText.setToolTipText("");
         searchText.getDocument().addDocumentListener(new DocumentListener() {
@@ -192,48 +237,82 @@ public class EventLogList extends JInternalFrame {
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        mainPanel.getAccessibleContext().setAccessibleName("ADDUser");
+        mainPanel.getAccessibleContext().setAccessibleName("CalendarForm");
 
         pack();
+
     }// </editor-fold>//GEN-END:initComponents
 
     public void refresh() throws IOException {
-        eventLogService.setServiceName("/getAllEventLog");
-        logs = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(eventLogService.getServerUrl(), eventLogService.getServiceName()), new TypeReference<List<EventLog>>() {
+        calendarService.setServiceName("/getAllCalendar");
+        calendarList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(calendarService.getServerUrl(), calendarService.getServiceName()), new TypeReference<List<Calendar>>() {
         });
 
-        JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, logs, mainTable, "");
-        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${title.name}"));
-        columnBinding.setColumnName("TITLE");
+        JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, calendarList, mainTable, "");
+        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${code}"));
+        columnBinding.setColumnName("CODE");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${eventType.name}"));
-        columnBinding.setColumnName("EVENT_TYPE");
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
+        columnBinding.setColumnName("NAME");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${objectId}"));
-        columnBinding.setColumnName("OBJECT_ID");
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${description}"));
+        columnBinding.setColumnName("DESCRIPTION");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${tableName}"));
-        columnBinding.setColumnName("TABLE_NAME");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${username}"));
-        columnBinding.setColumnName("USER_NAME");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${date}"));
-        columnBinding.setColumnName("DATE");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${time}"));
-        columnBinding.setColumnName("TIME");
-        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${defaultCalendar}"));
+        columnBinding.setColumnName("DEFAULT");
+        columnBinding.setColumnClass(Boolean.class);
         BindingGroup bindingGroup = new BindingGroup();
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
     }
+
+    private void deleteActionPerformed(ActionEvent evt) {
+
+        int[] indexes = new int[mainTable.getSelectedRows().length];
+        int j = 0;
+        for (int i : mainTable.getSelectedRows()) {
+            indexes[j++] = mainTable.convertRowIndexToModel(i);
+        }
+
+        List<Calendar> deletedCalendars = new ArrayList<>();
+        for (int index : indexes) {
+            deletedCalendars.add(calendarList.get(index));
+        }
+
+        calendarService.setServiceName("/deleteCalendars");
+        try {
+            new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(calendarService.getServerUrl(), calendarService.getServiceName(), new ObjectMapper().writeValueAsString(deletedCalendars)), Boolean.class);
+            refresh();
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+    }
+
+    private void addActionPerformed(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
+        CalendarForm calendarForm = new CalendarForm(jdpDesktop, false, null, this);
+        calendarForm.setVisible(true);
+        jdpDesktop.add(calendarForm);
+        calendarForm.setSelected(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+
+    private void editActionPerformed(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
+        Calendar calendar = calendarList.get(mainTable.convertRowIndexToModel(mainTable.getSelectedRow()));
+        CalendarForm calendarForm = new CalendarForm(jdpDesktop, true, calendar, this);
+        calendarForm.setVisible(true);
+        jdpDesktop.add(calendarForm);
+        calendarForm.setSelected(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JButton add;
+    private JButton delete;
+    private JButton edit;
     private JComboBox searchCombo;
     private JLabel by;
     private JLabel filter;
@@ -243,8 +322,8 @@ public class EventLogList extends JInternalFrame {
     private JTable mainTable;
     private JDesktopPane jdpDesktop;
     private JTextField searchText;
-    private WebServiceInfo eventLogService = new WebServiceInfo();
-    private List<EventLog> logs = new ArrayList<>();
+    private WebServiceInfo calendarService = new WebServiceInfo();
+    private List<Calendar> calendarList = new ArrayList<>();
     private String[] searchItems;
 
     public JTable getMainTable() {

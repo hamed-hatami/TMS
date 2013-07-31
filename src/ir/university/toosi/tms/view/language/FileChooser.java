@@ -6,7 +6,7 @@ package ir.university.toosi.tms.view.language;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ir.university.toosi.tms.model.entity.Language;
+import ir.university.toosi.tms.model.entity.Languages;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
@@ -138,7 +138,7 @@ public class FileChooser extends JInternalFrame {
     private JTextField pathText;
     private JCheckBox rtlCheckBox;
     private JFileChooser fileChooser;
-    private Language language = new Language();
+    private Languages language = new Languages();
     private File file;
     private WebServiceInfo webServiceInfo;
     // End of variables declaration//GEN-END:variables

@@ -1,4 +1,4 @@
-package ir.university.toosi.tms.model.entity;
+package ir.university.toosi.tms.model.entity.calendar;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 
 @JsonIgnoreProperties(value = "@id")
-public class BLookup implements Serializable {
+public class Calendar implements Serializable {
 
     @JsonProperty
     private long id;
@@ -21,23 +21,16 @@ public class BLookup implements Serializable {
     private String description;
 
     @JsonProperty
-    private String persianName;
+    private boolean defaultCalendar;
 
-    @JsonProperty
-    private Lookup lookup;
-
-    public BLookup() {
+    public Calendar() {
     }
 
-    public BLookup(int id) {
-        this.id = id;
-    }
-
-    public BLookup(String code, String name, String description, Lookup lookup) {
+    public Calendar(String code, String name, String description, boolean defaultCalendar) {
         this.code = code;
         this.name = name;
         this.description = description;
-        this.lookup = lookup;
+        this.defaultCalendar = defaultCalendar;
     }
 
     public long getId() {
@@ -64,14 +57,6 @@ public class BLookup implements Serializable {
         this.name = name;
     }
 
-    public String getPersianName() {
-        return persianName;
-    }
-
-    public void setPersianName(String persianName) {
-        this.persianName = persianName;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -80,16 +65,11 @@ public class BLookup implements Serializable {
         this.description = description;
     }
 
-    public Lookup getLookup() {
-        return lookup;
+    public boolean isDefaultCalendar() {
+        return defaultCalendar;
     }
 
-    public void setLookup(Lookup lookup) {
-        this.lookup = lookup;
-    }
-
-    @Override
-    public String toString() {
-        return name;
+    public void setDefaultCalendar(boolean defaultCalendar) {
+        this.defaultCalendar = defaultCalendar;
     }
 }

@@ -218,6 +218,11 @@ public class RoleForm extends JInternalFrame {
 
     private void close(java.awt.event.ActionEvent evt) {
         this.dispose();
+        try {
+            roleManagement.refresh();
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
     }
 
 

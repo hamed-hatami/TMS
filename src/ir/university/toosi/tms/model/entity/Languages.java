@@ -1,12 +1,13 @@
 package ir.university.toosi.tms.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-
-public class Language implements Serializable {
+@JsonIgnoreProperties(value = "@id")
+public class Languages implements Serializable {
 
     @JsonProperty
     private long id;
@@ -17,7 +18,7 @@ public class Language implements Serializable {
     @JsonProperty
     private byte[] content;
 
-    public Language() {
+    public Languages() {
     }
 
     public long getId() {

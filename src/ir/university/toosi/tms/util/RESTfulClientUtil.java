@@ -43,6 +43,24 @@ public class RESTfulClientUtil {
             e.printStackTrace();
             return null;
         }
+    } public InputStream restFullServiceString(String url, String serviceName, String jsonString) {
+        try {
+            HttpClient client = new DefaultHttpClient();
+            HttpPost postRequest = new HttpPost(url + serviceName);
+            postRequest.setHeader("Content-type", "TEXT/PLAIN");
+            postRequest.setEntity(new StringEntity(jsonString));
+            HttpResponse response = client.execute(postRequest);
+            if (response.getStatusLine().getStatusCode() != 200) {
+                throw new RuntimeException("Failed : HTTP error code : "
+                        + response.getStatusLine().getStatusCode());
+            }
+
+            return response.getEntity().getContent();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 

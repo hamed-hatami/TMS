@@ -46,8 +46,6 @@ public class User implements Serializable {
     @JsonProperty
     private String failedLoginCount;
     @JsonProperty
-    private String userComment;
-    @JsonProperty
     private String lastLoginDate;
     @JsonProperty
     private String lastLoginIP;
@@ -64,6 +62,7 @@ public class User implements Serializable {
     public User(long id) {
         this.id = id;
     }
+
     public User(WorkGroup workgroup) {
         this.workgroup = workgroup;
     }
@@ -85,7 +84,7 @@ public class User implements Serializable {
         this.createTime = createTime;
         this.createBy = createBy;
         this.failedLoginCount = failedLoginCount;
-        this.userComment = userComment;
+
         this.lastLoginDate = lastLoginDate;
         this.lastLoginIP = lastLoginIP;
         this.online = online;
@@ -99,14 +98,6 @@ public class User implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public void setUserComment(String userComment) {
-        this.userComment = userComment;
-    }
-
-    public String getUserComment() {
-        return userComment;
     }
 
     public void setCreateDate(String createDate) {

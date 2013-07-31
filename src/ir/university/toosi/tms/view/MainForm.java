@@ -3,12 +3,13 @@ package ir.university.toosi.tms.view;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.controller.LanguageAction;
-import ir.university.toosi.tms.model.entity.Language;
+import ir.university.toosi.tms.model.entity.Languages;
 import ir.university.toosi.tms.model.entity.Lookup;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.basicinfo.BasicInfoManagement;
+import ir.university.toosi.tms.view.calendar.CalendarManagement;
 import ir.university.toosi.tms.view.eventlog.EventLogList;
 import ir.university.toosi.tms.view.language.FileChooser;
 import ir.university.toosi.tms.view.role.RoleManagement;
@@ -22,7 +23,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -48,8 +48,9 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
     private JMenuItem userManagementItem;
     private JMenuItem roleManagementItem;
     private JMenuItem workGroupManagementItem;
+    private JMenuItem calendarManagementItem;
     private JMenuItem eventLogListItem;
-    private List<Language> languageList;
+    private List<Languages> languageList;
 
     private WebServiceInfo lookupService;
     private List<Lookup> lookups;
@@ -68,7 +69,7 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
         WebServiceInfo webServiceInfo = new WebServiceInfo();
         webServiceInfo.setServiceName("/getAllLanguage");
         try {
-            languageList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName()), new TypeReference<List<Language>>() {
+            languageList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName()), new TypeReference<List<Languages>>() {
             });
         } catch (IOException e) {
             e.printStackTrace();
@@ -135,10 +136,12 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
 
         managementMenu = new JMenu();
         workGroupManagementItem = new JMenuItem();
+        calendarManagementItem = new JMenuItem();
         userManagementItem = new JMenuItem();
         roleManagementItem = new JMenuItem();
         eventLogListItem = new JMenuItem();
         workGroupManagementItem.setText(LanguageAction.getBundleMessage("workgroup_management"));
+        calendarManagementItem.setText(LanguageAction.getBundleMessage("calendar_management"));
         managementMenu.setText(LanguageAction.getBundleMessage("management"));
         roleManagementItem.setText(LanguageAction.getBundleMessage("role_management"));
         userManagementItem.setText(LanguageAction.getBundleMessage("user_management"));
@@ -147,10 +150,12 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
         roleManagementItem.addActionListener(this);
         workGroupManagementItem.addActionListener(this);
         eventLogListItem.addActionListener(this);
+        calendarManagementItem.addActionListener(this);
         managementMenu.add(workGroupManagementItem);
         managementMenu.add(roleManagementItem);
         managementMenu.add(userManagementItem);
         managementMenu.add(eventLogListItem);
+        managementMenu.add(calendarManagementItem);
 
         basicInfoMenu = new JMenu();
         basicInfoMenu.setText(LanguageAction.getBundleMessage("BasicInfo"));
@@ -213,6 +218,14 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
 
     }
 
+    private void showCalendarManagment() throws PropertyVetoException {
+        CalendarManagement calendarManagement = new CalendarManagement(jdpDesktop);
+        calendarManagement.setVisible(true);
+        jdpDesktop.add(calendarManagement);
+        calendarManagement.setSelected(true);
+
+    }
+
     private void showRoleManagement() throws PropertyVetoException {
         RoleManagement roleManagement = new RoleManagement(jdpDesktop);
         roleManagement.setVisible(true);
@@ -261,7 +274,7 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
             } else if (e.getSource() == englishItem) {
                 LanguageAction.changeLocale("en");
                 refreshMainForm();
-            }else if (e.getSource() == englishItem) {
+            } else if (e.getSource() == englishItem) {
                 LanguageAction.changeLocale("other");
                 refreshMainForm();
             } else if (e.getSource() == userManagementItem) {
@@ -274,6 +287,8 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
                 showEventLogList();
             } else if (e.getSource() == workGroupManagementItem) {
                 showWorkGroupManagement();
+            } else if (e.getSource() == calendarManagementItem) {
+                showCalendarManagment();
             } else {
                 for (int i = 0; i < basicInfoMenus.length; i++) {
                     JMenuItem infoMenu = basicInfoMenus[i];
