@@ -53,67 +53,57 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
     private JMenuItem personManagementItem;
     private JMenuItem eventLogListItem;
     private List<Languages> languageList;
-
     private WebServiceInfo lookupService;
     private List<Lookup> lookups;
-
     private Login loginForm;
+    private Image image;
 
     public MainForm() {
 
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        int xSize = ((int) toolkit.getScreenSize().getWidth());
-        int ySize = ((int) toolkit.getScreenSize().getHeight());
-        setSize(xSize, ySize);
-
-        setDefaultLookAndFeelDecorated(true);
-        setUndecorated(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         try {
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            int xSize = ((int) toolkit.getScreenSize().getWidth());
+            int ySize = ((int) toolkit.getScreenSize().getHeight());
+            setSize(xSize, ySize);
+
+            setDefaultLookAndFeelDecorated(true);
+            setUndecorated(true);
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+            image = toolkit.createImage(new java.net.URL(getClass().getResource("Test.gif"), "Test.gif"));
 
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-        }
+            ThreadPoolManager.mainForm = this;
+            WebServiceInfo webServiceInfo = new WebServiceInfo();
+            webServiceInfo.setServiceName("/getAllLanguage");
 
-        ThreadPoolManager.mainForm = this;
-        WebServiceInfo webServiceInfo = new WebServiceInfo();
-        webServiceInfo.setServiceName("/getAllLanguage");
-
-        try {
             languageList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName()), new TypeReference<List<Languages>>() {
             });
-        } catch (IOException e) {
+
+            loginForm = new Login(this);
+            loginForm.setVisible(true);
+
+            jdpDesktop = new JDesktopPane();
+            jdpDesktop.add(loginForm);
+
+            try {
+                loginForm.setSelected(true);
+            } catch (PropertyVetoException e) {
+                e.printStackTrace();
+            }
+
+            setContentPane(jdpDesktop);
+            menuBar = createMenuBar();
+            setJMenuBar(menuBar);
+            menuBar.setVisible(false);
+
+            jdpDesktop.putClientProperty("JDesktopPane.dragMode", "outline");
+            jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
+            menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-        loginForm = new Login(this);
-        loginForm.setVisible(true);
-
-        jdpDesktop = new JDesktopPane();
-        jdpDesktop.add(loginForm);
-
-        try {
-            loginForm.setSelected(true);
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        }
-
-        setContentPane(jdpDesktop);
-        menuBar = createMenuBar();
-        setJMenuBar(menuBar);
-        menuBar.setVisible(false);
-
-        jdpDesktop.putClientProperty("JDesktopPane.dragMode", "outline");
-        jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
-        menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
 
     }
 
