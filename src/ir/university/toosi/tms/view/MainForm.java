@@ -61,7 +61,11 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
 
     public MainForm() {
 
-        setSize(500, 500);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xSize = ((int) tk.getScreenSize().getWidth());
+        int ySize = ((int) tk.getScreenSize().getHeight());
+        setSize(xSize, ySize);
+
         JFrame.setDefaultLookAndFeelDecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         try {
