@@ -13,10 +13,6 @@ import org.jdesktop.swingbinding.JTableBinding;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -173,15 +169,30 @@ public class RoleManagement extends JInternalFrame {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 //To change body of implemented methods use File | Settings | File Templates.
+                try {
+                    search(e);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
                 //To change body of implemented methods use File | Settings | File Templates.
+                try {
+                    search(e);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
+                try {
+                    search(e);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
             }
         });
 
@@ -244,11 +255,18 @@ public class RoleManagement extends JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void refresh() throws IOException {
+    private void getAll() throws IOException {
         roleService.setServiceName("/getAllRole");
         roleList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName()), new TypeReference<List<Role>>() {
         });
+    }
 
+    public void refresh() throws IOException {
+        getAll();
+        showData();
+    }
+
+    private void showData() {
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, roleList, mainTable, "");
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
         columnBinding.setColumnName("NAME");
@@ -267,8 +285,18 @@ public class RoleManagement extends JInternalFrame {
         jTableBinding.bind();
     }
 
-    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {
+    private void search(DocumentEvent documentEvent) throws IOException {
 
+        if (RoleSearchItems.values()[searchCombo.getSelectedIndex()].equals(RoleSearchItems.NAME)) {
+            roleService.setServiceName("/getRoleByName");
+            roleList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(roleService.getServerUrl(), roleService.getServiceName(), searchText.getText()), new TypeReference<List<Role>>() {
+            });
+
+            showData();
+        }
+    }
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {
         int[] indexes = new int[mainTable.getSelectedRows().length];
         int j = 0;
         for (int i : mainTable.getSelectedRows()) {
