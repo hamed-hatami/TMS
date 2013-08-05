@@ -24,7 +24,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -56,7 +55,6 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
     private WebServiceInfo lookupService;
     private List<Lookup> lookups;
     private Login loginForm;
-    private Image image;
 
     public MainForm() {
 
@@ -69,9 +67,7 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             setDefaultLookAndFeelDecorated(true);
             setUndecorated(true);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-            image = toolkit.createImage(new java.net.URL(getClass().getResource("Test.gif"), "Test.gif"));
 
             ThreadPoolManager.mainForm = this;
             WebServiceInfo webServiceInfo = new WebServiceInfo();
@@ -86,15 +82,12 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             jdpDesktop = new JDesktopPane();
             jdpDesktop.add(loginForm);
 
-            try {
-                loginForm.setSelected(true);
-            } catch (PropertyVetoException e) {
-                e.printStackTrace();
-            }
+            loginForm.setSelected(true);
 
             setContentPane(jdpDesktop);
             menuBar = createMenuBar();
             setJMenuBar(menuBar);
+            getContentPane().add(new BackgroundPanel());
             menuBar.setVisible(false);
 
             jdpDesktop.putClientProperty("JDesktopPane.dragMode", "outline");
@@ -109,73 +102,69 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
 
 
     protected JMenuBar createMenuBar() {
-        menuBar = new JMenuBar();
-        menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
-        menu = new JMenu();
-
-        languageMenu = new JMenu();
-        menuItem = new JMenuItem();
-        persianItem = new JMenuItem();
-        englishItem = new JMenuItem();
-        otherItem = new JMenuItem();
-        importLanguage = new JMenuItem();
-        menu.setText(LanguageAction.getBundleMessage("loginForm"));
-        languageMenu.setText(LanguageAction.getBundleMessage("language"));
-        menuItem.setText(LanguageAction.getBundleMessage("salam"));
-        persianItem.setText(LanguageAction.getBundleMessage("persian"));
-        englishItem.setText(LanguageAction.getBundleMessage("english"));
-        otherItem.setText(LanguageAction.getBundleMessage("thirdLanguage"));
-        importLanguage.setText(LanguageAction.getBundleMessage("importLanguage"));
-        menuItem.addActionListener(this);
-        persianItem.addActionListener(this);
-        englishItem.addActionListener(this);
-        otherItem.addActionListener(this);
-        importLanguage.addActionListener(this);
-        menu.add(menuItem);
-        languageMenu.add(persianItem);
-        languageMenu.add(englishItem);
-        if (languageList != null && !languageList.isEmpty()) {
-            try {
-                LanguageAction.initProperty(languageList.get(0).getContent());
-            } catch (IOException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            }
-            languageMenu.add(otherItem);
-        }
-        languageMenu.add(importLanguage);
-
-        managementMenu = new JMenu();
-        workGroupManagementItem = new JMenuItem();
-        calendarManagementItem = new JMenuItem();
-        personManagementItem = new JMenuItem();
-        userManagementItem = new JMenuItem();
-        roleManagementItem = new JMenuItem();
-        eventLogListItem = new JMenuItem();
-        workGroupManagementItem.setText(LanguageAction.getBundleMessage("workgroup_management"));
-        calendarManagementItem.setText(LanguageAction.getBundleMessage("calendar_management"));
-        personManagementItem.setText(LanguageAction.getBundleMessage("person_management"));
-        managementMenu.setText(LanguageAction.getBundleMessage("management"));
-        roleManagementItem.setText(LanguageAction.getBundleMessage("role_management"));
-        userManagementItem.setText(LanguageAction.getBundleMessage("user_management"));
-        eventLogListItem.setText(LanguageAction.getBundleMessage("eventLog_list"));
-        userManagementItem.addActionListener(this);
-        roleManagementItem.addActionListener(this);
-        workGroupManagementItem.addActionListener(this);
-        eventLogListItem.addActionListener(this);
-        calendarManagementItem.addActionListener(this);
-        personManagementItem.addActionListener(this);
-        managementMenu.add(workGroupManagementItem);
-        managementMenu.add(roleManagementItem);
-        managementMenu.add(userManagementItem);
-        managementMenu.add(eventLogListItem);
-        managementMenu.add(calendarManagementItem);
-        managementMenu.add(personManagementItem);
-
-        basicInfoMenu = new JMenu();
-        basicInfoMenu.setText(LanguageAction.getBundleMessage("BasicInfo"));
-        lookupService = new WebServiceInfo();
-        lookupService.setServiceName("/getAllDefinableLookup");
         try {
+            menuBar = new JMenuBar();
+            menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
+            menu = new JMenu();
+
+            languageMenu = new JMenu();
+            menuItem = new JMenuItem();
+            persianItem = new JMenuItem();
+            englishItem = new JMenuItem();
+            otherItem = new JMenuItem();
+            importLanguage = new JMenuItem();
+            menu.setText(LanguageAction.getBundleMessage("loginForm"));
+            languageMenu.setText(LanguageAction.getBundleMessage("language"));
+            menuItem.setText(LanguageAction.getBundleMessage("salam"));
+            persianItem.setText(LanguageAction.getBundleMessage("persian"));
+            englishItem.setText(LanguageAction.getBundleMessage("english"));
+            otherItem.setText(LanguageAction.getBundleMessage("thirdLanguage"));
+            importLanguage.setText(LanguageAction.getBundleMessage("importLanguage"));
+            menuItem.addActionListener(this);
+            persianItem.addActionListener(this);
+            englishItem.addActionListener(this);
+            otherItem.addActionListener(this);
+            importLanguage.addActionListener(this);
+            menu.add(menuItem);
+            languageMenu.add(persianItem);
+            languageMenu.add(englishItem);
+            if (languageList != null && !languageList.isEmpty()) {
+                LanguageAction.initProperty(languageList.get(0).getContent());
+                languageMenu.add(otherItem);
+            }
+            languageMenu.add(importLanguage);
+
+            managementMenu = new JMenu();
+            workGroupManagementItem = new JMenuItem();
+            calendarManagementItem = new JMenuItem();
+            personManagementItem = new JMenuItem();
+            userManagementItem = new JMenuItem();
+            roleManagementItem = new JMenuItem();
+            eventLogListItem = new JMenuItem();
+            workGroupManagementItem.setText(LanguageAction.getBundleMessage("workgroup_management"));
+            calendarManagementItem.setText(LanguageAction.getBundleMessage("calendar_management"));
+            personManagementItem.setText(LanguageAction.getBundleMessage("person_management"));
+            managementMenu.setText(LanguageAction.getBundleMessage("management"));
+            roleManagementItem.setText(LanguageAction.getBundleMessage("role_management"));
+            userManagementItem.setText(LanguageAction.getBundleMessage("user_management"));
+            eventLogListItem.setText(LanguageAction.getBundleMessage("eventLog_list"));
+            userManagementItem.addActionListener(this);
+            roleManagementItem.addActionListener(this);
+            workGroupManagementItem.addActionListener(this);
+            eventLogListItem.addActionListener(this);
+            calendarManagementItem.addActionListener(this);
+            personManagementItem.addActionListener(this);
+            managementMenu.add(workGroupManagementItem);
+            managementMenu.add(roleManagementItem);
+            managementMenu.add(userManagementItem);
+            managementMenu.add(eventLogListItem);
+            managementMenu.add(calendarManagementItem);
+            managementMenu.add(personManagementItem);
+
+            basicInfoMenu = new JMenu();
+            basicInfoMenu.setText(LanguageAction.getBundleMessage("BasicInfo"));
+            lookupService = new WebServiceInfo();
+            lookupService.setServiceName("/getAllDefinableLookup");
             lookups = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(lookupService.getServerUrl(), lookupService.getServiceName()), new TypeReference<List<Lookup>>() {
             });
             basicInfoMenus = new JMenuItem[lookups.size()];
@@ -187,14 +176,14 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
                 basicInfoMenus[i++] = jMenuItem;
                 basicInfoMenu.add(jMenuItem);
             }
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
 
-        menuBar.add(menu);
-        menuBar.add(languageMenu);
-        menuBar.add(managementMenu);
-        menuBar.add(basicInfoMenu);
+            menuBar.add(menu);
+            menuBar.add(languageMenu);
+            menuBar.add(managementMenu);
+            menuBar.add(basicInfoMenu);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return menuBar;
     }
 
@@ -429,5 +418,26 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
     @Override
     public void internalFrameDeactivated(InternalFrameEvent e) {
         //To change body of implemented methods use File | Settings | File Templates.
+    }
+}
+
+class BackgroundPanel extends Panel {
+    private Image image;
+
+    public BackgroundPanel() {
+        try {
+            image = Toolkit.getDefaultToolkit().createImage("/home/hatami/Layering.png");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        if (image != null)
+            g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
+        else
+            g.drawString("No Image", 100, 100);
     }
 }
