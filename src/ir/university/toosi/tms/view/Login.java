@@ -7,6 +7,8 @@ import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
@@ -19,7 +21,7 @@ public class Login extends javax.swing.JInternalFrame {
     /**
      * Creates new form Login
      */
-    MainForm mainForm;
+    private MainForm mainForm;
 
     public Login(MainForm mainForm) {
         this.mainForm = mainForm;
@@ -54,6 +56,14 @@ public class Login extends javax.swing.JInternalFrame {
         jButton2.setText("CANCLE");
         jButton2.setActionCommand("cancle");
 
+        jButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
+
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,7 +95,7 @@ public class Login extends javax.swing.JInternalFrame {
                 } else {
                     ThreadPoolManager.me = result;
                     JOptionPane.showMessageDialog(new JFrame(), "Welcome " + result.getFirstname());
-                    mainForm.getMenuBar().setVisible(true);
+                    mainForm.getMainMenuBar().setVisible(true);
                     mainForm.getLoginForm().dispose();
                 }
             }
