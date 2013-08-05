@@ -9,11 +9,11 @@ import java.awt.*;
  */
 public class TMSJDesktop extends JDesktopPane {
 
-    Image image = new ImageIcon("/home/hatami/Layering.png").getImage().getScaledInstance(1500, 1000, Image.SCALE_SMOOTH);
+    Image image = new ImageIcon("/home/hatami/Layering.png").getImage();
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(image, 0, 0, this);
+        g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
     }
 }
