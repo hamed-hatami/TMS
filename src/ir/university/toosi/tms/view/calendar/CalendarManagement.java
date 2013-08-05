@@ -170,18 +170,32 @@ public class CalendarManagement extends JInternalFrame {
         searchText.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                //To change body of implemented methods use File | Settings | File Templates.
+                try {
+                    search(e);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                //To change body of implemented methods use File | Settings | File Templates.
+                try {
+                    search(e);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
+                try {
+                    search(e);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
+
 
         filter.setText("FILTER");
 
@@ -243,10 +257,13 @@ public class CalendarManagement extends JInternalFrame {
 
     }// </editor-fold>//GEN-END:initComponents
 
-    public void refresh() throws IOException {
+    private void getAll() throws IOException {
         calendarService.setServiceName("/getAllCalendar");
         calendarList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(calendarService.getServerUrl(), calendarService.getServiceName()), new TypeReference<List<Calendar>>() {
         });
+    }
+
+    private void showData() {
 
         JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, calendarList, mainTable, "");
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${code}"));
@@ -264,6 +281,26 @@ public class CalendarManagement extends JInternalFrame {
         BindingGroup bindingGroup = new BindingGroup();
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
+    }
+
+    public void refresh() throws IOException {
+
+        getAll();
+        showData();
+    }
+
+    private void search(DocumentEvent documentEvent) throws IOException {
+
+        if (CalendarSearchItems.values()[searchCombo.getSelectedIndex()].equals(CalendarSearchItems.NAME)) {
+            calendarService.setServiceName("/findCalendarByName");
+            calendarList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(calendarService.getServerUrl(), calendarService.getServiceName(), searchText.getText()), new TypeReference<List<Calendar>>() {
+            });
+        } else if (CalendarSearchItems.values()[searchCombo.getSelectedIndex()].equals(CalendarSearchItems.CODE)) {
+            calendarService.setServiceName("/findCalendarByCode");
+            calendarList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(calendarService.getServerUrl(), calendarService.getServiceName(), searchText.getText()), new TypeReference<List<Calendar>>() {
+            });
+        }
+        showData();
     }
 
     private void deleteActionPerformed(ActionEvent evt) {
