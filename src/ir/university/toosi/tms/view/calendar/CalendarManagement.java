@@ -293,13 +293,11 @@ public class CalendarManagement extends JInternalFrame {
 
         if (CalendarSearchItems.values()[searchCombo.getSelectedIndex()].equals(CalendarSearchItems.NAME)) {
             calendarService.setServiceName("/findCalendarByName");
-            calendarList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(calendarService.getServerUrl(), calendarService.getServiceName(), searchText.getText()), new TypeReference<List<Calendar>>() {
-            });
         } else if (CalendarSearchItems.values()[searchCombo.getSelectedIndex()].equals(CalendarSearchItems.CODE)) {
             calendarService.setServiceName("/findCalendarByCode");
-            calendarList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(calendarService.getServerUrl(), calendarService.getServiceName(), searchText.getText()), new TypeReference<List<Calendar>>() {
-            });
         }
+        calendarList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(calendarService.getServerUrl(), calendarService.getServiceName(), searchText.getText()), new TypeReference<List<Calendar>>() {
+        });
         showData();
     }
 

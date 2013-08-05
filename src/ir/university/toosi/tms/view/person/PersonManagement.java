@@ -2,12 +2,11 @@ package ir.university.toosi.tms.view.person;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ir.university.toosi.tms.model.entity.Role;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.model.entity.person.Person;
+import ir.university.toosi.tms.model.entity.person.PersonSearchItems;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
-import ir.university.toosi.tms.view.role.RoleForm;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
@@ -23,17 +22,20 @@ public class PersonManagement extends JInternalFrame {
 
     public PersonManagement() {
 
+        fillSearchCombo();
         jFileChooser1 = new JFileChooser();
         searchPanel = new JPanel();
         search = new JButton();
         searchText = new JTextField();
-        searchCombo = new JComboBox();
+        searchCombo = new JComboBox(searchItems);
         mainPanel = new JPanel();
         tableScroll = new JScrollPane();
         mainTable = new JTable();
         add = new JButton();
         delete = new JButton();
         edit = new JButton();
+        by = new JLabel();
+        filter = new JLabel();
         try {
             initComponents();
         } catch (IOException e) {
@@ -43,22 +45,33 @@ public class PersonManagement extends JInternalFrame {
 
     public PersonManagement(JDesktopPane jDesktopPane) {
 
+        fillSearchCombo();
         jFileChooser1 = new JFileChooser();
         searchPanel = new JPanel();
         search = new JButton();
         searchText = new JTextField();
-        searchCombo = new JComboBox();
+        searchCombo = new JComboBox(searchItems);
         mainPanel = new JPanel();
         tableScroll = new JScrollPane();
         mainTable = new JTable();
         add = new JButton();
         delete = new JButton();
         edit = new JButton();
+        by = new JLabel();
+        filter = new JLabel();
         this.jDesktopPane = jDesktopPane;
         try {
             initComponents();
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
+
+    private void fillSearchCombo() {
+        searchItems = new String[PersonSearchItems.values().length];
+        int i = 0;
+        for (PersonSearchItems personSearchItem : PersonSearchItems.values()) {
+            searchItems[i++] = personSearchItem.getDescription();
         }
     }
 
@@ -72,48 +85,65 @@ public class PersonManagement extends JInternalFrame {
 
         searchPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("PERSONSEARCH"));
 
-        search.setText("SEARCH");
-        search.setActionCommand("search");
-
+        searchText.setToolTipText("");
         searchText.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                //To change body of implemented methods use File | Settings | File Templates.
+                try {
+                    search(e);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                //To change body of implemented methods use File | Settings | File Templates.
+                try {
+                    search(e);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
+                try {
+                    search(e);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
 
-        searchCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(searchPanel);
-        searchPanel.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
-                                .add(39, 39, 39)
-                                .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(18, 18, 18)
-                                .add(searchText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 175, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(34, 34, 34)
-                                .add(search)
-                                .addContainerGap(63, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
+        filter.setText("FILTER");
+
+        by.setText("BY");
+
+        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(searchPanel);
+        searchPanel.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+                jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(filter)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(searchText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 122, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(18, 18, 18)
+                                .add(by)
+                                .add(18, 18, 18)
+                                .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(194, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+                jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(filter)
                                         .add(searchText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                        .add(search))
+                                        .add(by))
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -160,15 +190,15 @@ public class PersonManagement extends JInternalFrame {
             }
         });
 
-        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
-        mainPanel.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-                jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2Layout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
+        mainPanel.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                                         .add(org.jdesktop.layout.GroupLayout.LEADING, tableScroll, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
-                                        .add(jPanel2Layout.createSequentialGroup()
+                                        .add(jPanel1Layout.createSequentialGroup()
                                                 .add(edit)
                                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                                 .add(delete)
@@ -176,10 +206,10 @@ public class PersonManagement extends JInternalFrame {
                                                 .add(add)))
                                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-                jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel2Layout.createSequentialGroup()
-                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+        jPanel1Layout.setVerticalGroup(
+                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(jPanel1Layout.createSequentialGroup()
+                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(add)
                                         .add(delete)
                                         .add(edit))
@@ -212,12 +242,14 @@ public class PersonManagement extends JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void refresh() throws IOException {
+    private void getAll() throws IOException {
 
         personService.setServiceName("/getAllPerson");
         personList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(personService.getServerUrl(), personService.getServiceName()), new TypeReference<List<Person>>() {
         });
+    }
 
+    private void showData() {
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, personList, mainTable, "");
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
         columnBinding.setColumnName("NAME");
@@ -237,8 +269,31 @@ public class PersonManagement extends JInternalFrame {
         BindingGroup bindingGroup = new BindingGroup();
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
-
     }
+
+    public void refresh() throws IOException {
+
+        getAll();
+        showData();
+    }
+
+    private void search(DocumentEvent documentEvent) throws IOException {
+
+        if (PersonSearchItems.values()[searchCombo.getSelectedIndex()].equals(PersonSearchItems.NAME)) {
+            personService.setServiceName("/getPersonByName");
+        } else if (PersonSearchItems.values()[searchCombo.getSelectedIndex()].equals(PersonSearchItems.LASTNAME)) {
+            personService.setServiceName("/getPersonByLastName");
+        } else if (PersonSearchItems.values()[searchCombo.getSelectedIndex()].equals(PersonSearchItems.NATIONALCODE)) {
+            personService.setServiceName("/getPersonByNationalCode");
+        } else if (PersonSearchItems.values()[searchCombo.getSelectedIndex()].equals(PersonSearchItems.PERSONNELNO)) {
+            personService.setServiceName("/getPersonByPersonnelNo");
+        }
+
+        personList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(personService.getServerUrl(), personService.getServiceName(), searchText.getText()), new TypeReference<List<Person>>() {
+        });
+        showData();
+    }
+
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {
 
@@ -286,6 +341,8 @@ public class PersonManagement extends JInternalFrame {
     private JComboBox searchCombo;
     private JFileChooser jFileChooser1;
     private JPanel searchPanel;
+    private JLabel by;
+    private JLabel filter;
     private JPanel mainPanel;
     private JScrollPane tableScroll;
     private JTable mainTable;
@@ -294,7 +351,7 @@ public class PersonManagement extends JInternalFrame {
 
     private WebServiceInfo personService = new WebServiceInfo();
     private List<Person> personList;
-
+    private String[] searchItems;
 
     public JTable getMainTable() {
         return mainTable;
