@@ -32,7 +32,7 @@ import java.util.List;
  * @version : 1.0
  */
 
-public class MainForm extends JApplet implements ActionListener, InternalFrameListener {
+public class MainForm extends JFrame implements ActionListener, InternalFrameListener {
 
     private JDesktopPane jdpDesktop;
     private JMenuBar menuBar;
@@ -57,19 +57,30 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
     private WebServiceInfo lookupService;
     private List<Lookup> lookups;
 
-    Login loginForm;
+    private Login loginForm;
 
-    @Override
-    public void init() {
-        ThreadPoolManager.mainForm = this;
-        Frame[] frames = Frame.getFrames();
-        for (Frame frame : frames) {
-            frame.setMenuBar(null);
-            frame.setTitle("Traffic Management System");
-            frame.pack();
+    public MainForm() {
+
+        setSize(500, 500);
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
         }
+
+        ThreadPoolManager.mainForm = this;
         WebServiceInfo webServiceInfo = new WebServiceInfo();
         webServiceInfo.setServiceName("/getAllLanguage");
+
         try {
             languageList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName()), new TypeReference<List<Languages>>() {
             });
@@ -82,6 +93,7 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
 
         jdpDesktop = new JDesktopPane();
         jdpDesktop.add(loginForm);
+
         try {
             loginForm.setSelected(true);
         } catch (PropertyVetoException e) {
@@ -319,20 +331,17 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
         }
     }
 
+    public static void main(String[] args) {
+        MainForm main = new MainForm();
+        main.setVisible(true);
+    }
+
     public JDesktopPane getJdpDesktop() {
         return jdpDesktop;
     }
 
     public void setJdpDesktop(JDesktopPane jdpDesktop) {
         this.jdpDesktop = jdpDesktop;
-    }
-
-    public JMenuBar getMenuBar() {
-        return menuBar;
-    }
-
-    public void setMenuBar(JMenuBar menuBar) {
-        this.menuBar = menuBar;
     }
 
     public JMenu getMenu() {
@@ -381,6 +390,14 @@ public class MainForm extends JApplet implements ActionListener, InternalFrameLi
 
     public void setLoginForm(Login loginForm) {
         this.loginForm = loginForm;
+    }
+
+    public JMenuBar getMainMenuBar() {
+        return menuBar;
+    }
+
+    public void setMenuBar(JMenuBar menuBar) {
+        this.menuBar = menuBar;
     }
 
     @Override
