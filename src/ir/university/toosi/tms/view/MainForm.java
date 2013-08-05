@@ -33,7 +33,7 @@ import java.util.List;
 
 public class MainForm extends JFrame implements ActionListener, InternalFrameListener {
 
-    private JDesktopPane jdpDesktop;
+    private TMSJDesktop jdpDesktop;
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenu languageMenu;
@@ -79,7 +79,7 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             loginForm = new Login(this);
             loginForm.setVisible(true);
 
-            jdpDesktop = new JDesktopPane();
+            jdpDesktop = new TMSJDesktop();
             jdpDesktop.add(loginForm);
 
             loginForm.setSelected(true);
@@ -87,7 +87,6 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             setContentPane(jdpDesktop);
             menuBar = createMenuBar();
             setJMenuBar(menuBar);
-            getContentPane().add(new BackgroundPanel());
             menuBar.setVisible(false);
 
             jdpDesktop.putClientProperty("JDesktopPane.dragMode", "outline");
@@ -99,7 +98,6 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
         }
 
     }
-
 
     protected JMenuBar createMenuBar() {
         try {
@@ -325,7 +323,7 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
         return jdpDesktop;
     }
 
-    public void setJdpDesktop(JDesktopPane jdpDesktop) {
+    public void setJdpDesktop(TMSJDesktop jdpDesktop) {
         this.jdpDesktop = jdpDesktop;
     }
 
@@ -418,26 +416,5 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
     @Override
     public void internalFrameDeactivated(InternalFrameEvent e) {
         //To change body of implemented methods use File | Settings | File Templates.
-    }
-}
-
-class BackgroundPanel extends Panel {
-    private Image image;
-
-    public BackgroundPanel() {
-        try {
-            image = Toolkit.getDefaultToolkit().createImage("/home/hatami/Layering.png");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        if (image != null)
-            g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
-        else
-            g.drawString("No Image", 100, 100);
     }
 }
