@@ -66,8 +66,10 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
         int ySize = ((int) tk.getScreenSize().getHeight());
         setSize(xSize, ySize);
 
-        JFrame.setDefaultLookAndFeelDecorated(true);
+        setDefaultLookAndFeelDecorated(true);
+        setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 
