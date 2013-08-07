@@ -289,7 +289,10 @@ public class RoleManagement extends JInternalFrame {
 
         if (RoleSearchItems.values()[searchCombo.getSelectedIndex()].equals(RoleSearchItems.NAME)) {
             roleService.setServiceName("/getRoleByName");
-            roleList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(roleService.getServerUrl(), roleService.getServiceName(), searchText.getText()), new TypeReference<List<Role>>() {
+            Role searchRole = new Role();
+            searchRole.setName(searchText.getText());
+            searchRole.setEffectorUser(ThreadPoolManager.me.getUsername());
+            roleList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(searchRole)), new TypeReference<List<Role>>() {
             });
 
             showData();
@@ -305,7 +308,9 @@ public class RoleManagement extends JInternalFrame {
 
         List<Role> deletedRoles = new ArrayList<>();
         for (int index : indexes) {
-            deletedRoles.add(roleList.get(index));
+            Role role = roleList.get(index);
+            role.setEffectorUser(ThreadPoolManager.me.getUsername());
+            deletedRoles.add(role);
         }
 
         roleService.setServiceName("/deleteRoleList");

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.EventLog;
 import ir.university.toosi.tms.model.entity.EventLogSearchItems;
+import ir.university.toosi.tms.model.entity.EventLogType;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
@@ -203,12 +204,9 @@ public class EventLogList extends JInternalFrame {
         });
 
         JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, logs, mainTable, "");
-        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${title.name}"));
-        columnBinding.setColumnName("TITLE");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${eventType.name}"));
-        columnBinding.setColumnName("EVENT_TYPE");
-        columnBinding.setColumnClass(String.class);
+        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${operation.name}"));
+        columnBinding.setColumnName("OPERATION");
+        columnBinding.setColumnClass(EventLogType.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${objectId}"));
         columnBinding.setColumnName("OBJECT_ID");
         columnBinding.setColumnClass(String.class);

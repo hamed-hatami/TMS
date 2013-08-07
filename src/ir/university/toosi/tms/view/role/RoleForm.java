@@ -179,6 +179,7 @@ public class RoleForm extends JInternalFrame {
         newRole.setEnglishDescription(roleDesc.getText());
         newRole.setEnabled(true);
         newRole.setDeleted("0");
+        newRole.setEffectorUser(ThreadPoolManager.me.getUsername());
 
         roleService.setServiceName("/createRole");
 
@@ -199,6 +200,7 @@ public class RoleForm extends JInternalFrame {
 
         role.setName(roleName.getText());
         role.setPersianDescription(roleDesc.getText());
+        role.setEffectorUser(ThreadPoolManager.me.getUsername());
 
         roleService.setServiceName("/editRole");
 

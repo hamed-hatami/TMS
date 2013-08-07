@@ -11,7 +11,7 @@ import java.util.Set;
  * @version : 0.8
  */
 @JsonIgnoreProperties(value = "@id")
-public class Role implements Serializable {
+public class Role extends BaseEntity {
     @JsonProperty
     private long id;
     @JsonProperty
