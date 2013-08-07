@@ -229,6 +229,7 @@ public class User implements Serializable {
     }
 
     public void setEnable(String enable) {
+
         this.enable = enable;
     }
 
