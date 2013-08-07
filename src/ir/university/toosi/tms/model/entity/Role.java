@@ -11,7 +11,7 @@ import java.util.Set;
  * @version : 0.8
  */
 @JsonIgnoreProperties(value = "@id")
-public class Role extends BaseEntity {
+public class Role extends BaseEntity implements Serializable {
     @JsonProperty
     private long id;
     @JsonProperty
@@ -24,9 +24,10 @@ public class Role extends BaseEntity {
     private boolean enabled;
     @JsonProperty
     private String deleted;
-
     @JsonProperty
     private boolean selected;
+    @JsonProperty
+    private Set<Operation> operations;
 
     public Role() {
     }
@@ -102,5 +103,11 @@ public class Role extends BaseEntity {
         this.selected = selected;
     }
 
+    public Set<Operation> getOperations() {
+        return operations;
+    }
 
+    public void setOperations(Set<Operation> operations) {
+        this.operations = operations;
+    }
 }

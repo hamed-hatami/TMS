@@ -1,10 +1,7 @@
 package ir.university.toosi.tms.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import ir.university.toosi.tms.model.entity.calendar.Calendar;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -13,9 +10,8 @@ import java.util.Set;
  * @author : Hamed Hatami ,  Farzad Sedaghatbin, Atefeh Ahmadi
  * @version : 0.8
  */
-
 @JsonIgnoreProperties(value = "@id")
-public class WorkGroup extends BaseEntity implements Serializable {
+public class Operation extends BaseEntity implements Serializable {
     @JsonProperty
     private long id;
     @JsonProperty
@@ -25,23 +21,22 @@ public class WorkGroup extends BaseEntity implements Serializable {
     @JsonProperty
     private String englishDescription;
     @JsonProperty
-    private String enabled;
+    private boolean enabled;
     @JsonProperty
     private String deleted;
+
     @JsonProperty
     private boolean selected;
-    @JsonProperty
-    private Set<Role> roles;
 
-
-    public WorkGroup() {
-    }
-
-    public WorkGroup(int id) {
+    public Operation() {
     }
 
 
-    public WorkGroup(long id, String name, String persianDescription, String englishDescription, String enabled, String deleted, boolean selected, Set<User> users) {
+    public Operation(long id) {
+        this.id = id;
+    }
+
+    public Operation(long id, String name, String persianDescription, String englishDescription, boolean enabled, String deleted, Set<WorkGroup> workGroups, boolean selected) {
         this.id = id;
         this.name = name;
         this.persianDescription = persianDescription;
@@ -54,7 +49,6 @@ public class WorkGroup extends BaseEntity implements Serializable {
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -83,11 +77,11 @@ public class WorkGroup extends BaseEntity implements Serializable {
         this.englishDescription = englishDescription;
     }
 
-    public String getEnabled() {
+    public boolean isEnabled() {
         return enabled;
     }
 
-    public void setEnabled(String enabled) {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 
@@ -99,6 +93,7 @@ public class WorkGroup extends BaseEntity implements Serializable {
         this.deleted = deleted;
     }
 
+
     public boolean isSelected() {
         return selected;
     }
@@ -107,11 +102,5 @@ public class WorkGroup extends BaseEntity implements Serializable {
         this.selected = selected;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
 }

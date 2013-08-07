@@ -1,9 +1,9 @@
-package ir.university.toosi.tms.view.role;
+package ir.university.toosi.tms.view.operation;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ir.university.toosi.tms.model.entity.Role;
-import ir.university.toosi.tms.model.entity.RoleSearchItems;
+import ir.university.toosi.tms.model.entity.Operation;
+import ir.university.toosi.tms.model.entity.OperationSearchItems;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
@@ -18,12 +18,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoleManagement extends JInternalFrame {
+public class OperationManagement extends JInternalFrame {
 
     /**
      * Creates new form ContactEditor
      */
-    public RoleManagement() {
+    public OperationManagement() {
         fillSearchCombo();
         mainPanel = new JPanel();
         tableScroll = new JScrollPane();
@@ -43,7 +43,7 @@ public class RoleManagement extends JInternalFrame {
         }
     }
 
-    public RoleManagement(JDesktopPane jDesktopPane) {
+    public OperationManagement(JDesktopPane jDesktopPane) {
         fillSearchCombo();
         jdpDesktop = jDesktopPane;
         mainPanel = new JPanel();
@@ -65,10 +65,10 @@ public class RoleManagement extends JInternalFrame {
     }
 
     private void fillSearchCombo() {
-        searchItems = new String[RoleSearchItems.values().length];
+        searchItems = new String[OperationSearchItems.values().length];
         int i = 0;
-        for (RoleSearchItems roleSearchItem : RoleSearchItems.values()) {
-            searchItems[i++] = roleSearchItem.getDescription();
+        for (OperationSearchItems operationSearchItem : OperationSearchItems.values()) {
+            searchItems[i++] = operationSearchItem.getDescription();
         }
     }
 
@@ -256,8 +256,8 @@ public class RoleManagement extends JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void getAll() throws IOException {
-        roleService.setServiceName("/getAllRole");
-        roleList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName()), new TypeReference<List<Role>>() {
+        operationService.setServiceName("/getAllOperation");
+        operationList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(operationService.getServerUrl(), operationService.getServiceName()), new TypeReference<List<Operation>>() {
         });
     }
 
@@ -267,7 +267,7 @@ public class RoleManagement extends JInternalFrame {
     }
 
     private void showData() {
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, roleList, mainTable, "");
+        JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, operationList, mainTable, "");
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
         columnBinding.setColumnName("NAME");
         columnBinding.setColumnClass(String.class);
@@ -287,12 +287,12 @@ public class RoleManagement extends JInternalFrame {
 
     private void search(DocumentEvent documentEvent) throws IOException {
 
-        if (RoleSearchItems.values()[searchCombo.getSelectedIndex()].equals(RoleSearchItems.NAME)) {
-            roleService.setServiceName("/getRoleByName");
-            Role searchRole = new Role();
-            searchRole.setName(searchText.getText());
-            searchRole.setEffectorUser(ThreadPoolManager.me.getUsername());
-            roleList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(searchRole)), new TypeReference<List<Role>>() {
+        if (OperationSearchItems.values()[searchCombo.getSelectedIndex()].equals(OperationSearchItems.NAME)) {
+            operationService.setServiceName("/getOperationByName");
+            Operation searchOperation = new Operation();
+            searchOperation.setName(searchText.getText());
+            searchOperation.setEffectorUser(ThreadPoolManager.me.getUsername());
+            operationList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(operationService.getServerUrl(), operationService.getServiceName(), new ObjectMapper().writeValueAsString(searchOperation)), new TypeReference<List<Operation>>() {
             });
 
             showData();
@@ -306,16 +306,16 @@ public class RoleManagement extends JInternalFrame {
             indexes[j++] = mainTable.convertRowIndexToModel(i);
         }
 
-        List<Role> deletedRoles = new ArrayList<>();
+        List<Operation> deletedOperations = new ArrayList<>();
         for (int index : indexes) {
-            Role role = roleList.get(index);
-            role.setEffectorUser(ThreadPoolManager.me.getUsername());
-            deletedRoles.add(role);
+            Operation operation = operationList.get(index);
+            operation.setEffectorUser(ThreadPoolManager.me.getUsername());
+            deletedOperations.add(operation);
         }
 
-        roleService.setServiceName("/deleteRoleList");
+        operationService.setServiceName("/deleteOperationList");
         try {
-            new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(deletedRoles)), Boolean.class);
+            new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(operationService.getServerUrl(), operationService.getServiceName(), new ObjectMapper().writeValueAsString(deletedOperations)), Boolean.class);
             refresh();
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -323,19 +323,19 @@ public class RoleManagement extends JInternalFrame {
     }
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
-        RoleForm roleForm = new RoleForm(false, null, this);
-        roleForm.setVisible(true);
-        jdpDesktop.add(roleForm);
-        roleForm.setSelected(true);
+        OperationForm operationForm = new OperationForm(false, null, this);
+        operationForm.setVisible(true);
+        jdpDesktop.add(operationForm);
+        operationForm.setSelected(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
-        Role role = roleList.get(mainTable.convertRowIndexToModel(mainTable.getSelectedRow()));
-        RoleForm roleForm = new RoleForm(true, role, this);
-        roleForm.setVisible(true);
-        jdpDesktop.add(roleForm);
-        roleForm.setSelected(true);
+        Operation operation = operationList.get(mainTable.convertRowIndexToModel(mainTable.getSelectedRow()));
+        OperationForm operationForm = new OperationForm(true, operation, this);
+        operationForm.setVisible(true);
+        jdpDesktop.add(operationForm);
+        operationForm.setSelected(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -355,8 +355,8 @@ public class RoleManagement extends JInternalFrame {
     private JTable mainTable;
     private JDesktopPane jdpDesktop;
     private JTextField searchText;
-    private WebServiceInfo roleService = new WebServiceInfo();
-    private List<Role> roleList = new ArrayList<>();
+    private WebServiceInfo operationService = new WebServiceInfo();
+    private List<Operation> operationList = new ArrayList<>();
     private String[] searchItems;
 
     public JTable getMainTable() {

@@ -5,13 +5,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * @author : Hamed Hatami ,  Farzad Sedaghatbin, Atefeh Ahmadi
  * @version : 0.8
  */
 @JsonIgnoreProperties(value = "@id")
-public class User implements Serializable {
+public class User extends BaseEntity implements Serializable {
 
     @JsonProperty
     private long id;
@@ -54,7 +55,7 @@ public class User implements Serializable {
     @JsonProperty
     private String deleted;
     @JsonProperty
-    private WorkGroup workgroup;
+    private Set<WorkGroup> workgroup;
 
     public User() {
     }
@@ -62,12 +63,11 @@ public class User implements Serializable {
     public User(long id) {
         this.id = id;
     }
-
-    public User(WorkGroup workgroup) {
+    public User(Set<WorkGroup> workgroup) {
         this.workgroup = workgroup;
     }
 
-    public User(long id, String username, String password, String firstname, String lastname, String mobile, String email, String status, String enable, String address, String phone, String nationalCode, String createDate, String createTime, String createBy, String passwordModifiedDate, String failedLoginCount, String userComment, String firstLoginDate, String firstLoginIP, String lastLoginDate, String lastLoginIP, boolean online, String deleted, WorkGroup workgroup) {
+    public User(long id, String username, String password, String firstname, String lastname, String mobile, String email, String status, String enable, String address, String phone, String nationalCode, String createDate, String createTime, String createBy, String passwordModifiedDate, String failedLoginCount, String userComment, String firstLoginDate, String firstLoginIP, String lastLoginDate, String lastLoginIP, boolean online, String deleted, Set<WorkGroup> workGroups) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -84,12 +84,11 @@ public class User implements Serializable {
         this.createTime = createTime;
         this.createBy = createBy;
         this.failedLoginCount = failedLoginCount;
-
         this.lastLoginDate = lastLoginDate;
         this.lastLoginIP = lastLoginIP;
         this.online = online;
         this.deleted = deleted;
-        this.workgroup = workgroup;
+        this.workgroup = workGroups;
     }
 
     public String getAddress() {
@@ -220,16 +219,15 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public void setWorkgroup(WorkGroup workgroup) {
-        this.workgroup = workgroup;
-    }
-
-    public WorkGroup getWorkgroup() {
+    public Set<WorkGroup> getWorkgroup() {
         return workgroup;
     }
 
-    public void setEnable(String enable) {
+    public void setWorkgroup(Set<WorkGroup> workgroup) {
+        this.workgroup = workgroup;
+    }
 
+    public void setEnable(String enable) {
         this.enable = enable;
     }
 
