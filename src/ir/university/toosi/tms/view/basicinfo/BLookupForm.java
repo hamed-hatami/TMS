@@ -165,6 +165,7 @@ public class BLookupForm extends JInternalFrame {
         bLookup1.setCode(codeField.getText());
         bLookup1.setDescription(descField.getText());
         bLookup1.setLookup(lookup);
+        bLookup1.setEffectorUser(ThreadPoolManager.me.getUsername());
 
         blookupService.setServiceName("/createBLookup");
 
@@ -187,6 +188,7 @@ public class BLookupForm extends JInternalFrame {
         bLookup.setCode(codeField.getText());
         bLookup.setDescription(descField.getText());
         bLookup.setLookup(lookup);
+        bLookup.setEffectorUser(ThreadPoolManager.me.getUsername());
 
         blookupService.setServiceName("/editBLookup");
 

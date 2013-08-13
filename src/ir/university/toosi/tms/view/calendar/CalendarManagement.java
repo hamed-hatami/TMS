@@ -291,12 +291,16 @@ public class CalendarManagement extends JInternalFrame {
 
     private void search(DocumentEvent documentEvent) throws IOException {
 
+        Calendar searchCalendar = new Calendar();
         if (CalendarSearchItems.values()[searchCombo.getSelectedIndex()].equals(CalendarSearchItems.NAME)) {
             calendarService.setServiceName("/findCalendarByName");
+            searchCalendar.setName(searchText.getText());
         } else if (CalendarSearchItems.values()[searchCombo.getSelectedIndex()].equals(CalendarSearchItems.CODE)) {
             calendarService.setServiceName("/findCalendarByCode");
+            searchCalendar.setCode(searchText.getText());
         }
-        calendarList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(calendarService.getServerUrl(), calendarService.getServiceName(), searchText.getText()), new TypeReference<List<Calendar>>() {
+        searchCalendar.setEffectorUser(ThreadPoolManager.me.getUsername());
+        calendarList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(calendarService.getServerUrl(), calendarService.getServiceName(), new ObjectMapper().writeValueAsString(searchCalendar)), new TypeReference<List<Calendar>>() {
         });
         showData();
     }
@@ -311,6 +315,8 @@ public class CalendarManagement extends JInternalFrame {
 
         List<Calendar> deletedCalendars = new ArrayList<>();
         for (int index : indexes) {
+            Calendar calendar = calendarList.get(index);
+            calendar.setEffectorUser(ThreadPoolManager.me.getUsername());
             deletedCalendars.add(calendarList.get(index));
         }
 
@@ -321,7 +327,6 @@ public class CalendarManagement extends JInternalFrame {
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-
     }
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed

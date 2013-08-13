@@ -240,6 +240,7 @@ public class CalendarForm extends JInternalFrame {
         newCalendar.setCode(code.getText());
         newCalendar.setDescription(desc.getText());
         newCalendar.setDefaultCalendar(defaultCal.isSelected());
+        newCalendar.setEffectorUser(ThreadPoolManager.me.getUsername());
 
         calendarService.setServiceName("/createCalendar");
 
@@ -260,6 +261,7 @@ public class CalendarForm extends JInternalFrame {
         calendar.setCode(code.getText());
         calendar.setDescription(desc.getText());
         calendar.setDefaultCalendar(defaultCal.isSelected());
+        calendar.setEffectorUser(ThreadPoolManager.me.getUsername());
 
         calendarService.setServiceName("/editCalendar");
 

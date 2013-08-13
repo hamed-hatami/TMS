@@ -268,7 +268,9 @@ public class BasicInfoManagement extends JInternalFrame {
 
         List<BLookup> deletedBLookups = new ArrayList<>();
         for (int index : indexes) {
-            deletedBLookups.add(bLookups.get(index));
+            BLookup bLookup = bLookups.get(index);
+            bLookup.setEffectorUser(ThreadPoolManager.me.getUsername());
+            deletedBLookups.add(bLookup);
         }
 
         blookupService.setServiceName("/deleteBLookups");
