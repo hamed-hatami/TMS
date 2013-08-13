@@ -42,7 +42,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class UserForm extends JInternalFrame {
 
@@ -269,7 +271,9 @@ public class UserForm extends JInternalFrame {
         serviceInfo.setServiceName("/findWorkGroupByName");
         try {
             WorkGroup workGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), (String) workGroups.getSelectedItem()), WorkGroup.class);
-            user.setWorkgroup(workGroup);
+            Set<WorkGroup> workGroups1 = new HashSet<>();
+            workGroups1.add(workGroup);
+            user.setWorkgroup(workGroups1);
             user.setLastname(familyName.getText());
 //        String workgroupName=workGroups.getSelectedItem();
 //        user.setWorkgroup();
@@ -292,7 +296,9 @@ public void updateUser() {
         serviceInfo.setServiceName("/findWorkGroupByName");
         try {
             WorkGroup workGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), (String) workGroups.getSelectedItem()), WorkGroup.class);
-            user.setWorkgroup(workGroup);
+            Set<WorkGroup> workGroups1 = new HashSet<>();
+            workGroups1.add(workGroup);
+            user.setWorkgroup(workGroups1);
             user.setLastname(familyName.getText());
 //        String workgroupName=workGroups.getSelectedItem();
 //        user.setWorkgroup();
