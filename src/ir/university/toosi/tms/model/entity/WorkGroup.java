@@ -31,6 +31,8 @@ public class WorkGroup extends BaseEntity {
     @JsonProperty
     private boolean selected;
     @JsonProperty
+    private String status;
+    @JsonProperty
     private Set<Role> roles;
 
 
@@ -113,5 +115,13 @@ public class WorkGroup extends BaseEntity {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String isStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
