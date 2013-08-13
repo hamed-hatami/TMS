@@ -3,10 +3,8 @@ package ir.university.toosi.tms.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.io.Serializable;
-
 @JsonIgnoreProperties(value = "@id")
-public class EventLog implements Serializable {
+public class EventLog extends BaseEntity {
 
     @JsonProperty
     private long id;

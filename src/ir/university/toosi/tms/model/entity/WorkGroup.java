@@ -15,7 +15,7 @@ import java.util.Set;
  */
 
 @JsonIgnoreProperties(value = "@id")
-public class WorkGroup extends BaseEntity implements Serializable {
+public class WorkGroup extends BaseEntity {
     @JsonProperty
     private long id;
     @JsonProperty

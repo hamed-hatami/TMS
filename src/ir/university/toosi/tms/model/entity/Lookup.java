@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @JsonIgnoreProperties(value = "@id")
-public class Lookup implements Serializable {
+public class Lookup extends BaseEntity {
 
     @JsonProperty
     private long id;
@@ -27,6 +27,9 @@ public class Lookup implements Serializable {
 
     @JsonProperty
     private boolean definable;
+
+    @JsonProperty
+    private String deleted;
 
     public Lookup(String code, String name, String description) {
         this.code = code;
@@ -88,5 +91,13 @@ public class Lookup implements Serializable {
 
     public void setDefinable(boolean definable) {
         this.definable = definable;
+    }
+
+    public String getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(String deleted) {
+        this.deleted = deleted;
     }
 }

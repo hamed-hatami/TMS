@@ -3,10 +3,8 @@ package ir.university.toosi.tms.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.io.Serializable;
-
 @JsonIgnoreProperties(value = "@id")
-public class BLookup implements Serializable {
+public class BLookup extends BaseEntity {
 
     @JsonProperty
     private long id;

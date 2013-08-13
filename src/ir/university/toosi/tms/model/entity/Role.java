@@ -3,6 +3,7 @@ package ir.university.toosi.tms.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Column;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -11,7 +12,7 @@ import java.util.Set;
  * @version : 0.8
  */
 @JsonIgnoreProperties(value = "@id")
-public class Role extends BaseEntity implements Serializable {
+public class Role extends BaseEntity {
     @JsonProperty
     private long id;
     @JsonProperty
@@ -26,6 +27,8 @@ public class Role extends BaseEntity implements Serializable {
     private String deleted;
     @JsonProperty
     private boolean selected;
+    @JsonProperty
+    private String status;
     @JsonProperty
     private Set<Operation> operations;
 
@@ -109,5 +112,13 @@ public class Role extends BaseEntity implements Serializable {
 
     public void setOperations(Set<Operation> operations) {
         this.operations = operations;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

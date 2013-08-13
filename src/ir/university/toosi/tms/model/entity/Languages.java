@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @JsonIgnoreProperties(value = "@id")
-public class Languages implements Serializable {
+public class Languages extends BaseEntity {
 
     @JsonProperty
     private long id;

@@ -273,10 +273,10 @@ public class UserForm extends JInternalFrame {
             WorkGroup workGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), (String) workGroups.getSelectedItem()), WorkGroup.class);
             Set<WorkGroup> workGroups1 = new HashSet<>();
             workGroups1.add(workGroup);
-            user.setWorkgroup(workGroups1);
+            user.setWorkGroups(workGroups1);
             user.setLastname(familyName.getText());
 //        String workgroupName=workGroups.getSelectedItem();
-//        user.setWorkgroup();
+//        user.setWorkGroups();
 
             serviceInfo.setServiceName("/createUser");
             new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), new ObjectMapper().writeValueAsString(user));
@@ -298,10 +298,10 @@ public void updateUser() {
             WorkGroup workGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), (String) workGroups.getSelectedItem()), WorkGroup.class);
             Set<WorkGroup> workGroups1 = new HashSet<>();
             workGroups1.add(workGroup);
-            user.setWorkgroup(workGroups1);
+            user.setWorkGroups(workGroups1);
             user.setLastname(familyName.getText());
 //        String workgroupName=workGroups.getSelectedItem();
-//        user.setWorkgroup();
+//        user.setWorkGroups();
             serviceInfo.setServiceName("/editUser");
             new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), new ObjectMapper().writeValueAsString(user));
             this.setVisible(false);

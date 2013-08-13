@@ -3,11 +3,12 @@ package ir.university.toosi.tms.model.entity.calendar;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.university.toosi.tms.model.entity.BLookup;
+import ir.university.toosi.tms.model.entity.BaseEntity;
 
 import java.io.Serializable;
 
 @JsonIgnoreProperties(value = "@id")
-public class WeekDay implements Serializable {
+public class WeekDay extends BaseEntity {
 
     @JsonProperty
     private long id;

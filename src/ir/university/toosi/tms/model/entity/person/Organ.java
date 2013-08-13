@@ -4,6 +4,7 @@ package ir.university.toosi.tms.model.entity.person;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.university.toosi.tms.model.entity.BLookup;
+import ir.university.toosi.tms.model.entity.BaseEntity;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -14,7 +15,7 @@ import java.util.Set;
  */
 
 @JsonIgnoreProperties(value = "@id")
-public class Organ implements Serializable {
+public class Organ extends BaseEntity {
 
     @JsonProperty
     private long id;

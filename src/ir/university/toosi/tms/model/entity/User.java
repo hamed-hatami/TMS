@@ -4,7 +4,6 @@ package ir.university.toosi.tms.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.io.Serializable;
 import java.util.Set;
 
 /**
@@ -12,7 +11,7 @@ import java.util.Set;
  * @version : 0.8
  */
 @JsonIgnoreProperties(value = "@id")
-public class User extends BaseEntity implements Serializable {
+public class User extends BaseEntity {
 
     @JsonProperty
     private long id;
@@ -55,7 +54,15 @@ public class User extends BaseEntity implements Serializable {
     @JsonProperty
     private String deleted;
     @JsonProperty
-    private Set<WorkGroup> workgroup;
+    private Set<WorkGroup> workGroups;
+    @JsonProperty
+    private String extraField1;
+    @JsonProperty
+    private String extraField2;
+    @JsonProperty
+    private String extraField3;
+    @JsonProperty
+    private String extraField4;
 
     public User() {
     }
@@ -64,7 +71,7 @@ public class User extends BaseEntity implements Serializable {
         this.id = id;
     }
     public User(Set<WorkGroup> workgroup) {
-        this.workgroup = workgroup;
+        this.workGroups = workgroup;
     }
 
     public User(long id, String username, String password, String firstname, String lastname, String mobile, String email, String status, String enable, String address, String phone, String nationalCode, String createDate, String createTime, String createBy, String passwordModifiedDate, String failedLoginCount, String userComment, String firstLoginDate, String firstLoginIP, String lastLoginDate, String lastLoginIP, boolean online, String deleted, Set<WorkGroup> workGroups) {
@@ -88,7 +95,7 @@ public class User extends BaseEntity implements Serializable {
         this.lastLoginIP = lastLoginIP;
         this.online = online;
         this.deleted = deleted;
-        this.workgroup = workGroups;
+        this.workGroups = workGroups;
     }
 
     public String getAddress() {
@@ -219,12 +226,12 @@ public class User extends BaseEntity implements Serializable {
         this.username = username;
     }
 
-    public Set<WorkGroup> getWorkgroup() {
-        return workgroup;
+    public Set<WorkGroup> getWorkGroups() {
+        return workGroups;
     }
 
-    public void setWorkgroup(Set<WorkGroup> workgroup) {
-        this.workgroup = workgroup;
+    public void setWorkGroups(Set<WorkGroup> workGroups) {
+        this.workGroups = workGroups;
     }
 
     public void setEnable(String enable) {
@@ -257,5 +264,37 @@ public class User extends BaseEntity implements Serializable {
 
     public boolean isOnline() {
         return online;
+    }
+
+    public String getExtraField1() {
+        return extraField1;
+    }
+
+    public void setExtraField1(String extraField1) {
+        this.extraField1 = extraField1;
+    }
+
+    public String getExtraField2() {
+        return extraField2;
+    }
+
+    public void setExtraField2(String extraField2) {
+        this.extraField2 = extraField2;
+    }
+
+    public String getExtraField3() {
+        return extraField3;
+    }
+
+    public void setExtraField3(String extraField3) {
+        this.extraField3 = extraField3;
+    }
+
+    public String getExtraField4() {
+        return extraField4;
+    }
+
+    public void setExtraField4(String extraField4) {
+        this.extraField4 = extraField4;
     }
 }
