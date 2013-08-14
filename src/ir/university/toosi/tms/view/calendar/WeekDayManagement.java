@@ -312,7 +312,9 @@ public class WeekDayManagement extends JInternalFrame {
 
         List<WeekDay> deletedWeekDays = new ArrayList<>();
         for (int index : indexes) {
-            deletedWeekDays.add(weekDayList.get(index));
+            WeekDay weekDay = weekDayList.get(index);
+            weekDay.setEffectorUser(ThreadPoolManager.me.getUsername());
+            deletedWeekDays.add(weekDay);
         }
 
         weekDayService.setServiceName("/deleteWeekDays");
@@ -340,6 +342,7 @@ public class WeekDayManagement extends JInternalFrame {
         weekDay.setStartTime(fromTime.getText());
         weekDay.setEndTime(toTime.getText());
         weekDay.setHoliday(holiday.isSelected());
+        weekDay.setEffectorUser(ThreadPoolManager.me.getUsername());
 
         weekDayService.setServiceName("/createWeekDay");
         try {

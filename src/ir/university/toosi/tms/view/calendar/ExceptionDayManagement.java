@@ -298,7 +298,9 @@ public class ExceptionDayManagement extends JInternalFrame {
 
         List<ExceptionDay> deletedExceptionDays = new ArrayList<>();
         for (int index : indexes) {
-            deletedExceptionDays.add(exceptionDayList.get(index));
+            ExceptionDay exceptionDay = exceptionDayList.get(index);
+            exceptionDay.setEffectorUser(ThreadPoolManager.me.getUsername());
+            deletedExceptionDays.add(exceptionDay);
         }
 
         exceptionDayService.setServiceName("/deleteExceptionDays");
@@ -319,6 +321,7 @@ public class ExceptionDayManagement extends JInternalFrame {
         exceptionDay.setToDate(toDate.getText());
         exceptionDay.setHoliday(holiday.isSelected());
         exceptionDay.setCalendar(calendar);
+        exceptionDay.setEffectorUser(ThreadPoolManager.me.getUsername());
 
         exceptionDayService.setServiceName("/createExceptionDay");
         try {
