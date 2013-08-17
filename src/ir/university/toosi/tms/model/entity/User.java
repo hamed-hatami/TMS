@@ -3,6 +3,7 @@ package ir.university.toosi.tms.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ir.university.toosi.tms.model.entity.person.Person;
 
 import java.util.Set;
 
@@ -63,6 +64,8 @@ public class User extends BaseEntity {
     private String extraField3;
     @JsonProperty
     private String extraField4;
+    @JsonProperty
+    private Person person;
 
     public User() {
     }
@@ -296,5 +299,13 @@ public class User extends BaseEntity {
 
     public void setExtraField4(String extraField4) {
         this.extraField4 = extraField4;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 }

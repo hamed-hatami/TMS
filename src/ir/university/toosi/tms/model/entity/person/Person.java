@@ -3,10 +3,13 @@ package ir.university.toosi.tms.model.entity.person;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ir.university.toosi.tms.model.entity.BLookup;
 import ir.university.toosi.tms.model.entity.BaseEntity;
 import ir.university.toosi.tms.model.entity.calendar.Calendar;
+import ir.university.toosi.tms.model.entity.zone.Gateway;
 
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * @author : Hamed Hatami ,  Farzad Sedaghatbin, Atefeh Ahmadi
@@ -34,6 +37,21 @@ public class Person extends BaseEntity {
     private Calendar defaultCalendar;
     @JsonProperty
     private Calendar calendar;
+    private String status;
+    @JsonProperty
+    private String deleted;
+    @JsonProperty
+    private String extraField1;
+    @JsonProperty
+    private String extraField2;
+    @JsonProperty
+    private String extraField3;
+    @JsonProperty
+    private String extraField4;
+    @JsonProperty
+    private BLookup personStatus;
+    @JsonProperty
+    private Set<Gateway> gateways;
 
     public Person() {
     }
