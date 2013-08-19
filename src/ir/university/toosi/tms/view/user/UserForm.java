@@ -89,7 +89,7 @@ public class UserForm extends JInternalFrame {
 
     public UserForm(UserManagement userManagement, User user) {
         List<WorkGroup> workGroupList;
-        this.user=user;
+        this.user = user;
         this.userManagement = userManagement;
         editable = true;
 
@@ -119,8 +119,10 @@ public class UserForm extends JInternalFrame {
         okButton = new javax.swing.JButton();
 
         userName.setText(user.getUsername());
-        firstName.setText(user.getPerson().getName());
-        familyName.setText(user.getPerson().getLastName());
+        if (user.getPerson() != null) {
+            firstName.setText(user.getPerson().getName());
+            familyName.setText(user.getPerson().getLastName());
+        }
         password.setText(user.getPassword());
 
         initComponents();
@@ -288,7 +290,8 @@ public class UserForm extends JInternalFrame {
         }
 
     }
-public void updateUser() {
+
+    public void updateUser() {
         WebServiceInfo serviceInfo = new WebServiceInfo();
         user.setUsername(userName.getText());
         user.setPassword(password.getText());
