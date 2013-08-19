@@ -37,6 +37,7 @@ public class Person extends BaseEntity {
     private Calendar defaultCalendar;
     @JsonProperty
     private Calendar calendar;
+    @JsonProperty
     private String status;
     @JsonProperty
     private String deleted;
@@ -52,6 +53,20 @@ public class Person extends BaseEntity {
     private BLookup personStatus;
     @JsonProperty
     private Set<Gateway> gateways;
+    @JsonProperty
+    private String mobile;
+    @JsonProperty
+    private String email;
+    @JsonProperty
+    private String address;
+    @JsonProperty
+    private String phone;
+    @JsonProperty
+    private String createDate;
+    @JsonProperty
+    private String createTime;
+    @JsonProperty
+    private String createBy;
 
     public Person() {
     }
@@ -156,6 +171,7 @@ public class Person extends BaseEntity {
     public String getExtraField1() {
         return extraField1;
     }
+
 
     public void setExtraField1(String extraField1) {
         this.extraField1 = extraField1;
