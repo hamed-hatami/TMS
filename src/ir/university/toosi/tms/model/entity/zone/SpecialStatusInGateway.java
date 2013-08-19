@@ -1,6 +1,7 @@
 package ir.university.toosi.tms.model.entity.zone;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.university.toosi.tms.model.entity.BLookup;
 import ir.university.toosi.tms.model.entity.BaseEntity;
@@ -10,7 +11,7 @@ import ir.university.toosi.tms.model.entity.BaseEntity;
  * @version : 0.8
  */
 
-
+@JsonIgnoreProperties(value = "@id")
 public class SpecialStatusInGateway extends BaseEntity {
 
     @JsonProperty
