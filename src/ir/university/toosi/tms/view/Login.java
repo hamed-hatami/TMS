@@ -94,7 +94,7 @@ public class Login extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(new JFrame(), "user not found");
                 } else {
                     ThreadPoolManager.me = result;
-                    JOptionPane.showMessageDialog(new JFrame(), "Welcome " + result.getFirstname());
+                    JOptionPane.showMessageDialog(new JFrame(), "Welcome " + result.getUsername());
                     mainForm.getMainMenuBar().setVisible(true);
                     mainForm.getLoginForm().dispose();
                 }
