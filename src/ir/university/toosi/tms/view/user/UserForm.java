@@ -119,8 +119,8 @@ public class UserForm extends JInternalFrame {
         okButton = new javax.swing.JButton();
 
         userName.setText(user.getUsername());
-        firstName.setText(user.getFirstname());
-        familyName.setText(user.getLastname());
+        firstName.setText(user.getPerson().getName());
+        familyName.setText(user.getPerson().getLastName());
         password.setText(user.getPassword());
 
         initComponents();
@@ -267,14 +267,14 @@ public class UserForm extends JInternalFrame {
         WebServiceInfo serviceInfo = new WebServiceInfo();
         user.setUsername(userName.getText());
         user.setPassword(password.getText());
-        user.setFirstname(firstName.getText());
+        user.getPerson().setName(firstName.getText());
         serviceInfo.setServiceName("/findWorkGroupByName");
         try {
             WorkGroup workGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), (String) workGroups.getSelectedItem()), WorkGroup.class);
             Set<WorkGroup> workGroups1 = new HashSet<>();
             workGroups1.add(workGroup);
             user.setWorkGroups(workGroups1);
-            user.setLastname(familyName.getText());
+            user.getPerson().setLastName(familyName.getText());
 //        String workgroupName=workGroups.getSelectedItem();
 //        user.setWorkGroups();
 
@@ -292,14 +292,14 @@ public void updateUser() {
         WebServiceInfo serviceInfo = new WebServiceInfo();
         user.setUsername(userName.getText());
         user.setPassword(password.getText());
-        user.setFirstname(firstName.getText());
+        user.getPerson().setName(firstName.getText());
         serviceInfo.setServiceName("/findWorkGroupByName");
         try {
             WorkGroup workGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), (String) workGroups.getSelectedItem()), WorkGroup.class);
             Set<WorkGroup> workGroups1 = new HashSet<>();
             workGroups1.add(workGroup);
             user.setWorkGroups(workGroups1);
-            user.setLastname(familyName.getText());
+            user.getPerson().setLastName(familyName.getText());
 //        String workgroupName=workGroups.getSelectedItem();
 //        user.setWorkGroups();
             serviceInfo.setServiceName("/editUser");

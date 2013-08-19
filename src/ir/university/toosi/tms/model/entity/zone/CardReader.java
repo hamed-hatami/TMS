@@ -1,11 +1,15 @@
 package ir.university.toosi.tms.model.entity.zone;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.university.toosi.tms.model.entity.BLookup;
 import ir.university.toosi.tms.model.entity.BaseEntity;
 
+import javax.persistence.*;
 
+@JsonIgnoreProperties(value = "@id")
 public class CardReader extends BaseEntity {
+
     @JsonProperty
     private long id;
     @JsonProperty
@@ -44,10 +48,6 @@ public class CardReader extends BaseEntity {
 
     public void setCardReaderType(BLookup cardReaderType) {
         this.cardReaderType = cardReaderType;
-    }
-
-    public String getCardReaderTypeCode() {
-        return "CardReaderType";
     }
 
     public String getAction() {

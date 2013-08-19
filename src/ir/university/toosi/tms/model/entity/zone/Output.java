@@ -1,11 +1,15 @@
 package ir.university.toosi.tms.model.entity.zone;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.university.toosi.tms.model.entity.BLookup;
 import ir.university.toosi.tms.model.entity.BaseEntity;
 
+import javax.persistence.*;
 
+@JsonIgnoreProperties(value = "@id")
 public class Output extends BaseEntity {
+
     @JsonProperty
     private long id;
     @JsonProperty
