@@ -31,12 +31,16 @@
 package ir.university.toosi.tms.view.user;
 
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ir.university.toosi.tms.model.entity.PC;
 import ir.university.toosi.tms.model.entity.User;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.model.entity.WorkGroup;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
+import org.jdesktop.beansbinding.BindingGroup;
+import org.jdesktop.swingbinding.JTableBinding;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -81,6 +85,9 @@ public class UserForm extends JInternalFrame {
         cancelButton = new JButton();
         okButton = new JButton();
         assignPC = new JButton();
+        mainPanel = new JPanel();
+        tableScroll = new JScrollPane();
+        mainTable = new JTable();
 
         initComponents();
     }
@@ -112,7 +119,10 @@ public class UserForm extends JInternalFrame {
         cancelButton = new JButton();
         okButton = new JButton();
         assignPC = new JButton();
+        mainPanel = new JPanel();
         this.jdpDesktop = jDesktopPane;
+        tableScroll = new JScrollPane();
+        mainTable = new JTable();
 
         userName.setText(user == null ? "" : user.getUsername());
         password.setText(user == null ? "" : user.getPassword());
@@ -147,6 +157,20 @@ public class UserForm extends JInternalFrame {
 
         jLabel5.setText("WORKGROUP");
 
+
+        mainPanel.setBorder(BorderFactory.createTitledBorder("PCLIST"));
+
+        mainTable.setAutoCreateRowSorter(true);
+        try {
+            refresh();
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+
+        mainTable.setColumnSelectionAllowed(true);
+        tableScroll.setViewportView(mainTable);
+        mainTable.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -218,6 +242,26 @@ public class UserForm extends JInternalFrame {
 
         assignPC.setEnabled(editable);
 
+        org.jdesktop.layout.GroupLayout jPanel1Layout1 = new org.jdesktop.layout.GroupLayout(mainPanel);
+        mainPanel.setLayout(jPanel1Layout1);
+        jPanel1Layout1.setHorizontalGroup(
+                jPanel1Layout1.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(jPanel1Layout1.createSequentialGroup()
+                                .add(36, 36, 36)
+                                .add(jPanel1Layout1.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(tableScroll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(45, Short.MAX_VALUE))
+        );
+        jPanel1Layout1.setVerticalGroup(
+                jPanel1Layout1.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(jPanel1Layout1.createSequentialGroup()
+                                .addContainerGap()
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .add(tableScroll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(133, 133, 133))
+        );
+
+
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -235,6 +279,10 @@ public class UserForm extends JInternalFrame {
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(cancelButton)
                                 .add(110, 110, 110))
+                        .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .add(mainPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
         );
 
         layout.linkSize(new java.awt.Component[]{cancelButton, okButton, assignPC}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
@@ -245,11 +293,14 @@ public class UserForm extends JInternalFrame {
                                 .addContainerGap()
                                 .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(mainPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 221, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(cancelButton)
                                         .add(okButton)
                                         .add(assignPC))
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("UserForm");
@@ -322,6 +373,36 @@ public class UserForm extends JInternalFrame {
         }
     }
 
+    private void getAll() throws IOException {
+        pcList = new ArrayList<>();
+        if(user == null)
+           return;
+        for (PC pc : user.getPcs()) {
+            pcList.add(pc);
+        }
+    }
+
+    public void refresh() throws IOException {
+        getAll();
+        showData();
+    }
+
+    private void showData() {
+        JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pcList, mainTable, "");
+        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
+        columnBinding.setColumnName("NAME");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${ip}"));
+        columnBinding.setColumnName("IP");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${location}"));
+        columnBinding.setColumnName("LOCATION");
+        columnBinding.setColumnClass(String.class);
+        BindingGroup bindingGroup = new BindingGroup();
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -329,6 +410,7 @@ public class UserForm extends JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ButtonGroup buttonGroup1;
     private JButton cancelButton;
+    private JPanel mainPanel;
     private JButton okButton;
     private JButton assignPC;
     private JComboBox workGroups;
@@ -340,7 +422,14 @@ public class UserForm extends JInternalFrame {
     private JTextField password;
     private JDesktopPane jdpDesktop;
     private User user;
+    private JScrollPane tableScroll;
+    private JTable mainTable;
     List<WorkGroup> workGroupList = new ArrayList<>();
+    List<PC> pcList = new ArrayList<>();
     // End of variables declaration//GEN-END:variables
+
+    public JTable getMainTable() {
+        return mainTable;
+    }
 
 }

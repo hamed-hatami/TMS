@@ -390,7 +390,7 @@ public class PCManagement extends JInternalFrame {
         try {
             new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(pcService.getServerUrl(), pcService.getServiceName(), new ObjectMapper().writeValueAsString(user)), Boolean.class);
             this.dispose();
-//            userForm.refresh();
+            userForm.refresh();
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
