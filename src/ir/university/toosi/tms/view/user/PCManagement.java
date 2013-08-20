@@ -353,7 +353,7 @@ public class PCManagement extends JInternalFrame {
         PC pc = pcList.get(mainTable.convertRowIndexToModel(mainTable.getSelectedRow()));
         PCForm pcForm = new PCForm(true, pc, this);
         pcForm.setVisible(true);
-        userForm.add(pcForm);
+        jdpDesktop.add(pcForm);
         pcForm.setSelected(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

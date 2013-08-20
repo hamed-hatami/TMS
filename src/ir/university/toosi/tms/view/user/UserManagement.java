@@ -139,7 +139,11 @@ public class UserManagement extends JInternalFrame {
         editButton.setText("EDIT");
         editButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editUser();
+                try {
+                    editUser();
+                } catch (PropertyVetoException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
             }
         });
 
@@ -244,11 +248,12 @@ public class UserManagement extends JInternalFrame {
 
     }
 
-    private void editUser() {
+    private void editUser() throws PropertyVetoException {
         User user = userList.get(userTable.convertRowIndexToModel(userTable.getSelectedRow()));
         UserForm userForm = new UserForm(this, user, jdpDesktop, true);
         userForm.setVisible(true);
         jdpDesktop.add(userForm);
+        userForm.setSelected(true);
     }
 
     private void deleteUser() throws IOException {
