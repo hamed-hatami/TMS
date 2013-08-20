@@ -21,6 +21,10 @@ public class PC extends BaseEntity {
     public PC() {
     }
 
+    public PC(long id) {
+        this.id = id;
+    }
+
     public PC(String name, String ip, String location) {
         this.name = name;
         this.ip = ip;

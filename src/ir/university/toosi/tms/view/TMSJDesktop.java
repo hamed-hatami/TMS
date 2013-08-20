@@ -9,7 +9,7 @@ import java.awt.*;
  */
 public class TMSJDesktop extends JDesktopPane {
 
-    Image image = new ImageIcon("/home/hatami/Layering.png").getImage();
+    Image image = new ImageIcon("D:\\Layering.jpg").getImage();
 
     @Override
     public void paintComponent(Graphics g) {
