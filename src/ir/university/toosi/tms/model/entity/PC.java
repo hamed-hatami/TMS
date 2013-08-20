@@ -1,12 +1,7 @@
 package ir.university.toosi.tms.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-import javax.persistence.*;
-import java.util.Set;
 
 @JsonIgnoreProperties(value = "@id")
 public class PC extends BaseEntity {
@@ -22,9 +17,6 @@ public class PC extends BaseEntity {
 
     @JsonProperty
     private String location;
-
-    @JsonProperty
-    private Set<User> users;
 
     public PC() {
     }
@@ -65,13 +57,5 @@ public class PC extends BaseEntity {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
     }
 }

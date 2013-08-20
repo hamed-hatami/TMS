@@ -41,7 +41,9 @@ import ir.university.toosi.tms.util.ThreadPoolManager;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,10 +56,9 @@ public class UserForm extends JInternalFrame {
     private String[] workGroupsName;
     private UserManagement userManagement;
     private boolean editable = false;
-    private User user;
 
     public UserForm(UserManagement userManagement) {
-        List<WorkGroup> workGroupList;
+
         this.userManagement = userManagement;
         WebServiceInfo webServiceInfo = new WebServiceInfo();
         webServiceInfo.setServiceName("/getAllWorkGroup");
@@ -69,29 +70,26 @@ public class UserForm extends JInternalFrame {
             workGroupsName[i++] = workGroup.getName();
         }
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        userName = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        password = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        firstName = new javax.swing.JTextField();
-        familyName = new javax.swing.JTextField();
-        workGroups = new javax.swing.JComboBox(workGroupsName);
-        cancelButton = new javax.swing.JButton();
-        okButton = new javax.swing.JButton();
+        buttonGroup1 = new ButtonGroup();
+        jPanel1 = new JPanel();
+        userNameLabel = new JLabel();
+        userName = new JTextField();
+        passLabel = new JLabel();
+        password = new JTextField();
+        jLabel5 = new JLabel();
+        workGroups = new JComboBox(workGroupsName);
+        cancelButton = new JButton();
+        okButton = new JButton();
+        assignPC = new JButton();
 
         initComponents();
     }
 
-    public UserForm(UserManagement userManagement, User user) {
+    public UserForm(UserManagement userManagement, User user, JDesktopPane jDesktopPane, boolean editable) {
         List<WorkGroup> workGroupList;
         this.user = user;
         this.userManagement = userManagement;
-        editable = true;
+        this.editable = editable;
 
         WebServiceInfo webServiceInfo = new WebServiceInfo();
         webServiceInfo.setServiceName("/getAllWorkGroup");
@@ -103,27 +101,21 @@ public class UserForm extends JInternalFrame {
             workGroupsName[i++] = workGroup.getName();
         }
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        userName = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        password = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        firstName = new javax.swing.JTextField();
-        familyName = new javax.swing.JTextField();
-        workGroups = new javax.swing.JComboBox(workGroupsName);
-        cancelButton = new javax.swing.JButton();
-        okButton = new javax.swing.JButton();
+        buttonGroup1 = new ButtonGroup();
+        jPanel1 = new JPanel();
+        userNameLabel = new JLabel();
+        userName = new JTextField();
+        passLabel = new JLabel();
+        password = new JTextField();
+        jLabel5 = new JLabel();
+        workGroups = new JComboBox(workGroupsName);
+        cancelButton = new JButton();
+        okButton = new JButton();
+        assignPC = new JButton();
+        this.jdpDesktop = jDesktopPane;
 
-        userName.setText(user.getUsername());
-        if (user.getPerson() != null) {
-            firstName.setText(user.getPerson().getName());
-            familyName.setText(user.getPerson().getLastName());
-        }
-        password.setText(user.getPassword());
+        userName.setText(user == null ? "" : user.getUsername());
+        password.setText(user == null ? "" : user.getPassword());
 
         initComponents();
     }
@@ -146,19 +138,14 @@ public class UserForm extends JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("USER"));
 
-        jLabel1.setText("USERNAME");
+        userNameLabel.setText("USERNAME");
 
-        jLabel3.setText("PASSWORD");
+        passLabel.setText("PASSWORD");
 
         password.setToolTipText("");
 
-        jLabel2.setText("NAME");
-
-        jLabel4.setText("FAMILYNAME");
 
         jLabel5.setText("WORKGROUP");
-
-        familyName.setToolTipText("");
 
 
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
@@ -174,16 +161,13 @@ public class UserForm extends JInternalFrame {
                                                 .add(workGroups, 0, 155, Short.MAX_VALUE))
                                         .add(jPanel1Layout.createSequentialGroup()
                                                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                                        .add(jLabel2)
-                                                        .add(jLabel3)
-                                                        .add(jLabel4)
-                                                        .add(jLabel1))
+                                                        .add(passLabel)
+                                                        .add(userNameLabel))
                                                 .add(18, 18, 18)
                                                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                                         .add(password, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                                                         .add(org.jdesktop.layout.GroupLayout.TRAILING, userName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                                                        .add(firstName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                                                        .add(familyName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))))
+                                                )))
                                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -191,20 +175,13 @@ public class UserForm extends JInternalFrame {
                         .add(jPanel1Layout.createSequentialGroup()
                                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(userName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                        .add(jLabel1))
+                                        .add(userNameLabel))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(password, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                        .add(jLabel3))
+                                        .add(passLabel))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                        .add(jLabel2)
-                                        .add(firstName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                        .add(jLabel4)
-                                        .add(familyName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+
                                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(jLabel5)
                                         .add(workGroups, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
@@ -228,6 +205,19 @@ public class UserForm extends JInternalFrame {
             }
         });
 
+        assignPC.setText("ASSIGNPC");
+        assignPC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    assignPCToUser(evt);
+                } catch (PropertyVetoException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        assignPC.setEnabled(editable);
+
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -241,11 +231,13 @@ public class UserForm extends JInternalFrame {
                                 .addContainerGap(114, Short.MAX_VALUE)
                                 .add(okButton)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(assignPC)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(cancelButton)
                                 .add(110, 110, 110))
         );
 
-        layout.linkSize(new java.awt.Component[]{cancelButton, okButton}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
+        layout.linkSize(new java.awt.Component[]{cancelButton, okButton, assignPC}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
 
         layout.setVerticalGroup(
                 layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -255,7 +247,8 @@ public class UserForm extends JInternalFrame {
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(cancelButton)
-                                        .add(okButton))
+                                        .add(okButton)
+                                        .add(assignPC))
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -265,26 +258,25 @@ public class UserForm extends JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void saveUser() {
-        User user = new User();
+        User newUser = new User();
         WebServiceInfo serviceInfo = new WebServiceInfo();
-        user.setUsername(userName.getText());
-        user.setPassword(password.getText());
-        user.getPerson().setName(firstName.getText());
+        newUser.setUsername(userName.getText());
+        newUser.setPassword(password.getText());
         serviceInfo.setServiceName("/findWorkGroupByName");
         try {
-            WorkGroup workGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), (String) workGroups.getSelectedItem()), WorkGroup.class);
+            WorkGroup workGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), (String) workGroups.getSelectedItem()), WorkGroup.class);
             Set<WorkGroup> workGroups1 = new HashSet<>();
             workGroups1.add(workGroup);
-            user.setWorkGroups(workGroups1);
-            user.getPerson().setLastName(familyName.getText());
+            newUser.setWorkGroups(workGroups1);
 //        String workgroupName=workGroups.getSelectedItem();
 //        user.setWorkGroups();
 
             serviceInfo.setServiceName("/createUser");
-            new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), new ObjectMapper().writeValueAsString(user));
-            this.setVisible(false);
-            this.dispose();
-            userManagement.refresh();
+            user = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), new ObjectMapper().writeValueAsString(newUser)), User.class);
+            assignPC.setEnabled(true);
+//            this.setVisible(false);
+//            this.dispose();
+//            userManagement.refresh();
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
@@ -295,29 +287,39 @@ public class UserForm extends JInternalFrame {
         WebServiceInfo serviceInfo = new WebServiceInfo();
         user.setUsername(userName.getText());
         user.setPassword(password.getText());
-        user.getPerson().setName(firstName.getText());
         serviceInfo.setServiceName("/findWorkGroupByName");
         try {
-            WorkGroup workGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), (String) workGroups.getSelectedItem()), WorkGroup.class);
+            WorkGroup workGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), (String) workGroups.getSelectedItem()), WorkGroup.class);
             Set<WorkGroup> workGroups1 = new HashSet<>();
             workGroups1.add(workGroup);
             user.setWorkGroups(workGroups1);
-            user.getPerson().setLastName(familyName.getText());
 //        String workgroupName=workGroups.getSelectedItem();
 //        user.setWorkGroups();
             serviceInfo.setServiceName("/editUser");
             new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), new ObjectMapper().writeValueAsString(user));
-            this.setVisible(false);
-            this.dispose();
-            userManagement.refresh();
+//            this.setVisible(false);
+//            this.dispose();
+//            userManagement.refresh();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
+    private void assignPCToUser(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
+        PCManagement pcManagement = new PCManagement(this, user, jdpDesktop);
+        pcManagement.setVisible(true);
+        jdpDesktop.add(pcManagement);
+        pcManagement.setSelected(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void cancel() {
         this.dispose();
+        try {
+            userManagement.refresh();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -325,20 +327,20 @@ public class UserForm extends JInternalFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton cancelButton;
-    private javax.swing.JButton okButton;
-    private javax.swing.JComboBox workGroups;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField userName;
-    private javax.swing.JTextField firstName;
-    private javax.swing.JTextField password;
-    private javax.swing.JTextField familyName;
+    private ButtonGroup buttonGroup1;
+    private JButton cancelButton;
+    private JButton okButton;
+    private JButton assignPC;
+    private JComboBox workGroups;
+    private JLabel userNameLabel;
+    private JLabel passLabel;
+    private JLabel jLabel5;
+    private JPanel jPanel1;
+    private JTextField userName;
+    private JTextField password;
+    private JDesktopPane jdpDesktop;
+    private User user;
+    List<WorkGroup> workGroupList = new ArrayList<>();
     // End of variables declaration//GEN-END:variables
 
 }
