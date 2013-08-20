@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.university.toosi.tms.model.entity.person.Person;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -25,11 +26,11 @@ public class User extends BaseEntity {
     @JsonProperty
     private String enable;
     @JsonProperty
-    private String failedLoginCount;
-    @JsonProperty
     private String lastLoginDate;
     @JsonProperty
     private String lastLoginIP;
+    @JsonProperty
+    private String failedLoginCount;
     @JsonProperty
     private boolean online;
     @JsonProperty
@@ -46,6 +47,8 @@ public class User extends BaseEntity {
     private String extraField4;
     @JsonProperty
     private Person person;
+    @JsonProperty
+    private Set<PC> pcs;
 
     public User() {
     }
@@ -182,5 +185,15 @@ public class User extends BaseEntity {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    public Set<PC> getPcs() {
+        if(pcs == null)
+            return new HashSet<>();
+        return pcs;
+    }
+
+    public void setPcs(Set<PC> pcs) {
+        this.pcs = pcs;
     }
 }
