@@ -3,6 +3,9 @@ package ir.university.toosi.tms.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Column;
+import javax.persistence.Transient;
+
 @JsonIgnoreProperties(value = "@id")
 public class PC extends BaseEntity {
 
@@ -17,6 +20,12 @@ public class PC extends BaseEntity {
 
     @JsonProperty
     private String location;
+    @JsonProperty
+    private String status;
+    @JsonProperty
+    private String deleted;
+    @JsonProperty
+    private boolean selected;
 
     public PC() {
     }
@@ -61,5 +70,29 @@ public class PC extends BaseEntity {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(String deleted) {
+        this.deleted = deleted;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }
