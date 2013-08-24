@@ -275,7 +275,7 @@ public class PCManagement extends JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void getAll() throws IOException {
-        pcService.setServiceName("/getAllPc");
+        pcService.setServiceName("/getAllPC");
         pcList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(pcService.getServerUrl(), pcService.getServiceName()), new TypeReference<List<PC>>() {
         });
     }
