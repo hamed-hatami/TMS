@@ -31,7 +31,6 @@
 package ir.university.toosi.tms.view.user;
 
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.PC;
 import ir.university.toosi.tms.model.entity.User;
@@ -39,6 +38,7 @@ import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.model.entity.WorkGroup;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
+import ir.university.toosi.tms.view.person.PersonList;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
@@ -76,15 +76,23 @@ public class UserForm extends JInternalFrame {
 
         buttonGroup1 = new ButtonGroup();
         jPanel1 = new JPanel();
+        personPanel = new JPanel();
         userNameLabel = new JLabel();
         userName = new JTextField();
         passLabel = new JLabel();
         password = new JTextField();
         jLabel5 = new JLabel();
         workGroups = new JComboBox(workGroupsName);
+        nameLabel = new JLabel();
+        name = new JTextField();
+        lastName = new JTextField();
+        lastNameLabel = new JLabel();
+        nationalCode = new JTextField();
+        nationalCodeLabel = new JLabel();
         cancelButton = new JButton();
         okButton = new JButton();
         assignPC = new JButton();
+        assignPerson = new JButton();
         mainPanel = new JPanel();
         tableScroll = new JScrollPane();
         mainTable = new JTable();
@@ -110,22 +118,43 @@ public class UserForm extends JInternalFrame {
 
         buttonGroup1 = new ButtonGroup();
         jPanel1 = new JPanel();
+        personPanel = new JPanel();
         userNameLabel = new JLabel();
         userName = new JTextField();
         passLabel = new JLabel();
         password = new JTextField();
         jLabel5 = new JLabel();
         workGroups = new JComboBox(workGroupsName);
+        nameLabel = new JLabel();
+        name = new JTextField();
+        lastName = new JTextField();
+        lastNameLabel = new JLabel();
+        nationalCode = new JTextField();
+        nationalCodeLabel = new JLabel();
         cancelButton = new JButton();
         okButton = new JButton();
         assignPC = new JButton();
+        assignPerson = new JButton();
         mainPanel = new JPanel();
         this.jdpDesktop = jDesktopPane;
         tableScroll = new JScrollPane();
         mainTable = new JTable();
 
-        userName.setText(user == null ? "" : user.getUsername());
-        password.setText(user == null ? "" : user.getPassword());
+        if (user != null) {
+            userName.setText(user.getUsername());
+            password.setText(user.getPassword());
+            if (user.getPerson() != null) {
+                name.setText(user.getPerson().getName());
+                lastName.setText(user.getPerson().getLastName());
+                nationalCode.setText(user.getPerson().getNationalCode());
+            }
+        } else {
+            userName.setText("");
+            password.setText("");
+            name.setText("");
+            lastName.setText("");
+            nationalCode.setText("");
+        }
 
         initComponents();
     }
@@ -147,6 +176,7 @@ public class UserForm extends JInternalFrame {
 
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("USER"));
+        personPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("PERSON"));
 
         userNameLabel.setText("USERNAME");
 
@@ -156,6 +186,10 @@ public class UserForm extends JInternalFrame {
 
 
         jLabel5.setText("WORKGROUP");
+
+        nameLabel.setText("NAME");
+        lastNameLabel.setText("LASTNAME");
+        nationalCodeLabel.setText("NATIONALCODE");
 
 
         mainPanel.setBorder(BorderFactory.createTitledBorder("PCLIST"));
@@ -211,6 +245,46 @@ public class UserForm extends JInternalFrame {
                                         .add(workGroups, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         );
 
+        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(personPanel);
+        personPanel.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+                jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(jPanel2Layout.createSequentialGroup()
+                                .add(45, 45, 45)
+                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(jPanel2Layout.createSequentialGroup()
+                                                .add(nationalCodeLabel)
+                                                .add(18, 18, 18)
+                                                .add(nationalCode, 0, 155, Short.MAX_VALUE))
+                                        .add(jPanel2Layout.createSequentialGroup()
+                                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                        .add(nameLabel)
+                                                        .add(lastNameLabel))
+                                                .add(18, 18, 18)
+                                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                        .add(lastName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, name, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                                                )))
+                                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+                jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(jPanel2Layout.createSequentialGroup()
+                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(name, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(nameLabel))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(lastName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                        .add(lastNameLabel))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+
+                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                        .add(nationalCodeLabel)
+                                        .add(nationalCode, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+        );
+
+
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
@@ -242,6 +316,19 @@ public class UserForm extends JInternalFrame {
 
         assignPC.setEnabled(editable);
 
+        assignPerson.setText("ASSIGNPERSON");
+        assignPerson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    assignPersonToUser(evt);
+                } catch (PropertyVetoException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        assignPerson.setEnabled(editable);
+
         org.jdesktop.layout.GroupLayout jPanel1Layout1 = new org.jdesktop.layout.GroupLayout(mainPanel);
         mainPanel.setLayout(jPanel1Layout1);
         jPanel1Layout1.setHorizontalGroup(
@@ -262,7 +349,6 @@ public class UserForm extends JInternalFrame {
         );
 
 
-
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -271,14 +357,20 @@ public class UserForm extends JInternalFrame {
                                 .add(26, 26, 26)
                                 .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(28, Short.MAX_VALUE))
+                        .add(layout.createSequentialGroup()
+                                .add(26, 26, 26)
+                                .add(personPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(28, Short.MAX_VALUE))
                         .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(114, Short.MAX_VALUE)
+                                .addContainerGap(84, Short.MAX_VALUE)
                                 .add(okButton)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(assignPC)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(assignPerson)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(cancelButton)
-                                .add(110, 110, 110))
+                                .add(90, 90, 90))
                         .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .add(mainPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -293,12 +385,15 @@ public class UserForm extends JInternalFrame {
                                 .addContainerGap()
                                 .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(mainPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 221, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(personPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(mainPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 251, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(cancelButton)
                                         .add(okButton)
-                                        .add(assignPC))
+                                        .add(assignPC)
+                                        .add(assignPerson))
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 
         );
@@ -325,6 +420,7 @@ public class UserForm extends JInternalFrame {
             serviceInfo.setServiceName("/createUser");
             user = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), new ObjectMapper().writeValueAsString(newUser)), User.class);
             assignPC.setEnabled(true);
+            assignPerson.setEnabled(true);
 //            this.setVisible(false);
 //            this.dispose();
 //            userManagement.refresh();
@@ -364,6 +460,13 @@ public class UserForm extends JInternalFrame {
         pcManagement.setSelected(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void assignPersonToUser(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
+        PersonList personListForm = new PersonList(this, user, jdpDesktop);
+        personListForm.setVisible(true);
+        jdpDesktop.add(personListForm);
+        personListForm.setSelected(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void cancel() {
         this.dispose();
         try {
@@ -375,8 +478,8 @@ public class UserForm extends JInternalFrame {
 
     private void getAll() throws IOException {
         pcList = new ArrayList<>();
-        if(user == null)
-           return;
+        if (user == null)
+            return;
         for (PC pc : user.getPcs()) {
             pcList.add(pc);
         }
@@ -413,13 +516,21 @@ public class UserForm extends JInternalFrame {
     private JPanel mainPanel;
     private JButton okButton;
     private JButton assignPC;
+    private JButton assignPerson;
     private JComboBox workGroups;
     private JLabel userNameLabel;
     private JLabel passLabel;
     private JLabel jLabel5;
+    private JLabel nameLabel;
+    private JLabel lastNameLabel;
+    private JLabel nationalCodeLabel;
     private JPanel jPanel1;
+    private JPanel personPanel;
     private JTextField userName;
     private JTextField password;
+    private JTextField name;
+    private JTextField lastName;
+    private JTextField nationalCode;
     private JDesktopPane jdpDesktop;
     private User user;
     private JScrollPane tableScroll;

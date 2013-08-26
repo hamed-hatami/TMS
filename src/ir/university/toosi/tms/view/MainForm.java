@@ -66,7 +66,7 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             setSize(xSize, ySize);
 
             setDefaultLookAndFeelDecorated(true);
-            setUndecorated(true);
+            //setUndecorated(true);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 
@@ -269,7 +269,6 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
     }
 
     private void showLookupInfo(Lookup lookup) throws PropertyVetoException {
-        System.out.println("LOOKUP : " + lookup.getName());
         BasicInfoManagement basicInfoManagement = new BasicInfoManagement(jdpDesktop, lookup);
         basicInfoManagement.setVisible(true);
         jdpDesktop.add(basicInfoManagement);
@@ -279,7 +278,6 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-
             if (e.getSource() == menuItem) {
                 showPersonEdit();
             } else if (e.getSource() == persianItem) {
