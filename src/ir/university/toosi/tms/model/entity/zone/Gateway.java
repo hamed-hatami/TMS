@@ -34,11 +34,8 @@ public class Gateway extends BaseEntity {
     @JsonProperty
     private Zone zone;
     @JsonProperty
-    private String status;
-    @JsonProperty
     private Calendar calendar;
-    @JsonProperty
-    private String deleted;
+
 
     public Gateway() {
     }
@@ -119,27 +116,11 @@ public class Gateway extends BaseEntity {
         this.zone = zone;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public Calendar getCalendar() {
         return calendar;
     }
 
     public void setCalendar(Calendar calendar) {
         this.calendar = calendar;
-    }
-
-    public String getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(String deleted) {
-        this.deleted = deleted;
     }
 }

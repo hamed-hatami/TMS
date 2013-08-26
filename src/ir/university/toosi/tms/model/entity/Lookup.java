@@ -28,9 +28,6 @@ public class Lookup extends BaseEntity {
     @JsonProperty
     private boolean definable;
 
-    @JsonProperty
-    private String deleted;
-
     public Lookup(String code, String name, String description) {
         this.code = code;
         this.name = name;
@@ -91,13 +88,5 @@ public class Lookup extends BaseEntity {
 
     public void setDefinable(boolean definable) {
         this.definable = definable;
-    }
-
-    public String getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(String deleted) {
-        this.deleted = deleted;
     }
 }

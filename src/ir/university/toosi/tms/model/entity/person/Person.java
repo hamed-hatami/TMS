@@ -38,10 +38,6 @@ public class Person extends BaseEntity {
     @JsonProperty
     private Calendar calendar;
     @JsonProperty
-    private String status;
-    @JsonProperty
-    private String deleted;
-    @JsonProperty
     private String extraField1;
     @JsonProperty
     private String extraField2;
@@ -152,22 +148,6 @@ public class Person extends BaseEntity {
         this.calendar = calendar;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(String deleted) {
-        this.deleted = deleted;
-    }
-
     public String getExtraField1() {
         return extraField1;
     }
@@ -215,5 +195,61 @@ public class Person extends BaseEntity {
 
     public void setGateways(Set<Gateway> gateways) {
         this.gateways = gateways;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
     }
 }

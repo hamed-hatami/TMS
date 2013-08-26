@@ -20,10 +20,7 @@ public class PC extends BaseEntity {
 
     @JsonProperty
     private String location;
-    @JsonProperty
-    private String status;
-    @JsonProperty
-    private String deleted;
+
     @JsonProperty
     private boolean selected;
 
@@ -70,22 +67,6 @@ public class PC extends BaseEntity {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(String deleted) {
-        this.deleted = deleted;
     }
 
     public boolean isSelected() {

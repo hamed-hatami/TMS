@@ -22,8 +22,6 @@ public class Operation extends BaseEntity {
     private String englishDescription;
     @JsonProperty
     private boolean enabled;
-    @JsonProperty
-    private String deleted;
 
     @JsonProperty
     private boolean selected;
@@ -92,7 +90,6 @@ public class Operation extends BaseEntity {
     public void setDeleted(String deleted) {
         this.deleted = deleted;
     }
-
 
     public boolean isSelected() {
         return selected;

@@ -23,10 +23,6 @@ public class ZCU extends BaseEntity {
     private String macAddress;
     @JsonProperty
     private String IPAddress;
-    @JsonProperty
-    private String status;
-    @JsonProperty
-    private String deleted;
 
     public ZCU() {
     }
@@ -69,21 +65,5 @@ public class ZCU extends BaseEntity {
 
     public void setIPAddress(String IPAddress) {
         this.IPAddress = IPAddress;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(String deleted) {
-        this.deleted = deleted;
     }
 }

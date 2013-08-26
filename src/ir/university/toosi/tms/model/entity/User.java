@@ -22,8 +22,6 @@ public class User extends BaseEntity {
     @JsonProperty
     private String password;
     @JsonProperty
-    private String status;
-    @JsonProperty
     private String enable;
     @JsonProperty
     private String lastLoginDate;
@@ -33,8 +31,6 @@ public class User extends BaseEntity {
     private String failedLoginCount;
     @JsonProperty
     private boolean online;
-    @JsonProperty
-    private String deleted;
     @JsonProperty
     private Set<WorkGroup> workGroups;
     @JsonProperty
@@ -91,14 +87,6 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getEnable() {
         return enable;
     }
@@ -137,14 +125,6 @@ public class User extends BaseEntity {
 
     public void setOnline(boolean online) {
         this.online = online;
-    }
-
-    public String getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(String deleted) {
-        this.deleted = deleted;
     }
 
     public Set<WorkGroup> getWorkGroups() {

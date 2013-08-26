@@ -25,12 +25,6 @@ public class Calendar extends BaseEntity {
     private boolean defaultCalendar;
 
     @JsonProperty
-    private String status;
-
-    @JsonProperty
-    private String deleted;
-
-    @JsonProperty
     private String extraField1;
 
     @JsonProperty
@@ -94,22 +88,6 @@ public class Calendar extends BaseEntity {
 
     public void setDefaultCalendar(boolean defaultCalendar) {
         this.defaultCalendar = defaultCalendar;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(String deleted) {
-        this.deleted = deleted;
     }
 
     public String getExtraField1() {

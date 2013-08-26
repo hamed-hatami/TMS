@@ -16,10 +16,6 @@ public class HardwareSpec extends BaseEntity {
     private CardReader cardReader;
     @JsonProperty
     private Gateway gateway;
-    @JsonProperty
-    private String status;
-    @JsonProperty
-    private String deleted;
 
     public HardwareSpec() {
     }
@@ -62,21 +58,5 @@ public class HardwareSpec extends BaseEntity {
 
     public void setGateway(Gateway gateway) {
         this.gateway = gateway;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(String deleted) {
-        this.deleted = deleted;
     }
 }

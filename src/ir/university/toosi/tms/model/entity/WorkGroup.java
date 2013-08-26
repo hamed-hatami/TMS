@@ -27,11 +27,7 @@ public class WorkGroup extends BaseEntity {
     @JsonProperty
     private String enabled;
     @JsonProperty
-    private String deleted;
-    @JsonProperty
     private boolean selected;
-    @JsonProperty
-    private String status;
     @JsonProperty
     private Set<Role> roles;
 
@@ -93,14 +89,6 @@ public class WorkGroup extends BaseEntity {
         this.enabled = enabled;
     }
 
-    public String getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(String deleted) {
-        this.deleted = deleted;
-    }
-
     public boolean isSelected() {
         return selected;
     }
@@ -115,13 +103,5 @@ public class WorkGroup extends BaseEntity {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
-    }
-
-    public String isStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 }

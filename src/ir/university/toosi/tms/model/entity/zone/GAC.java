@@ -21,10 +21,7 @@ public class GAC extends BaseEntity {
     private String IPAddress;
     @JsonProperty
     private String description;
-    @JsonProperty
-    private String status;
-    @JsonProperty
-    private String deleted;
+
 
     public GAC() {
     }
@@ -91,21 +88,5 @@ public class GAC extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(String deleted) {
-        this.deleted = deleted;
     }
 }

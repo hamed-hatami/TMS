@@ -18,10 +18,7 @@ public class CardReader extends BaseEntity {
     private BLookup cardReaderType;
     @JsonProperty
     private String action;//todo
-    @JsonProperty
-    private String status;
-    @JsonProperty
-    private String deleted;
+
 
     public CardReader() {
     }
@@ -56,21 +53,5 @@ public class CardReader extends BaseEntity {
 
     public void setAction(String action) {
         this.action = action;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(String deleted) {
-        this.deleted = deleted;
     }
 }

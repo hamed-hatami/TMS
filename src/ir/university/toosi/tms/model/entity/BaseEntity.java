@@ -10,6 +10,10 @@ public class BaseEntity implements Serializable {
 
     @JsonProperty
     private String effectorUser;
+    @JsonProperty
+    protected String deleted;
+    @JsonProperty
+    protected String status;
 
     public String getEffectorUser() {
         return effectorUser;
@@ -17,5 +21,21 @@ public class BaseEntity implements Serializable {
 
     public void setEffectorUser(String effectorUser) {
         this.effectorUser = effectorUser;
+    }
+
+    public String getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(String deleted) {
+        this.deleted = deleted;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

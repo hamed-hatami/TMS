@@ -24,11 +24,7 @@ public class Role extends BaseEntity {
     @JsonProperty
     private boolean enabled;
     @JsonProperty
-    private String deleted;
-    @JsonProperty
     private boolean selected;
-    @JsonProperty
-    private String status;
     @JsonProperty
     private Set<Operation> operations;
 
@@ -89,15 +85,6 @@ public class Role extends BaseEntity {
         this.enabled = enabled;
     }
 
-    public String getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(String deleted) {
-        this.deleted = deleted;
-    }
-
-
     public boolean isSelected() {
         return selected;
     }
@@ -112,13 +99,5 @@ public class Role extends BaseEntity {
 
     public void setOperations(Set<Operation> operations) {
         this.operations = operations;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 }

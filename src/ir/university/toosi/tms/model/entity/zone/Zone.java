@@ -27,10 +27,6 @@ public class Zone extends BaseEntity {
     private boolean truePass;
     @JsonProperty
     private List<Gateway> gatewayList;
-    @JsonProperty
-    private String status;
-    @JsonProperty
-    private String deleted;
 
     public Zone() {
     }
@@ -81,21 +77,5 @@ public class Zone extends BaseEntity {
 
     public void setGatewayList(List<Gateway> gatewayList) {
         this.gatewayList = gatewayList;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(String deleted) {
-        this.deleted = deleted;
     }
 }
