@@ -39,8 +39,8 @@ public class WorkGroupForm extends JInternalFrame {
             });
 
             for (Role role : allRoleList) {
-                roleListModel.addElement(role.getPersianDescription());
-                roles.put(role.getPersianDescription(), role);
+                roleListModel.addElement(role.getName());
+                roles.put(role.getName(), role);
             }
 
             initComponents();
@@ -62,7 +62,7 @@ public class WorkGroupForm extends JInternalFrame {
         this.workGroupManagement = workGroupManagement;
         this.workGroup = workGroup;
         nameText.setText(workGroup.getName());
-        descriptionText.setText(workGroup.getPersianDescription());
+        descriptionText.setText(workGroup.getDescription());
         selectedRoleList=new ArrayList<>(workGroup.getRoles());
         workGroupService.setServiceName("/getAllRole");
 
@@ -73,8 +73,8 @@ public class WorkGroupForm extends JInternalFrame {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
         for (Role role : allRoleList) {
-            roleListModel.addElement(role.getPersianDescription());
-            roles.put(role.getPersianDescription(), role);
+            roleListModel.addElement(role.getName());
+            roles.put(role.getName(), role);
         }
 
         List<Role> allRoles=new ArrayList<>(allRoleList);
@@ -277,16 +277,14 @@ public class WorkGroupForm extends JInternalFrame {
                 WorkGroup newWorkGroup = new WorkGroup();
                 newWorkGroup.setDeleted("0");
                 newWorkGroup.setName(nameText.getText());
-                newWorkGroup.setPersianDescription(descriptionText.getText());
-                newWorkGroup.setEnglishDescription(descriptionText.getText());
+                newWorkGroup.setDescription(descriptionText.getText());
                 newWorkGroup.setRoles(roleSet);
                 workGroupService.setServiceName("/createWorkGroup");
                 newWorkGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName(),new ObjectMapper().writeValueAsString(newWorkGroup)), WorkGroup.class);
                 this.dispose();
             }else{
                 workGroup.setName(nameText.getText());
-                workGroup.setPersianDescription(descriptionText.getText());
-                workGroup.setEnglishDescription(descriptionText.getText());
+                workGroup.setDescription(descriptionText.getText());
                 workGroup.setRoles(roleSet);
                 workGroupService.setServiceName("/createWorkGroup");
                 workGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName(),new ObjectMapper().writeValueAsString(workGroup)), WorkGroup.class);
@@ -306,8 +304,8 @@ public class WorkGroupForm extends JInternalFrame {
     private void refreshSelectedList() {
         DefaultListModel<String> roleListModel = new DefaultListModel<>();
         for (Role role : selectedRoleList) {
-            roleListModel.addElement(role.getPersianDescription());
-            roles.put(role.getPersianDescription(), role);
+            roleListModel.addElement(role.getName());
+            roles.put(role.getName(), role);
         }
         assignList.setModel(roleListModel);
 
@@ -316,8 +314,8 @@ public class WorkGroupForm extends JInternalFrame {
     private void refreshAllList() {
         DefaultListModel<String> roleListModel = new DefaultListModel<>();
         for (Role role : allRoleList) {
-            roleListModel.addElement(role.getPersianDescription());
-            roles.put(role.getPersianDescription(), role);
+            roleListModel.addElement(role.getName());
+            roles.put(role.getName(), role);
         }
         allList.setModel(roleListModel);
     }

@@ -265,12 +265,8 @@ public class WorkGroupManagement extends JInternalFrame {
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(ELProperty.create("${name}"));
         columnBinding.setColumnName("NAME");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${persianDescription}"));
-        columnBinding.setColumnName("PERSIANDESCRIPSION");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${englishDescription}"));
-        columnBinding.setColumnName("ENGLISHDESCRIPSION");
-        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${description}"));
+        columnBinding.setColumnName("DESCRIPTION");
         columnBinding.setColumnClass(String.class);
         BindingGroup bindingGroup = new BindingGroup();
         bindingGroup.addBinding(jTableBinding);

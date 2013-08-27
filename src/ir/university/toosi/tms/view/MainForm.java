@@ -46,7 +46,7 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
     private JMenuItem otherItem;
     private JMenuItem importLanguage;
     private JMenuItem userManagementItem;
-    private JMenuItem roleManagementItem;
+//    private JMenuItem roleManagementItem;
     private JMenuItem operationManagementItem;
     private JMenuItem workGroupManagementItem;
     private JMenuItem calendarManagementItem;
@@ -138,26 +138,26 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             calendarManagementItem = new JMenuItem();
             personManagementItem = new JMenuItem();
             userManagementItem = new JMenuItem();
-            roleManagementItem = new JMenuItem();
+//            roleManagementItem = new JMenuItem();
             operationManagementItem = new JMenuItem();
             eventLogListItem = new JMenuItem();
             workGroupManagementItem.setText(LanguageAction.getBundleMessage("workgroup_management"));
             calendarManagementItem.setText(LanguageAction.getBundleMessage("calendar_management"));
             personManagementItem.setText(LanguageAction.getBundleMessage("person_management"));
             managementMenu.setText(LanguageAction.getBundleMessage("management"));
-            roleManagementItem.setText(LanguageAction.getBundleMessage("role_management"));
+//            roleManagementItem.setText(LanguageAction.getBundleMessage("role_management"));
             operationManagementItem.setText(LanguageAction.getBundleMessage("operation_management"));
             userManagementItem.setText(LanguageAction.getBundleMessage("user_management"));
             eventLogListItem.setText(LanguageAction.getBundleMessage("eventLog_list"));
             userManagementItem.addActionListener(this);
-            roleManagementItem.addActionListener(this);
+//            roleManagementItem.addActionListener(this);
             operationManagementItem.addActionListener(this);
             workGroupManagementItem.addActionListener(this);
             eventLogListItem.addActionListener(this);
             calendarManagementItem.addActionListener(this);
             personManagementItem.addActionListener(this);
             managementMenu.add(workGroupManagementItem);
-            managementMenu.add(roleManagementItem);
+//            managementMenu.add(roleManagementItem);
             managementMenu.add(operationManagementItem);
             managementMenu.add(userManagementItem);
             managementMenu.add(eventLogListItem);
@@ -293,8 +293,8 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
                 showUserManagement();
             } else if (e.getSource() == importLanguage) {
                 showFileChooser();
-            } else if (e.getSource() == roleManagementItem) {
-                showRoleManagement();
+//            } else if (e.getSource() == roleManagementItem) {
+//                showRoleManagement();
             } else if (e.getSource() == operationManagementItem) {
                 showRoleManagement();
             } else if (e.getSource() == eventLogListItem) {

@@ -271,13 +271,10 @@ public class RoleManagement extends JInternalFrame {
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
         columnBinding.setColumnName("NAME");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${persianDescription}"));
-        columnBinding.setColumnName("PERSIANDESCRIPSION");
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${description}"));
+        columnBinding.setColumnName("DESCRIPSTION");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${englishDescription}"));
-        columnBinding.setColumnName("ENGLISHDESCRIPSION");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${enabled}"));
+         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${enabled}"));
         columnBinding.setColumnName("ENABLED");
         columnBinding.setColumnClass(Boolean.class);
         BindingGroup bindingGroup = new BindingGroup();

@@ -1,6 +1,7 @@
 package ir.university.toosi.tms.view;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ir.university.toosi.tms.model.entity.PC;
 import ir.university.toosi.tms.model.entity.User;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
@@ -10,6 +11,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 
@@ -93,6 +96,23 @@ public class Login extends javax.swing.JInternalFrame {
                 else if (result.getUsername().equalsIgnoreCase("null")) {
                     JOptionPane.showMessageDialog(new JFrame(), "user not found");
                 } else {
+                    try {
+                        String ipAddress = InetAddress.getLocalHost().getHostAddress();
+                        boolean allowed = false;
+                        for (PC pc : result.getPcs()) {
+                            if(pc.getIp().equals(ipAddress)){
+                                allowed = true;
+                                break;
+                            }
+                        }
+
+                        if(!allowed){
+                            JOptionPane.showMessageDialog(new JFrame(), "you can not login on this pc");
+                            return;
+                        }
+                    } catch (UnknownHostException e) {
+                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    }
                     ThreadPoolManager.me = result;
                     JOptionPane.showMessageDialog(new JFrame(), "Welcome " + result.getUsername());
                     mainForm.getMainMenuBar().setVisible(true);

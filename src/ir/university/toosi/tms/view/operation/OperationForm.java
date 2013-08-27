@@ -86,7 +86,7 @@ public class OperationForm extends JInternalFrame {
         descLabel.setText("ROLEDESCRIPTION");
 
         if (editMode)
-            operationDesc.setText(operation.getPersianDescription());
+            operationDesc.setText(operation.getDescription());
         else
             operationDesc.setText("");
 
@@ -175,8 +175,7 @@ public class OperationForm extends JInternalFrame {
 
         Operation newOperation = new Operation();
         newOperation.setName(operationName.getText());
-        newOperation.setPersianDescription(operationDesc.getText());
-        newOperation.setEnglishDescription(operationDesc.getText());
+        newOperation.setDescription(operationDesc.getText());
         newOperation.setEnabled(true);
         newOperation.setDeleted("0");
         newOperation.setEffectorUser(ThreadPoolManager.me.getUsername());
@@ -199,7 +198,7 @@ public class OperationForm extends JInternalFrame {
     private void edit(java.awt.event.ActionEvent evt) {
 
         operation.setName(operationName.getText());
-        operation.setPersianDescription(operationDesc.getText());
+        operation.setDescription(operationDesc.getText());
         operation.setEffectorUser(ThreadPoolManager.me.getUsername());
 
         operationService.setServiceName("/editOperation");

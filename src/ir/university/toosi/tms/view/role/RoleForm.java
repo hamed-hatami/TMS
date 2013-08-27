@@ -110,7 +110,7 @@ public class RoleForm extends JInternalFrame {
         descLabel.setText("ROLEDESCRIPTION");
 
         if (editMode)
-            roleDesc.setText(role.getPersianDescription());
+            roleDesc.setText(role.getDescription());
         else
             roleDesc.setText("");
 
@@ -240,8 +240,7 @@ public class RoleForm extends JInternalFrame {
 
         Role newRole = new Role();
         newRole.setName(roleName.getText());
-        newRole.setPersianDescription(roleDesc.getText());
-        newRole.setEnglishDescription(roleDesc.getText());
+        newRole.setDescription(roleDesc.getText());
         newRole.setEnabled(true);
         newRole.setDeleted("0");
         newRole.setEffectorUser(ThreadPoolManager.me.getUsername());
@@ -265,7 +264,7 @@ public class RoleForm extends JInternalFrame {
     private void edit(java.awt.event.ActionEvent evt) {
 
         role.setName(roleName.getText());
-        role.setPersianDescription(roleDesc.getText());
+        role.setDescription(roleDesc.getText());
         role.setEffectorUser(ThreadPoolManager.me.getUsername());
 
         roleService.setServiceName("/editRole");
@@ -310,11 +309,8 @@ public class RoleForm extends JInternalFrame {
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
         columnBinding.setColumnName("NAME");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${persianDescription}"));
-        columnBinding.setColumnName("PERSIANDESCRIPSION");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${englishDescription}"));
-        columnBinding.setColumnName("ENGLISHDESCRIPSION");
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${description}"));
+        columnBinding.setColumnName("DESCRIPTION");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${enabled}"));
         columnBinding.setColumnName("ENABLED");
