@@ -127,10 +127,10 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             menu.add(menuItem);
             languageMenu.add(persianItem);
             languageMenu.add(englishItem);
-            if (languageList != null && !languageList.isEmpty()) {
-                LanguageAction.initProperty(languageList.get(0).getContent());
-                languageMenu.add(otherItem);
-            }
+//            if (languageList != null && !languageList.isEmpty()) {
+//                LanguageAction.initProperty(languageList.get(0).getContent());
+//                languageMenu.add(otherItem);
+//            }
             languageMenu.add(importLanguage);
 
             managementMenu = new JMenu();

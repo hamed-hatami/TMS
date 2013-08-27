@@ -3,20 +3,17 @@ package ir.university.toosi.tms.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.*;
-import java.io.Serializable;
-
 @JsonIgnoreProperties(value = "@id")
-public class Languages extends BaseEntity {
+public class LanguageManagement extends BaseEntity {
 
     @JsonProperty
     private long id;
     @JsonProperty
-    private String name;
+    private String title;
     @JsonProperty
-    private boolean rtl;
+    private Languages type;
 
-    public Languages() {
+    public LanguageManagement() {
     }
 
     public long getId() {
@@ -27,19 +24,19 @@ public class Languages extends BaseEntity {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public boolean isRtl() {
-        return rtl;
+    public Languages getType() {
+        return type;
     }
 
-    public void setRtl(boolean rtl) {
-        this.rtl = rtl;
+    public void setType(Languages type) {
+        this.type = type;
     }
 }

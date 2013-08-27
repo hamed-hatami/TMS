@@ -121,7 +121,7 @@ public class FileChooser extends JInternalFrame {
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         language.setName(file.getName());
         try {
-            language.setContent(Files.readAllBytes(file.toPath()));
+//            language.setContent(Files.readAllBytes(file.toPath()));
             language.setRtl(rtlCheckBox.isSelected());
             webServiceInfo = new WebServiceInfo();
             webServiceInfo.setServiceName("/createLanguage");
