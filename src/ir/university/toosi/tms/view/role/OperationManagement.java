@@ -2,9 +2,7 @@ package ir.university.toosi.tms.view.role;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ir.university.toosi.tms.model.entity.Role;
-import ir.university.toosi.tms.model.entity.RoleSearchItems;
-import ir.university.toosi.tms.model.entity.WebServiceInfo;
+import ir.university.toosi.tms.model.entity.*;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import org.jdesktop.beansbinding.BindingGroup;
@@ -16,21 +14,21 @@ import javax.swing.event.DocumentListener;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class RoleManagement extends JInternalFrame {
+public class OperationManagement extends JInternalFrame {
 
     /**
      * Creates new form ContactEditor
      */
-    public RoleManagement() {
+    public OperationManagement() {
         fillSearchCombo();
         mainPanel = new JPanel();
         tableScroll = new JScrollPane();
         mainTable = new JTable();
-        add = new JButton();
-        delete = new JButton();
-        edit = new JButton();
+        assign = new JButton();
         searchPanel = new JPanel();
         searchCombo = new JComboBox(searchItems);
         searchText = new JTextField();
@@ -43,20 +41,20 @@ public class RoleManagement extends JInternalFrame {
         }
     }
 
-    public RoleManagement(JDesktopPane jDesktopPane) {
+    public OperationManagement(JDesktopPane jDesktopPane, Role role, RoleForm roleForm) {
         fillSearchCombo();
         jdpDesktop = jDesktopPane;
         mainPanel = new JPanel();
         tableScroll = new JScrollPane();
         mainTable = new JTable();
-        add = new JButton();
-        delete = new JButton();
-        edit = new JButton();
+        assign = new JButton();
         searchPanel = new JPanel();
         searchCombo = new JComboBox(searchItems);
         searchText = new JTextField();
         filter = new JLabel();
         by = new JLabel();
+        this.role = role;
+        this.roleForm = roleForm;
         try {
             initComponents();
         } catch (IOException e) {
@@ -65,10 +63,10 @@ public class RoleManagement extends JInternalFrame {
     }
 
     private void fillSearchCombo() {
-        searchItems = new String[RoleSearchItems.values().length];
+        searchItems = new String[OperationSearchItems.values().length];
         int i = 0;
-        for (RoleSearchItems roleSearchItem : RoleSearchItems.values()) {
-            searchItems[i++] = roleSearchItem.getDescription();
+        for (OperationSearchItems operationSearchItem : OperationSearchItems.values()) {
+            searchItems[i++] = operationSearchItem.getDescription();
         }
     }
 
@@ -85,9 +83,9 @@ public class RoleManagement extends JInternalFrame {
         this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("ROLEMANAGEMENT");
+        setTitle("OPERATIONMANAGMENT");
 
-        mainPanel.setBorder(BorderFactory.createTitledBorder("ROLEMANAGEMENT"));
+        mainPanel.setBorder(BorderFactory.createTitledBorder("OPERATIONMANAGMENT"));
 
         mainTable.setAutoCreateRowSorter(true);
         refresh();
@@ -98,37 +96,10 @@ public class RoleManagement extends JInternalFrame {
         mainTable.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
 
-        add.setText("ADD");
-        add.addActionListener(new java.awt.event.ActionListener() {
+        assign.setText("ASSIGN");
+        assign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    addActionPerformed(evt);
-                } catch (PropertyVetoException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                }
-            }
-        });
-
-        delete.setText("DELETE");
-        delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                int result = JOptionPane.showConfirmDialog(null, "DELETE_USER", "DELETE", JOptionPane.OK_CANCEL_OPTION);
-                if (result == JOptionPane.OK_OPTION) {
-                    deleteActionPerformed(evt);
-                }
-
-
-            }
-        });
-
-        edit.setText("EDIT");
-        edit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    editActionPerformed(evt);
-                } catch (PropertyVetoException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                }
+                assignActionPerformed(evt);
             }
         });
 
@@ -140,11 +111,7 @@ public class RoleManagement extends JInternalFrame {
                                 .add(36, 36, 36)
                                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                         .add(jPanel1Layout.createSequentialGroup()
-                                                .add(add)
-                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                                                .add(delete)
-                                                .add(18, 18, 18)
-                                                .add(edit))
+                                                .add(assign))
                                         .add(tableScroll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(45, Short.MAX_VALUE))
         );
@@ -153,15 +120,13 @@ public class RoleManagement extends JInternalFrame {
                         .add(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                        .add(add)
-                                        .add(delete)
-                                        .add(edit))
+                                        .add(assign))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .add(tableScroll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .add(133, 133, 133))
         );
 
-        searchPanel.setBorder(BorderFactory.createTitledBorder("SEARCHROLE"));
+        searchPanel.setBorder(BorderFactory.createTitledBorder("SEARCHOPERATION"));
 //        searchCombo.setModel(new DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         searchText.setToolTipText("");
@@ -256,8 +221,8 @@ public class RoleManagement extends JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void getAll() throws IOException {
-        roleService.setServiceName("/getAllRole");
-        roleList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName()), new TypeReference<List<Role>>() {
+        operationService.setServiceName("/getAllOperation");
+        operationList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(operationService.getServerUrl(), operationService.getServiceName()), new TypeReference<List<Operation>>() {
         });
     }
 
@@ -267,7 +232,7 @@ public class RoleManagement extends JInternalFrame {
     }
 
     private void showData() {
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, roleList, mainTable, "");
+        JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, operationList, mainTable, "");
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
         columnBinding.setColumnName("NAME");
         columnBinding.setColumnClass(String.class);
@@ -287,65 +252,62 @@ public class RoleManagement extends JInternalFrame {
 
     private void search(DocumentEvent documentEvent) throws IOException {
 
-        if (RoleSearchItems.values()[searchCombo.getSelectedIndex()].equals(RoleSearchItems.NAME)) {
-            roleService.setServiceName("/getRoleByName");
-            Role searchRole = new Role();
-            searchRole.setName(searchText.getText());
-            searchRole.setEffectorUser(ThreadPoolManager.me.getUsername());
-            roleList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(searchRole)), new TypeReference<List<Role>>() {
+        if (OperationSearchItems.values()[searchCombo.getSelectedIndex()].equals(OperationSearchItems.NAME)) {
+            operationService.setServiceName("/getOperationByName");
+            Operation searchOperation = new Operation();
+            searchOperation.setName(searchText.getText());
+            searchOperation.setEffectorUser(ThreadPoolManager.me.getUsername());
+            operationList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(operationService.getServerUrl(), operationService.getServiceName(), new ObjectMapper().writeValueAsString(searchOperation)), new TypeReference<List<Operation>>() {
             });
 
             showData();
         }
     }
 
-    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {
+    private void assignActionPerformed(java.awt.event.ActionEvent evt) {
         int[] indexes = new int[mainTable.getSelectedRows().length];
         int j = 0;
         for (int i : mainTable.getSelectedRows()) {
             indexes[j++] = mainTable.convertRowIndexToModel(i);
         }
 
-        List<Role> deletedRoles = new ArrayList<>();
+        Set<Operation> assignOperations = new HashSet<>();
         for (int index : indexes) {
-            Role role = roleList.get(index);
-            role.setEffectorUser(ThreadPoolManager.me.getUsername());
-            deletedRoles.add(role);
+            Operation operation = operationList.get(index);
+            boolean hasOperation = false;
+            for (Operation operation1 : role.getOperations()) {
+                if (operation.getId() == operation1.getId()) {
+                    hasOperation = true;
+                    break;
+                }
+            }
+
+            if (!hasOperation) {
+                assignOperations.add(operation);
+            }
         }
 
-        roleService.setServiceName("/deleteRoleList");
+        if (assignOperations.size() == 0) {
+            this.dispose();
+            return;
+        }
+
+        role.getOperations().addAll(assignOperations);
+        operationService.setServiceName("/editRole");
         try {
-            new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(deletedRoles)), Boolean.class);
-            refresh();
+            new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(operationService.getServerUrl(), operationService.getServiceName(), new ObjectMapper().writeValueAsString(role)), Boolean.class);
+            this.dispose();
+            roleForm.refresh();
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
     }
-
-    private void addActionPerformed(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
-        RoleForm roleForm = new RoleForm(false, null, this, jdpDesktop);
-        roleForm.setVisible(true);
-        jdpDesktop.add(roleForm);
-        roleForm.setSelected(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-
-    private void editActionPerformed(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
-        Role role = roleList.get(mainTable.convertRowIndexToModel(mainTable.getSelectedRow()));
-        RoleForm roleForm = new RoleForm(true, role, this, jdpDesktop);
-        roleForm.setVisible(true);
-        jdpDesktop.add(roleForm);
-        roleForm.setSelected(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JButton add;
-    private JButton delete;
-    private JButton edit;
+    private JButton assign;
     private JComboBox searchCombo;
     private JLabel by;
     private JLabel filter;
@@ -355,9 +317,11 @@ public class RoleManagement extends JInternalFrame {
     private JTable mainTable;
     private JDesktopPane jdpDesktop;
     private JTextField searchText;
-    private WebServiceInfo roleService = new WebServiceInfo();
-    private List<Role> roleList = new ArrayList<>();
+    private WebServiceInfo operationService = new WebServiceInfo();
+    private List<Operation> operationList = new ArrayList<>();
     private String[] searchItems;
+    private Role role;
+    private RoleForm roleForm;
 
     public JTable getMainTable() {
         return mainTable;

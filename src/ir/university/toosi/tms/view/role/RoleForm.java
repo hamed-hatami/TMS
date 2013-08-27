@@ -32,13 +32,19 @@ package ir.university.toosi.tms.view.role;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ir.university.toosi.tms.model.entity.Operation;
 import ir.university.toosi.tms.model.entity.Role;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
+import org.jdesktop.beansbinding.BindingGroup;
+import org.jdesktop.swingbinding.JTableBinding;
 
 import javax.swing.*;
+import java.beans.PropertyVetoException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RoleForm extends JInternalFrame {
 
@@ -46,17 +52,22 @@ public class RoleForm extends JInternalFrame {
      * Creates new form ContactEditor
      */
 
-    public RoleForm(boolean editMode, Role role, RoleManagement roleManagement) {
+    public RoleForm(boolean editMode, Role role, RoleManagement roleManagement, JDesktopPane jDesktopPane) {
         this.editMode = editMode;
         this.role = role;
         this.roleManagement = roleManagement;
-        mainPanel = new javax.swing.JPanel();
-        nameLabel = new javax.swing.JLabel();
-        roleName = new javax.swing.JTextField();
-        descLabel = new javax.swing.JLabel();
-        roleDesc = new javax.swing.JTextField();
-        cancel = new javax.swing.JButton();
-        ok = new javax.swing.JButton();
+        mainPanel = new JPanel();
+        nameLabel = new JLabel();
+        roleName = new JTextField();
+        descLabel = new JLabel();
+        roleDesc = new JTextField();
+        cancel = new JButton();
+        operationPanel = new JPanel();
+        ok = new JButton();
+        assignOperation = new JButton();
+        mainTable = new JTable();
+        tableScroll = new JScrollPane();
+        this.jDesktopPane = jDesktopPane;
         initComponents();
     }
 
@@ -75,6 +86,19 @@ public class RoleForm extends JInternalFrame {
         setTitle("ROLEMANAGEMENT");
 
         mainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("ROLE"));
+        operationPanel.setBorder(BorderFactory.createTitledBorder("OPERATIONLIST"));
+
+        mainTable.setAutoCreateRowSorter(true);
+        try {
+            refresh();
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+
+        mainTable.setColumnSelectionAllowed(true);
+        tableScroll.setViewportView(mainTable);
+        mainTable.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         nameLabel.setText("ROLENAME");
 
@@ -118,10 +142,31 @@ public class RoleForm extends JInternalFrame {
                                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
+
+        org.jdesktop.layout.GroupLayout jPanel1Layout1 = new org.jdesktop.layout.GroupLayout(operationPanel);
+        operationPanel.setLayout(jPanel1Layout1);
+        jPanel1Layout1.setHorizontalGroup(
+                jPanel1Layout1.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(jPanel1Layout1.createSequentialGroup()
+                                .add(36, 36, 36)
+                                .add(jPanel1Layout1.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(tableScroll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(45, Short.MAX_VALUE))
+        );
+        jPanel1Layout1.setVerticalGroup(
+                jPanel1Layout1.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(jPanel1Layout1.createSequentialGroup()
+                                .addContainerGap()
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .add(tableScroll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(133, 133, 133))
+        );
+
+
         cancel.setText("Cancel");
         cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-               close(evt);
+                close(evt);
             }
         });
 
@@ -135,6 +180,17 @@ public class RoleForm extends JInternalFrame {
             }
         });
 
+        assignOperation.setText("ASSIGNOPERATION");
+        assignOperation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    assignActionPerformed(evt);
+                } catch (PropertyVetoException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+        });
+        assignOperation.setEnabled(editMode);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,14 +201,20 @@ public class RoleForm extends JInternalFrame {
                                 .add(mainPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(29, Short.MAX_VALUE))
                         .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .add(operationPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+                        .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap(120, Short.MAX_VALUE)
                                 .add(ok)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(assignOperation)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(cancel)
                                 .add(104, 104, 104))
         );
 
-        layout.linkSize(new java.awt.Component[]{cancel, ok}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
+        layout.linkSize(new java.awt.Component[]{cancel, ok, assignOperation}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
 
         layout.setVerticalGroup(
                 layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -160,9 +222,12 @@ public class RoleForm extends JInternalFrame {
                                 .addContainerGap()
                                 .add(mainPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(operationPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 251, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(cancel)
-                                        .add(ok))
+                                        .add(ok)
+                                        .add(assignOperation))
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -184,16 +249,17 @@ public class RoleForm extends JInternalFrame {
         roleService.setServiceName("/createRole");
 
         try {
-            new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(newRole)), Role.class);
+            role = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(newRole)), Role.class);
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        this.dispose();
-        try {
-            roleManagement.refresh();
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+        assignOperation.setEnabled(true);
+//        this.dispose();
+//        try {
+//            roleManagement.refresh();
+//        } catch (IOException e) {
+//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//        }
     }
 
     private void edit(java.awt.event.ActionEvent evt) {
@@ -210,12 +276,12 @@ public class RoleForm extends JInternalFrame {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
 
-        this.dispose();
-        try {
-            roleManagement.refresh();
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+//        this.dispose();
+//        try {
+//            roleManagement.refresh();
+//        } catch (IOException e) {
+//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//        }
     }
 
     private void close(java.awt.event.ActionEvent evt) {
@@ -227,20 +293,63 @@ public class RoleForm extends JInternalFrame {
         }
     }
 
+    private void getAll() throws IOException {
+        operationList = new ArrayList<>();
+        if (role != null) {
+            operationList.addAll(role.getOperations());
+        }
+    }
+
+    public void refresh() throws IOException {
+        getAll();
+        showData();
+    }
+
+    private void showData() {
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, operationList, mainTable, "");
+        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
+        columnBinding.setColumnName("NAME");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${persianDescription}"));
+        columnBinding.setColumnName("PERSIANDESCRIPSION");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${englishDescription}"));
+        columnBinding.setColumnName("ENGLISHDESCRIPSION");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${enabled}"));
+        columnBinding.setColumnName("ENABLED");
+        columnBinding.setColumnClass(Boolean.class);
+        BindingGroup bindingGroup = new BindingGroup();
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+    }
+
+    private void assignActionPerformed(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
+        OperationManagement operationManagement = new OperationManagement(jDesktopPane, role, this);
+        operationManagement.setVisible(true);
+        jDesktopPane.add(operationManagement);
+        operationManagement.setSelected(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JButton cancel;
     private JButton ok;
+    private JButton assignOperation;
     private JLabel nameLabel;
     private JLabel descLabel;
     private JPanel mainPanel;
     private JTextField roleName;
     private JTextField roleDesc;
-
+    private JPanel operationPanel;
     private boolean editMode;
     private Role role;
     private RoleManagement roleManagement;
     private WebServiceInfo roleService = new WebServiceInfo();
+    private JScrollPane tableScroll;
+    private JTable mainTable;
+    private JDesktopPane jDesktopPane;
+    private List<Operation> operationList;
     // End of variables declaration//GEN-END:variables
 
 }
