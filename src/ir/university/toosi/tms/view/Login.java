@@ -1,9 +1,8 @@
 package ir.university.toosi.tms.view;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ir.university.toosi.tms.model.entity.PC;
-import ir.university.toosi.tms.model.entity.User;
-import ir.university.toosi.tms.model.entity.WebServiceInfo;
+import ir.university.toosi.tms.model.entity.*;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 
@@ -15,6 +14,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
+import java.util.List;
 
 /**
  * @author a_ahmady
@@ -27,9 +27,37 @@ public class Login extends javax.swing.JInternalFrame {
     private MainForm mainForm;
 
     public Login(MainForm mainForm) {
+
+        fillSearchCombo();
         this.mainForm = mainForm;
+        jPanel1 = new JPanel();
+        login = new JButton();
+        cancel = new JButton();
+        userName = new JTextField();
+        password = new JTextField();
+        userNameLabel = new JLabel();
+        passwordLabel = new JLabel();
+        langLabel = new JLabel();
+        language = new JComboBox(langItems);
         initComponents();
     }
+
+    private void fillSearchCombo() {
+
+        loginService.setServiceName("/getAllLanguage");
+        try {
+            languagesList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(loginService.getServerUrl(), loginService.getServiceName()), new TypeReference<List<Languages>>() {
+            });
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        langItems = new String[languagesList.size()];
+        int i = 0;
+        for (Languages languages : languagesList) {
+            langItems[i++] = languages.getName();
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to
@@ -41,25 +69,17 @@ public class Login extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
-        jButton1.setText("LOGIN");
-        jButton1.setActionCommand("login");
+        login.setText("LOGIN");
+        login.setActionCommand("login");
 
-        jButton2.setText("CANCLE");
-        jButton2.setActionCommand("cancle");
+        cancel.setText("CANCEL");
+        cancel.setActionCommand("cancel");
 
-        jButton2.addActionListener(new ActionListener() {
+        cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
@@ -67,16 +87,15 @@ public class Login extends javax.swing.JInternalFrame {
         });
 
 
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        login.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
 
-                loginService = new WebServiceInfo();
-                loginService.setServiceName("/authenticate");
+               loginService.setServiceName("/authenticate");
 
                 user = new User();
-                user.setUsername(jTextField1.getText());
-                user.setPassword(jTextField2.getText());
+                user.setUsername(userName.getText());
+                user.setPassword(password.getText());
 
 
                 AccessController.doPrivileged(new PrivilegedAction() {
@@ -100,13 +119,13 @@ public class Login extends javax.swing.JInternalFrame {
                         String ipAddress = InetAddress.getLocalHost().getHostAddress();
                         boolean allowed = false;
                         for (PC pc : result.getPcs()) {
-                            if(pc.getIp().equals(ipAddress)){
+                            if (pc.getIp().equals(ipAddress)) {
                                 allowed = true;
                                 break;
                             }
                         }
 
-                        if(!allowed){
+                        if (!allowed) {
                             JOptionPane.showMessageDialog(new JFrame(), "you can not login on this pc");
                             return;
                         }
@@ -114,6 +133,7 @@ public class Login extends javax.swing.JInternalFrame {
                         e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                     }
                     ThreadPoolManager.me = result;
+                    ThreadPoolManager.currentLanguage = languagesList.get(language.getSelectedIndex());
                     JOptionPane.showMessageDialog(new JFrame(), "Welcome " + result.getUsername());
                     mainForm.getMainMenuBar().setVisible(true);
                     mainForm.getLoginForm().dispose();
@@ -122,15 +142,17 @@ public class Login extends javax.swing.JInternalFrame {
         });
 
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        userName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("USERNAME");
+        userNameLabel.setText("USERNAME");
 
-        jLabel2.setText("PASSWORD");
+        passwordLabel.setText("PASSWORD");
+
+        langLabel.setText("LANGUAGE");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -140,18 +162,20 @@ public class Login extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(141, 141, 141)
-                                                .addComponent(jButton1)
+                                                .addComponent(login)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jButton2))
+                                                .addComponent(cancel))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addContainerGap(109, Short.MAX_VALUE)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(jLabel1)
-                                                        .addComponent(jLabel2))
+                                                        .addComponent(userNameLabel)
+                                                        .addComponent(langLabel)
+                                                        .addComponent(passwordLabel))
                                                 .addGap(29, 29, 29)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(jTextField2)
-                                                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))))
+                                                        .addComponent(password)
+                                                        .addComponent(language)
+                                                        .addComponent(userName, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))))
                                 .addContainerGap(94, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -159,16 +183,20 @@ public class Login extends javax.swing.JInternalFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(49, 49, 49)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel1)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(userNameLabel)
+                                        .addComponent(userName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(passwordLabel)
+                                        .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(langLabel)
+                                        .addComponent(language, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton1)
-                                        .addComponent(jButton2))
+                                        .addComponent(login)
+                                        .addComponent(cancel))
                                 .addGap(25, 25, 25))
         );
 
@@ -198,15 +226,19 @@ public class Login extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private WebServiceInfo loginService;
+    private JButton login;
+    private JButton cancel;
+    private JLabel userNameLabel;
+    private JLabel passwordLabel;
+    private JLabel langLabel;
+    private JPanel jPanel1;
+    private JTextField userName;
+    private JTextField password;
+    private JComboBox language;
+    private WebServiceInfo loginService = new WebServiceInfo();;
     private User user, result;
+    private String[] langItems;
+    private List<Languages> languagesList;
 
     // End of variables declaration//GEN-END:variables
 }
