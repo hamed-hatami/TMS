@@ -92,9 +92,9 @@ public class PCManagement extends JInternalFrame {
         this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("PCMANAGMENT");
+        setTitle(ThreadPoolManager.getLangValue("TMS_PC_MANAGEMENT"));
 
-        mainPanel.setBorder(BorderFactory.createTitledBorder("PCMANAGMENT"));
+        mainPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_PC_MANAGEMENT")));
 
         mainTable.setAutoCreateRowSorter(true);
         refresh();
@@ -105,7 +105,7 @@ public class PCManagement extends JInternalFrame {
         mainTable.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
 
-        add.setText("ADD");
+        add.setText(ThreadPoolManager.getLangValue("TMS_ADD"));
         add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -116,7 +116,7 @@ public class PCManagement extends JInternalFrame {
             }
         });
 
-        delete.setText("DELETE");
+        delete.setText(ThreadPoolManager.getLangValue("TMS_DELETE"));
         delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 int result = JOptionPane.showConfirmDialog(null, "DELETE_PC", "DELETE", JOptionPane.OK_CANCEL_OPTION);
@@ -126,7 +126,7 @@ public class PCManagement extends JInternalFrame {
             }
         });
 
-        edit.setText("EDIT");
+        edit.setText(ThreadPoolManager.getLangValue("TMS_EDIT"));
         edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -137,7 +137,7 @@ public class PCManagement extends JInternalFrame {
             }
         });
 
-        assign.setText("Assign");
+        assign.setText(ThreadPoolManager.getLangValue("TMS_ASSIGN"));
         assign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 int result = JOptionPane.showConfirmDialog(null, "ASSIGN_PC", "ASSIGN", JOptionPane.OK_CANCEL_OPTION);
@@ -180,7 +180,7 @@ public class PCManagement extends JInternalFrame {
                                 .add(133, 133, 133))
         );
 
-        searchPanel.setBorder(BorderFactory.createTitledBorder("SEARCHPC"));
+        searchPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_SEARCH_PC")));
 //        searchCombo.setModel(new DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         searchText.setToolTipText("");
@@ -215,9 +215,9 @@ public class PCManagement extends JInternalFrame {
             }
         });
 
-        filter.setText("FILTER");
+        filter.setText(ThreadPoolManager.getLangValue("TMS_FILTER"));
 
-        by.setText("BY");
+        by.setText(ThreadPoolManager.getLangValue("TMS_BY"));
 
         org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(searchPanel);
         searchPanel.setLayout(jPanel2Layout);
@@ -288,13 +288,13 @@ public class PCManagement extends JInternalFrame {
     private void showData() {
         JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pcList, mainTable, "");
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
-        columnBinding.setColumnName("NAME");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_NAME"));
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${ip}"));
-        columnBinding.setColumnName("IP");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_IP"));
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${location}"));
-        columnBinding.setColumnName("LOCATION");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_LOCATION"));
         columnBinding.setColumnClass(String.class);
         BindingGroup bindingGroup = new BindingGroup();
         bindingGroup.addBinding(jTableBinding);

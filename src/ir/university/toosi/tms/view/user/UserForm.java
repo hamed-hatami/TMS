@@ -156,6 +156,10 @@ public class UserForm extends JInternalFrame {
             nationalCode.setText("");
         }
 
+        name.setEnabled(false);
+        lastName.setEnabled(false);
+        nationalCode.setEnabled(false);
+
         initComponents();
     }
 
@@ -170,29 +174,29 @@ public class UserForm extends JInternalFrame {
 
         setSize(600, 600);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("USERMANAGEMENT");
+        setTitle(ThreadPoolManager.getLangValue("TMS_USER_MANAGEMENT"));
         setClosable(true);
         this.addInternalFrameListener(ThreadPoolManager.mainForm);
 
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("USER"));
-        personPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("PERSON"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_USER")));
+        personPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_PERSON")));
 
-        userNameLabel.setText("USERNAME");
+        userNameLabel.setText(ThreadPoolManager.getLangValue("TMS_USERNAME"));
 
-        passLabel.setText("PASSWORD");
+        passLabel.setText(ThreadPoolManager.getLangValue("TMS_PASSWORD"));
 
         password.setToolTipText("");
 
 
-        jLabel5.setText("WORKGROUP");
+        jLabel5.setText(ThreadPoolManager.getLangValue("TMS_WORKGROUP"));
 
-        nameLabel.setText("NAME");
-        lastNameLabel.setText("LASTNAME");
-        nationalCodeLabel.setText("NATIONALCODE");
+        nameLabel.setText(ThreadPoolManager.getLangValue("TMS_NAME"));
+        lastNameLabel.setText(ThreadPoolManager.getLangValue("TMS_LAST_NAME"));
+        nationalCodeLabel.setText(ThreadPoolManager.getLangValue("TMS_NATIONAL_CODE"));
 
 
-        mainPanel.setBorder(BorderFactory.createTitledBorder("PCLIST"));
+        mainPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_PC_LIST")));
 
         mainTable.setAutoCreateRowSorter(true);
         try {
@@ -285,14 +289,14 @@ public class UserForm extends JInternalFrame {
         );
 
 
-        cancelButton.setText("Cancel");
+        cancelButton.setText(ThreadPoolManager.getLangValue("TMS_CANCEL"));
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 cancel();
             }
         });
 
-        okButton.setText("OK");
+        okButton.setText(ThreadPoolManager.getLangValue("TMS_OK"));
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if (!editable) {
@@ -303,7 +307,7 @@ public class UserForm extends JInternalFrame {
             }
         });
 
-        assignPC.setText("ASSIGNPC");
+        assignPC.setText(ThreadPoolManager.getLangValue("TMS_ASSIGN_PC"));
         assignPC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -316,7 +320,7 @@ public class UserForm extends JInternalFrame {
 
         assignPC.setEnabled(editable);
 
-        assignPerson.setText("ASSIGNPERSON");
+        assignPerson.setText(ThreadPoolManager.getLangValue("TMS_ASSIGN_PERSON"));
         assignPerson.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -409,6 +413,9 @@ public class UserForm extends JInternalFrame {
         WebServiceInfo serviceInfo = new WebServiceInfo();
         newUser.setUsername(userName.getText());
         newUser.setPassword(password.getText());
+        newUser.setDeleted("0");
+        newUser.setEnable("1");
+        newUser.setEffectorUser(ThreadPoolManager.me.getUsername());
         serviceInfo.setServiceName("/findWorkGroupByName");
         try {
             WorkGroup workGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), (String) workGroups.getSelectedItem()), WorkGroup.class);
@@ -487,6 +494,11 @@ public class UserForm extends JInternalFrame {
     }
 
     public void refresh() throws IOException {
+        if(user != null && user.getPerson() != null){
+            name.setText(user.getPerson().getName());
+            lastName.setText(user.getPerson().getLastName());
+            nationalCode.setText(user.getPerson().getNationalCode());
+        }
         getAll();
         showData();
     }
@@ -494,13 +506,13 @@ public class UserForm extends JInternalFrame {
     private void showData() {
         JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pcList, mainTable, "");
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
-        columnBinding.setColumnName("NAME");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_NAME"));
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${ip}"));
-        columnBinding.setColumnName("IP");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_IP"));
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${location}"));
-        columnBinding.setColumnName("LOCATION");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_LOCATION"));
         columnBinding.setColumnClass(String.class);
         BindingGroup bindingGroup = new BindingGroup();
         bindingGroup.addBinding(jTableBinding);

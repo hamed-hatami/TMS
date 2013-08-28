@@ -78,9 +78,9 @@ public class PersonList extends JInternalFrame {
         this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("PersonManagement");
+        setTitle(ThreadPoolManager.getLangValue("TMS_PERSON_MANAGEMENT"));
 
-        searchPanel.setBorder(BorderFactory.createTitledBorder("PERSONSEARCH"));
+        searchPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_PERSON_SEARCH")));
 
         searchText.setToolTipText("");
         searchText.getDocument().addDocumentListener(new DocumentListener() {
@@ -113,9 +113,9 @@ public class PersonList extends JInternalFrame {
         });
 
 
-        filter.setText("FILTER");
+        filter.setText(ThreadPoolManager.getLangValue("TMS_FILTER"));
 
-        by.setText("BY");
+        by.setText(ThreadPoolManager.getLangValue("TMS_BY"));
 
         org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(searchPanel);
         searchPanel.setLayout(jPanel2Layout);
@@ -144,7 +144,7 @@ public class PersonList extends JInternalFrame {
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        mainPanel.setBorder(BorderFactory.createTitledBorder("PERSONLIST"));
+        mainPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_PERSON_LIST")));
 
         mainTable.setAutoCreateRowSorter(true);
         refresh();
@@ -222,19 +222,19 @@ public class PersonList extends JInternalFrame {
     private void showData() {
         JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, personList, mainTable, "");
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
-        columnBinding.setColumnName("NAME");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_NAME"));
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${lastName}"));
-        columnBinding.setColumnName("LASTNAME");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_LAST_NAME"));
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${personnelNo}"));
-        columnBinding.setColumnName("PERSONNELNO");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_PERSONNEL_NO"));
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nationalCode}"));
-        columnBinding.setColumnName("NATIONALCODE");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_NATIONAL_CODE"));
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${pin}"));
-        columnBinding.setColumnName("PIN");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_PIN"));
         columnBinding.setColumnClass(String.class);
         BindingGroup bindingGroup = new BindingGroup();
         bindingGroup.addBinding(jTableBinding);

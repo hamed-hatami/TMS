@@ -74,25 +74,25 @@ public class PCForm extends JInternalFrame {
         this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("PCMANAGMENT");
+        setTitle(ThreadPoolManager.getLangValue("TMS_PC"));
 
-        mainPanel.setBorder(BorderFactory.createTitledBorder("PC"));
+        mainPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_PC")));
 
-        nameLabel.setText("PCNAME");
+        nameLabel.setText(ThreadPoolManager.getLangValue("TMS_NAME"));
 
         if (editMode)
             pcName.setText(pc.getName());
         else
             pcName.setText("");
 
-        ipLabel.setText("PCIP");
+        ipLabel.setText(ThreadPoolManager.getLangValue("TMS_IP"));
 
         if (editMode)
             pcIP.setText(pc.getIp());
         else
             pcIP.setText("");
 
-        locationLabel.setText("PCLOCATION");
+        locationLabel.setText(ThreadPoolManager.getLangValue("TMS_LOCATION"));
 
         if (editMode)
             pcLocation.setText(pc.getLocation());
@@ -133,14 +133,14 @@ public class PCForm extends JInternalFrame {
                                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
-        cancel.setText("Cancel");
+        cancel.setText(ThreadPoolManager.getLangValue("TMS_CANCEL"));
         cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 close(evt);
             }
         });
 
-        ok.setText("OK");
+        ok.setText(ThreadPoolManager.getLangValue("TMS_OK"));
         ok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if (editMode)
