@@ -92,7 +92,8 @@ public class LanguageManagementForm extends JInternalFrame {
         mainTable.getDefaultEditor(String.class).addCellEditorListener(new CellEditorListener() {
             @Override
             public void editingStopped(ChangeEvent e) {
-                System.out.println("stooooooooop");
+                int index = mainTable.convertRowIndexToModel(mainTable.getEditingRow())   ;
+                langList.get(index).setEdited(true);
             }
 
             @Override
