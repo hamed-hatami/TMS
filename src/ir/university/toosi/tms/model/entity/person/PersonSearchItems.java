@@ -1,5 +1,7 @@
 package ir.university.toosi.tms.model.entity.person;
 
+import ir.university.toosi.tms.util.ThreadPoolManager;
+
 public enum PersonSearchItems {
 
     NAME, LASTNAME, NATIONALCODE, PERSONNELNO;
@@ -8,13 +10,13 @@ public enum PersonSearchItems {
 
         switch (this) {
             case NAME:
-                return "Name";
+                return ThreadPoolManager.getLangValue("NAME");
             case LASTNAME:
-                return "LastName";
+                return ThreadPoolManager.getLangValue("LAST_NAME");
             case NATIONALCODE:
-                return "NationalCode";
+                return ThreadPoolManager.getLangValue("NATIONAL_CODE");
             case PERSONNELNO:
-                return "PersonnelNo";
+                return ThreadPoolManager.getLangValue("PERSONNEL_NO");
         }
         return "";
     }

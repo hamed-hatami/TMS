@@ -2,7 +2,9 @@ package ir.university.toosi.tms.view.user;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ir.university.toosi.tms.model.entity.PCSearchItems;
 import ir.university.toosi.tms.model.entity.User;
+import ir.university.toosi.tms.model.entity.UserSearchItems;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
@@ -11,6 +13,8 @@ import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.List;
@@ -24,6 +28,7 @@ public class UserManagement extends JInternalFrame {
     List<User> userList;
 
     public UserManagement(JDesktopPane jDesktopPane) {
+        fillSearchCombo();
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -32,7 +37,7 @@ public class UserManagement extends JInternalFrame {
         deleteButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        searchType = new javax.swing.JComboBox();
+        searchType = new javax.swing.JComboBox(searchItems);
         searchKey = new javax.swing.JTextField();
         searchLable = new javax.swing.JLabel();
         byLable = new javax.swing.JLabel();
@@ -44,11 +49,31 @@ public class UserManagement extends JInternalFrame {
         }
     }
 
-    public void refresh() throws IOException {
-        userService.setServiceName("/getAllUser");
-        userList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(userService.getServerUrl(), userService.getServiceName()), new TypeReference<List<User>>() {
-        });
+    private void fillSearchCombo() {
+        searchItems = new String[UserSearchItems.values().length];
+        int i = 0;
+        for (UserSearchItems userSearchItems : UserSearchItems.values()) {
+            searchItems[i++] = userSearchItems.getDescription();
+        }
+    }
 
+    private void getAll() {
+        userService.setServiceName("/getAllUser");
+        try {
+            userList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(userService.getServerUrl(), userService.getServiceName()), new TypeReference<List<User>>() {
+            });
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
+
+
+    public void refresh() throws IOException {
+        getAll();
+        showData();
+    }
+
+    private void showData() {
         JTableBinding jTableBinding = SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, userList, userTable, "");
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${username}"));
         columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_USERNAME"));
@@ -56,6 +81,20 @@ public class UserManagement extends JInternalFrame {
         BindingGroup bindingGroup = new BindingGroup();
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
+    }
+
+    private void search(DocumentEvent documentEvent) throws IOException {
+
+        User searchUser = new User();
+        if (UserSearchItems.values()[searchType.getSelectedIndex()].equals(UserSearchItems.NAME)) {
+            userService.setServiceName("/findUserByUserName");
+            searchUser.setUsername(searchKey.getText());
+        }
+        searchUser.setEffectorUser(ThreadPoolManager.me.getUsername());
+        userList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(userService.getServerUrl(), userService.getServiceName(), new ObjectMapper().writeValueAsString(searchUser)), new TypeReference<List<User>>() {
+        });
+
+        showData();
     }
 
     /**
@@ -149,9 +188,35 @@ public class UserManagement extends JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_SEARCH_USER")));
 
-        searchType.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
-
         searchKey.setToolTipText("");
+        searchKey.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                try {
+                    search(e);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                try {
+                    search(e);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                try {
+                    search(e);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
 
         searchLable.setText(ThreadPoolManager.getLangValue("TMS_FILTER"));
 
@@ -250,6 +315,7 @@ public class UserManagement extends JInternalFrame {
     private javax.swing.JTable userTable;
     private javax.swing.JTextField searchKey;
     private WebServiceInfo userService = new WebServiceInfo();
+    private String[] searchItems;
     // End of variables declaration//GEN-END:variables
 
 }
