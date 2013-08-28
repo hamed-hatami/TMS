@@ -2,7 +2,10 @@ package ir.university.toosi.tms.view.role;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ir.university.toosi.tms.model.entity.*;
+import ir.university.toosi.tms.model.entity.Operation;
+import ir.university.toosi.tms.model.entity.OperationSearchItems;
+import ir.university.toosi.tms.model.entity.Role;
+import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import org.jdesktop.beansbinding.BindingGroup;
@@ -11,7 +14,6 @@ import org.jdesktop.swingbinding.JTableBinding;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -299,6 +301,7 @@ public class OperationManagement extends JInternalFrame {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
     }
+
     /**
      * @param args the command line arguments
      */
