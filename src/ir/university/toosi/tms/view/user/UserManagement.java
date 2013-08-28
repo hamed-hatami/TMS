@@ -121,6 +121,7 @@ public class UserManagement extends JInternalFrame {
         userTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         addButton.setText(ThreadPoolManager.getLangValue("TMS_ADD"));
+        addButton.setVisible(ThreadPoolManager.hasPermission("ADD_USER"));
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -132,6 +133,7 @@ public class UserManagement extends JInternalFrame {
         });
 
         deleteButton.setText(ThreadPoolManager.getLangValue("TMS_DELETE"));
+        deleteButton.setVisible(ThreadPoolManager.hasPermission("DELETE_USER"));
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 int result = JOptionPane.showConfirmDialog(null, "DELETE_USER", "DELETE", JOptionPane.OK_CANCEL_OPTION);
@@ -147,6 +149,7 @@ public class UserManagement extends JInternalFrame {
         });
 
         editButton.setText(ThreadPoolManager.getLangValue("TMS_EDIT"));
+        editButton.setVisible(ThreadPoolManager.hasPermission("EDIT_USER"));
         editButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {

@@ -1,9 +1,6 @@
 package ir.university.toosi.tms.util;
 
-import ir.university.toosi.tms.model.entity.LanguageKeyValue;
-import ir.university.toosi.tms.model.entity.LanguageManagement;
-import ir.university.toosi.tms.model.entity.Languages;
-import ir.university.toosi.tms.model.entity.User;
+import ir.university.toosi.tms.model.entity.*;
 import ir.university.toosi.tms.view.MainForm;
 
 import java.util.ArrayList;
@@ -25,6 +22,7 @@ public class ThreadPoolManager {
     public static User me;
     public static Languages currentLanguage;
     public static Hashtable<String, LanguageManagement> langHash = new Hashtable<>();
+    public static Hashtable<String, Boolean> permissionHash = new Hashtable<>();
     public static final ForkJoinPool forkJoinPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
 
     public static String getLangValue(String key) {
@@ -43,5 +41,31 @@ public class ThreadPoolManager {
             langList.add(languageKeyValue);
         }
         return langList;
+    }
+
+    public static boolean hasPermission(String checkledOperation) {
+
+        if (permissionHash.containsKey(checkledOperation))
+            return permissionHash.get(checkledOperation);
+
+        return false;
+    }
+
+    public static void loadPermissions(List<Operation> operations) {
+
+        for (Operation operation : operations) {
+            for (WorkGroup workGroup : me.getWorkGroups()) {
+                for (Role role : workGroup.getRoles()) {
+                    for (Operation innerOperation : role.getOperations()) {
+                        if (innerOperation.getName().equalsIgnoreCase(innerOperation.getName())) {
+                            permissionHash.put(operation.getName(), Boolean.TRUE);
+                        }
+                    }
+                }
+            }
+            if (!permissionHash.containsKey(operation.getName()))
+                permissionHash.put(operation.getName(), Boolean.FALSE);
+        }
+
     }
 }

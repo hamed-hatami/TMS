@@ -153,6 +153,15 @@ public class Login extends javax.swing.JInternalFrame {
                     } catch (IOException e) {
                         e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                     }
+
+                    loginService.setServiceName("/getAllOperation");
+                    try {
+                        List<Operation> operationList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(loginService.getServerUrl(), loginService.getServiceName()), new TypeReference<List<Operation>>() {
+                        });
+                        ThreadPoolManager.loadPermissions(operationList);
+                    } catch (IOException e) {
+                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    }
                     JOptionPane.showMessageDialog(new JFrame(), "Welcome " + result.getUsername());
                     mainForm.getMainMenuBar().setVisible(true);
                     mainForm.getLoginForm().dispose();
