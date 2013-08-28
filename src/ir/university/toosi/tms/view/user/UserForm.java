@@ -168,7 +168,7 @@ public class UserForm extends JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     public void initComponents() {
 
-
+        setSize(600, 600);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("USERMANAGEMENT");
         setClosable(true);
@@ -400,8 +400,9 @@ public class UserForm extends JInternalFrame {
 
         jPanel1.getAccessibleContext().setAccessibleName("UserForm");
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+
+        // pack();
+    }
 
     public void saveUser() {
         User newUser = new User();
