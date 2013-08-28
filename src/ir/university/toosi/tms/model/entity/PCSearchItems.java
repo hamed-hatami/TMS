@@ -1,5 +1,7 @@
 package ir.university.toosi.tms.model.entity;
 
+import ir.university.toosi.tms.util.ThreadPoolManager;
+
 public enum PCSearchItems {
 
     NAME, IP;
@@ -8,9 +10,9 @@ public enum PCSearchItems {
 
         switch (this) {
             case NAME:
-                return "Name";
+                return ThreadPoolManager.getLangValue("TMS_NAME");
             case IP:
-                return "ip";
+                return ThreadPoolManager.getLangValue("TMS_IP");
         }
         return "";
     }

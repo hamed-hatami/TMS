@@ -1,6 +1,8 @@
 package ir.university.toosi.tms.model.entity;
 
 
+import ir.university.toosi.tms.util.ThreadPoolManager;
+
 /**
  * @author : Hamed Hatami , Javad Sarhadi , Farzad Sedaghatbin, Atefeh Ahmadi
  * @version : 0.8
@@ -15,13 +17,13 @@ public enum EventLogType {
         switch (this) {
 
             case ADD:
-                return "Add";
+                return ThreadPoolManager.getLangValue("TMS_ADD");
             case EDIT:
-                return "Edit";
+                return ThreadPoolManager.getLangValue("TMS_EDIT");
             case DELETE:
-                return "Delete";
+                return ThreadPoolManager.getLangValue("TMS_DELETE");
             case SEARCH:
-                return "Search";
+                return ThreadPoolManager.getLangValue("TMS_SEARCH");
         }
         return "NONE";
     }

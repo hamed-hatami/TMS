@@ -1,5 +1,7 @@
 package ir.university.toosi.tms.model.entity;
 
+import ir.university.toosi.tms.util.ThreadPoolManager;
+
 public enum OperationSearchItems {
 
     NAME;
@@ -8,7 +10,7 @@ public enum OperationSearchItems {
 
         switch (this) {
             case NAME:
-                return "Name";
+                return ThreadPoolManager.getLangValue("TMS_NAME");
         }
         return "";
     }

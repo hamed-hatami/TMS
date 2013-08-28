@@ -1,5 +1,7 @@
 package ir.university.toosi.tms.model.entity;
 
+import ir.university.toosi.tms.util.ThreadPoolManager;
+
 public enum EventLogSearchItems {
 
     TITLE, TYPE, DATE, TIME, USER, TABLE;
@@ -8,17 +10,17 @@ public enum EventLogSearchItems {
 
         switch (this) {
             case TITLE:
-                return "Title";
+                return ThreadPoolManager.getLangValue("TMS_TITLE");
             case TYPE:
-                return "Type";
+                return ThreadPoolManager.getLangValue("TMS_TYPE");
             case DATE:
-                return "Date";
+                return ThreadPoolManager.getLangValue("TMS_DATE");
             case TABLE:
-                return "Table";
+                return ThreadPoolManager.getLangValue("TMS_TABLE");
             case TIME:
-                return "Time";
+                return ThreadPoolManager.getLangValue("TMS_TIME");
             case USER:
-                return "User";
+                return ThreadPoolManager.getLangValue("TMS_USER");
         }
         return "";
     }
