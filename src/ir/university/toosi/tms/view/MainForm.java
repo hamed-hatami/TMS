@@ -3,6 +3,7 @@ package ir.university.toosi.tms.view;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.controller.LanguageAction;
+import ir.university.toosi.tms.model.entity.LanguageManagement;
 import ir.university.toosi.tms.model.entity.Languages;
 import ir.university.toosi.tms.model.entity.Lookup;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
@@ -12,6 +13,7 @@ import ir.university.toosi.tms.view.basicinfo.BasicInfoManagement;
 import ir.university.toosi.tms.view.calendar.CalendarManagement;
 import ir.university.toosi.tms.view.eventlog.EventLogList;
 import ir.university.toosi.tms.view.language.FileChooser;
+import ir.university.toosi.tms.view.language.LanguageManagementForm;
 import ir.university.toosi.tms.view.person.PersonManagement;
 import ir.university.toosi.tms.view.role.RoleManagement;
 import ir.university.toosi.tms.view.user.UserManagement;
@@ -41,12 +43,13 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
     private JMenu basicInfoMenu;
     private JMenuItem[] basicInfoMenus;
     private JMenuItem menuItem;
+    private JMenuItem languageDefItem;
     private JMenuItem persianItem;
     private JMenuItem englishItem;
     private JMenuItem otherItem;
     private JMenuItem importLanguage;
     private JMenuItem userManagementItem;
-//    private JMenuItem roleManagementItem;
+    //    private JMenuItem roleManagementItem;
     private JMenuItem operationManagementItem;
     private JMenuItem workGroupManagementItem;
     private JMenuItem calendarManagementItem;
@@ -109,6 +112,7 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             languageMenu = new JMenu();
             menuItem = new JMenuItem();
             persianItem = new JMenuItem();
+            languageDefItem = new JMenuItem();
             englishItem = new JMenuItem();
             otherItem = new JMenuItem();
             importLanguage = new JMenuItem();
@@ -116,15 +120,18 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             languageMenu.setText(LanguageAction.getBundleMessage("language"));
             menuItem.setText(LanguageAction.getBundleMessage("salam"));
             persianItem.setText(LanguageAction.getBundleMessage("persian"));
+            languageDefItem.setText(LanguageAction.getBundleMessage("languageDef"));
             englishItem.setText(LanguageAction.getBundleMessage("english"));
             otherItem.setText(LanguageAction.getBundleMessage("thirdLanguage"));
             importLanguage.setText(LanguageAction.getBundleMessage("importLanguage"));
             menuItem.addActionListener(this);
             persianItem.addActionListener(this);
+            languageDefItem.addActionListener(this);
             englishItem.addActionListener(this);
             otherItem.addActionListener(this);
             importLanguage.addActionListener(this);
             menu.add(menuItem);
+            languageMenu.add(languageDefItem);
             languageMenu.add(persianItem);
             languageMenu.add(englishItem);
 //            if (languageList != null && !languageList.isEmpty()) {
@@ -260,6 +267,7 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
         menu.setText(LanguageAction.getBundleMessage("loginForm"));
         languageMenu.setText(LanguageAction.getBundleMessage("language"));
         menuItem.setText(LanguageAction.getBundleMessage("salam"));
+        languageDefItem.setText(LanguageAction.getBundleMessage("languageDef"));
         persianItem.setText(LanguageAction.getBundleMessage("persian"));
         englishItem.setText(LanguageAction.getBundleMessage("english"));
         otherItem.setText(LanguageAction.getBundleMessage("other"));
@@ -275,6 +283,13 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
         basicInfoManagement.setSelected(true);
     }
 
+    private void showLanguageDef() throws PropertyVetoException {
+        LanguageManagementForm languageManagement = new LanguageManagementForm(jdpDesktop);
+        languageManagement.setVisible(true);
+        jdpDesktop.add(languageManagement);
+        languageManagement.setSelected(true);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
@@ -283,6 +298,8 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             } else if (e.getSource() == persianItem) {
                 LanguageAction.changeLocale("fa");
                 refreshMainForm();
+            } else if (e.getSource() == languageDefItem) {
+                showLanguageDef();
             } else if (e.getSource() == englishItem) {
                 LanguageAction.changeLocale("en");
                 refreshMainForm();

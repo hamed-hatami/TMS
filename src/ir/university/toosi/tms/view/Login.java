@@ -14,6 +14,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
+import java.util.Hashtable;
 import java.util.List;
 
 /**
@@ -134,6 +135,14 @@ public class Login extends javax.swing.JInternalFrame {
                     }
                     ThreadPoolManager.me = result;
                     ThreadPoolManager.currentLanguage = languagesList.get(language.getSelectedIndex());
+                    loginService.setServiceName("/loadLanguage");
+                    try {
+                        ThreadPoolManager.langHash = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(loginService.getServerUrl(), loginService.getServiceName(), ThreadPoolManager.currentLanguage.getName()), new TypeReference<Hashtable<String, String>>() {
+                         });
+
+                    } catch (IOException e) {
+                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    }
                     JOptionPane.showMessageDialog(new JFrame(), "Welcome " + result.getUsername());
                     mainForm.getMainMenuBar().setVisible(true);
                     mainForm.getLoginForm().dispose();
