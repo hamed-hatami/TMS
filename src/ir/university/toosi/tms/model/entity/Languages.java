@@ -15,6 +15,8 @@ public class Languages extends BaseEntity {
     private String name;
     @JsonProperty
     private boolean rtl;
+    @JsonProperty
+    private boolean defaulted;
 
     public Languages() {
     }
@@ -41,5 +43,13 @@ public class Languages extends BaseEntity {
 
     public void setRtl(boolean rtl) {
         this.rtl = rtl;
+    }
+
+    public boolean isDefaulted() {
+        return defaulted;
+    }
+
+    public void setDefaulted(boolean defaulted) {
+        this.defaulted = defaulted;
     }
 }

@@ -40,6 +40,7 @@ public class Login extends javax.swing.JInternalFrame {
         passwordLabel = new JLabel();
         langLabel = new JLabel();
         language = new JComboBox(langItems);
+        language.setSelectedItem(defaultedLang);
         initComponents();
     }
 
@@ -55,6 +56,8 @@ public class Login extends javax.swing.JInternalFrame {
         langItems = new String[languagesList.size()];
         int i = 0;
         for (Languages languages : languagesList) {
+            if(languages.isDefaulted())
+                defaultedLang = languages.getName();
             langItems[i++] = languages.getName();
         }
     }
@@ -247,6 +250,7 @@ public class Login extends javax.swing.JInternalFrame {
     private WebServiceInfo loginService = new WebServiceInfo();;
     private User user, result;
     private String[] langItems;
+    private String defaultedLang;
     private List<Languages> languagesList;
 
     // End of variables declaration//GEN-END:variables
