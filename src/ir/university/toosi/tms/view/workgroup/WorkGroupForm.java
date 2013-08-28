@@ -119,15 +119,15 @@ public class WorkGroupForm extends JInternalFrame {
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("WORKGROUP");
+        setTitle(ThreadPoolManager.getLangValue("TMS_WORKGROUP"));
 
         allList.setModel(roleListModel);
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("WORKGROUP"));
-        jPanel1.setName("WORKGROUP"); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_WORKGROUP")));
+        jPanel1.setName(ThreadPoolManager.getLangValue("TMS_WORKGROUP")); // NOI18N
 
-        nameLable.setText("NAME");
+        nameLable.setText(ThreadPoolManager.getLangValue("TMS_NAME"));
 
-        jLabel2.setText("DESCRIPTION");
+        jLabel2.setText(ThreadPoolManager.getLangValue("TMS_DESC"));
 
 
         jScrollPane1.setViewportView(allList);
@@ -148,14 +148,14 @@ public class WorkGroupForm extends JInternalFrame {
                 removeActionPerformed(evt);
             }
         });
-        okButton.setText("OK");
+        okButton.setText(ThreadPoolManager.getLangValue("TMS_OK"));
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okButtonActionPerformed(evt);
             }
         });
 
-        cancelButton.setText("CANCEL");
+        cancelButton.setText(ThreadPoolManager.getLangValue("TMS_CANCEL"));
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);

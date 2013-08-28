@@ -115,9 +115,9 @@ public class WorkGroupManagement extends JInternalFrame {
         this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("WORKGROUPMANAGEMENT");
+        setTitle(ThreadPoolManager.getLangValue("TMS_WORKGROUP_MANAGEMENT"));
 
-        mainPanel.setBorder(BorderFactory.createTitledBorder("WORKGROUPMANAGEMENT"));
+        mainPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_WORKGROUP_MANAGEMENT")));
 
         mainTable.setAutoCreateRowSorter(true);
         refresh();
@@ -128,7 +128,7 @@ public class WorkGroupManagement extends JInternalFrame {
         mainTable.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
 
-        add.setText("ADD");
+        add.setText(ThreadPoolManager.getLangValue("TMS_ADD"));
         add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -139,7 +139,7 @@ public class WorkGroupManagement extends JInternalFrame {
             }
         });
 
-        edit.setText("EDIT");
+        edit.setText(ThreadPoolManager.getLangValue("TMS_EDIT"));
         edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -177,7 +177,7 @@ public class WorkGroupManagement extends JInternalFrame {
                                 .add(133, 133, 133))
         );
 
-        searchPanel.setBorder(BorderFactory.createTitledBorder("SEARCHWORKGROUP"));
+        searchPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_SEARCH_WORKGROUP")));
 //        searchCombo.setModel(new DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         searchText.setToolTipText("");
@@ -197,9 +197,9 @@ public class WorkGroupManagement extends JInternalFrame {
             }
         });
 
-        filter.setText("FILTER");
+        filter.setText(ThreadPoolManager.getLangValue("TMS_FILTER"));
 
-        by.setText("BY");
+        by.setText(ThreadPoolManager.getLangValue("TMS_BY"));
 
         org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(searchPanel);
         searchPanel.setLayout(jPanel2Layout);
@@ -251,7 +251,7 @@ public class WorkGroupManagement extends JInternalFrame {
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        mainPanel.getAccessibleContext().setAccessibleName("WORKGROUPForm");
+        mainPanel.getAccessibleContext().setAccessibleName("WORKGROUPFORM");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -263,10 +263,10 @@ public class WorkGroupManagement extends JInternalFrame {
 
         JTableBinding jTableBinding = SwingBindings.createJTableBinding(AutoBinding.UpdateStrategy.READ_WRITE, workGroupList, mainTable, "");
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(ELProperty.create("${name}"));
-        columnBinding.setColumnName("NAME");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_NAME"));
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${description}"));
-        columnBinding.setColumnName("DESCRIPTION");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_DESC"));
         columnBinding.setColumnClass(String.class);
         BindingGroup bindingGroup = new BindingGroup();
         bindingGroup.addBinding(jTableBinding);
