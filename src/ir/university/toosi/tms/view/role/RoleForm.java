@@ -83,10 +83,10 @@ public class RoleForm extends JInternalFrame {
         this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("ROLEMANAGEMENT");
+        setTitle(ThreadPoolManager.getLangValue("TMS_ROLE"));
 
-        mainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("ROLE"));
-        operationPanel.setBorder(BorderFactory.createTitledBorder("OPERATIONLIST"));
+        mainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_ROLE")));
+        operationPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_OPERATION_LIST")));
 
         mainTable.setAutoCreateRowSorter(true);
         try {
@@ -100,14 +100,14 @@ public class RoleForm extends JInternalFrame {
         tableScroll.setViewportView(mainTable);
         mainTable.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
-        nameLabel.setText("ROLENAME");
+        nameLabel.setText(ThreadPoolManager.getLangValue("TMS_NAME"));
 
         if (editMode)
             roleName.setText(role.getName());
         else
             roleName.setText("");
 
-        descLabel.setText("ROLEDESCRIPTION");
+        descLabel.setText(ThreadPoolManager.getLangValue("TMS_DESC"));
 
         if (editMode)
             roleDesc.setText(role.getDescription());
@@ -163,14 +163,14 @@ public class RoleForm extends JInternalFrame {
         );
 
 
-        cancel.setText("Cancel");
+        cancel.setText(ThreadPoolManager.getLangValue("TMS_CANCEL"));
         cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 close(evt);
             }
         });
 
-        ok.setText("OK");
+        ok.setText(ThreadPoolManager.getLangValue("TMS_OK"));
         ok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if (editMode)
@@ -180,7 +180,7 @@ public class RoleForm extends JInternalFrame {
             }
         });
 
-        assignOperation.setText("ASSIGNOPERATION");
+        assignOperation.setText(ThreadPoolManager.getLangValue("TMS_ASSIGN_OPERATION"));
         assignOperation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -307,13 +307,13 @@ public class RoleForm extends JInternalFrame {
     private void showData() {
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, operationList, mainTable, "");
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
-        columnBinding.setColumnName("NAME");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_NAME"));
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${description}"));
-        columnBinding.setColumnName("DESCRIPTION");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_DESC"));
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${enabled}"));
-        columnBinding.setColumnName("ENABLED");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_ENABLED"));
         columnBinding.setColumnClass(Boolean.class);
         BindingGroup bindingGroup = new BindingGroup();
         bindingGroup.addBinding(jTableBinding);

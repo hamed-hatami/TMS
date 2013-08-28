@@ -85,9 +85,9 @@ public class RoleManagement extends JInternalFrame {
         this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("ROLEMANAGEMENT");
+        setTitle(ThreadPoolManager.getLangValue("TMS_ROLE_MANAGEMENT"));
 
-        mainPanel.setBorder(BorderFactory.createTitledBorder("ROLEMANAGEMENT"));
+        mainPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_ROLE_MANAGEMENT")));
 
         mainTable.setAutoCreateRowSorter(true);
         refresh();
@@ -98,7 +98,7 @@ public class RoleManagement extends JInternalFrame {
         mainTable.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
 
-        add.setText("ADD");
+        add.setText(ThreadPoolManager.getLangValue("TMS_ADD"));
         add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -109,7 +109,7 @@ public class RoleManagement extends JInternalFrame {
             }
         });
 
-        delete.setText("DELETE");
+        delete.setText(ThreadPoolManager.getLangValue("TMS_DELETE"));
         delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 int result = JOptionPane.showConfirmDialog(null, "DELETE_USER", "DELETE", JOptionPane.OK_CANCEL_OPTION);
@@ -121,7 +121,7 @@ public class RoleManagement extends JInternalFrame {
             }
         });
 
-        edit.setText("EDIT");
+        edit.setText(ThreadPoolManager.getLangValue("TMS_EDIT"));
         edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -161,7 +161,7 @@ public class RoleManagement extends JInternalFrame {
                                 .add(133, 133, 133))
         );
 
-        searchPanel.setBorder(BorderFactory.createTitledBorder("SEARCHROLE"));
+        searchPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_SEARCH_ROLE")));
 //        searchCombo.setModel(new DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         searchText.setToolTipText("");
@@ -196,9 +196,9 @@ public class RoleManagement extends JInternalFrame {
             }
         });
 
-        filter.setText("FILTER");
+        filter.setText(ThreadPoolManager.getLangValue("TMS_FILTER"));
 
-        by.setText("BY");
+        by.setText(ThreadPoolManager.getLangValue("TMS_BY"));
 
         org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(searchPanel);
         searchPanel.setLayout(jPanel2Layout);
@@ -269,13 +269,13 @@ public class RoleManagement extends JInternalFrame {
     private void showData() {
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, roleList, mainTable, "");
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
-        columnBinding.setColumnName("NAME");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_NAME"));
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${description}"));
-        columnBinding.setColumnName("DESCRIPSTION");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_DESC"));
         columnBinding.setColumnClass(String.class);
          columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${enabled}"));
-        columnBinding.setColumnName("ENABLED");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_ENABLED"));
         columnBinding.setColumnClass(Boolean.class);
         BindingGroup bindingGroup = new BindingGroup();
         bindingGroup.addBinding(jTableBinding);

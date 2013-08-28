@@ -83,9 +83,9 @@ public class OperationManagement extends JInternalFrame {
         this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("OPERATIONMANAGMENT");
+        setTitle(ThreadPoolManager.getLangValue("TMS_OPERATION_MANAGEMENT"));
 
-        mainPanel.setBorder(BorderFactory.createTitledBorder("OPERATIONMANAGMENT"));
+        mainPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_OPERATION_MANAGEMENT")));
 
         mainTable.setAutoCreateRowSorter(true);
         refresh();
@@ -96,7 +96,7 @@ public class OperationManagement extends JInternalFrame {
         mainTable.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
 
-        assign.setText("ASSIGN");
+        assign.setText(ThreadPoolManager.getLangValue("TMS_ASSIGN"));
         assign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 assignActionPerformed(evt);
@@ -126,7 +126,7 @@ public class OperationManagement extends JInternalFrame {
                                 .add(133, 133, 133))
         );
 
-        searchPanel.setBorder(BorderFactory.createTitledBorder("SEARCHOPERATION"));
+        searchPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_SEARCH_OPERATION")));
 //        searchCombo.setModel(new DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         searchText.setToolTipText("");
@@ -161,9 +161,9 @@ public class OperationManagement extends JInternalFrame {
             }
         });
 
-        filter.setText("FILTER");
+        filter.setText(ThreadPoolManager.getLangValue("TMS_FILTER"));
 
-        by.setText("BY");
+        by.setText(ThreadPoolManager.getLangValue("TMS_BY"));
 
         org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(searchPanel);
         searchPanel.setLayout(jPanel2Layout);
@@ -234,13 +234,13 @@ public class OperationManagement extends JInternalFrame {
     private void showData() {
         JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, operationList, mainTable, "");
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
-        columnBinding.setColumnName("NAME");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_NAME"));
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${description}"));
-        columnBinding.setColumnName("DESCRIPTION");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_DESC"));
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${enabled}"));
-        columnBinding.setColumnName("ENABLED");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_ENABLED"));
         columnBinding.setColumnClass(Boolean.class);
         BindingGroup bindingGroup = new BindingGroup();
         bindingGroup.addBinding(jTableBinding);
