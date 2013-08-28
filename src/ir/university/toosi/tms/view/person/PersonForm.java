@@ -79,25 +79,25 @@ public class PersonForm extends JInternalFrame {
         this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Personnal Info");
+        setTitle(ThreadPoolManager.getLangValue("TMS_PERSONNEL_INFO"));
 
-        mainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Personnal Info"));
+        mainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_PERSONNEL_INFO")));
 
-        nameLabel.setText("NAME");
+        nameLabel.setText(ThreadPoolManager.getLangValue("TMS_NAME"));
 
-        lastNameLabel.setText("LASTNAME");
+        lastNameLabel.setText(ThreadPoolManager.getLangValue("TMS_LAST_NAME"));
 
-        personnelNoLabel.setText("PERSONNELNO");
+        personnelNoLabel.setText(ThreadPoolManager.getLangValue("TMS_PERSONNEL_NO"));
 
-        nationalCodeLabel.setText("NATIONALCODE");
+        nationalCodeLabel.setText(ThreadPoolManager.getLangValue("TMS_NATIONAL_CODE"));
 
-        idNumLabel.setText("IDNUM");
+        idNumLabel.setText(ThreadPoolManager.getLangValue("TMS_ID_NUM"));
 
-        pinLabel.setText("PIN");
+        pinLabel.setText(ThreadPoolManager.getLangValue("TMS_PIN"));
 
-        addressLabel.setText("ADDRESS");
+        addressLabel.setText(ThreadPoolManager.getLangValue("TMS_ADDRESS"));
 
-        pictureLabel.setText("PICTURE ");
+        pictureLabel.setText(ThreadPoolManager.getLangValue("TMS_PIC"));
 
         if (editMode) {
             name.setText(person.getName());
@@ -122,7 +122,7 @@ public class PersonForm extends JInternalFrame {
             }
         });
 
-        browse.setText("BROWSE");
+        browse.setText(ThreadPoolManager.getLangValue("TMS_BROWSE"));
 
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
         mainPanel.setLayout(jPanel1Layout);
@@ -198,7 +198,7 @@ public class PersonForm extends JInternalFrame {
                                 .add(19, 19, 19))
         );
 
-        cancel.setText("CANCLE");
+        cancel.setText(ThreadPoolManager.getLangValue("TMS_CANCEL"));
         cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 close(evt);
@@ -206,9 +206,9 @@ public class PersonForm extends JInternalFrame {
         });
 
         if (editMode)
-            edit.setText("EDIT");
+            edit.setText(ThreadPoolManager.getLangValue("TMS_EDIT"));
         else
-            edit.setText("ADD");
+            edit.setText(ThreadPoolManager.getLangValue("TMS_ADD"));
         edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if (editMode)
@@ -218,9 +218,8 @@ public class PersonForm extends JInternalFrame {
             }
         });
 
-        jobSetting.setText("JOBSETTING");
+        jobSetting.setText(ThreadPoolManager.getLangValue("TMS_JOB_SETTING"));
         jobSetting.setEnabled(added);
-        jobSetting.setActionCommand("jobSetting");
         jobSetting.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jobSetting(evt);

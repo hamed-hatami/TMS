@@ -78,9 +78,9 @@ public class EventLogList extends JInternalFrame {
         this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("EVENTLOGLIST");
+        setTitle(ThreadPoolManager.getLangValue("TMS_EVENTLOGLIST"));
 
-        mainPanel.setBorder(BorderFactory.createTitledBorder("EVENTLOGLIST"));
+        mainPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_EVENTLOGLIST")));
 
         mainTable.setAutoCreateRowSorter(true);
         refresh();
@@ -120,28 +120,41 @@ public class EventLogList extends JInternalFrame {
                                 .add(133, 133, 133))
         );
 
-        searchPanel.setBorder(BorderFactory.createTitledBorder("SEARCHEVENTLOG"));
+        searchPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_SEARCH")));
 
         searchText.setToolTipText("");
         searchText.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                //To change body of implemented methods use File | Settings | File Templates.
+                try {
+                    search(e);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                //To change body of implemented methods use File | Settings | File Templates.
+                try {
+                    search(e);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
+                try {
+                    search(e);
+                } catch (IOException e1) {
+                    e1.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
             }
         });
 
-        filter.setText("FILTER");
+        filter.setText(ThreadPoolManager.getLangValue("TMS_FILTER"));
 
-        by.setText("BY");
+        by.setText(ThreadPoolManager.getLangValue("TMS_BY"));
 
         org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(searchPanel);
         searchPanel.setLayout(jPanel2Layout);
@@ -198,33 +211,57 @@ public class EventLogList extends JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void refresh() throws IOException {
+    private void getAll() throws IOException {
         eventLogService.setServiceName("/getAllEventLog");
         logs = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(eventLogService.getServerUrl(), eventLogService.getServiceName()), new TypeReference<List<EventLog>>() {
         });
+    }
+
+    public void refresh() throws IOException {
+        getAll();
+        showData();
+    }
+
+    private void showData() {
 
         JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, logs, mainTable, "");
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${operation}"));
-        columnBinding.setColumnName("OPERATION");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_OPERATION"));
         columnBinding.setColumnClass(EventLogType.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${objectId}"));
-        columnBinding.setColumnName("OBJECT_ID");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_OBJECT_ID"));
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${tableName}"));
-        columnBinding.setColumnName("TABLE_NAME");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_TABLE_NAME"));
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${username}"));
-        columnBinding.setColumnName("USER_NAME");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_USERNAME"));
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${date}"));
-        columnBinding.setColumnName("DATE");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_DATE"));
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${time}"));
-        columnBinding.setColumnName("TIME");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_TIME"));
         columnBinding.setColumnClass(String.class);
         BindingGroup bindingGroup = new BindingGroup();
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
+    }
+
+
+    private void search(DocumentEvent documentEvent) throws IOException {
+
+        EventLog searchEventLog = new EventLog();
+        if (EventLogSearchItems.values()[searchCombo.getSelectedIndex()].equals(EventLogSearchItems.TABLE)) {
+            eventLogService.setServiceName("/getEventLogByTable");
+            searchEventLog.setTableName(searchText.getText());
+        }
+
+        searchEventLog.setEffectorUser(ThreadPoolManager.me.getUsername());
+        logs = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(eventLogService.getServerUrl(), eventLogService.getServiceName(), new ObjectMapper().writeValueAsString(searchEventLog)), new TypeReference<List<EventLog>>() {
+        });
+
+        showData();
     }
 
     /**
