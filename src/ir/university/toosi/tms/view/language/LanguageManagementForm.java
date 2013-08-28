@@ -7,6 +7,8 @@ import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
 import javax.swing.*;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.io.IOException;
@@ -87,6 +89,17 @@ public class LanguageManagementForm extends JInternalFrame {
         mainTable.setColumnSelectionAllowed(true);
         tableScroll.setViewportView(mainTable);
         mainTable.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        mainTable.getDefaultEditor(String.class).addCellEditorListener(new CellEditorListener() {
+            @Override
+            public void editingStopped(ChangeEvent e) {
+                System.out.println("stooooooooop");
+            }
+
+            @Override
+            public void editingCanceled(ChangeEvent e) {
+                System.out.println("Canceeeeeel");
+            }
+        });
 
 
         save.setText("SAVE");
