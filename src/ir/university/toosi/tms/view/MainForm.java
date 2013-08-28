@@ -94,6 +94,13 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             menuBar.setVisible(false);
 
             jdpDesktop.putClientProperty("JDesktopPane.dragMode", "outline");
+
+//            if (ThreadPoolManager.currentLanguage.isRtl())
+//                jdpDesktop.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+//
+//            else
+//                jdpDesktop.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+
             jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
             menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
 

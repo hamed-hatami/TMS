@@ -7,6 +7,7 @@ import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -75,13 +76,19 @@ public class Login extends javax.swing.JInternalFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        loginService.setServiceName("/loadLanguage");
+        try {
+            ThreadPoolManager.langHash = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(loginService.getServerUrl(), loginService.getServiceName(), defaultedLang), new TypeReference<Hashtable<String, LanguageManagement>>() {
+            });
+
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
-        login.setText("LOGIN");
-        login.setActionCommand("login");
+        login.setText(ThreadPoolManager.getLangValue("TMS_LOGIN"));
 
-        cancel.setText("CANCEL");
-        cancel.setActionCommand("cancel");
+        cancel.setText(ThreadPoolManager.getLangValue("TMS_CANCEL"));
 
         cancel.addActionListener(new ActionListener() {
             @Override
@@ -140,7 +147,7 @@ public class Login extends javax.swing.JInternalFrame {
                     ThreadPoolManager.currentLanguage = languagesList.get(language.getSelectedIndex());
                     loginService.setServiceName("/loadLanguage");
                     try {
-                        ThreadPoolManager.langHash = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(loginService.getServerUrl(), loginService.getServiceName(), ThreadPoolManager.currentLanguage.getName()), new TypeReference<Hashtable<String, String>>() {
+                        ThreadPoolManager.langHash = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(loginService.getServerUrl(), loginService.getServiceName(), ThreadPoolManager.currentLanguage.getName()), new TypeReference<Hashtable<String, LanguageManagement>>() {
                          });
 
                     } catch (IOException e) {
@@ -160,11 +167,11 @@ public class Login extends javax.swing.JInternalFrame {
             }
         });
 
-        userNameLabel.setText("USERNAME");
+        userNameLabel.setText(ThreadPoolManager.getLangValue("TMS_USERNAME"));
 
-        passwordLabel.setText("PASSWORD");
+        passwordLabel.setText(ThreadPoolManager.getLangValue("TMS_PASSWORD"));
 
-        langLabel.setText("LANGUAGE");
+        langLabel.setText(ThreadPoolManager.getLangValue("TMS_LANGUAGE"));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

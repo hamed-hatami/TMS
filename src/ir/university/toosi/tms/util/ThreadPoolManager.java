@@ -1,6 +1,7 @@
 package ir.university.toosi.tms.util;
 
 import ir.university.toosi.tms.model.entity.LanguageKeyValue;
+import ir.university.toosi.tms.model.entity.LanguageManagement;
 import ir.university.toosi.tms.model.entity.Languages;
 import ir.university.toosi.tms.model.entity.User;
 import ir.university.toosi.tms.view.MainForm;
@@ -23,12 +24,12 @@ public class ThreadPoolManager {
     public static MainForm mainForm;
     public static User me;
     public static Languages currentLanguage;
-    public static Hashtable<String, String> langHash = new Hashtable<>();
+    public static Hashtable<String, LanguageManagement> langHash = new Hashtable<>();
     public static final ForkJoinPool forkJoinPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
 
     public static String getLangValue(String key) {
         if (langHash.containsKey(key))
-            return langHash.get(key);
+            return langHash.get(key).getTitle();
         return key + "_NOT_DEF";
     }
 
@@ -38,7 +39,7 @@ public class ThreadPoolManager {
         for (String s : langHash.keySet()) {
             LanguageKeyValue languageKeyValue = new LanguageKeyValue();
             languageKeyValue.setKey(s);
-            languageKeyValue.setValue(langHash.get(s));
+            languageKeyValue.setValue(langHash.get(s).getTitle());
             langList.add(languageKeyValue);
         }
         return langList;

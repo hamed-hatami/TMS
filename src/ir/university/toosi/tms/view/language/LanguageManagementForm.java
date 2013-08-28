@@ -1,7 +1,12 @@
 package ir.university.toosi.tms.view.language;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.LanguageKeySearchItems;
 import ir.university.toosi.tms.model.entity.LanguageKeyValue;
+import ir.university.toosi.tms.model.entity.LanguageManagement;
+import ir.university.toosi.tms.model.entity.WebServiceInfo;
+import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
@@ -11,9 +16,12 @@ import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Locale;
 
 public class LanguageManagementForm extends JInternalFrame {
 
@@ -74,13 +82,12 @@ public class LanguageManagementForm extends JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     public void initComponents() throws IOException {
 
-
         this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("LANGMANAGEMENT");
+        setTitle(ThreadPoolManager.getLangValue("TMS_LANGMANAGEMENT"));
 
-        mainPanel.setBorder(BorderFactory.createTitledBorder("LANGMANAGEMENT"));
+        mainPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_LANGMANAGEMENT")));
 
         mainTable.setAutoCreateRowSorter(true);
         refresh();
@@ -92,7 +99,7 @@ public class LanguageManagementForm extends JInternalFrame {
         mainTable.getDefaultEditor(String.class).addCellEditorListener(new CellEditorListener() {
             @Override
             public void editingStopped(ChangeEvent e) {
-                int index = mainTable.convertRowIndexToModel(mainTable.getEditingRow())   ;
+                int index = mainTable.convertRowIndexToModel(mainTable.getSelectedRow());
                 langList.get(index).setEdited(true);
             }
 
@@ -103,7 +110,7 @@ public class LanguageManagementForm extends JInternalFrame {
         });
 
 
-        save.setText("SAVE");
+        save.setText(ThreadPoolManager.getLangValue("TMS_SAVE"));
         save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveActionPerformed(evt);
@@ -134,7 +141,7 @@ public class LanguageManagementForm extends JInternalFrame {
                                 .add(133, 133, 133))
         );
 
-        searchPanel.setBorder(BorderFactory.createTitledBorder("SEARCHKEY"));
+        searchPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_SEARCHBY")));
 //        searchCombo.setModel(new DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         searchText.setToolTipText("");
@@ -169,11 +176,11 @@ public class LanguageManagementForm extends JInternalFrame {
             }
         });
 
-        filter.setText("FILTER");
+//        filter.setText("FILTER");
+//
+//        by.setText("BY");
 
-        by.setText("BY");
-
-        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(searchPanel);
+       /* org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(searchPanel);
         searchPanel.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
                 jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -198,16 +205,16 @@ public class LanguageManagementForm extends JInternalFrame {
                                         .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(by))
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        );*/
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(layout.createSequentialGroup()
+                        /*.add(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .add(searchPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))*/
                         .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .add(mainPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -217,13 +224,19 @@ public class LanguageManagementForm extends JInternalFrame {
                 layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap()
-                                .add(searchPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                               /* .add(searchPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)*/
                                 .add(mainPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 221, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         mainPanel.getAccessibleContext().setAccessibleName("OperationForm");
+
+        if (ThreadPoolManager.currentLanguage.isRtl())
+            getContentPane().setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+
+        else
+            getContentPane().setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -237,11 +250,11 @@ public class LanguageManagementForm extends JInternalFrame {
     private void showData() {
         JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, langList, mainTable, "");
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${key}"));
-        columnBinding.setColumnName("KEY");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_KEY"));
         columnBinding.setEditable(false);
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${value}"));
-        columnBinding.setColumnName("VALUE");
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_VALUE"));
         columnBinding.setEditable(true);
         columnBinding.setColumnClass(String.class);
         BindingGroup bindingGroup = new BindingGroup();
@@ -251,7 +264,7 @@ public class LanguageManagementForm extends JInternalFrame {
 
     private void search(DocumentEvent documentEvent) throws IOException {
 
-        if (!ThreadPoolManager.langHash.containsKey(searchText.getText())) {
+      /*  if (!ThreadPoolManager.langHash.containsKey(searchText.getText())) {
             langList = ThreadPoolManager.getLangList();
             showData();
             return;
@@ -264,11 +277,42 @@ public class LanguageManagementForm extends JInternalFrame {
         languageKeyValue.setValue(value);
         langList.add(languageKeyValue);
 
-        showData();
+        showData();*/
     }
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {
 
+        List<LanguageManagement> languageManagements = new ArrayList<>();
+        for (LanguageKeyValue languageKeyValue : langList) {
+            if (!languageKeyValue.isEdited())
+                continue;
+
+            LanguageManagement changedLanguageManagement = ThreadPoolManager.langHash.get(languageKeyValue.getKey());
+            changedLanguageManagement.setTitle(languageKeyValue.getValue());
+            languageManagements.add(changedLanguageManagement);
+        }
+
+        langService.setServiceName("/editLanguageManagementList");
+        try {
+            new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(langService.getServerUrl(), langService.getServiceName(), new ObjectMapper().writeValueAsString(languageManagements)), Boolean.class);
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        langService.setServiceName("/loadLanguage");
+        try {
+            ThreadPoolManager.langHash = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(langService.getServerUrl(), langService.getServiceName(), ThreadPoolManager.currentLanguage.getName()), new TypeReference<Hashtable<String, LanguageManagement>>() {
+            });
+
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        try {
+            refresh();
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
     }
 
     /**
@@ -288,6 +332,7 @@ public class LanguageManagementForm extends JInternalFrame {
     private JTextField searchText;
     private List<LanguageKeyValue> langList = new ArrayList<>();
     private String[] searchItems;
+    private WebServiceInfo langService = new WebServiceInfo();
 
     public JTable getMainTable() {
         return mainTable;
