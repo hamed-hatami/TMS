@@ -92,6 +92,7 @@ public class BasicInfoManagement extends JInternalFrame {
 
 
         add.setText("ADD");
+        add.setVisible(ThreadPoolManager.hasPermission("ADD_BASICINFO"));
         add.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 try {
@@ -103,6 +104,7 @@ public class BasicInfoManagement extends JInternalFrame {
         });
 
         delete.setText("DELETE");
+        delete.setVisible(ThreadPoolManager.hasPermission("DELETE_BASICINFO"));
         delete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 int result = JOptionPane.showConfirmDialog(null, "DELETE_BLOOKUP", "DELETE", JOptionPane.OK_CANCEL_OPTION);
@@ -115,6 +117,7 @@ public class BasicInfoManagement extends JInternalFrame {
         });
 
         edit.setText("EDIT");
+        edit.setVisible(ThreadPoolManager.hasPermission("EDIT_BASICINFO"));
         edit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 try {

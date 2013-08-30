@@ -99,6 +99,7 @@ public class RoleManagement extends JInternalFrame {
 
 
         add.setText(ThreadPoolManager.getLangValue("TMS_ADD"));
+        add.setVisible(ThreadPoolManager.hasPermission("ADD_ROLE"));
         add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -110,6 +111,7 @@ public class RoleManagement extends JInternalFrame {
         });
 
         delete.setText(ThreadPoolManager.getLangValue("TMS_DELETE"));
+        delete.setVisible(ThreadPoolManager.hasPermission("DELETe_ROLE"));
         delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 int result = JOptionPane.showConfirmDialog(null, "DELETE_USER", "DELETE", JOptionPane.OK_CANCEL_OPTION);
@@ -122,6 +124,7 @@ public class RoleManagement extends JInternalFrame {
         });
 
         edit.setText(ThreadPoolManager.getLangValue("TMS_EDIT"));
+        edit.setVisible(ThreadPoolManager.hasPermission("EDIT_ROL"));
         edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {

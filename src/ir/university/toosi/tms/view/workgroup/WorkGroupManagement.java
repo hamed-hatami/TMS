@@ -129,6 +129,7 @@ public class WorkGroupManagement extends JInternalFrame {
 
 
         add.setText(ThreadPoolManager.getLangValue("TMS_ADD"));
+        add.setVisible(ThreadPoolManager.hasPermission("ADD_WORKGROUP"));
         add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -140,6 +141,7 @@ public class WorkGroupManagement extends JInternalFrame {
         });
 
         edit.setText(ThreadPoolManager.getLangValue("TMS_EDIT"));
+        edit.setVisible(ThreadPoolManager.hasPermission("EDIT_WORKGROUP"));
         edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {

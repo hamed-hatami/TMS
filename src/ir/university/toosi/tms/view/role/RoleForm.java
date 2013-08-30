@@ -181,6 +181,7 @@ public class RoleForm extends JInternalFrame {
         });
 
         assignOperation.setText(ThreadPoolManager.getLangValue("TMS_ASSIGN_OPERATION"));
+        assignOperation.setVisible(ThreadPoolManager.hasPermission("ASSINGN_OPERATION"));
         assignOperation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {

@@ -130,6 +130,7 @@ public class CalendarForm extends JInternalFrame {
         );
 
         addWeekDay.setText("ADDWEEKDAY");
+        addWeekDay.setVisible(ThreadPoolManager.hasPermission("ADDWEEKDAY_CALENDER"));
 
         addWeekDay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,6 +143,7 @@ public class CalendarForm extends JInternalFrame {
         });
 
         addExceptionDate.setText("ADDEXCEPTIONDATE");
+        addExceptionDate.setVisible(ThreadPoolManager.hasPermission("ADDEXCEPTIONDATA_CALENDER"));
         addExceptionDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -155,10 +157,14 @@ public class CalendarForm extends JInternalFrame {
         addExceptionDate.setEnabled(added);
         addWeekDay.setEnabled(added);
 
-        if (editMode)
+        if (editMode){
             add.setText("EDIT");
-        else
+          add.setVisible(ThreadPoolManager.hasPermission("EDIT_CALENDER"));
+        }
+        else {
             add.setText("ADD");
+            add.setVisible(ThreadPoolManager.hasPermission("ADD_CALENDER"));
+        }
 
         add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +176,7 @@ public class CalendarForm extends JInternalFrame {
         });
 
         close.setText("CLOSE");
+        close.setVisible(ThreadPoolManager.hasPermission("CLOSE_CALENDER"));
         close.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                     close(evt);

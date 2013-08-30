@@ -89,15 +89,12 @@ public class Login extends javax.swing.JInternalFrame {
         login.setText(ThreadPoolManager.getLangValue("TMS_LOGIN"));
 
         cancel.setText(ThreadPoolManager.getLangValue("TMS_CANCEL"));
-
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
-
-
         login.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,7 +125,7 @@ public class Login extends javax.swing.JInternalFrame {
                 } else {
                     try {
                         String ipAddress = InetAddress.getLocalHost().getHostAddress();
-                        boolean allowed = false;
+                        boolean allowed = true;
                         for (PC pc : result.getPcs()) {
                             if (pc.getIp().equals(ipAddress)) {
                                 allowed = true;

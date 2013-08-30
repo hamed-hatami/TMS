@@ -134,6 +134,7 @@ public class PCForm extends JInternalFrame {
         );
 
         cancel.setText(ThreadPoolManager.getLangValue("TMS_CANCEL"));
+        cancel.setVisible(ThreadPoolManager.hasPermission("CANCLE_PC"));
         cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 close(evt);
@@ -141,6 +142,7 @@ public class PCForm extends JInternalFrame {
         });
 
         ok.setText(ThreadPoolManager.getLangValue("TMS_OK"));
+        ok.setVisible(ThreadPoolManager.hasPermission("OK_PC"));
         ok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if (editMode)

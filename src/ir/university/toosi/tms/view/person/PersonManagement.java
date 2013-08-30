@@ -157,6 +157,7 @@ public class PersonManagement extends JInternalFrame {
         mainTable.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         delete.setText(ThreadPoolManager.getLangValue("TMS_DELETE"));
+        delete.setVisible(ThreadPoolManager.hasPermission("DELET_PERSON"));
         delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 int result = JOptionPane.showConfirmDialog(null, "DELETE_PERSON", "DELETE", JOptionPane.OK_CANCEL_OPTION);
@@ -169,6 +170,7 @@ public class PersonManagement extends JInternalFrame {
         });
 
         edit.setText(ThreadPoolManager.getLangValue("TMS_EDIT"));
+        edit.setVisible(ThreadPoolManager.hasPermission("EDIT_PERSON"));
         edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -180,6 +182,7 @@ public class PersonManagement extends JInternalFrame {
         });
 
         add.setText(ThreadPoolManager.getLangValue("TMS_ADD"));
+        add.setVisible(ThreadPoolManager.hasPermission("ADD_PERSON"));
         add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {

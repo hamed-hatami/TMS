@@ -123,6 +123,7 @@ public class PersonForm extends JInternalFrame {
         });
 
         browse.setText(ThreadPoolManager.getLangValue("TMS_BROWSE"));
+        browse.setVisible(ThreadPoolManager.hasPermission("BROWS_PERSON"));
 
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
         mainPanel.setLayout(jPanel1Layout);
@@ -205,10 +206,13 @@ public class PersonForm extends JInternalFrame {
             }
         });
 
-        if (editMode)
+        if (editMode)  {
             edit.setText(ThreadPoolManager.getLangValue("TMS_EDIT"));
+            edit.setVisible(ThreadPoolManager.hasPermission("EDIT_PERSON"));
+        }
         else
             edit.setText(ThreadPoolManager.getLangValue("TMS_ADD"));
+            edit.setVisible(ThreadPoolManager.hasPermission("ADD_PERSON"));
         edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if (editMode)
@@ -219,6 +223,7 @@ public class PersonForm extends JInternalFrame {
         });
 
         jobSetting.setText(ThreadPoolManager.getLangValue("TMS_JOB_SETTING"));
+        jobSetting.setVisible(ThreadPoolManager.hasPermission("JOB_SETTING"));
         jobSetting.setEnabled(added);
         jobSetting.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent evt) {

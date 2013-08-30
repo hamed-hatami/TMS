@@ -105,7 +105,7 @@ public class LanguageManagementForm extends JInternalFrame {
 
             @Override
             public void editingCanceled(ChangeEvent e) {
-                System.out.println("Canceeeeeel");
+
             }
         });
 

@@ -155,6 +155,7 @@ public class PersonList extends JInternalFrame {
 
 
         add.setText("ASSIGN");
+        add.setVisible(ThreadPoolManager.hasPermission("ASSING_PERSON"));
         add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 assignPersonActionPerformed(evt);

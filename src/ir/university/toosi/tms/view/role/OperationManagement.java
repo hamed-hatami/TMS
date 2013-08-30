@@ -99,6 +99,7 @@ public class OperationManagement extends JInternalFrame {
 
 
         assign.setText(ThreadPoolManager.getLangValue("TMS_ASSIGN"));
+        assign.setVisible(ThreadPoolManager.hasPermission("ASSIGN_OPERATION"));
         assign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 assignActionPerformed(evt);

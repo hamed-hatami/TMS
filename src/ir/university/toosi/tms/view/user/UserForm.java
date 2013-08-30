@@ -260,6 +260,7 @@ public class UserForm extends JInternalFrame {
 
 
         cancelButton.setText(ThreadPoolManager.getLangValue("TMS_CANCEL"));
+        cancelButton.setVisible(ThreadPoolManager.hasPermission("CANCLE_PC"));
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 cancel();
@@ -278,6 +279,7 @@ public class UserForm extends JInternalFrame {
         });
 
         assignPC.setText(ThreadPoolManager.getLangValue("TMS_ASSIGN_PC"));
+        assignPC.setVisible(ThreadPoolManager.hasPermission("ASSIGN_PC"));
         assignPC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -291,6 +293,7 @@ public class UserForm extends JInternalFrame {
         assignPC.setEnabled(editable);
 
         assignPerson.setText(ThreadPoolManager.getLangValue("TMS_ASSIGN_PERSON"));
+        assignPerson.setVisible(ThreadPoolManager.hasPermission("ASSIGN_PERSON"));
         assignPerson.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {

@@ -101,6 +101,7 @@ public class CalendarManagement extends JInternalFrame {
 
 
         add.setText("ADD");
+        add.setVisible(ThreadPoolManager.hasPermission("ADD_PC"));
         add.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 try {

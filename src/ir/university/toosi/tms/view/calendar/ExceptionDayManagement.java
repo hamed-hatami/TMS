@@ -106,6 +106,7 @@ public class ExceptionDayManagement extends JInternalFrame {
         });
 
         add.setText("ADD");
+        add.setVisible(ThreadPoolManager.hasPermission("ADD_EXCEPTION"));
         add.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 try {
@@ -117,6 +118,7 @@ public class ExceptionDayManagement extends JInternalFrame {
         });
 
         delete.setText("DELETE");
+        delete.setVisible(ThreadPoolManager.hasPermission("DELETE_EXCEPTION"));
         delete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 int result = JOptionPane.showConfirmDialog(null, "DELETE_USER", "DELETE", JOptionPane.OK_CANCEL_OPTION);

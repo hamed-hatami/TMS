@@ -106,6 +106,7 @@ public class PCManagement extends JInternalFrame {
 
 
         add.setText(ThreadPoolManager.getLangValue("TMS_ADD"));
+        add.setVisible(ThreadPoolManager.hasPermission("ADD_PC"));
         add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -117,6 +118,7 @@ public class PCManagement extends JInternalFrame {
         });
 
         delete.setText(ThreadPoolManager.getLangValue("TMS_DELETE"));
+        delete.setVisible(ThreadPoolManager.hasPermission("DELETE_PC"));
         delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 int result = JOptionPane.showConfirmDialog(null, "DELETE_PC", "DELETE", JOptionPane.OK_CANCEL_OPTION);
@@ -127,6 +129,7 @@ public class PCManagement extends JInternalFrame {
         });
 
         edit.setText(ThreadPoolManager.getLangValue("TMS_EDIT"));
+        edit.setVisible(ThreadPoolManager.hasPermission("EDIT_PC"));
         edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -138,6 +141,7 @@ public class PCManagement extends JInternalFrame {
         });
 
         assign.setText(ThreadPoolManager.getLangValue("TMS_ASSIGN"));
+        assign.setVisible(ThreadPoolManager.hasPermission("ASSIGN_PC"));
         assign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 int result = JOptionPane.showConfirmDialog(null, "ASSIGN_PC", "ASSIGN", JOptionPane.OK_CANCEL_OPTION);
