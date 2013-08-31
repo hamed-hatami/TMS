@@ -1,5 +1,7 @@
 package ir.university.toosi.tms.view;
 
+import ir.university.toosi.tms.controller.LanguageAction;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -15,5 +17,6 @@ public class TMSJDesktop extends JDesktopPane {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
+        setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
     }
 }
