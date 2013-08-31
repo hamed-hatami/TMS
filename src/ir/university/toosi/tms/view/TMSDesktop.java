@@ -9,7 +9,7 @@ import java.awt.*;
  * @author : Hamed Hatami , Farzad Sedaghatbin, Atefeh Ahmadi
  * @version : 1.0
  */
-public class TMSJDesktop extends JDesktopPane {
+public class TMSDesktop extends JDesktopPane {
 
     Image image = new ImageIcon("D:\\Layering.jpg").getImage();
 
