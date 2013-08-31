@@ -65,6 +65,7 @@ public class Login extends TMSInternalFrame {
 
     private void initComponents() {
 
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         loginService.setServiceName("/loadLanguage");
         try {
