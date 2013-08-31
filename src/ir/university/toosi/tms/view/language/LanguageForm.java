@@ -126,7 +126,7 @@ public class LanguageForm extends TMSInternalFrame {
         try {
             new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(langServiceInfo.getServerUrl(), langServiceInfo.getServiceName(), new ObjectMapper().writeValueAsString(languages)), Languages.class);
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
 
         this.dispose();
