@@ -7,6 +7,7 @@ import ir.university.toosi.tms.model.entity.OperationSearchItems;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
+import ir.university.toosi.tms.view.TMSInternalFrame;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
@@ -18,7 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OperationManagement extends JInternalFrame {
+public class OperationManagement extends TMSInternalFrame {
 
     /**
      * Creates new form ContactEditor

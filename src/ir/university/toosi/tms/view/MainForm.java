@@ -3,7 +3,6 @@ package ir.university.toosi.tms.view;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.controller.LanguageAction;
-import ir.university.toosi.tms.model.entity.LanguageManagement;
 import ir.university.toosi.tms.model.entity.Languages;
 import ir.university.toosi.tms.model.entity.Lookup;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
@@ -35,7 +34,7 @@ import java.util.List;
 
 public class MainForm extends JFrame implements ActionListener, InternalFrameListener {
 
-    private TMSJDesktop jdpDesktop;
+    private TMSDesktop jdpDesktop;
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenu languageMenu;
@@ -69,7 +68,6 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             setSize(xSize, ySize);
 
             setDefaultLookAndFeelDecorated(true);
-            //setUndecorated(true);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 
@@ -83,7 +81,7 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             loginForm = new Login(this);
             loginForm.setVisible(true);
 
-            jdpDesktop = new TMSJDesktop();
+            jdpDesktop = new TMSDesktop();
             jdpDesktop.add(loginForm);
 
             loginForm.setSelected(true);
@@ -352,7 +350,7 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
         return jdpDesktop;
     }
 
-    public void setJdpDesktop(TMSJDesktop jdpDesktop) {
+    public void setJdpDesktop(TMSDesktop jdpDesktop) {
         this.jdpDesktop = jdpDesktop;
     }
 

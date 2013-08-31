@@ -10,6 +10,7 @@ import ir.university.toosi.tms.model.entity.Languages;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
+import ir.university.toosi.tms.view.TMSInternalFrame;
 
 import javax.swing.*;
 import java.io.File;
@@ -20,7 +21,7 @@ import java.util.List;
 /**
  * @author farzad
  */
-public class FileChooser extends JInternalFrame {
+public class FileChooser extends TMSInternalFrame {
 
     private JDesktopPane jdpDesktop;
 

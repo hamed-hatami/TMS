@@ -7,6 +7,7 @@ import ir.university.toosi.tms.model.entity.person.Person;
 import ir.university.toosi.tms.model.entity.person.PersonSearchItems;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
+import ir.university.toosi.tms.view.TMSInternalFrame;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
@@ -18,7 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonManagement extends JInternalFrame {
+public class PersonManagement extends TMSInternalFrame {
 
     public PersonManagement() {
 

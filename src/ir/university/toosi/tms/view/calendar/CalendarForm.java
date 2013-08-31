@@ -5,13 +5,14 @@ import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.model.entity.calendar.Calendar;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
+import ir.university.toosi.tms.view.TMSInternalFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 
-public class CalendarForm extends JInternalFrame {
+public class CalendarForm extends TMSInternalFrame {
 
     /**
      * Creates new form ContactEditor

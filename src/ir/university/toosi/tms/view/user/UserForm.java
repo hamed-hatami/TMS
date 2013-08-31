@@ -8,6 +8,7 @@ import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.model.entity.WorkGroup;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
+import ir.university.toosi.tms.view.TMSInternalFrame;
 import ir.university.toosi.tms.view.person.PersonList;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
@@ -22,7 +23,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class UserForm extends JInternalFrame {
+public class UserForm extends TMSInternalFrame {
 
     /**
      * Creates new form ContactEditor

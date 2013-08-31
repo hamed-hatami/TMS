@@ -37,6 +37,7 @@ import ir.university.toosi.tms.model.entity.Role;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
+import ir.university.toosi.tms.view.TMSInternalFrame;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
@@ -46,7 +47,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoleForm extends JInternalFrame {
+public class RoleForm extends TMSInternalFrame {
 
     /**
      * Creates new form ContactEditor

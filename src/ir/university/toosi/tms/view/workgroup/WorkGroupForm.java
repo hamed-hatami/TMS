@@ -11,6 +11,7 @@ import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.model.entity.WorkGroup;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
+import ir.university.toosi.tms.view.TMSInternalFrame;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -19,7 +20,7 @@ import java.util.*;
 /**
  * @author root
  */
-public class WorkGroupForm extends JInternalFrame {
+public class WorkGroupForm extends TMSInternalFrame {
 
     /**
      * Creates new form WorkGroupForm

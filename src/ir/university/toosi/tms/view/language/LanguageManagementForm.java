@@ -8,6 +8,7 @@ import ir.university.toosi.tms.model.entity.LanguageManagement;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
+import ir.university.toosi.tms.view.TMSInternalFrame;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
@@ -23,7 +24,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
 
-public class LanguageManagementForm extends JInternalFrame {
+public class LanguageManagementForm extends TMSInternalFrame {
 
     /**
      * Creates new form ContactEditor

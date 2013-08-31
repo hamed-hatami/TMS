@@ -8,6 +8,7 @@ import ir.university.toosi.tms.model.entity.calendar.Calendar;
 import ir.university.toosi.tms.model.entity.calendar.WeekDay;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
+import ir.university.toosi.tms.view.TMSInternalFrame;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
@@ -19,7 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeekDayManagement extends JInternalFrame {
+public class WeekDayManagement extends TMSInternalFrame {
 
     /**
      * Creates new form ContactEditor
