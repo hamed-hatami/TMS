@@ -52,7 +52,7 @@ public class Login extends TMSInternalFrame {
             languagesList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(loginService.getServerUrl(), loginService.getServiceName()), new TypeReference<List<Languages>>() {
             });
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
         langItems = new String[languagesList.size()];
         int i = 0;
