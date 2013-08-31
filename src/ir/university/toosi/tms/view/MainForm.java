@@ -36,12 +36,13 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
 
     private TMSDesktop jdpDesktop;
     private JMenuBar menuBar;
-    private JMenu menu;
     private JMenu languageMenu;
     private JMenu managementMenu;
     private JMenu basicInfoMenu;
+    private JMenuItem exit;
+    private JMenu exitMenu;
+
     private JMenuItem[] basicInfoMenus;
-    private JMenuItem menuItem;
     private JMenuItem languageDefItem;
     private JMenuItem importLanguage;
     private JMenuItem userManagementItem;
@@ -109,21 +110,15 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
         try {
             menuBar = new JMenuBar();
             menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
-            menu = new JMenu();
 
             languageMenu = new JMenu();
-            menuItem = new JMenuItem();
             languageDefItem = new JMenuItem();
             importLanguage = new JMenuItem();
-            menu.setText(LanguageAction.getBundleMessage("loginForm"));
-            languageMenu.setText(LanguageAction.getBundleMessage("language"));
-            menuItem.setText(LanguageAction.getBundleMessage("salam"));
-            languageDefItem.setText(LanguageAction.getBundleMessage("languageDef"));
-            importLanguage.setText(LanguageAction.getBundleMessage("importLanguage"));
-            menuItem.addActionListener(this);
+            languageMenu.setText(ThreadPoolManager.getLangValue("language"));
+            languageDefItem.setText(ThreadPoolManager.getLangValue("languageDef"));
+            importLanguage.setText(ThreadPoolManager.getLangValue("importLanguage"));
             languageDefItem.addActionListener(this);
             importLanguage.addActionListener(this);
-            menu.add(menuItem);
             languageMenu.add(languageDefItem);
 //            if (languageList != null && !languageList.isEmpty()) {
 //                LanguageAction.initProperty(languageList.get(0).getContent());
@@ -134,19 +129,20 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             managementMenu = new JMenu();
             workGroupManagementItem = new JMenuItem();
             calendarManagementItem = new JMenuItem();
+            calendarManagementItem.setVisible(false);
             personManagementItem = new JMenuItem();
             userManagementItem = new JMenuItem();
 //            roleManagementItem = new JMenuItem();
             operationManagementItem = new JMenuItem();
             eventLogListItem = new JMenuItem();
-            workGroupManagementItem.setText(LanguageAction.getBundleMessage("workgroup_management"));
-            calendarManagementItem.setText(LanguageAction.getBundleMessage("calendar_management"));
-            personManagementItem.setText(LanguageAction.getBundleMessage("person_management"));
-            managementMenu.setText(LanguageAction.getBundleMessage("management"));
+            workGroupManagementItem.setText(ThreadPoolManager.getLangValue("workgroup_management"));
+            calendarManagementItem.setText(ThreadPoolManager.getLangValue("calendar_management"));
+            personManagementItem.setText(ThreadPoolManager.getLangValue("person_management"));
+            managementMenu.setText(ThreadPoolManager.getLangValue("management"));
 //            roleManagementItem.setText(LanguageAction.getBundleMessage("role_management"));
-            operationManagementItem.setText(LanguageAction.getBundleMessage("operation_management"));
-            userManagementItem.setText(LanguageAction.getBundleMessage("user_management"));
-            eventLogListItem.setText(LanguageAction.getBundleMessage("eventLog_list"));
+            operationManagementItem.setText(ThreadPoolManager.getLangValue("operation_management"));
+            userManagementItem.setText(ThreadPoolManager.getLangValue("user_management"));
+            eventLogListItem.setText(ThreadPoolManager.getLangValue("eventLog_list"));
             userManagementItem.addActionListener(this);
 //            roleManagementItem.addActionListener(this);
             operationManagementItem.addActionListener(this);
@@ -163,7 +159,15 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             managementMenu.add(personManagementItem);
 
             basicInfoMenu = new JMenu();
-            basicInfoMenu.setText(LanguageAction.getBundleMessage("BasicInfo"));
+            basicInfoMenu.setVisible(false);
+            basicInfoMenu.setText(ThreadPoolManager.getLangValue("BasicInfo"));
+            exit= new JMenuItem();
+            exitMenu= new JMenu();
+            exit.setText(ThreadPoolManager.getLangValue("exit"));
+            exitMenu.setText(ThreadPoolManager.getLangValue("operation"));
+            exit.addActionListener(this);
+            exitMenu.addActionListener(this);
+            exitMenu.add(exit);
             lookupService = new WebServiceInfo();
             lookupService.setServiceName("/getAllDefinableLookup");
             lookups = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(lookupService.getServerUrl(), lookupService.getServiceName()), new TypeReference<List<Lookup>>() {
@@ -172,15 +176,16 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             int i = 0;
             for (Lookup lookup : lookups) {
                 JMenuItem jMenuItem = new JMenuItem();
+                jMenuItem.setVisible(false);
                 jMenuItem.setText(LanguageAction.getBundleMessage(lookup.getName()));
                 jMenuItem.addActionListener(this);
                 basicInfoMenus[i++] = jMenuItem;
                 basicInfoMenu.add(jMenuItem);
             }
 
-            menuBar.add(menu);
             menuBar.add(languageMenu);
             menuBar.add(managementMenu);
+            menuBar.add(exitMenu);
             menuBar.add(basicInfoMenu);
         } catch (Exception e) {
             e.printStackTrace();
@@ -255,10 +260,8 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
     private void refreshMainForm() {
         jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
         menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
-        menu.setText(LanguageAction.getBundleMessage("loginForm"));
-        languageMenu.setText(LanguageAction.getBundleMessage("language"));
-        menuItem.setText(LanguageAction.getBundleMessage("salam"));
-        languageDefItem.setText(LanguageAction.getBundleMessage("languageDef"));
+        languageMenu.setText(ThreadPoolManager.getLangValue("language"));
+        languageDefItem.setText(ThreadPoolManager.getLangValue("languageDef"));
         jdpDesktop.removeAll();
         jdpDesktop.revalidate();
         jdpDesktop.repaint();
@@ -281,9 +284,7 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            if (e.getSource() == menuItem) {
-                showPersonEdit();
-            } else if (e.getSource() == languageDefItem) {
+           if (e.getSource() == languageDefItem) {
                 showLanguageDef();
             } else if (e.getSource() == userManagementItem) {
                 showUserManagement();
@@ -301,6 +302,8 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
                 showCalendarManagment();
             } else if (e.getSource() == personManagementItem) {
                 showPersonManagment();
+            }else if (e.getSource() == exit) {
+                System.exit(0);
             } else {
                 for (int i = 0; i < basicInfoMenus.length; i++) {
                     JMenuItem infoMenu = basicInfoMenus[i];
@@ -328,13 +331,6 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
         this.jdpDesktop = jdpDesktop;
     }
 
-    public JMenu getMenu() {
-        return menu;
-    }
-
-    public void setMenu(JMenu menu) {
-        this.menu = menu;
-    }
 
     public JMenu getLanguageMenu() {
         return languageMenu;
@@ -342,14 +338,6 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
 
     public void setLanguageMenu(JMenu languageMenu) {
         this.languageMenu = languageMenu;
-    }
-
-    public JMenuItem getMenuItem() {
-        return menuItem;
-    }
-
-    public void setMenuItem(JMenuItem menuItem) {
-        this.menuItem = menuItem;
     }
     public Login getLoginForm() {
         return loginForm;
