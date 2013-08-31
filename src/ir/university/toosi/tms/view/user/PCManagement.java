@@ -9,6 +9,7 @@ import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
+import ir.university.toosi.tms.view.TMSPanel;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
@@ -29,14 +30,14 @@ public class PCManagement extends TMSInternalFrame {
      */
     public PCManagement() {
         fillSearchCombo();
-        mainPanel = new JPanel();
+        mainPanel = new TMSPanel();
         tableScroll = new JScrollPane();
         mainTable = new JTable();
         add = new JButton();
         delete = new JButton();
         edit = new JButton();
         assign = new JButton();
-        searchPanel = new JPanel();
+        searchPanel = new TMSPanel();
         searchCombo = new JComboBox(searchItems);
         searchText = new JTextField();
         filter = new JLabel();
@@ -51,14 +52,14 @@ public class PCManagement extends TMSInternalFrame {
     public PCManagement(UserForm userForm, User user, JDesktopPane jdpDesktop) {
         fillSearchCombo();
         this.userForm = userForm;
-        mainPanel = new JPanel();
+        mainPanel = new TMSPanel();
         tableScroll = new JScrollPane();
         mainTable = new JTable();
         add = new JButton();
         delete = new JButton();
         edit = new JButton();
         assign = new JButton();
-        searchPanel = new JPanel();
+        searchPanel = new TMSPanel();
         searchCombo = new JComboBox(searchItems);
         searchText = new JTextField();
         filter = new JLabel();
@@ -153,14 +154,14 @@ public class PCManagement extends TMSInternalFrame {
         });
 
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
-        mainPanel.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout TMSPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
+        mainPanel.setLayout(TMSPanel1Layout);
+        TMSPanel1Layout.setHorizontalGroup(
+                TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel1Layout.createSequentialGroup()
                                 .add(36, 36, 36)
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                        .add(jPanel1Layout.createSequentialGroup()
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(TMSPanel1Layout.createSequentialGroup()
                                                 .add(add)
                                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                                                 .add(delete)
@@ -171,11 +172,11 @@ public class PCManagement extends TMSInternalFrame {
                                         .add(tableScroll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(45, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
+        TMSPanel1Layout.setVerticalGroup(
+                TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(add)
                                         .add(delete)
                                         .add(edit)
@@ -224,11 +225,11 @@ public class PCManagement extends TMSInternalFrame {
 
         by.setText(ThreadPoolManager.getLangValue("TMS_BY"));
 
-        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(searchPanel);
-        searchPanel.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-                jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel2Layout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout TMSPanel2Layout = new org.jdesktop.layout.GroupLayout(searchPanel);
+        searchPanel.setLayout(TMSPanel2Layout);
+        TMSPanel2Layout.setHorizontalGroup(
+                TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .add(filter)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -239,11 +240,11 @@ public class PCManagement extends TMSInternalFrame {
                                 .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(194, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-                jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel2Layout.createSequentialGroup()
+        TMSPanel2Layout.setVerticalGroup(
+                TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(filter)
                                         .add(searchText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -414,8 +415,8 @@ public class PCManagement extends TMSInternalFrame {
     private JComboBox searchCombo;
     private JLabel by;
     private JLabel filter;
-    private JPanel mainPanel;
-    private JPanel searchPanel;
+    private TMSPanel mainPanel;
+    private TMSPanel searchPanel;
     private JScrollPane tableScroll;
     private JTable mainTable;
     private UserForm userForm;

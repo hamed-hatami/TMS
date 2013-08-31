@@ -31,11 +31,11 @@ public class Login extends TMSInternalFrame {
 
         fillSearchCombo();
         this.mainForm = mainForm;
-        jPanel1 = new TMSPanel();
+        TMSPanel1 = new TMSPanel();
         login = new JButton();
         cancel = new JButton();
         userName = new JTextField();
-        password = new JTextField();
+        password = new JPasswordField();
         userNameLabel = new JLabel();
         passwordLabel = new JLabel();
         langLabel = new JLabel();
@@ -75,7 +75,7 @@ public class Login extends TMSInternalFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        TMSPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
         login.setText(ThreadPoolManager.getLangValue("TMS_LOGIN"));
 
@@ -170,47 +170,47 @@ public class Login extends TMSInternalFrame {
 
         langLabel.setText(ThreadPoolManager.getLangValue("TMS_LANGUAGE"));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout TMSPanel1Layout = new javax.swing.GroupLayout(TMSPanel1);
+        TMSPanel1.setLayout(TMSPanel1Layout);
+        TMSPanel1Layout.setHorizontalGroup(
+                TMSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(TMSPanel1Layout.createSequentialGroup()
+                                .addGroup(TMSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(TMSPanel1Layout.createSequentialGroup()
                                                 .addGap(141, 141, 141)
                                                 .addComponent(login)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(cancel))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(TMSPanel1Layout.createSequentialGroup()
                                                 .addContainerGap(109, Short.MAX_VALUE)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(TMSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                         .addComponent(userNameLabel)
                                                         .addComponent(langLabel)
                                                         .addComponent(passwordLabel))
                                                 .addGap(29, 29, 29)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(TMSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                         .addComponent(password)
                                                         .addComponent(language)
                                                         .addComponent(userName, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))))
                                 .addContainerGap(94, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        TMSPanel1Layout.setVerticalGroup(
+                TMSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TMSPanel1Layout.createSequentialGroup()
                                 .addGap(49, 49, 49)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(TMSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(userNameLabel)
                                         .addComponent(userName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(TMSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(passwordLabel)
                                         .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(TMSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(langLabel)
                                         .addComponent(language, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(TMSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(login)
                                         .addComponent(cancel))
                                 .addGap(25, 25, 25))
@@ -222,14 +222,14 @@ public class Login extends TMSInternalFrame {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(37, 37, 37)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TMSPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(65, 65, 65)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TMSPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(65, Short.MAX_VALUE))
         );
 
@@ -248,9 +248,9 @@ public class Login extends TMSInternalFrame {
     private JLabel userNameLabel;
     private JLabel passwordLabel;
     private JLabel langLabel;
-    private TMSPanel jPanel1;
+    private TMSPanel TMSPanel1;
     private JTextField userName;
-    private JTextField password;
+    private JPasswordField password;
     private JComboBox language;
     private WebServiceInfo loginService = new WebServiceInfo();
     ;

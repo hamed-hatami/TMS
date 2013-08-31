@@ -37,6 +37,7 @@ import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
+import ir.university.toosi.tms.view.TMSPanel;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -51,7 +52,7 @@ public class PCForm extends TMSInternalFrame {
         this.editMode = editMode;
         this.pc = pc;
         this.pcManagement = pcManagement;
-        mainPanel = new JPanel();
+        mainPanel = new TMSPanel();
         nameLabel = new JLabel();
         pcName = new JTextField();
         ipLabel = new JLabel();
@@ -101,34 +102,34 @@ public class PCForm extends TMSInternalFrame {
             pcLocation.setText("");
 
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
-        mainPanel.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout TMSPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
+        mainPanel.setLayout(TMSPanel1Layout);
+        TMSPanel1Layout.setHorizontalGroup(
+                TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel1Layout.createSequentialGroup()
                                 .add(30, 30, 30)
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                                         .add(nameLabel)
                                         .add(ipLabel)
                                         .add(locationLabel))
                                 .add(18, 18, 18)
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                                         .add(org.jdesktop.layout.GroupLayout.LEADING, pcLocation, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                                         .add(org.jdesktop.layout.GroupLayout.LEADING, pcIP, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                                         .add(pcName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
                                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+        TMSPanel1Layout.setVerticalGroup(
+                TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel1Layout.createSequentialGroup()
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(nameLabel)
                                         .add(pcName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(pcIP, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(ipLabel))
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(pcLocation, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(locationLabel))
                                 .addContainerGap(37, Short.MAX_VALUE))
@@ -250,7 +251,7 @@ public class PCForm extends TMSInternalFrame {
     private JLabel nameLabel;
     private JLabel ipLabel;
     private JLabel locationLabel;
-    private JPanel mainPanel;
+    private TMSPanel mainPanel;
     private JTextField pcName;
     private JTextField pcIP;
     private JTextField pcLocation;

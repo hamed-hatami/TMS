@@ -6,6 +6,7 @@ import ir.university.toosi.tms.model.entity.calendar.Calendar;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
+import ir.university.toosi.tms.view.TMSPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,7 +20,7 @@ public class CalendarForm extends TMSInternalFrame {
      */
     public CalendarForm() {
 
-        mainPanel = new JPanel();
+        mainPanel = new TMSPanel();
         nameLabel = new JLabel();
         codeLabel = new JLabel();
         name = new JTextField();
@@ -36,7 +37,7 @@ public class CalendarForm extends TMSInternalFrame {
 
     public CalendarForm(JDesktopPane jDesktopPane, boolean editMode, Calendar calendar, CalendarManagement calendarManagement) {
 
-        mainPanel = new JPanel();
+        mainPanel = new TMSPanel();
         nameLabel = new JLabel();
         codeLabel = new JLabel();
         name = new JTextField();
@@ -90,40 +91,40 @@ public class CalendarForm extends TMSInternalFrame {
         else
             defaultCal.setSelected(false);
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
-        mainPanel.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout TMSPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
+        mainPanel.setLayout(TMSPanel1Layout);
+        TMSPanel1Layout.setHorizontalGroup(
+                TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel1Layout.createSequentialGroup()
                                 .add(50, 50, 50)
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                        .add(jPanel1Layout.createSequentialGroup()
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                        .add(TMSPanel1Layout.createSequentialGroup()
                                                 .add(nameLabel)
                                                 .add(16, 16, 16))
-                                        .add(jPanel1Layout.createSequentialGroup()
+                                        .add(TMSPanel1Layout.createSequentialGroup()
                                                 .add(descLabel)
                                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)))
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                                         .add(desc)
                                         .add(name, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
                                 .add(82, 82, 82)
                                 .add(codeLabel)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                         .add(code, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 112, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(defaultCal))
                                 .addContainerGap(29, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+        TMSPanel1Layout.setVerticalGroup(
+                TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel1Layout.createSequentialGroup()
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(nameLabel)
                                         .add(name, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(codeLabel)
                                         .add(code, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                                 .add(26, 26, 26)
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(desc, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(descLabel)
                                         .add(defaultCal))
@@ -302,7 +303,7 @@ public class CalendarForm extends TMSInternalFrame {
     private JLabel nameLabel;
     private JLabel codeLabel;
     private JLabel descLabel;
-    private JPanel mainPanel;
+    private TMSPanel mainPanel;
     private JTextField name;
     private JTextField code;
     private JTextField desc;

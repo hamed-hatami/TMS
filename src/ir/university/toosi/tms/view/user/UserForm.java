@@ -9,6 +9,7 @@ import ir.university.toosi.tms.model.entity.WorkGroup;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
+import ir.university.toosi.tms.view.TMSPanel;
 import ir.university.toosi.tms.view.person.PersonList;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
@@ -46,8 +47,8 @@ public class UserForm extends TMSInternalFrame {
         }
 
         buttonGroup1 = new ButtonGroup();
-        jPanel1 = new JPanel();
-        personPanel = new JPanel();
+        TMSPanel1 = new TMSPanel();
+        personPanel = new TMSPanel();
         userNameLabel = new JLabel();
         userName = new JTextField();
         passLabel = new JLabel();
@@ -64,7 +65,7 @@ public class UserForm extends TMSInternalFrame {
         okButton = new JButton();
         assignPC = new JButton();
         assignPerson = new JButton();
-        mainPanel = new JPanel();
+        mainPanel = new TMSPanel();
         tableScroll = new JScrollPane();
         mainTable = new JTable();
 
@@ -88,8 +89,8 @@ public class UserForm extends TMSInternalFrame {
         }
 
         buttonGroup1 = new ButtonGroup();
-        jPanel1 = new JPanel();
-        personPanel = new JPanel();
+        TMSPanel1 = new TMSPanel();
+        personPanel = new TMSPanel();
         userNameLabel = new JLabel();
         userName = new JTextField();
         passLabel = new JLabel();
@@ -106,7 +107,7 @@ public class UserForm extends TMSInternalFrame {
         okButton = new JButton();
         assignPC = new JButton();
         assignPerson = new JButton();
-        mainPanel = new JPanel();
+        mainPanel = new TMSPanel();
         this.jdpDesktop = jDesktopPane;
         tableScroll = new JScrollPane();
         mainTable = new JTable();
@@ -150,7 +151,7 @@ public class UserForm extends TMSInternalFrame {
         this.addInternalFrameListener(ThreadPoolManager.mainForm);
 
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_USER")));
+        TMSPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_USER")));
         personPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_PERSON")));
 
         userNameLabel.setText(ThreadPoolManager.getLangValue("TMS_USERNAME"));
@@ -181,80 +182,80 @@ public class UserForm extends TMSInternalFrame {
         tableScroll.setViewportView(mainTable);
         mainTable.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout TMSPanel1Layout = new org.jdesktop.layout.GroupLayout(TMSPanel1);
+        TMSPanel1.setLayout(TMSPanel1Layout);
+        TMSPanel1Layout.setHorizontalGroup(
+                TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel1Layout.createSequentialGroup()
                                 .add(45, 45, 45)
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                        .add(jPanel1Layout.createSequentialGroup()
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(TMSPanel1Layout.createSequentialGroup()
                                                 .add(jLabel5)
                                                 .add(18, 18, 18)
                                                 .add(workGroups, 0, 155, Short.MAX_VALUE))
-                                        .add(jPanel1Layout.createSequentialGroup()
-                                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(TMSPanel1Layout.createSequentialGroup()
+                                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                                         .add(passLabel)
                                                         .add(userNameLabel))
                                                 .add(18, 18, 18)
-                                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                                         .add(password, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                                                         .add(org.jdesktop.layout.GroupLayout.TRAILING, userName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                                                 )))
                                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+        TMSPanel1Layout.setVerticalGroup(
+                TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel1Layout.createSequentialGroup()
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(userName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(userNameLabel))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(password, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(passLabel))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
 
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(jLabel5)
                                         .add(workGroups, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         );
 
-        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(personPanel);
-        personPanel.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-                jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel2Layout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout TMSPanel2Layout = new org.jdesktop.layout.GroupLayout(personPanel);
+        personPanel.setLayout(TMSPanel2Layout);
+        TMSPanel2Layout.setHorizontalGroup(
+                TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel2Layout.createSequentialGroup()
                                 .add(45, 45, 45)
-                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                        .add(jPanel2Layout.createSequentialGroup()
+                                .add(TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(TMSPanel2Layout.createSequentialGroup()
                                                 .add(nationalCodeLabel)
                                                 .add(18, 18, 18)
                                                 .add(nationalCode, 0, 155, Short.MAX_VALUE))
-                                        .add(jPanel2Layout.createSequentialGroup()
-                                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(TMSPanel2Layout.createSequentialGroup()
+                                                .add(TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                                         .add(nameLabel)
                                                         .add(lastNameLabel))
                                                 .add(18, 18, 18)
-                                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                .add(TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                                         .add(lastName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                                                         .add(org.jdesktop.layout.GroupLayout.TRAILING, name, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                                                 )))
                                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-                jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel2Layout.createSequentialGroup()
-                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+        TMSPanel2Layout.setVerticalGroup(
+                TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel2Layout.createSequentialGroup()
+                                .add(TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(name, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(nameLabel))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(lastName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(lastNameLabel))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
 
-                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(nationalCodeLabel)
                                         .add(nationalCode, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
         );
@@ -307,19 +308,19 @@ public class UserForm extends TMSInternalFrame {
 
         assignPerson.setEnabled(editable);
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout1 = new org.jdesktop.layout.GroupLayout(mainPanel);
-        mainPanel.setLayout(jPanel1Layout1);
-        jPanel1Layout1.setHorizontalGroup(
-                jPanel1Layout1.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout1.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout TMSPanel1Layout1 = new org.jdesktop.layout.GroupLayout(mainPanel);
+        mainPanel.setLayout(TMSPanel1Layout1);
+        TMSPanel1Layout1.setHorizontalGroup(
+                TMSPanel1Layout1.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel1Layout1.createSequentialGroup()
                                 .add(36, 36, 36)
-                                .add(jPanel1Layout1.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                .add(TMSPanel1Layout1.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                         .add(tableScroll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(45, Short.MAX_VALUE))
         );
-        jPanel1Layout1.setVerticalGroup(
-                jPanel1Layout1.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout1.createSequentialGroup()
+        TMSPanel1Layout1.setVerticalGroup(
+                TMSPanel1Layout1.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel1Layout1.createSequentialGroup()
                                 .addContainerGap()
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .add(tableScroll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -333,7 +334,7 @@ public class UserForm extends TMSInternalFrame {
                 layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(layout.createSequentialGroup()
                                 .add(26, 26, 26)
-                                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(TMSPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(28, Short.MAX_VALUE))
                         .add(layout.createSequentialGroup()
                                 .add(26, 26, 26)
@@ -361,7 +362,7 @@ public class UserForm extends TMSInternalFrame {
                 layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(TMSPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(personPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -376,7 +377,7 @@ public class UserForm extends TMSInternalFrame {
 
         );
 
-        jPanel1.getAccessibleContext().setAccessibleName("UserForm");
+        TMSPanel1.getAccessibleContext().setAccessibleName("UserForm");
 
 
         // pack();
@@ -500,7 +501,7 @@ public class UserForm extends TMSInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ButtonGroup buttonGroup1;
     private JButton cancelButton;
-    private JPanel mainPanel;
+    private TMSPanel mainPanel;
     private JButton okButton;
     private JButton assignPC;
     private JButton assignPerson;
@@ -511,8 +512,8 @@ public class UserForm extends TMSInternalFrame {
     private JLabel nameLabel;
     private JLabel lastNameLabel;
     private JLabel nationalCodeLabel;
-    private JPanel jPanel1;
-    private JPanel personPanel;
+    private TMSPanel TMSPanel1;
+    private TMSPanel personPanel;
     private JTextField userName;
     private JTextField password;
     private JTextField name;

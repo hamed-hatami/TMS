@@ -8,6 +8,7 @@ import ir.university.toosi.tms.model.entity.calendar.ExceptionDay;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
+import ir.university.toosi.tms.view.TMSPanel;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
@@ -26,12 +27,12 @@ public class ExceptionDayManagement extends TMSInternalFrame {
      */
     public ExceptionDayManagement(Calendar calendar) {
         this.calendar = calendar;
-        mainPanel = new JPanel();
+        mainPanel = new TMSPanel();
         tableScroll = new JScrollPane();
         mainTable = new JTable();
         add = new JButton();
         delete = new JButton();
-        addPanel = new JPanel();
+        addPanel = new TMSPanel();
         fromDate = new JTextField();
         toDate = new JTextField();
         fromTime = new JTextField();
@@ -52,12 +53,12 @@ public class ExceptionDayManagement extends TMSInternalFrame {
     public ExceptionDayManagement(JDesktopPane jDesktopPane, Calendar calendar) {
         this.calendar = calendar;
         jdpDesktop = jDesktopPane;
-        mainPanel = new JPanel();
+        mainPanel = new TMSPanel();
         tableScroll = new JScrollPane();
         mainTable = new JTable();
         add = new JButton();
         delete = new JButton();
-        addPanel = new JPanel();
+        addPanel = new TMSPanel();
         fromDate = new JTextField();
         toDate = new JTextField();
         fromTime = new JTextField();
@@ -131,23 +132,23 @@ public class ExceptionDayManagement extends TMSInternalFrame {
             }
         });
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
-        mainPanel.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout TMSPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
+        mainPanel.setLayout(TMSPanel1Layout);
+        TMSPanel1Layout.setHorizontalGroup(
+                TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel1Layout.createSequentialGroup()
                                 .add(36, 36, 36)
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                        .add(jPanel1Layout.createSequentialGroup()
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(TMSPanel1Layout.createSequentialGroup()
                                                 .add(delete))
                                         .add(tableScroll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(45, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
+        TMSPanel1Layout.setVerticalGroup(
+                TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(delete))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .add(tableScroll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -169,59 +170,59 @@ public class ExceptionDayManagement extends TMSInternalFrame {
         fromTime.setEnabled(!holiday.isSelected());
         toTime.setEnabled(!holiday.isSelected());
 
-        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(addPanel);
-        addPanel.setLayout(jPanel2Layout);
+        org.jdesktop.layout.GroupLayout TMSPanel2Layout = new org.jdesktop.layout.GroupLayout(addPanel);
+        addPanel.setLayout(TMSPanel2Layout);
         addPanel.setBorder(BorderFactory.createTitledBorder("WEEKDAY"));
-        jPanel2Layout.setHorizontalGroup(
-                jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel2Layout.createSequentialGroup()
+        TMSPanel2Layout.setHorizontalGroup(
+                TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel2Layout.createSequentialGroup()
                                 .add(50, 50, 50)
-                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                        .add(jPanel2Layout.createSequentialGroup()
+                                .add(TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                        .add(TMSPanel2Layout.createSequentialGroup()
                                                 .add(fromDayLabel)
                                                 .add(16, 16, 16))
-                                        .add(jPanel2Layout.createSequentialGroup()
+                                        .add(TMSPanel2Layout.createSequentialGroup()
                                                 .add(fromTimeLabel)
                                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)))
-                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                                .add(TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                                         .add(fromTime)
                                         .add(fromDate, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
                                 .add(31, 31, 31)
-                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                .add(TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                                         .add(toDayLabel)
                                         .add(toTimeLabel))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                .add(TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                         .add(toTime, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                                         .add(toDate, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 112, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                                 .add(30, 30, 30))
-                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .add(org.jdesktop.layout.GroupLayout.TRAILING, TMSPanel2Layout.createSequentialGroup()
                                 .add(117, 117, 117)
                                 .add(holiday)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 178, Short.MAX_VALUE)
                                 .add(add)
                                 .add(97, 97, 97))
         );
-        jPanel2Layout.setVerticalGroup(
-                jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel2Layout.createSequentialGroup()
-                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+        TMSPanel2Layout.setVerticalGroup(
+                TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel2Layout.createSequentialGroup()
+                                .add(TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(fromDayLabel)
                                         .add(fromDate, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(toDayLabel)
                                         .add(toDate, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                                 .add(26, 26, 26)
-                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(fromTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(fromTimeLabel)
                                         .add(toTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 28, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(toTimeLabel))
-                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                        .add(jPanel2Layout.createSequentialGroup()
+                                .add(TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(TMSPanel2Layout.createSequentialGroup()
                                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 37, Short.MAX_VALUE)
                                                 .add(add)
                                                 .add(23, 23, 23))
-                                        .add(jPanel2Layout.createSequentialGroup()
+                                        .add(TMSPanel2Layout.createSequentialGroup()
                                                 .add(29, 29, 29)
                                                 .add(holiday)
                                                 .addContainerGap())))
@@ -359,8 +360,8 @@ public class ExceptionDayManagement extends TMSInternalFrame {
     private JLabel fromTimeLabel;
     private JLabel toTimeLabel;
     private WebServiceInfo exceptionDayService = new WebServiceInfo();
-    private JPanel mainPanel;
-    private JPanel addPanel;
+    private TMSPanel mainPanel;
+    private TMSPanel addPanel;
     private JScrollPane tableScroll;
     private JTable mainTable;
     private JDesktopPane jdpDesktop;

@@ -36,6 +36,7 @@ import ir.university.toosi.tms.model.entity.*;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
+import ir.university.toosi.tms.view.TMSPanel;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
@@ -57,13 +58,13 @@ public class RoleForm extends TMSInternalFrame {
         this.editMode = editMode;
         this.role = role;
         this.roleManagement = roleManagement;
-        mainPanel = new JPanel();
+        mainPanel = new TMSPanel();
         nameLabel = new JLabel();
         roleName = new JTextField();
         descLabel = new JLabel();
         roleDesc = new JTextField();
         cancel = new JButton();
-        operationPanel = new JPanel();
+        operationPanel = new TMSPanel();
         ok = new JButton();
         assignOperation = new JButton();
         mainTable = new JTable();
@@ -115,48 +116,48 @@ public class RoleForm extends TMSInternalFrame {
         else
             roleDesc.setText("");
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
-        mainPanel.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout TMSPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
+        mainPanel.setLayout(TMSPanel1Layout);
+        TMSPanel1Layout.setHorizontalGroup(
+                TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel1Layout.createSequentialGroup()
                                 .add(30, 30, 30)
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                                         .add(nameLabel)
                                         .add(descLabel))
                                 .add(18, 18, 18)
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                                         .add(org.jdesktop.layout.GroupLayout.LEADING, roleDesc, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                                         .add(roleName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
                                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+        TMSPanel1Layout.setVerticalGroup(
+                TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel1Layout.createSequentialGroup()
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(nameLabel)
                                         .add(roleName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(roleDesc, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(descLabel))
                                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout1 = new org.jdesktop.layout.GroupLayout(operationPanel);
-        operationPanel.setLayout(jPanel1Layout1);
-        jPanel1Layout1.setHorizontalGroup(
-                jPanel1Layout1.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout1.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout TMSPanel1Layout1 = new org.jdesktop.layout.GroupLayout(operationPanel);
+        operationPanel.setLayout(TMSPanel1Layout1);
+        TMSPanel1Layout1.setHorizontalGroup(
+                TMSPanel1Layout1.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel1Layout1.createSequentialGroup()
                                 .add(36, 36, 36)
-                                .add(jPanel1Layout1.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                .add(TMSPanel1Layout1.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                         .add(tableScroll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(45, Short.MAX_VALUE))
         );
-        jPanel1Layout1.setVerticalGroup(
-                jPanel1Layout1.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout1.createSequentialGroup()
+        TMSPanel1Layout1.setVerticalGroup(
+                TMSPanel1Layout1.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel1Layout1.createSequentialGroup()
                                 .addContainerGap()
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .add(tableScroll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -355,10 +356,10 @@ public class RoleForm extends TMSInternalFrame {
     private JButton assignOperation;
     private JLabel nameLabel;
     private JLabel descLabel;
-    private JPanel mainPanel;
+    private TMSPanel mainPanel;
     private JTextField roleName;
     private JTextField roleDesc;
-    private JPanel operationPanel;
+    private TMSPanel operationPanel;
     private boolean editMode;
     private Role role;
     private RoleManagement roleManagement;

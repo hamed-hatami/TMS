@@ -9,6 +9,7 @@ import ir.university.toosi.tms.model.entity.person.PersonSearchItems;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
+import ir.university.toosi.tms.view.TMSPanel;
 import ir.university.toosi.tms.view.user.UserForm;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
@@ -26,10 +27,10 @@ public class PersonList extends TMSInternalFrame {
 
         fillSearchCombo();
         jFileChooser1 = new JFileChooser();
-        searchPanel = new JPanel();
+        searchPanel = new TMSPanel();
         searchText = new JTextField();
         searchCombo = new JComboBox(searchItems);
-        mainPanel = new JPanel();
+        mainPanel = new TMSPanel();
         tableScroll = new JScrollPane();
         mainTable = new JTable();
         add = new JButton();
@@ -46,10 +47,10 @@ public class PersonList extends TMSInternalFrame {
 
         fillSearchCombo();
         jFileChooser1 = new JFileChooser();
-        searchPanel = new JPanel();
+        searchPanel = new TMSPanel();
         searchText = new JTextField();
         searchCombo = new JComboBox(searchItems);
-        mainPanel = new JPanel();
+        mainPanel = new TMSPanel();
         tableScroll = new JScrollPane();
         mainTable = new JTable();
         add = new JButton();
@@ -118,11 +119,11 @@ public class PersonList extends TMSInternalFrame {
 
         by.setText(ThreadPoolManager.getLangValue("TMS_BY"));
 
-        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(searchPanel);
-        searchPanel.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-                jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel2Layout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout TMSPanel2Layout = new org.jdesktop.layout.GroupLayout(searchPanel);
+        searchPanel.setLayout(TMSPanel2Layout);
+        TMSPanel2Layout.setHorizontalGroup(
+                TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .add(filter)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -133,11 +134,11 @@ public class PersonList extends TMSInternalFrame {
                                 .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(194, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-                jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel2Layout.createSequentialGroup()
+        TMSPanel2Layout.setVerticalGroup(
+                TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(TMSPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(filter)
                                         .add(searchText, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -163,15 +164,15 @@ public class PersonList extends TMSInternalFrame {
             }
         });
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
-        mainPanel.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout TMSPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
+        mainPanel.setLayout(TMSPanel1Layout);
+        TMSPanel1Layout.setHorizontalGroup(
+                TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(org.jdesktop.layout.GroupLayout.TRAILING, TMSPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                                         .add(org.jdesktop.layout.GroupLayout.LEADING, tableScroll, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
-                                        .add(jPanel1Layout.createSequentialGroup()
+                                        .add(TMSPanel1Layout.createSequentialGroup()
                                                 .add(add)
                                                 /*.addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                                 .add(delete)
@@ -180,10 +181,10 @@ public class PersonList extends TMSInternalFrame {
                                 )
                                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+        TMSPanel1Layout.setVerticalGroup(
+                TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel1Layout.createSequentialGroup()
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(add))
                                 .add(18, 18, 18)
                                 .add(tableScroll, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
@@ -284,10 +285,10 @@ public class PersonList extends TMSInternalFrame {
     private JButton add;
     private JComboBox searchCombo;
     private JFileChooser jFileChooser1;
-    private JPanel searchPanel;
+    private TMSPanel searchPanel;
     private JLabel by;
     private JLabel filter;
-    private JPanel mainPanel;
+    private TMSPanel mainPanel;
     private JScrollPane tableScroll;
     private JTable mainTable;
     private JTextField searchText;

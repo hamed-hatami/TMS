@@ -6,6 +6,7 @@ import ir.university.toosi.tms.model.entity.*;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
+import ir.university.toosi.tms.view.TMSPanel;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
@@ -23,13 +24,13 @@ public class BasicInfoManagement extends TMSInternalFrame {
      * Creates new form ContactEditor
      */
     public BasicInfoManagement() {
-        mainPanel = new JPanel();
+        mainPanel = new TMSPanel();
         tableScroll = new JScrollPane();
         mainTable = new JTable();
         add = new JButton();
         delete = new JButton();
         edit = new JButton();
-        lookupPanel = new JPanel();
+        lookupPanel = new TMSPanel();
         codeField = new JTextField();
         nameField = new JTextField();
         descField = new JTextField();
@@ -46,13 +47,13 @@ public class BasicInfoManagement extends TMSInternalFrame {
     public BasicInfoManagement(JDesktopPane jDesktopPane, Lookup lookup) {
         jdpDesktop = jDesktopPane;
         this.lookup = lookup;
-        mainPanel = new JPanel();
+        mainPanel = new TMSPanel();
         tableScroll = new JScrollPane();
         mainTable = new JTable();
         add = new JButton();
         delete = new JButton();
         edit = new JButton();
-        lookupPanel = new JPanel();
+        lookupPanel = new TMSPanel();
         codeField = new JTextField();
         nameField = new JTextField();
         descField = new JTextField();
@@ -129,14 +130,14 @@ public class BasicInfoManagement extends TMSInternalFrame {
             }
         });
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
-        mainPanel.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout TMSPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
+        mainPanel.setLayout(TMSPanel1Layout);
+        TMSPanel1Layout.setHorizontalGroup(
+                TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel1Layout.createSequentialGroup()
                                 .add(36, 36, 36)
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                        .add(jPanel1Layout.createSequentialGroup()
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                        .add(TMSPanel1Layout.createSequentialGroup()
                                                 .add(add)
                                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                                                 .add(delete)
@@ -145,11 +146,11 @@ public class BasicInfoManagement extends TMSInternalFrame {
                                         .add(tableScroll, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(45, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
+        TMSPanel1Layout.setVerticalGroup(
+                TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(TMSPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(add)
                                         .add(delete)
                                         .add(edit))
@@ -172,38 +173,38 @@ public class BasicInfoManagement extends TMSInternalFrame {
         nameLabel.setText("NAME");
         descLabel.setText("DESCRIPTION");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(lookupPanel);
-        lookupPanel.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout TMSPanel2Layout = new javax.swing.GroupLayout(lookupPanel);
+        lookupPanel.setLayout(TMSPanel2Layout);
+        TMSPanel2Layout.setHorizontalGroup(
+                TMSPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(TMSPanel2Layout.createSequentialGroup()
+                                .addGroup(TMSPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(TMSPanel2Layout.createSequentialGroup()
                                                 .addContainerGap(115, Short.MAX_VALUE)
-                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(TMSPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                         .addComponent(codeLabel)
                                                         .addComponent(nameLabel)
                                                         .addComponent(descLabel))
                                                 .addGap(29, 29, 29)
-                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(TMSPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                         .addComponent(descField)
                                                         .addComponent(nameField)
                                                         .addComponent(codeField, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))))
                                 .addContainerGap(200, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        TMSPanel2Layout.setVerticalGroup(
+                TMSPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TMSPanel2Layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(TMSPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(codeLabel)
                                         .addComponent(codeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(TMSPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(nameLabel)
                                         .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(TMSPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(descLabel)
                                         .addComponent(descField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
@@ -310,8 +311,8 @@ public class BasicInfoManagement extends TMSInternalFrame {
     private JButton add;
     private JButton delete;
     private JButton edit;
-    private JPanel mainPanel;
-    private JPanel lookupPanel;
+    private TMSPanel mainPanel;
+    private TMSPanel lookupPanel;
     private JScrollPane tableScroll;
     private JTable mainTable;
     private JDesktopPane jdpDesktop;
