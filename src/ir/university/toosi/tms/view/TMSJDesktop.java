@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * @author : Hamed Hatami , Javad Sarhadi , Farzad Sedaghatbin, Atefeh Ahmadi
+ * @author : Hamed Hatami , Farzad Sedaghatbin, Atefeh Ahmadi
  * @version : 1.0
  */
 public class TMSJDesktop extends JDesktopPane {
