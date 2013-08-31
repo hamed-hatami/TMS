@@ -7,6 +7,7 @@ import ir.university.toosi.tms.model.entity.RoleSearchItems;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
+import ir.university.toosi.tms.view.TMSInternalFrame;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
@@ -18,7 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoleManagement extends JInternalFrame {
+public class RoleManagement extends TMSInternalFrame {
 
     /**
      * Creates new form ContactEditor
@@ -39,7 +40,7 @@ public class RoleManagement extends JInternalFrame {
         try {
             initComponents();
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
     }
 
@@ -60,7 +61,7 @@ public class RoleManagement extends JInternalFrame {
         try {
             initComponents();
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
     }
 
@@ -277,7 +278,7 @@ public class RoleManagement extends JInternalFrame {
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${description}"));
         columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_DESC"));
         columnBinding.setColumnClass(String.class);
-         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${enabled}"));
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${enabled}"));
         columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_ENABLED"));
         columnBinding.setColumnClass(Boolean.class);
         BindingGroup bindingGroup = new BindingGroup();
