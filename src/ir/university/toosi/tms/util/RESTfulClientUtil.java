@@ -30,7 +30,7 @@ public class RESTfulClientUtil {
             HttpClient client = new DefaultHttpClient();
             HttpPost postRequest = new HttpPost(url + serviceName);
             postRequest.setHeader("Content-type", "application/json");
-            postRequest.setEntity(new StringEntity(jsonString));
+            postRequest.setEntity(new StringEntity(jsonString, "UTF-8"));
             HttpResponse response = client.execute(postRequest);
             if (response.getStatusLine().getStatusCode() != 200) {
                 throw new RuntimeException("Failed : HTTP error code : "
@@ -48,7 +48,7 @@ public class RESTfulClientUtil {
             HttpClient client = new DefaultHttpClient();
             HttpPost postRequest = new HttpPost(url + serviceName);
             postRequest.setHeader("Content-type", "TEXT/PLAIN");
-            postRequest.setEntity(new StringEntity(jsonString));
+            postRequest.setEntity(new StringEntity(jsonString, "UTF-8"));
             HttpResponse response = client.execute(postRequest);
             if (response.getStatusLine().getStatusCode() != 200) {
                 throw new RuntimeException("Failed : HTTP error code : "
