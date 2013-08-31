@@ -241,7 +241,7 @@ public class Login extends TMSInternalFrame {
                                 .addContainerGap(65, Short.MAX_VALUE))
         );
 
-        setSize(200, 200);
+        setSize(700, 400);
         //pack();
     }
 

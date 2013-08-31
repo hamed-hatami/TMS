@@ -182,7 +182,7 @@ public class RoleForm extends TMSInternalFrame {
         });
 
         assignOperation.setText(ThreadPoolManager.getLangValue("TMS_ASSIGN_OPERATION"));
-        assignOperation.setVisible(ThreadPoolManager.hasPermission("ASSINGN_OPERATION"));
+        assignOperation.setVisible(ThreadPoolManager.hasPermission("ASSIGN_OPERATION"));
         assignOperation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
