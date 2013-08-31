@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * @author a_ahmady
  */
-public class Login extends javax.swing.JInternalFrame {
+public class Login extends TMSInternalFrame {
 
     /**
      * Creates new form Login
