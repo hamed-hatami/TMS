@@ -11,7 +11,7 @@ import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.basicinfo.BasicInfoManagement;
 import ir.university.toosi.tms.view.calendar.CalendarManagement;
 import ir.university.toosi.tms.view.eventlog.EventLogList;
-import ir.university.toosi.tms.view.language.FileChooser;
+import ir.university.toosi.tms.view.language.LanguageForm;
 import ir.university.toosi.tms.view.language.LanguageManagementForm;
 import ir.university.toosi.tms.view.person.PersonManagement;
 import ir.university.toosi.tms.view.role.RoleManagement;
@@ -211,11 +211,11 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
 
     }
 
-    private void showFileChooser() throws PropertyVetoException {
-        FileChooser fileChooser = new FileChooser(jdpDesktop);
-        fileChooser.setVisible(true);
-        jdpDesktop.add(fileChooser);
-        fileChooser.setSelected(true);
+    private void showLanguageForm() throws PropertyVetoException {
+        LanguageForm languageForm = new LanguageForm(jdpDesktop);
+        languageForm.setVisible(true);
+        jdpDesktop.add(languageForm);
+        languageForm.setSelected(true);
 
     }
 
@@ -260,8 +260,8 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
     private void refreshMainForm() {
         jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
         menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
-        languageMenu.setText(ThreadPoolManager.getLangValue("language"));
-        languageDefItem.setText(ThreadPoolManager.getLangValue("languageDef"));
+        languageMenu.setText(LanguageAction.getBundleMessage("language"));
+        languageDefItem.setText(LanguageAction.getBundleMessage("languageDef"));
         jdpDesktop.removeAll();
         jdpDesktop.revalidate();
         jdpDesktop.repaint();
@@ -289,7 +289,7 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             } else if (e.getSource() == userManagementItem) {
                 showUserManagement();
             } else if (e.getSource() == importLanguage) {
-                showFileChooser();
+                showLanguageForm();
 //            } else if (e.getSource() == roleManagementItem) {
 //                showRoleManagement();
             } else if (e.getSource() == operationManagementItem) {
