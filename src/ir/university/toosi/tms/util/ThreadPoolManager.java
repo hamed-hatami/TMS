@@ -57,7 +57,7 @@ public class ThreadPoolManager {
             for (WorkGroup workGroup : me.getWorkGroups()) {
                 for (Role role : workGroup.getRoles()) {
                     for (Operation innerOperation : role.getOperations()) {
-                        if (innerOperation.getName().equalsIgnoreCase(innerOperation.getName())) {
+                        if (innerOperation.getName().equalsIgnoreCase(operation.getName())) {
                             permissionHash.put(operation.getName(), Boolean.TRUE);
                         }
                     }

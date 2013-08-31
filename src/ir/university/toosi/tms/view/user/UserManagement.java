@@ -89,7 +89,7 @@ public class UserManagement extends TMSInternalFrame {
 
         User searchUser = new User();
         if (UserSearchItems.values()[searchType.getSelectedIndex()].equals(UserSearchItems.NAME)) {
-            userService.setServiceName("/findUserByUserName");
+            userService.setServiceName("/findAllUserByUserName");
             searchUser.setUsername(searchKey.getText());
         }
         searchUser.setEffectorUser(ThreadPoolManager.me.getUsername());
