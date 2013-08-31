@@ -43,9 +43,6 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
     private JMenuItem[] basicInfoMenus;
     private JMenuItem menuItem;
     private JMenuItem languageDefItem;
-    private JMenuItem persianItem;
-    private JMenuItem englishItem;
-    private JMenuItem otherItem;
     private JMenuItem importLanguage;
     private JMenuItem userManagementItem;
     //    private JMenuItem roleManagementItem;
@@ -116,29 +113,18 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
 
             languageMenu = new JMenu();
             menuItem = new JMenuItem();
-            persianItem = new JMenuItem();
             languageDefItem = new JMenuItem();
-            englishItem = new JMenuItem();
-            otherItem = new JMenuItem();
             importLanguage = new JMenuItem();
             menu.setText(LanguageAction.getBundleMessage("loginForm"));
             languageMenu.setText(LanguageAction.getBundleMessage("language"));
             menuItem.setText(LanguageAction.getBundleMessage("salam"));
-            persianItem.setText(LanguageAction.getBundleMessage("persian"));
             languageDefItem.setText(LanguageAction.getBundleMessage("languageDef"));
-            englishItem.setText(LanguageAction.getBundleMessage("english"));
-            otherItem.setText(LanguageAction.getBundleMessage("thirdLanguage"));
             importLanguage.setText(LanguageAction.getBundleMessage("importLanguage"));
             menuItem.addActionListener(this);
-            persianItem.addActionListener(this);
             languageDefItem.addActionListener(this);
-            englishItem.addActionListener(this);
-            otherItem.addActionListener(this);
             importLanguage.addActionListener(this);
             menu.add(menuItem);
             languageMenu.add(languageDefItem);
-            languageMenu.add(persianItem);
-            languageMenu.add(englishItem);
 //            if (languageList != null && !languageList.isEmpty()) {
 //                LanguageAction.initProperty(languageList.get(0).getContent());
 //                languageMenu.add(otherItem);
@@ -273,9 +259,6 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
         languageMenu.setText(LanguageAction.getBundleMessage("language"));
         menuItem.setText(LanguageAction.getBundleMessage("salam"));
         languageDefItem.setText(LanguageAction.getBundleMessage("languageDef"));
-        persianItem.setText(LanguageAction.getBundleMessage("persian"));
-        englishItem.setText(LanguageAction.getBundleMessage("english"));
-        otherItem.setText(LanguageAction.getBundleMessage("other"));
         jdpDesktop.removeAll();
         jdpDesktop.revalidate();
         jdpDesktop.repaint();
@@ -300,17 +283,8 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
         try {
             if (e.getSource() == menuItem) {
                 showPersonEdit();
-            } else if (e.getSource() == persianItem) {
-                LanguageAction.changeLocale("fa");
-                refreshMainForm();
             } else if (e.getSource() == languageDefItem) {
                 showLanguageDef();
-            } else if (e.getSource() == englishItem) {
-                LanguageAction.changeLocale("en");
-                refreshMainForm();
-            } else if (e.getSource() == englishItem) {
-                LanguageAction.changeLocale("other");
-                refreshMainForm();
             } else if (e.getSource() == userManagementItem) {
                 showUserManagement();
             } else if (e.getSource() == importLanguage) {
@@ -377,23 +351,6 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
     public void setMenuItem(JMenuItem menuItem) {
         this.menuItem = menuItem;
     }
-
-    public JMenuItem getPersianItem() {
-        return persianItem;
-    }
-
-    public void setPersianItem(JMenuItem persianItem) {
-        this.persianItem = persianItem;
-    }
-
-    public JMenuItem getEnglishItem() {
-        return englishItem;
-    }
-
-    public void setEnglishItem(JMenuItem englishItem) {
-        this.englishItem = englishItem;
-    }
-
     public Login getLoginForm() {
         return loginForm;
     }
