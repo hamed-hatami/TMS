@@ -15,8 +15,8 @@ public class TMSInternalFrame extends JInternalFrame {
         super();
         setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) ((dimension.getWidth() - this.getWidth()) / 4);
-        int y = (int) ((dimension.getHeight() - this.getHeight()) / 4);
+        int x = (int) (dimension.getWidth() / 4);
+        int y = (int) (dimension.getHeight() / 4);
         setLocation(x, y);
     }
 }
