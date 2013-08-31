@@ -7,6 +7,7 @@ import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class Login extends TMSInternalFrame {
 
         fillSearchCombo();
         this.mainForm = mainForm;
-        jPanel1 = new JPanel();
+        jPanel1 = new TMSPanel();
         login = new JButton();
         cancel = new JButton();
         userName = new JTextField();
@@ -74,14 +75,13 @@ public class Login extends TMSInternalFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         loginService.setServiceName("/loadLanguage");
         try {
             ThreadPoolManager.langHash = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(loginService.getServerUrl(), loginService.getServiceName(), defaultedLang), new TypeReference<Hashtable<String, LanguageManagement>>() {
             });
 
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
@@ -137,7 +137,7 @@ public class Login extends TMSInternalFrame {
                             return;
                         }
                     } catch (UnknownHostException e) {
-                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                        e.printStackTrace();
                     }
                     ThreadPoolManager.me = result;
                     ThreadPoolManager.currentLanguage = languagesList.get(language.getSelectedIndex());
@@ -223,7 +223,6 @@ public class Login extends TMSInternalFrame {
                                         .addComponent(cancel))
                                 .addGap(25, 25, 25))
         );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -241,7 +240,7 @@ public class Login extends TMSInternalFrame {
                                 .addContainerGap(65, Short.MAX_VALUE))
         );
 
-        setSize(200, 200);
+        setSize(800, 500);
         //pack();
     }
 
@@ -256,7 +255,7 @@ public class Login extends TMSInternalFrame {
     private JLabel userNameLabel;
     private JLabel passwordLabel;
     private JLabel langLabel;
-    private JPanel jPanel1;
+    private TMSPanel jPanel1;
     private JTextField userName;
     private JTextField password;
     private JComboBox language;
