@@ -7,7 +7,6 @@ import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -57,7 +56,7 @@ public class Login extends TMSInternalFrame {
         langItems = new String[languagesList.size()];
         int i = 0;
         for (Languages languages : languagesList) {
-            if(languages.isDefaulted())
+            if (languages.isDefaulted())
                 defaultedLang = languages.getName();
             langItems[i++] = languages.getName();
         }
@@ -99,7 +98,7 @@ public class Login extends TMSInternalFrame {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
 
-               loginService.setServiceName("/authenticate");
+                loginService.setServiceName("/authenticate");
 
                 user = new User();
                 user.setUsername(userName.getText());
@@ -145,7 +144,7 @@ public class Login extends TMSInternalFrame {
                     loginService.setServiceName("/loadLanguage");
                     try {
                         ThreadPoolManager.langHash = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(loginService.getServerUrl(), loginService.getServiceName(), ThreadPoolManager.currentLanguage.getName()), new TypeReference<Hashtable<String, LanguageManagement>>() {
-                         });
+                        });
 
                     } catch (IOException e) {
                         e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -242,8 +241,9 @@ public class Login extends TMSInternalFrame {
                                 .addContainerGap(65, Short.MAX_VALUE))
         );
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+        setSize(200, 200);
+        //pack();
+    }
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
 // TODO add your handling code here:
@@ -260,7 +260,8 @@ public class Login extends TMSInternalFrame {
     private JTextField userName;
     private JTextField password;
     private JComboBox language;
-    private WebServiceInfo loginService = new WebServiceInfo();;
+    private WebServiceInfo loginService = new WebServiceInfo();
+    ;
     private User user, result;
     private String[] langItems;
     private String defaultedLang;
