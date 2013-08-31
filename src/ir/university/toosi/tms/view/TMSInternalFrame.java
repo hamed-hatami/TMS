@@ -1,7 +1,5 @@
 package ir.university.toosi.tms.view;
 
-import ir.university.toosi.tms.controller.LanguageAction;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,7 +11,7 @@ public class TMSInternalFrame extends JInternalFrame {
 
     public TMSInternalFrame() {
         super();
-        setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
+        setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) (dimension.getWidth() / 4);
         int y = (int) (dimension.getHeight() / 4);
