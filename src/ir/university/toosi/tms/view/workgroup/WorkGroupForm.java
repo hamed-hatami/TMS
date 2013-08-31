@@ -10,6 +10,7 @@ import ir.university.toosi.tms.model.entity.*;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
+import ir.university.toosi.tms.view.TMSPanel;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -104,7 +105,7 @@ public class WorkGroupForm extends TMSInternalFrame {
 
         setClosable(true);
         this.addInternalFrameListener(ThreadPoolManager.mainForm);
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new TMSPanel();
         nameLable = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         nameText = new javax.swing.JTextField();
@@ -348,7 +349,7 @@ public class WorkGroupForm extends TMSInternalFrame {
     private javax.swing.JList assignList;
     private javax.swing.JTextField descriptionText;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
+    private TMSPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel nameLable;

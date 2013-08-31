@@ -9,6 +9,7 @@ import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
+import ir.university.toosi.tms.view.TMSPanel;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
@@ -26,18 +27,18 @@ public class UserManagement extends TMSInternalFrame {
      * Creates new form ContactEditor
      */
     private JDesktopPane jdpDesktop;
-    List<User> userList;
+    private List<User> userList;
 
     public UserManagement(JDesktopPane jDesktopPane) {
         fillSearchCombo();
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new TMSPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         userTable = new javax.swing.JTable();
         addButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel2 = new TMSPanel();
         searchType = new javax.swing.JComboBox(searchItems);
         searchKey = new javax.swing.JTextField();
         searchLable = new javax.swing.JLabel();
@@ -64,7 +65,7 @@ public class UserManagement extends TMSInternalFrame {
             userList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(userService.getServerUrl(), userService.getServiceName()), new TypeReference<List<User>>() {
             });
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
     }
 
@@ -313,8 +314,8 @@ public class UserManagement extends TMSInternalFrame {
     private javax.swing.JComboBox searchType;
     private javax.swing.JLabel byLable;
     private javax.swing.JLabel searchLable;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private TMSPanel jPanel1;
+    private TMSPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable userTable;
     private javax.swing.JTextField searchKey;

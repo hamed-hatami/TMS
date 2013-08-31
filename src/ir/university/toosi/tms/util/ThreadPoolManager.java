@@ -20,7 +20,7 @@ public class ThreadPoolManager {
     public static final ExecutorService executors = Executors.newCachedThreadPool();
     public static MainForm mainForm;
     public static User me;
-    public static Languages currentLanguage;
+    public static Languages currentLanguage = null;
     public static Hashtable<String, LanguageManagement> langHash = new Hashtable<>();
     public static Hashtable<String, Boolean> permissionHash = new Hashtable<>();
     public static final ForkJoinPool forkJoinPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
