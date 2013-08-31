@@ -32,9 +32,7 @@ package ir.university.toosi.tms.view.role;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ir.university.toosi.tms.model.entity.Operation;
-import ir.university.toosi.tms.model.entity.Role;
-import ir.university.toosi.tms.model.entity.WebServiceInfo;
+import ir.university.toosi.tms.model.entity.*;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
@@ -45,7 +43,9 @@ import javax.swing.*;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class RoleForm extends TMSInternalFrame {
 
@@ -251,6 +251,25 @@ public class RoleForm extends TMSInternalFrame {
 
         try {
             role = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(newRole)), Role.class);
+            if(role!=null)
+                roleService.setServiceName("/createLanguageManagement");
+            LanguageManagement languageManagement= new LanguageManagement();
+            languageManagement.setTitle(newRole.getDescription());
+            languageManagement.setType(ThreadPoolManager.currentLanguage);
+            try {
+                languageManagement = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(),roleService.getServiceName(),new ObjectMapper().writeValueAsString(languageManagement)),LanguageManagement.class);
+
+                roleService.setServiceName("/createLanguageKeyManagement");
+                LanguageKeyManagement languageKeyManagement= new LanguageKeyManagement();
+                languageKeyManagement.setDescriptionKey(newRole.getName());
+                Set list=new HashSet();
+                list.add(languageManagement);
+                languageKeyManagement.setLanguageManagements(list);
+
+                languageKeyManagement = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(),roleService.getServiceName(),new ObjectMapper().writeValueAsString(languageKeyManagement)),LanguageKeyManagement.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }

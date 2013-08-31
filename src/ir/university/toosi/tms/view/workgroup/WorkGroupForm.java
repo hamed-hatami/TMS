@@ -6,9 +6,7 @@ package ir.university.toosi.tms.view.workgroup;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ir.university.toosi.tms.model.entity.Role;
-import ir.university.toosi.tms.model.entity.WebServiceInfo;
-import ir.university.toosi.tms.model.entity.WorkGroup;
+import ir.university.toosi.tms.model.entity.*;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
@@ -282,12 +280,31 @@ public class WorkGroupForm extends TMSInternalFrame {
                 newWorkGroup.setRoles(roleSet);
                 workGroupService.setServiceName("/createWorkGroup");
                 newWorkGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName(),new ObjectMapper().writeValueAsString(newWorkGroup)), WorkGroup.class);
+                if(newWorkGroup!=null)
+                    workGroupService.setServiceName("/createLanguageManagement");
+                LanguageManagement languageManagement= new LanguageManagement();
+                languageManagement.setTitle(newWorkGroup.getDescription());
+                languageManagement.setType(ThreadPoolManager.currentLanguage);
+                try {
+                    languageManagement = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(),workGroupService.getServiceName(),new ObjectMapper().writeValueAsString(languageManagement)),LanguageManagement.class);
+
+                    workGroupService.setServiceName("/createLanguageKeyManagement");
+                    LanguageKeyManagement languageKeyManagement= new LanguageKeyManagement();
+                    languageKeyManagement.setDescriptionKey(newWorkGroup.getName());
+                    Set list=new HashSet();
+                    list.add(languageManagement);
+                    languageKeyManagement.setLanguageManagements(list);
+
+                    languageKeyManagement = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(),workGroupService.getServiceName(),new ObjectMapper().writeValueAsString(languageKeyManagement)),LanguageKeyManagement.class);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 this.dispose();
             }else{
                 workGroup.setName(nameText.getText());
                 workGroup.setDescription(descriptionText.getText());
                 workGroup.setRoles(roleSet);
-                workGroupService.setServiceName("/createWorkGroup");
+                workGroupService.setServiceName("/editWorkGroup");
                 workGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName(),new ObjectMapper().writeValueAsString(workGroup)), WorkGroup.class);
                 this.dispose();
             }
