@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="TMS" default="OneJar" basedir=".">
+
+    <description>TMS</description>
+
+
+    <property environment="env"/>
+    <property file="tms_fa.properties"/>
+    <property name="jaxb.home" value="."/>
+    <property name="version" value="0.1alpha"/>
+    <property name="display.name" value="TMS ${version}"/>
+    <property name="name" value="TMS"/>
+    <property name="packedName" value="TMSFinal"/>
+
+    <property name="bin.dir" value="bin"/>
+    <property name="build.dir" value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+
+    <property name="resources.dir" value="resources"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="packedLib.dir" value="packedLib"/>
+    <property name="src.dir" value="src"/>
+
+    <property name="classes.prefix" value="ir/university/toosi"/>
+    <property name="src.classes.prefix" value="${classes.prefix}/tms"/>
+
+
+    <property name="javac.debug" value="true"/>
+    <property name="javac.deprecation" value="false"/>
+    <property name="javac.version" value="1.7"/>
+
+    <path id="classpath">
+        <pathelement path="."/>
+    </path>
+
+    <path id="build.classpath">
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+
+
+    <path id="compile.classpath">
+        <path refid="build.classpath"/>
+        <pathelement location="${classes.dir}"/>
+    </path>
+
+    <patternset id="meta.files">
+        <include name="**/*.dtd"/>
+        <include name="**/*.xml"/>
+        <include name="**/*.xslt"/>
+        <include name="**/*.properties"/>
+    </patternset>
+
+    <patternset id="src.files">
+        <include name="**/*.java"/>
+    </patternset>
+
+    <taskdef name="one-jar" classpath="${lib.dir}/one-jar-ant-task-0.97.jar"
+             classname="com.simontuffs.onejar.ant.OneJarTask" onerror="report"/>
+
+
+    <target name="clean" description="Cleans up the build directory">
+        <delete dir="${build.dir}/classes/${src.classes.prefix}"/>
+        <delete>
+            <fileset dir="${build.dir}">
+                <include name="TMS.*"/>
+            </fileset>
+        </delete>
+    </target>
+
+    <target name="init" description="Initialize the build">
+        <echo message="Build ${display.name}"/>
+        <tstamp/>
+        <mkdir dir="${classes.dir}"/>
+        <copy todir="${classes.dir}">
+            <fileset dir="${src.dir}">
+                <patternset refid="meta.files"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="native2ascii">
+        <native2ascii src="." dest="${classes.dir}"
+                      includes="tms*.properties"
+                      encoding="UTF-8"/>
+    </target>
+
+    <target name="compile" depends="init, clean" description="Compile the Java source code">
+        <javac destdir="${classes.dir}"
+               classpathref="compile.classpath"
+               debug="${javac.debug}"
+               deprecation="${javac.deprecation}"
+               encoding="UTF-8"
+               source="1.7"
+               nowarn="on">
+            <compilerarg value="-Xlint:deprecation"/>
+            <src path="${src.dir}"/>
+        </javac>
+
+    </target>
+
+    <!-- ############################ Main Tragets #############################-->
+    <target name="jar" depends="compile, native2ascii">
+        <delete file="${build.dir}/${name}.jar" verbose="yes"/>
+
+        <jar jarfile="${build.dir}/${name}.jar">
+            <fileset dir="${classes.dir}">
+                <include name="**/tms/**/*.class"/>
+                <include name="**/tms_fa.properties"/>
+            </fileset>
+            <fileset dir="${resources.dir}/images">
+                <include name="**/*.png"/>
+                <include name="**/*.gif"/>
+                <include name="**/*.jpg"/>
+            </fileset>
+
+            <manifest>
+                <attribute name="Built-By" value="Hamed Hatami"/>
+                <attribute name="Main-Class" value="ir.university.toosi.tms.view.MainForm"/>
+            </manifest>
+        </jar>
+    </target>
+
+
+    <target name="OneJar" depends="jar">
+        <one-jar destfile="${build.dir}/${packedName}.jar">
+
+            <main jar="${build.dir}/${name}.jar"/>
+            <lib>
+                <fileset dir="${packedLib.dir}"/>
+            </lib>
+        </one-jar>
+
+        <delete dir="${build.dir}/classes/${src.classes.prefix}"/>
+
+        <delete>
+            <fileset dir="${build.dir}">
+                <include name="TMS.*"/>
+            </fileset>
+        </delete>
+
+    </target>
+
+</project>
