@@ -63,10 +63,9 @@
 
     <target name="clean" description="Cleans up the build directory">
         <delete dir="${build.dir}/classes/${src.classes.prefix}"/>
-        <!-- I don't clean opxi stuff, cuz they are not fast ubtainable -->
         <delete>
             <fileset dir="${build.dir}">
-                <include name="ACHAgent.*"/>
+                <include name="TMS.*"/>
             </fileset>
         </delete>
     </target>
@@ -84,7 +83,7 @@
 
     <target name="native2ascii">
         <native2ascii src="." dest="${classes.dir}"
-                      includes="agent*.properties"
+                      includes="tms*.properties"
                       encoding="UTF-8"/>
     </target>
 
@@ -123,35 +122,6 @@
             </manifest>
         </jar>
     </target>
-
-
-    <!--  <target name="jar" depends="compile, native2ascii">
-          <delete file="${signed.dir}/${name}.jar" verbose="yes"/>
-
-          <jar jarfile="${signed.dir}/${name}.jar">
-              <fileset dir="${classes.dir}">
-                  <include name="**/tms/**/*.class"/>
-                  <include name="**/agent_fa.properties"/>
-              </fileset>
-              <fileset dir="${resources.dir}/images">
-                  <include name="**/*.png"/>
-                  <include name="**/*.gif"/>
-                  <include name="**/*.jpg"/>
-              </fileset>
-
-              <zipfileset id="jar.bundle" prefix="ir/university/toosi/tms/resources"
-                          dir="${classes.dir}/ir/university/toosi/tms/resources">
-                  <include name="*.properties"/>
-              </zipfileset>
-
-              <manifest>
-                  <attribute name="Built-By" value="Hamed Hatami"/>
-                  <attribute name="Class-Path"
-                             value="swing-layout-1.0.4.jar,jackson-mapper-asl.jar,jackson-annotations-2.0.4.jar,jackson-core-2.0.4.jar,jackson-core-asl.jar,jackson-databind-2.0.4.jar,httpclient.jar,httpcore.jar,commons-logging.jar,commons-httpclient.jar,commons-io.jar"/>
-                  <attribute name="Main-Class" value="ir.university.toosi.tms.view.MainForm"/>
-              </manifest>
-          </jar>
-      </target>-->
 
 
     <target name="OneJar" depends="jar">
