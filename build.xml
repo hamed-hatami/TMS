@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="TMS" default="deploy" basedir=".">
+<project name="TMS" default="onejar" basedir=".">
 
     <description>TMS</description>
 
