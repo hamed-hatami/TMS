@@ -110,9 +110,9 @@ public class Login extends TMSInternalFrame {
                 });
 
                 if (result == null)
-                    JOptionPane.showMessageDialog(new JFrame(), "user not found");
+                    JOptionPane.showMessageDialog(new JFrame(), "کاربری با این مشخصات یافت نشد");
                 else if (result.getUsername().equalsIgnoreCase("null")) {
-                    JOptionPane.showMessageDialog(new JFrame(), "user not found");
+                    JOptionPane.showMessageDialog(new JFrame(),  "کاربری با این مشخصات یافت نشد");
                 } else {
                     try {
                         String ipAddress = InetAddress.getLocalHost().getHostAddress();
@@ -125,7 +125,8 @@ public class Login extends TMSInternalFrame {
                         }
 
                         if (!allowed) {
-                            JOptionPane.showMessageDialog(new JFrame(), "you can not login on this pc");
+                            JOptionPane.showMessageDialog(new JFrame(), "استفاده از این کامپیوتر برای شما مجاز نیست" +
+                                    "");
                             return;
                         }
                     } catch (UnknownHostException e) {
@@ -139,7 +140,7 @@ public class Login extends TMSInternalFrame {
                         });
 
                     } catch (IOException e) {
-                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                        e.printStackTrace();
                     }
 
                     loginService.setServiceName("/getAllOperation");
@@ -148,9 +149,9 @@ public class Login extends TMSInternalFrame {
                         });
                         ThreadPoolManager.loadPermissions(operationList);
                     } catch (IOException e) {
-                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                        e.printStackTrace();
                     }
-                    JOptionPane.showMessageDialog(new JFrame(), "Welcome " + result.getUsername());
+                    JOptionPane.showMessageDialog(new JFrame(), "خوش آمدید " );
                     mainForm.getMainMenuBar().setVisible(true);
                     mainForm.getLoginForm().dispose();
                 }
