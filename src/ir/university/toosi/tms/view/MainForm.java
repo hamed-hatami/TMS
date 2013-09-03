@@ -89,14 +89,6 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             setJMenuBar(menuBar);
             menuBar.setVisible(false);
 
-            jdpDesktop.putClientProperty("JDesktopPane.dragMode", "outline");
-
-//            if (ThreadPoolManager.currentLanguage.isRtl())
-//                jdpDesktop.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-//
-//            else
-//                jdpDesktop.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-
             jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
             menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
 
@@ -112,8 +104,8 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
 
             languageMenu = new JMenu();
-            languageDefItem = new JMenuItem();
-            importLanguage = new JMenuItem();
+            languageDefItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("lang.png")));
+            importLanguage = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("keyboard.png")));
             languageMenu.setText(ThreadPoolManager.getLangValue("language"));
             languageDefItem.setText(ThreadPoolManager.getLangValue("languageDef"));
             importLanguage.setText(ThreadPoolManager.getLangValue("importLanguage"));
@@ -127,14 +119,14 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             languageMenu.add(importLanguage);
 
             managementMenu = new JMenu();
-            workGroupManagementItem = new JMenuItem();
-            calendarManagementItem = new JMenuItem();
+            workGroupManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("groups.png")));
+            calendarManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("calendar.png")));
             calendarManagementItem.setVisible(false);
-            personManagementItem = new JMenuItem();
-            userManagementItem = new JMenuItem();
+            personManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("person-mgnt.png")));
+            userManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("user-mgnt.png")));
 //            roleManagementItem = new JMenuItem();
-            operationManagementItem = new JMenuItem();
-            eventLogListItem = new JMenuItem();
+            operationManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("operation.png")));
+            eventLogListItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("event.png")));
             workGroupManagementItem.setText(ThreadPoolManager.getLangValue("workgroup_management"));
             calendarManagementItem.setText(ThreadPoolManager.getLangValue("calendar_management"));
             personManagementItem.setText(ThreadPoolManager.getLangValue("person_management"));
@@ -161,7 +153,7 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             basicInfoMenu = new JMenu();
             basicInfoMenu.setVisible(false);
             basicInfoMenu.setText(ThreadPoolManager.getLangValue("BasicInfo"));
-            exit= new JMenuItem();
+            exit= new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("")));
             exitMenu= new JMenu();
             exit.setText(ThreadPoolManager.getLangValue("exit"));
             exitMenu.setText(ThreadPoolManager.getLangValue("operation"));
