@@ -41,7 +41,6 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
     private JMenu basicInfoMenu;
     private JMenuItem exit;
     private JMenu exitMenu;
-
     private JMenuItem[] basicInfoMenus;
     private JMenuItem languageDefItem;
     private JMenuItem importLanguage;
@@ -98,14 +97,28 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
 
     }
 
+    public static void main(String[] args) {
+        MainForm main = new MainForm();
+        main.setVisible(true);
+    }
+
     protected JMenuBar createMenuBar() {
         try {
             menuBar = new JMenuBar();
             menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
 
+            ComponentOrientation direction;
+            if (ThreadPoolManager.currentLanguage.isRtl()) {
+                direction = ComponentOrientation.RIGHT_TO_LEFT;
+            } else {
+                direction = ComponentOrientation.LEFT_TO_RIGHT;
+            }
+
             languageMenu = new JMenu();
             languageDefItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("lang.png")));
+            languageDefItem.setComponentOrientation(direction);
             importLanguage = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("keyboard.png")));
+            importLanguage.setComponentOrientation(direction);
             languageMenu.setText(ThreadPoolManager.getLangValue("language"));
             languageDefItem.setText(ThreadPoolManager.getLangValue("languageDef"));
             importLanguage.setText(ThreadPoolManager.getLangValue("importLanguage"));
@@ -120,13 +133,19 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
 
             managementMenu = new JMenu();
             workGroupManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("groups.png")));
+            workGroupManagementItem.setComponentOrientation(direction);
             calendarManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("calendar.png")));
+            calendarManagementItem.setComponentOrientation(direction);
             calendarManagementItem.setVisible(false);
             personManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("person-mgnt.png")));
+            personManagementItem.setComponentOrientation(direction);
             userManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("user-mgnt.png")));
+            userManagementItem.setComponentOrientation(direction);
 //            roleManagementItem = new JMenuItem();
             operationManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("operation.png")));
+            operationManagementItem.setComponentOrientation(direction);
             eventLogListItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("event.png")));
+            eventLogListItem.setComponentOrientation(direction);
             workGroupManagementItem.setText(ThreadPoolManager.getLangValue("workgroup_management"));
             calendarManagementItem.setText(ThreadPoolManager.getLangValue("calendar_management"));
             personManagementItem.setText(ThreadPoolManager.getLangValue("person_management"));
@@ -153,8 +172,8 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             basicInfoMenu = new JMenu();
             basicInfoMenu.setVisible(false);
             basicInfoMenu.setText(ThreadPoolManager.getLangValue("BasicInfo"));
-            exit= new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("")));
-            exitMenu= new JMenu();
+            exit = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("")));
+            exitMenu = new JMenu();
             exit.setText(ThreadPoolManager.getLangValue("exit"));
             exitMenu.setText(ThreadPoolManager.getLangValue("operation"));
             exit.addActionListener(this);
@@ -276,7 +295,7 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-           if (e.getSource() == languageDefItem) {
+            if (e.getSource() == languageDefItem) {
                 showLanguageDef();
             } else if (e.getSource() == userManagementItem) {
                 showUserManagement();
@@ -294,7 +313,7 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
                 showCalendarManagment();
             } else if (e.getSource() == personManagementItem) {
                 showPersonManagment();
-            }else if (e.getSource() == exit) {
+            } else if (e.getSource() == exit) {
                 System.exit(0);
             } else {
                 for (int i = 0; i < basicInfoMenus.length; i++) {
@@ -310,11 +329,6 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
         }
     }
 
-    public static void main(String[] args) {
-        MainForm main = new MainForm();
-        main.setVisible(true);
-    }
-
     public JDesktopPane getJdpDesktop() {
         return jdpDesktop;
     }
@@ -323,7 +337,6 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
         this.jdpDesktop = jdpDesktop;
     }
 
-
     public JMenu getLanguageMenu() {
         return languageMenu;
     }
@@ -331,6 +344,7 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
     public void setLanguageMenu(JMenu languageMenu) {
         this.languageMenu = languageMenu;
     }
+
     public Login getLoginForm() {
         return loginForm;
     }
@@ -346,7 +360,6 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
     public void setMenuBar(JMenuBar menuBar) {
         this.menuBar = menuBar;
     }
-
 
     @Override
     public void internalFrameOpened(InternalFrameEvent e) {
