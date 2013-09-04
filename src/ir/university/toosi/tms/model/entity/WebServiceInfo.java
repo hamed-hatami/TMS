@@ -10,7 +10,6 @@ public class WebServiceInfo {
 
 
     private final String serverUrl = "http://" + Configuration.getProperty("server.ip") + ":8080/kernel/restful/TMSService";
-//    private final String serverUrl = "http://127.0.0.1:8080/kernel/restful/TMSService";
     private String serviceName;
 
     public WebServiceInfo() {
