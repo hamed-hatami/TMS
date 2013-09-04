@@ -11,7 +11,7 @@ import java.awt.*;
  */
 public class TMSDesktop extends JDesktopPane {
 
-    Image image = new ImageIcon("D:\\Layering.jpg").getImage();
+    Image image = new ImageIcon(TMSDesktop.class.getClassLoader().getResource("spherical-cow.png")).getImage();
 
     @Override
     public void paintComponent(Graphics g) {
