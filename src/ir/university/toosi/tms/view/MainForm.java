@@ -19,6 +19,8 @@ import ir.university.toosi.tms.view.user.UserManagement;
 import ir.university.toosi.tms.view.workgroup.WorkGroupManagement;
 
 import javax.swing.*;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,7 +32,7 @@ import java.util.List;
  * @version : 1.0
  */
 
-public class MainForm extends JFrame {
+public class MainForm extends JFrame implements InternalFrameListener {
 
     private TMSDesktop jdpDesktop;
     private Login loginForm;
@@ -345,4 +347,38 @@ public class MainForm extends JFrame {
         this.loginForm = loginForm;
     }
 
+    @Override
+    public void internalFrameOpened(InternalFrameEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void internalFrameClosing(InternalFrameEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void internalFrameClosed(InternalFrameEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void internalFrameIconified(InternalFrameEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void internalFrameDeiconified(InternalFrameEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void internalFrameActivated(InternalFrameEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void internalFrameDeactivated(InternalFrameEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
 }
