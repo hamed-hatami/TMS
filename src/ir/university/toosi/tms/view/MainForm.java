@@ -176,6 +176,7 @@ public class MainForm extends JFrame implements InternalFrameListener {
             languageDefItem.setText(ThreadPoolManager.getLangValue("languageDef"));
             importLanguage.setText(ThreadPoolManager.getLangValue("importLanguage"));
             languageMenu.add(languageDefItem);
+            languageMenu.addSeparator();
             languageMenu.add(importLanguage);
             JMenu managementMenu = new JMenu();
             JMenuItem workGroupManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("groups.png")));
@@ -199,12 +200,16 @@ public class MainForm extends JFrame implements InternalFrameListener {
             userManagementItem.setText(ThreadPoolManager.getLangValue("user_management"));
             eventLogListItem.setText(ThreadPoolManager.getLangValue("eventLog_list"));
             managementMenu.add(workGroupManagementItem);
+            managementMenu.addSeparator();
             managementMenu.add(operationManagementItem);
+            managementMenu.addSeparator();
             managementMenu.add(userManagementItem);
+            managementMenu.addSeparator();
             managementMenu.add(eventLogListItem);
+            //managementMenu.addSeparator();
             managementMenu.add(calendarManagementItem);
+            managementMenu.addSeparator();
             managementMenu.add(personManagementItem);
-
             JMenu basicInfoMenu = new JMenu();
             basicInfoMenu.setVisible(false);
             basicInfoMenu.setText(ThreadPoolManager.getLangValue("BasicInfo"));
