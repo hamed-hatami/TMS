@@ -165,7 +165,8 @@ public class UserForm extends TMSInternalFrame {
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     public void initComponents() {
-
+        setResizable(true);
+        setAutoscrolls(true);
         setSize(800, 900);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(ThreadPoolManager.getLangValue("TMS_USER_MANAGEMENT"));

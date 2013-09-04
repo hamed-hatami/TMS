@@ -247,7 +247,7 @@ public class RoleForm extends TMSInternalFrame {
         newRole.setEnabled(true);
         newRole.setDeleted("0");
         newRole.setEffectorUser(ThreadPoolManager.me.getUsername());
-
+       newRole.setOperations(new HashSet<Operation>());
         roleService.setServiceName("/createRole");
 
         try {
@@ -343,6 +343,7 @@ public class RoleForm extends TMSInternalFrame {
     }
 
     private void assignActionPerformed(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
+
         OperationManagement operationManagement = new OperationManagement(jDesktopPane, role, this);
         operationManagement.setVisible(true);
         jDesktopPane.add(operationManagement);

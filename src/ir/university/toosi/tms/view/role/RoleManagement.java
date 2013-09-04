@@ -126,7 +126,7 @@ public class RoleManagement extends TMSInternalFrame {
         });
 
         edit.setText(ThreadPoolManager.getLangValue("TMS_EDIT"));
-        edit.setVisible(ThreadPoolManager.hasPermission("EDIT_ROL"));
+        edit.setVisible(ThreadPoolManager.hasPermission("EDIT_ROLE"));
         edit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
