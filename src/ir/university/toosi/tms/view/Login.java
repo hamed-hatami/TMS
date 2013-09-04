@@ -7,6 +7,7 @@ import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -22,10 +23,22 @@ import java.util.List;
  */
 public class Login extends TMSInternalFrame {
 
-    /**
-     * Creates new form Login
-     */
     private MainForm mainForm;
+    private JButton login;
+    private JButton cancel;
+    private JLabel userNameLabel;
+    private JLabel passwordLabel;
+    private JLabel langLabel;
+    private TMSPanel TMSPanel1;
+    private JTextField userName;
+    private JPasswordField password;
+    private JComboBox language;
+    private WebServiceInfo loginService = new WebServiceInfo();
+    private User user, result;
+    private String[] langItems;
+    private String defaultedLang;
+    private List<Languages> languagesList;
+    ;
 
     public Login(MainForm mainForm) {
 
@@ -61,7 +74,6 @@ public class Login extends TMSInternalFrame {
             langItems[i++] = languages.getName();
         }
     }
-
 
     private void initComponents() {
 
@@ -109,10 +121,10 @@ public class Login extends TMSInternalFrame {
                     }
                 });
 
-                if (result == null)
+                if (result == null) {
                     JOptionPane.showMessageDialog(new JFrame(), "کاربری با این مشخصات یافت نشد");
-                else if (result.getUsername().equalsIgnoreCase("null")) {
-                    JOptionPane.showMessageDialog(new JFrame(),  "کاربری با این مشخصات یافت نشد");
+                } else if (result.getUsername().equalsIgnoreCase("null")) {
+                    JOptionPane.showMessageDialog(new JFrame(), "کاربری با این مشخصات یافت نشد");
                 } else {
                     try {
                         String ipAddress = InetAddress.getLocalHost().getHostAddress();
@@ -151,8 +163,16 @@ public class Login extends TMSInternalFrame {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    JOptionPane.showMessageDialog(new JFrame(), "خوش آمدید " );
-                    mainForm.getMainMenuBar().setVisible(true);
+                    JOptionPane.showMessageDialog(new JFrame(), "خوش آمدید ");
+
+                    ComponentOrientation direction;
+                    if (ThreadPoolManager.currentLanguage.isRtl()) {
+                        direction = ComponentOrientation.RIGHT_TO_LEFT;
+                    } else {
+                        direction = ComponentOrientation.LEFT_TO_RIGHT;
+                    }
+
+                    mainForm.setJMenuBar(mainForm.createMenuBar(direction));
                     mainForm.getLoginForm().dispose();
                 }
             }
@@ -238,27 +258,8 @@ public class Login extends TMSInternalFrame {
         //pack();
     }
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
 // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JButton login;
-    private JButton cancel;
-    private JLabel userNameLabel;
-    private JLabel passwordLabel;
-    private JLabel langLabel;
-    private TMSPanel TMSPanel1;
-    private JTextField userName;
-    private JPasswordField password;
-    private JComboBox language;
-    private WebServiceInfo loginService = new WebServiceInfo();
-    ;
-    private User user, result;
-    private String[] langItems;
-    private String defaultedLang;
-    private List<Languages> languagesList;
-
-    // End of variables declaration//GEN-END:variables
 }

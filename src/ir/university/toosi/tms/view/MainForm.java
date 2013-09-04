@@ -19,8 +19,6 @@ import ir.university.toosi.tms.view.user.UserManagement;
 import ir.university.toosi.tms.view.workgroup.WorkGroupManagement;
 
 import javax.swing.*;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,28 +30,9 @@ import java.util.List;
  * @version : 1.0
  */
 
-public class MainForm extends JFrame implements ActionListener, InternalFrameListener {
+public class MainForm extends JFrame {
 
     private TMSDesktop jdpDesktop;
-    private JMenuBar menuBar;
-    private JMenu languageMenu;
-    private JMenu managementMenu;
-    private JMenu basicInfoMenu;
-    private JMenuItem exit;
-    private JMenu exitMenu;
-    private JMenuItem[] basicInfoMenus;
-    private JMenuItem languageDefItem;
-    private JMenuItem importLanguage;
-    private JMenuItem userManagementItem;
-    //    private JMenuItem roleManagementItem;
-    private JMenuItem operationManagementItem;
-    private JMenuItem workGroupManagementItem;
-    private JMenuItem calendarManagementItem;
-    private JMenuItem personManagementItem;
-    private JMenuItem eventLogListItem;
-    private List<Languages> languageList;
-    private WebServiceInfo lookupService;
-    private List<Lookup> lookups;
     private Login loginForm;
 
     public MainForm() {
@@ -72,24 +51,16 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
             WebServiceInfo webServiceInfo = new WebServiceInfo();
             webServiceInfo.setServiceName("/getAllLanguage");
 
-            languageList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName()), new TypeReference<List<Languages>>() {
+            List<Languages> languageList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName()), new TypeReference<List<Languages>>() {
             });
 
             loginForm = new Login(this);
             loginForm.setVisible(true);
-
             jdpDesktop = new TMSDesktop();
             jdpDesktop.add(loginForm);
-
             loginForm.setSelected(true);
-
             setContentPane(jdpDesktop);
-            menuBar = createMenuBar();
-            setJMenuBar(menuBar);
-            menuBar.setVisible(false);
-
             jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
-            menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,108 +71,6 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
     public static void main(String[] args) {
         MainForm main = new MainForm();
         main.setVisible(true);
-    }
-
-    protected JMenuBar createMenuBar() {
-        try {
-            menuBar = new JMenuBar();
-            menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
-
-            ComponentOrientation direction;
-            if (ThreadPoolManager.currentLanguage.isRtl()) {
-                direction = ComponentOrientation.RIGHT_TO_LEFT;
-            } else {
-                direction = ComponentOrientation.LEFT_TO_RIGHT;
-            }
-
-            languageMenu = new JMenu();
-            languageDefItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("lang.png")));
-            languageDefItem.setComponentOrientation(direction);
-            importLanguage = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("keyboard.png")));
-            importLanguage.setComponentOrientation(direction);
-            languageMenu.setText(ThreadPoolManager.getLangValue("language"));
-            languageDefItem.setText(ThreadPoolManager.getLangValue("languageDef"));
-            importLanguage.setText(ThreadPoolManager.getLangValue("importLanguage"));
-            languageDefItem.addActionListener(this);
-            importLanguage.addActionListener(this);
-            languageMenu.add(languageDefItem);
-//            if (languageList != null && !languageList.isEmpty()) {
-//                LanguageAction.initProperty(languageList.get(0).getContent());
-//                languageMenu.add(otherItem);
-//            }
-            languageMenu.add(importLanguage);
-
-            managementMenu = new JMenu();
-            workGroupManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("groups.png")));
-            workGroupManagementItem.setComponentOrientation(direction);
-            calendarManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("calendar.png")));
-            calendarManagementItem.setComponentOrientation(direction);
-            calendarManagementItem.setVisible(false);
-            personManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("person-mgnt.png")));
-            personManagementItem.setComponentOrientation(direction);
-            userManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("user-mgnt.png")));
-            userManagementItem.setComponentOrientation(direction);
-//            roleManagementItem = new JMenuItem();
-            operationManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("operation.png")));
-            operationManagementItem.setComponentOrientation(direction);
-            eventLogListItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("event.png")));
-            eventLogListItem.setComponentOrientation(direction);
-            workGroupManagementItem.setText(ThreadPoolManager.getLangValue("workgroup_management"));
-            calendarManagementItem.setText(ThreadPoolManager.getLangValue("calendar_management"));
-            personManagementItem.setText(ThreadPoolManager.getLangValue("person_management"));
-            managementMenu.setText(ThreadPoolManager.getLangValue("management"));
-//            roleManagementItem.setText(ThreadPoolManager.getLangValue("role_management"));
-            operationManagementItem.setText(ThreadPoolManager.getLangValue("operation_management"));
-            userManagementItem.setText(ThreadPoolManager.getLangValue("user_management"));
-            eventLogListItem.setText(ThreadPoolManager.getLangValue("eventLog_list"));
-            userManagementItem.addActionListener(this);
-//            roleManagementItem.addActionListener(this);
-            operationManagementItem.addActionListener(this);
-            workGroupManagementItem.addActionListener(this);
-            eventLogListItem.addActionListener(this);
-            calendarManagementItem.addActionListener(this);
-            personManagementItem.addActionListener(this);
-            managementMenu.add(workGroupManagementItem);
-//            managementMenu.add(roleManagementItem);
-            managementMenu.add(operationManagementItem);
-            managementMenu.add(userManagementItem);
-            managementMenu.add(eventLogListItem);
-            managementMenu.add(calendarManagementItem);
-            managementMenu.add(personManagementItem);
-
-            basicInfoMenu = new JMenu();
-            basicInfoMenu.setVisible(false);
-            basicInfoMenu.setText(ThreadPoolManager.getLangValue("BasicInfo"));
-            exit = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("")));
-            exitMenu = new JMenu();
-            exit.setText(ThreadPoolManager.getLangValue("exit"));
-            exitMenu.setText(ThreadPoolManager.getLangValue("operation"));
-            exit.addActionListener(this);
-            exitMenu.addActionListener(this);
-            exitMenu.add(exit);
-            lookupService = new WebServiceInfo();
-            lookupService.setServiceName("/getAllDefinableLookup");
-            lookups = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(lookupService.getServerUrl(), lookupService.getServiceName()), new TypeReference<List<Lookup>>() {
-            });
-            basicInfoMenus = new JMenuItem[lookups.size()];
-            int i = 0;
-            for (Lookup lookup : lookups) {
-                JMenuItem jMenuItem = new JMenuItem();
-                jMenuItem.setVisible(false);
-                jMenuItem.setText(ThreadPoolManager.getLangValue(lookup.getName()));
-                jMenuItem.addActionListener(this);
-                basicInfoMenus[i++] = jMenuItem;
-                basicInfoMenu.add(jMenuItem);
-            }
-
-            menuBar.add(languageMenu);
-            menuBar.add(managementMenu);
-            menuBar.add(exitMenu);
-            menuBar.add(basicInfoMenu);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return menuBar;
     }
 
     protected void showPersonEdit() {
@@ -270,9 +139,8 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
 
     private void refreshMainForm() {
         jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
-        menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
-        languageMenu.setText(ThreadPoolManager.getLangValue("language"));
-        languageDefItem.setText(ThreadPoolManager.getLangValue("languageDef"));
+        //languageMenu.setText(ThreadPoolManager.getLangValue("language"));
+        //languageDefItem.setText(ThreadPoolManager.getLangValue("languageDef"));
         jdpDesktop.removeAll();
         jdpDesktop.revalidate();
         jdpDesktop.repaint();
@@ -292,41 +160,173 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
         languageManagement.setSelected(true);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    public JMenuBar createMenuBar(ComponentOrientation direction) {
+        JMenuBar menuBar = null;
         try {
-            if (e.getSource() == languageDefItem) {
-                showLanguageDef();
-            } else if (e.getSource() == userManagementItem) {
-                showUserManagement();
-            } else if (e.getSource() == importLanguage) {
-                showLanguageForm();
-//            } else if (e.getSource() == roleManagementItem) {
-//                showRoleManagement();
-            } else if (e.getSource() == operationManagementItem) {
-                showRoleManagement();
-            } else if (e.getSource() == eventLogListItem) {
-                showEventLogList();
-            } else if (e.getSource() == workGroupManagementItem) {
-                showWorkGroupManagement();
-            } else if (e.getSource() == calendarManagementItem) {
-                showCalendarManagment();
-            } else if (e.getSource() == personManagementItem) {
-                showPersonManagment();
-            } else if (e.getSource() == exit) {
-                System.exit(0);
-            } else {
-                for (int i = 0; i < basicInfoMenus.length; i++) {
-                    JMenuItem infoMenu = basicInfoMenus[i];
-                    if (e.getSource() == infoMenu) {
-                        showLookupInfo(lookups.get(i));
-                        break;
+            menuBar = new JMenuBar();
+            menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
+            JMenu languageMenu = new JMenu();
+            JMenuItem languageDefItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("lang.png")));
+            languageDefItem.setComponentOrientation(direction);
+            JMenuItem importLanguage = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("keyboard.png")));
+            importLanguage.setComponentOrientation(direction);
+            languageMenu.setText(ThreadPoolManager.getLangValue("language"));
+            languageDefItem.setText(ThreadPoolManager.getLangValue("languageDef"));
+            importLanguage.setText(ThreadPoolManager.getLangValue("importLanguage"));
+            languageMenu.add(languageDefItem);
+            languageMenu.add(importLanguage);
+            JMenu managementMenu = new JMenu();
+            JMenuItem workGroupManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("groups.png")));
+            workGroupManagementItem.setComponentOrientation(direction);
+            JMenuItem calendarManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("calendar.png")));
+            calendarManagementItem.setComponentOrientation(direction);
+            calendarManagementItem.setVisible(false);
+            JMenuItem personManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("person-mgnt.png")));
+            personManagementItem.setComponentOrientation(direction);
+            JMenuItem userManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("user-mgnt.png")));
+            userManagementItem.setComponentOrientation(direction);
+            JMenuItem operationManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("operation.png")));
+            operationManagementItem.setComponentOrientation(direction);
+            JMenuItem eventLogListItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("event.png")));
+            eventLogListItem.setComponentOrientation(direction);
+            workGroupManagementItem.setText(ThreadPoolManager.getLangValue("workgroup_management"));
+            calendarManagementItem.setText(ThreadPoolManager.getLangValue("calendar_management"));
+            personManagementItem.setText(ThreadPoolManager.getLangValue("person_management"));
+            managementMenu.setText(ThreadPoolManager.getLangValue("management"));
+            operationManagementItem.setText(ThreadPoolManager.getLangValue("operation_management"));
+            userManagementItem.setText(ThreadPoolManager.getLangValue("user_management"));
+            eventLogListItem.setText(ThreadPoolManager.getLangValue("eventLog_list"));
+            managementMenu.add(workGroupManagementItem);
+            managementMenu.add(operationManagementItem);
+            managementMenu.add(userManagementItem);
+            managementMenu.add(eventLogListItem);
+            managementMenu.add(calendarManagementItem);
+            managementMenu.add(personManagementItem);
+
+            JMenu basicInfoMenu = new JMenu();
+            basicInfoMenu.setVisible(false);
+            basicInfoMenu.setText(ThreadPoolManager.getLangValue("BasicInfo"));
+            JMenuItem exit = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("exit.png")));
+            JMenu exitMenu = new JMenu();
+            exit.setText(ThreadPoolManager.getLangValue("exit"));
+            exitMenu.setText(ThreadPoolManager.getLangValue("operation"));
+            exitMenu.add(exit);
+
+            userManagementItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        showUserManagement();
+                    } catch (PropertyVetoException e1) {
+                        e1.printStackTrace();
                     }
                 }
+            });
+            operationManagementItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        showRoleManagement();
+                    } catch (PropertyVetoException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            });
+            workGroupManagementItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        showWorkGroupManagement();
+                    } catch (PropertyVetoException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            });
+            eventLogListItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        showEventLogList();
+                    } catch (PropertyVetoException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            });
+            calendarManagementItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        showCalendarManagment();
+                    } catch (PropertyVetoException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            });
+            personManagementItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        showPersonManagment();
+                    } catch (PropertyVetoException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            });
+            languageDefItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        showLanguageDef();
+                    } catch (PropertyVetoException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            });
+            importLanguage.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        showLanguageForm();
+                    } catch (PropertyVetoException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            });
+            exit.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.exit(0);
+                }
+            });
+
+            WebServiceInfo loginService = new WebServiceInfo();
+            loginService.setServiceName("/getAllDefinableLookup");
+            List<Lookup> lookups = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(loginService.getServerUrl(), loginService.getServiceName()), new TypeReference<List<Lookup>>() {
+            });
+            JMenuItem[] basicInfoMenus = new JMenuItem[lookups.size()];
+            int i = 0;
+            for (Lookup lookup : lookups) {
+                JMenuItem jMenuItem = new JMenuItem();
+                jMenuItem.setVisible(false);
+                jMenuItem.setText(ThreadPoolManager.getLangValue(lookup.getName()));
+                jMenuItem.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        //To change body of implemented methods use File | Settings | File Templates.
+                    }
+                });
+                basicInfoMenus[i++] = jMenuItem;
+                basicInfoMenu.add(jMenuItem);
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+
+            menuBar.add(languageMenu);
+            menuBar.add(managementMenu);
+            menuBar.add(exitMenu);
+            menuBar.add(basicInfoMenu);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return menuBar;
     }
 
     public JDesktopPane getJdpDesktop() {
@@ -337,14 +337,6 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
         this.jdpDesktop = jdpDesktop;
     }
 
-    public JMenu getLanguageMenu() {
-        return languageMenu;
-    }
-
-    public void setLanguageMenu(JMenu languageMenu) {
-        this.languageMenu = languageMenu;
-    }
-
     public Login getLoginForm() {
         return loginForm;
     }
@@ -353,46 +345,4 @@ public class MainForm extends JFrame implements ActionListener, InternalFrameLis
         this.loginForm = loginForm;
     }
 
-    public JMenuBar getMainMenuBar() {
-        return menuBar;
-    }
-
-    public void setMenuBar(JMenuBar menuBar) {
-        this.menuBar = menuBar;
-    }
-
-    @Override
-    public void internalFrameOpened(InternalFrameEvent e) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public void internalFrameClosing(InternalFrameEvent e) {
-        e.getInternalFrame().dispose();
-    }
-
-    @Override
-    public void internalFrameClosed(InternalFrameEvent e) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public void internalFrameIconified(InternalFrameEvent e) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public void internalFrameDeiconified(InternalFrameEvent e) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public void internalFrameActivated(InternalFrameEvent e) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public void internalFrameDeactivated(InternalFrameEvent e) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
 }
