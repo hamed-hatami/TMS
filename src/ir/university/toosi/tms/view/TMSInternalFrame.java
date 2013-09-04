@@ -1,5 +1,7 @@
 package ir.university.toosi.tms.view;
 
+import ir.university.toosi.tms.controller.LanguageAction;
+
 import javax.swing.*;
 import java.awt.*;
 
