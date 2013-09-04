@@ -209,6 +209,7 @@ public class MainForm extends JFrame implements InternalFrameListener {
             basicInfoMenu.setVisible(false);
             basicInfoMenu.setText(ThreadPoolManager.getLangValue("BasicInfo"));
             JMenuItem exit = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("exit.png")));
+            exit.setComponentOrientation(direction);
             JMenu exitMenu = new JMenu();
             exit.setText(ThreadPoolManager.getLangValue("exit"));
             exitMenu.setText(ThreadPoolManager.getLangValue("operation"));
