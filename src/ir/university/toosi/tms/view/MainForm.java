@@ -36,6 +36,7 @@ public class MainForm extends JFrame implements InternalFrameListener {
 
     private TMSDesktop jdpDesktop;
     private Login loginForm;
+    private WebServiceInfo webServiceInfo = new WebServiceInfo();
 
     public MainForm() {
 
@@ -50,7 +51,7 @@ public class MainForm extends JFrame implements InternalFrameListener {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 
             ThreadPoolManager.mainForm = this;
-            WebServiceInfo webServiceInfo = new WebServiceInfo();
+
             webServiceInfo.setServiceName("/getAllLanguage");
 
             List<Languages> languageList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName()), new TypeReference<List<Languages>>() {
@@ -307,9 +308,8 @@ public class MainForm extends JFrame implements InternalFrameListener {
                 }
             });
 
-            WebServiceInfo loginService = new WebServiceInfo();
-            loginService.setServiceName("/getAllDefinableLookup");
-            List<Lookup> lookups = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(loginService.getServerUrl(), loginService.getServiceName()), new TypeReference<List<Lookup>>() {
+            webServiceInfo.setServiceName("/getAllDefinableLookup");
+            List<Lookup> lookups = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName()), new TypeReference<List<Lookup>>() {
             });
             JMenuItem[] basicInfoMenus = new JMenuItem[lookups.size()];
             int i = 0;
