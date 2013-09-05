@@ -163,7 +163,6 @@ public class Login extends TMSInternalFrame {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    JOptionPane.showMessageDialog(new JFrame(), "خوش آمدید ");
 
                     ComponentOrientation direction;
                     if (ThreadPoolManager.currentLanguage.isRtl()) {
