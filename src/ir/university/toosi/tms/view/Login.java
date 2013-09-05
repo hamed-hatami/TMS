@@ -77,6 +77,7 @@ public class Login extends TMSInternalFrame {
 
     private void initComponents() {
 
+        setTitle("سامانه مدیریت تردد");
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         loginService.setServiceName("/loadLanguage");
         try {
