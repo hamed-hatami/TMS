@@ -309,18 +309,22 @@ public class MainForm extends JFrame implements InternalFrameListener {
             });
 
             webServiceInfo.setServiceName("/getAllDefinableLookup");
-            List<Lookup> lookups = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName()), new TypeReference<List<Lookup>>() {
+            final List<Lookup> lookups = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName()), new TypeReference<List<Lookup>>() {
             });
             JMenuItem[] basicInfoMenus = new JMenuItem[lookups.size()];
             int i = 0;
-            for (Lookup lookup : lookups) {
+            for (final Lookup lookup : lookups) {
                 JMenuItem jMenuItem = new JMenuItem();
                 jMenuItem.setVisible(false);
                 jMenuItem.setText(ThreadPoolManager.getLangValue(lookup.getName()));
                 jMenuItem.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        //To change body of implemented methods use File | Settings | File Templates.
+                        try {
+                            showLookupInfo(lookup);
+                        } catch (PropertyVetoException e1) {
+                            e1.printStackTrace();
+                        }
                     }
                 });
                 basicInfoMenus[i++] = jMenuItem;
