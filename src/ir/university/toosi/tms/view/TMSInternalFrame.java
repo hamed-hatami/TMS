@@ -13,6 +13,7 @@ public class TMSInternalFrame extends JInternalFrame {
 
     public TMSInternalFrame() {
         super();
+        setFrameIcon(new ImageIcon(MainForm.class.getClassLoader().getResource("logo.png")));
         setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) (dimension.getWidth() / 4);
