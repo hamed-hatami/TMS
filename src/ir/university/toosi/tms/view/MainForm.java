@@ -364,7 +364,7 @@ public class MainForm extends JFrame implements InternalFrameListener {
 
     @Override
     public void internalFrameClosing(InternalFrameEvent e) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        e.getInternalFrame().dispose();
     }
 
     @Override
