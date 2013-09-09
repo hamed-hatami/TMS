@@ -32,7 +32,9 @@ package ir.university.toosi.tms.view.role;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ir.university.toosi.tms.model.entity.*;
+import ir.university.toosi.tms.model.entity.Operation;
+import ir.university.toosi.tms.model.entity.Role;
+import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
@@ -46,7 +48,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class RoleForm extends TMSInternalFrame {
 
@@ -59,8 +60,8 @@ public class RoleForm extends TMSInternalFrame {
         this.role = role;
         this.roleManagement = roleManagement;
         mainPanel = new TMSPanel();
-        nameLabel = new JLabel();
-        roleName = new JTextField();
+//        nameLabel = new JLabel();
+//        roleName = new JTextField();
         descLabel = new JLabel();
         roleDesc = new JTextField();
         cancel = new JButton();
@@ -97,17 +98,16 @@ public class RoleForm extends TMSInternalFrame {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
 
-
         mainTable.setColumnSelectionAllowed(true);
         tableScroll.setViewportView(mainTable);
         mainTable.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
-        nameLabel.setText(ThreadPoolManager.getLangValue("TMS_NAME"));
-
-        if (editMode)
-            roleName.setText(role.getName());
-        else
-            roleName.setText("");
+//        nameLabel.setText(ThreadPoolManager.getLangValue("TMS_NAME"));
+//
+//        if (editMode)
+//            roleName.setText(role.getName());
+//        else
+//            roleName.setText("");
 
         descLabel.setText(ThreadPoolManager.getLangValue("TMS_DESC"));
 
@@ -123,21 +123,23 @@ public class RoleForm extends TMSInternalFrame {
                         .add(TMSPanel1Layout.createSequentialGroup()
                                 .add(30, 30, 30)
                                 .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                        .add(nameLabel)
+//                                        .add(nameLabel)
                                         .add(descLabel))
                                 .add(18, 18, 18)
                                 .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                                         .add(org.jdesktop.layout.GroupLayout.LEADING, roleDesc, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                                        .add(roleName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
+//                                        .add(roleName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                                )
                                 .addContainerGap())
         );
         TMSPanel1Layout.setVerticalGroup(
                 TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(TMSPanel1Layout.createSequentialGroup()
-                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                        .add(nameLabel)
-                                        .add(roleName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+//                                .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+//                                        .add(nameLabel)
+//                                        .add(roleName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+//                                )
+//                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(TMSPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                                         .add(roleDesc, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(descLabel))
@@ -242,38 +244,43 @@ public class RoleForm extends TMSInternalFrame {
     private void add(java.awt.event.ActionEvent evt) {
 
         Role newRole = new Role();
-        newRole.setName(roleName.getText());
-        newRole.setDescription(roleDesc.getText());
+//        newRole.setName(roleName.getText());
+//        newRole.setDescription(roleDesc.getText());
+        newRole.setDescText(roleDesc.getText());
         newRole.setEnabled(true);
         newRole.setDeleted("0");
         newRole.setEffectorUser(ThreadPoolManager.me.getUsername());
-       newRole.setOperations(new HashSet<Operation>());
+        newRole.setOperations(new HashSet<Operation>());
+        newRole.setCurrentLang(ThreadPoolManager.currentLanguage);
         roleService.setServiceName("/createRole");
-
         try {
             role = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(newRole)), Role.class);
-            if(role!=null)
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+       /* try {
+            if (role != null)
                 roleService.setServiceName("/createLanguageManagement");
-            LanguageManagement languageManagement= new LanguageManagement();
+            LanguageManagement languageManagement = new LanguageManagement();
             languageManagement.setTitle(newRole.getDescription());
             languageManagement.setType(ThreadPoolManager.currentLanguage);
             try {
-                languageManagement = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(),roleService.getServiceName(),new ObjectMapper().writeValueAsString(languageManagement)),LanguageManagement.class);
+                languageManagement = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(languageManagement)), LanguageManagement.class);
 
                 roleService.setServiceName("/createLanguageKeyManagement");
-                LanguageKeyManagement languageKeyManagement= new LanguageKeyManagement();
+                LanguageKeyManagement languageKeyManagement = new LanguageKeyManagement();
                 languageKeyManagement.setDescriptionKey(newRole.getName());
-                Set list=new HashSet();
+                Set list = new HashSet();
                 list.add(languageManagement);
                 languageKeyManagement.setLanguageManagements(list);
 
-                languageKeyManagement = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(),roleService.getServiceName(),new ObjectMapper().writeValueAsString(languageKeyManagement)),LanguageKeyManagement.class);
+                languageKeyManagement = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(languageKeyManagement)), LanguageKeyManagement.class);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+        }*/
         assignOperation.setEnabled(true);
 //        this.dispose();
 //        try {
@@ -285,12 +292,11 @@ public class RoleForm extends TMSInternalFrame {
 
     private void edit(java.awt.event.ActionEvent evt) {
 
-        role.setName(roleName.getText());
-        role.setDescription(roleDesc.getText());
+//        role.setName(roleName.getText());
+        role.setDescText(roleDesc.getText());
         role.setEffectorUser(ThreadPoolManager.me.getUsername());
-
+        role.setCurrentLang(ThreadPoolManager.currentLanguage);
         roleService.setServiceName("/editRole");
-
         try {
             new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(role)), Boolean.class);
         } catch (IOException e) {
@@ -328,10 +334,10 @@ public class RoleForm extends TMSInternalFrame {
 
     private void showData() {
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, operationList, mainTable, "");
-        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
-        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_NAME"));
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${description}"));
+//         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
+//        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_NAME"));
+//        columnBinding.setColumnClass(String.class);
+        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${description}"));
         columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_DESC"));
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${enabled}"));
@@ -355,10 +361,10 @@ public class RoleForm extends TMSInternalFrame {
     private JButton cancel;
     private JButton ok;
     private JButton assignOperation;
-    private JLabel nameLabel;
+    //    private JLabel nameLabel;
     private JLabel descLabel;
     private TMSPanel mainPanel;
-    private JTextField roleName;
+    //    private JTextField roleName;
     private JTextField roleDesc;
     private TMSPanel operationPanel;
     private boolean editMode;
@@ -369,6 +375,4 @@ public class RoleForm extends TMSInternalFrame {
     private JTable mainTable;
     private JDesktopPane jDesktopPane;
     private List<Operation> operationList;
-    // End of variables declaration//GEN-END:variables
-
 }

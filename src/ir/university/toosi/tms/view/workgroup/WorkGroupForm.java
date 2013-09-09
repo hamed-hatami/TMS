@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ir.university.toosi.tms.view.workgroup;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -33,14 +29,14 @@ public class WorkGroupForm extends TMSInternalFrame {
     public WorkGroupForm(WorkGroupManagement workGroupManagement) {
         roles = new Hashtable<>();
         try {
-        this.workGroupManagement = workGroupManagement;
+            this.workGroupManagement = workGroupManagement;
             workGroupService.setServiceName("/getAllRole");
             allRoleList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName()), new TypeReference<List<Role>>() {
             });
 
             for (Role role : allRoleList) {
-                roleListModel.addElement(role.getName());
-                roles.put(role.getName(), role);
+                roleListModel.addElement(role.getDescription());
+                roles.put(role.getDescription(), role);
             }
 
             initComponents();
@@ -61,9 +57,9 @@ public class WorkGroupForm extends TMSInternalFrame {
 
         this.workGroupManagement = workGroupManagement;
         this.workGroup = workGroup;
-        nameText.setText(workGroup.getName());
+//        nameText.setText(workGroup.getName());
         descriptionText.setText(workGroup.getDescription());
-        selectedRoleList=new ArrayList<>(workGroup.getRoles());
+        selectedRoleList = new ArrayList<>(workGroup.getRoles());
         workGroupService.setServiceName("/getAllRole");
 
         try {
@@ -73,14 +69,14 @@ public class WorkGroupForm extends TMSInternalFrame {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
         for (Role role : allRoleList) {
-            roleListModel.addElement(role.getName());
-            roles.put(role.getName(), role);
+            roleListModel.addElement(role.getDescription());
+            roles.put(role.getDescription(), role);
         }
 
-        List<Role> allRoles=new ArrayList<>(allRoleList);
+        List<Role> allRoles = new ArrayList<>(allRoleList);
         for (Role allRole : allRoles) {
             for (Role role : selectedRoleList) {
-                if(role.getName().equalsIgnoreCase(allRole.getName())){
+                if (role.getDescription().equalsIgnoreCase(allRole.getDescription())) {
                     allRoleList.remove(allRole);
                 }
             }
@@ -106,9 +102,9 @@ public class WorkGroupForm extends TMSInternalFrame {
         setClosable(true);
         this.addInternalFrameListener(ThreadPoolManager.mainForm);
         TMSPanel1 = new TMSPanel();
-        nameLable = new javax.swing.JLabel();
+//        nameLable = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        nameText = new javax.swing.JTextField();
+//        nameText = new javax.swing.JTextField();
         descriptionText = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         allList = new javax.swing.JList();
@@ -125,7 +121,7 @@ public class WorkGroupForm extends TMSInternalFrame {
         TMSPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_WORKGROUP")));
         TMSPanel1.setName(ThreadPoolManager.getLangValue("TMS_WORKGROUP")); // NOI18N
 
-        nameLable.setText(ThreadPoolManager.getLangValue("TMS_NAME"));
+//        nameLable.setText(ThreadPoolManager.getLangValue("TMS_NAME"));
 
         jLabel2.setText(ThreadPoolManager.getLangValue("TMS_DESC"));
 
@@ -178,10 +174,10 @@ public class WorkGroupForm extends TMSInternalFrame {
                                                         .addComponent(add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(TMSPanel1Layout.createSequentialGroup()
-                                                .addComponent(nameLable)
-                                                .addGap(82, 82, 82)
-                                                .addComponent(nameText))
+//                                        .addGroup(TMSPanel1Layout.createSequentialGroup()
+//                                                .addComponent(nameLable)
+//                                                .addGap(82, 82, 82)
+//                                                .addComponent(nameText))
                                         .addGroup(TMSPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabel2)
                                                 .addGap(27, 27, 27)
@@ -198,10 +194,10 @@ public class WorkGroupForm extends TMSInternalFrame {
                 TMSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TMSPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(TMSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(nameLable)
-                                        .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(16, 16, 16)
+//                                .addGroup(TMSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+//                                        .addComponent(nameLable)
+//                                        .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+//                                .addGap(16, 16, 16)
                                 .addGroup(TMSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel2)
                                         .addComponent(descriptionText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -276,40 +272,43 @@ public class WorkGroupForm extends TMSInternalFrame {
             if (!editable) {
                 WorkGroup newWorkGroup = new WorkGroup();
                 newWorkGroup.setDeleted("0");
-                newWorkGroup.setName(nameText.getText());
-                newWorkGroup.setDescription(descriptionText.getText());
+//                newWorkGroup.setName(nameText.getText());
+                newWorkGroup.setDescText(descriptionText.getText());
+                newWorkGroup.setCurrentLang(ThreadPoolManager.currentLanguage);
                 newWorkGroup.setRoles(roleSet);
                 workGroupService.setServiceName("/createWorkGroup");
-                newWorkGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName(),new ObjectMapper().writeValueAsString(newWorkGroup)), WorkGroup.class);
-                if(newWorkGroup!=null)
+                newWorkGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName(), new ObjectMapper().writeValueAsString(newWorkGroup)), WorkGroup.class);
+               /* if (newWorkGroup != null)
                     workGroupService.setServiceName("/createLanguageManagement");
-                LanguageManagement languageManagement= new LanguageManagement();
+                LanguageManagement languageManagement = new LanguageManagement();
                 languageManagement.setTitle(newWorkGroup.getDescription());
                 languageManagement.setType(ThreadPoolManager.currentLanguage);
                 try {
-                    languageManagement = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(),workGroupService.getServiceName(),new ObjectMapper().writeValueAsString(languageManagement)),LanguageManagement.class);
+                    languageManagement = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName(), new ObjectMapper().writeValueAsString(languageManagement)), LanguageManagement.class);
 
                     workGroupService.setServiceName("/createLanguageKeyManagement");
-                    LanguageKeyManagement languageKeyManagement= new LanguageKeyManagement();
+                    LanguageKeyManagement languageKeyManagement = new LanguageKeyManagement();
                     languageKeyManagement.setDescriptionKey(newWorkGroup.getName());
-                    Set list=new HashSet();
+                    Set list = new HashSet();
                     list.add(languageManagement);
                     languageKeyManagement.setLanguageManagements(list);
 
-                    languageKeyManagement = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(),workGroupService.getServiceName(),new ObjectMapper().writeValueAsString(languageKeyManagement)),LanguageKeyManagement.class);
+                    languageKeyManagement = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName(), new ObjectMapper().writeValueAsString(languageKeyManagement)), LanguageKeyManagement.class);
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
+                }*/
                 this.dispose();
-            }else{
-                workGroup.setName(nameText.getText());
-                workGroup.setDescription(descriptionText.getText());
+            } else {
+//                workGroup.setName(nameText.getText());
+                workGroup.setDescText(descriptionText.getText());
                 workGroup.setRoles(roleSet);
+                workGroup.setCurrentLang(ThreadPoolManager.currentLanguage);
                 workGroupService.setServiceName("/editWorkGroup");
-                workGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName(),new ObjectMapper().writeValueAsString(workGroup)), WorkGroup.class);
+                workGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName(), new ObjectMapper().writeValueAsString(workGroup)), WorkGroup.class);
                 this.dispose();
             }
-            workGroupManagement.refresh();;
+            workGroupManagement.refresh();
+            ;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -323,8 +322,8 @@ public class WorkGroupForm extends TMSInternalFrame {
     private void refreshSelectedList() {
         DefaultListModel<String> roleListModel = new DefaultListModel<>();
         for (Role role : selectedRoleList) {
-            roleListModel.addElement(role.getName());
-            roles.put(role.getName(), role);
+            roleListModel.addElement(role.getDescription());
+            roles.put(role.getDescription(), role);
         }
         assignList.setModel(roleListModel);
 
@@ -333,8 +332,8 @@ public class WorkGroupForm extends TMSInternalFrame {
     private void refreshAllList() {
         DefaultListModel<String> roleListModel = new DefaultListModel<>();
         for (Role role : allRoleList) {
-            roleListModel.addElement(role.getName());
-            roles.put(role.getName(), role);
+            roleListModel.addElement(role.getDescription());
+            roles.put(role.getDescription(), role);
         }
         allList.setModel(roleListModel);
     }
@@ -352,8 +351,8 @@ public class WorkGroupForm extends TMSInternalFrame {
     private TMSPanel TMSPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel nameLable;
-    private javax.swing.JTextField nameText;
+//    private javax.swing.JLabel nameLable;
+//    private javax.swing.JTextField nameText;
     private javax.swing.JButton remove;
     private javax.swing.JButton okButton;
     private javax.swing.JButton cancelButton;

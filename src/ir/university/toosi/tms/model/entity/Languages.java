@@ -3,9 +3,6 @@ package ir.university.toosi.tms.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.*;
-import java.io.Serializable;
-
 @JsonIgnoreProperties(value = "@id")
 public class Languages extends BaseEntity {
 

@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.university.toosi.tms.model.entity.BLookup;
 import ir.university.toosi.tms.model.entity.BaseEntity;
 
-import javax.persistence.*;
-
 @JsonIgnoreProperties(value = "@id")
 public class CardReader extends BaseEntity {
 

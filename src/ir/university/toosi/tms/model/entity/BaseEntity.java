@@ -2,7 +2,6 @@ package ir.university.toosi.tms.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Transient;
 import java.io.Serializable;
 
 
@@ -14,6 +13,8 @@ public class BaseEntity implements Serializable {
     protected String deleted;
     @JsonProperty
     protected String status;
+    @JsonProperty
+    protected Languages currentLang;
 
     public String getEffectorUser() {
         return effectorUser;
@@ -37,5 +38,13 @@ public class BaseEntity implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Languages getCurrentLang() {
+        return currentLang;
+    }
+
+    public void setCurrentLang(Languages currentLang) {
+        this.currentLang = currentLang;
     }
 }

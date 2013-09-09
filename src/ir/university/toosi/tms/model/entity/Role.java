@@ -2,6 +2,7 @@ package ir.university.toosi.tms.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ir.university.toosi.tms.util.ThreadPoolManager;
 
 import java.util.Set;
 
@@ -14,13 +15,13 @@ public class Role extends BaseEntity {
     @JsonProperty
     private long id;
     @JsonProperty
-    private String name;
-    @JsonProperty
     private String description;
     @JsonProperty
     private boolean enabled;
     @JsonProperty
     private boolean selected;
+    @JsonProperty
+    private String descText;
     @JsonProperty
     private Set<Operation> operations;
 
@@ -32,9 +33,8 @@ public class Role extends BaseEntity {
         this.id = id;
     }
 
-    public Role(long id, String name, String description, boolean enabled, String deleted, Set<WorkGroup> workGroups, boolean selected) {
+    public Role(long id, String description, boolean enabled, String deleted, Set<WorkGroup> workGroups, boolean selected) {
         this.id = id;
-        this.name = name;
         this.description = description;
         this.enabled = enabled;
         this.deleted = deleted;
@@ -47,14 +47,6 @@ public class Role extends BaseEntity {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDescription() {
@@ -87,5 +79,13 @@ public class Role extends BaseEntity {
 
     public void setOperations(Set<Operation> operations) {
         this.operations = operations;
+    }
+
+    public String getDescText() {
+        return ThreadPoolManager.getLangValue(this.description);
+    }
+
+    public void setDescText(String descText) {
+        this.descText = descText;
     }
 }

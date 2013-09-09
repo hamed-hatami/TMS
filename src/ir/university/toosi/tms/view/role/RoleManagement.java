@@ -26,18 +26,18 @@ public class RoleManagement extends TMSInternalFrame {
      * Creates new form ContactEditor
      */
     public RoleManagement() {
-        fillSearchCombo();
+//        fillSearchCombo();
         mainPanel = new TMSPanel();
         tableScroll = new JScrollPane();
         mainTable = new JTable();
         add = new JButton();
         delete = new JButton();
         edit = new JButton();
-        searchPanel = new TMSPanel();
-        searchCombo = new JComboBox(searchItems);
-        searchText = new JTextField();
-        filter = new JLabel();
-        by = new JLabel();
+//        searchPanel = new TMSPanel();
+//        searchCombo = new JComboBox(searchItems);
+//        searchText = new JTextField();
+//        filter = new JLabel();
+//        by = new JLabel();
         try {
             initComponents();
         } catch (IOException e) {
@@ -46,7 +46,7 @@ public class RoleManagement extends TMSInternalFrame {
     }
 
     public RoleManagement(JDesktopPane jDesktopPane) {
-        fillSearchCombo();
+//        fillSearchCombo();
         jdpDesktop = jDesktopPane;
         mainPanel = new TMSPanel();
         tableScroll = new JScrollPane();
@@ -54,11 +54,11 @@ public class RoleManagement extends TMSInternalFrame {
         add = new JButton();
         delete = new JButton();
         edit = new JButton();
-        searchPanel = new TMSPanel();
-        searchCombo = new JComboBox(searchItems);
-        searchText = new JTextField();
-        filter = new JLabel();
-        by = new JLabel();
+//        searchPanel = new TMSPanel();
+//        searchCombo = new JComboBox(searchItems);
+//        searchText = new JTextField();
+//        filter = new JLabel();
+//        by = new JLabel();
         try {
             initComponents();
         } catch (IOException e) {
@@ -66,13 +66,13 @@ public class RoleManagement extends TMSInternalFrame {
         }
     }
 
-    private void fillSearchCombo() {
-        searchItems = new String[RoleSearchItems.values().length];
-        int i = 0;
-        for (RoleSearchItems roleSearchItem : RoleSearchItems.values()) {
-            searchItems[i++] = roleSearchItem.getDescription();
-        }
-    }
+//    private void fillSearchCombo() {
+//        searchItems = new String[RoleSearchItems.values().length];
+//        int i = 0;
+//        for (RoleSearchItems roleSearchItem : RoleSearchItems.values()) {
+//            searchItems[i++] = roleSearchItem.getDescription();
+//        }
+//    }
 
     /**
      * This method is called from within the constructor to
@@ -166,7 +166,7 @@ public class RoleManagement extends TMSInternalFrame {
                                 .add(133, 133, 133))
         );
 
-        searchPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_SEARCH_ROLE")));
+       /* searchPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_SEARCH_ROLE")));
 //        searchCombo.setModel(new DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
 
         searchText.setToolTipText("");
@@ -230,16 +230,16 @@ public class RoleManagement extends TMSInternalFrame {
                                         .add(searchCombo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(by))
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        );*/
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(searchPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+//                        .add(layout.createSequentialGroup()
+//                                .addContainerGap()
+//                                .add(searchPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+//                                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .add(mainPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -249,8 +249,8 @@ public class RoleManagement extends TMSInternalFrame {
                 layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap()
-                                .add(searchPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+//                                .add(searchPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+//                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                                 .add(mainPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 221, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -287,19 +287,19 @@ public class RoleManagement extends TMSInternalFrame {
         jTableBinding.bind();
     }
 
-    private void search(DocumentEvent documentEvent) throws IOException {
-
-        if (RoleSearchItems.values()[searchCombo.getSelectedIndex()].equals(RoleSearchItems.NAME)) {
-            roleService.setServiceName("/getRoleByName");
-            Role searchRole = new Role();
-            searchRole.setName(searchText.getText());
-            searchRole.setEffectorUser(ThreadPoolManager.me.getUsername());
-            roleList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(searchRole)), new TypeReference<List<Role>>() {
-            });
-
-            showData();
-        }
-    }
+//    private void search(DocumentEvent documentEvent) throws IOException {
+//
+//        if (RoleSearchItems.values()[searchCombo.getSelectedIndex()].equals(RoleSearchItems.NAME)) {
+//            roleService.setServiceName("/getRoleByName");
+//            Role searchRole = new Role();
+//            searchRole.setName(searchText.getText());
+//            searchRole.setEffectorUser(ThreadPoolManager.me.getUsername());
+//            roleList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(searchRole)), new TypeReference<List<Role>>() {
+//            });
+//
+//            showData();
+//        }
+//    }
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {
         int[] indexes = new int[mainTable.getSelectedRows().length];
@@ -348,18 +348,18 @@ public class RoleManagement extends TMSInternalFrame {
     private JButton add;
     private JButton delete;
     private JButton edit;
-    private JComboBox searchCombo;
-    private JLabel by;
-    private JLabel filter;
+//    private JComboBox searchCombo;
+//    private JLabel by;
+//    private JLabel filter;
     private TMSPanel mainPanel;
-    private TMSPanel searchPanel;
+//    private TMSPanel searchPanel;
     private JScrollPane tableScroll;
     private JTable mainTable;
     private JDesktopPane jdpDesktop;
-    private JTextField searchText;
+//    private JTextField searchText;
     private WebServiceInfo roleService = new WebServiceInfo();
     private List<Role> roleList = new ArrayList<>();
-    private String[] searchItems;
+//    private String[] searchItems;
 
     public JTable getMainTable() {
         return mainTable;

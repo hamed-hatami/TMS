@@ -19,7 +19,7 @@ public class WorkGroup extends BaseEntity {
     @JsonProperty
     private long id;
     @JsonProperty
-    private String name;
+    private String descText;
     @JsonProperty
     private String description;
     @JsonProperty
@@ -37,9 +37,8 @@ public class WorkGroup extends BaseEntity {
     }
 
 
-    public WorkGroup(long id, String name, String description, String enabled, String deleted, boolean selected, Set<User> users) {
+    public WorkGroup(long id, String description, String enabled, String deleted, boolean selected, Set<User> users) {
         this.id = id;
-        this.name = name;
         this.description = description;
         this.enabled = enabled;
         this.deleted = deleted;
@@ -54,12 +53,12 @@ public class WorkGroup extends BaseEntity {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getDescText() {
+        return descText;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDescText(String descText) {
+        this.descText = descText;
     }
 
     public String getDescription() {

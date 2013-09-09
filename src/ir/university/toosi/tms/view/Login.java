@@ -38,7 +38,6 @@ public class Login extends TMSInternalFrame {
     private String[] langItems;
     private String defaultedLang;
     private List<Languages> languagesList;
-    ;
 
     public Login(MainForm mainForm) {
 
