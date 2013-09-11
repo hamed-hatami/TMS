@@ -295,7 +295,7 @@ public class OperationManagement extends TMSInternalFrame {
         }
 
         role.getOperations().addAll(assignOperations);
-        operationService.setServiceName("/editRole");
+        operationService.setServiceName("/pureEditRole");
         try {
             new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(operationService.getServerUrl(), operationService.getServiceName(), new ObjectMapper().writeValueAsString(role)), Boolean.class);
             this.dispose();

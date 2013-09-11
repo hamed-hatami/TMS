@@ -315,7 +315,11 @@ public class PersonManagement extends TMSInternalFrame {
 
         personService.setServiceName("/deletePersons");
         try {
-            new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(personService.getServerUrl(), personService.getServiceName(), new ObjectMapper().writeValueAsString(deletedPersons)), Boolean.class);
+            String result = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(personService.getServerUrl(), personService.getServiceName(), new ObjectMapper().writeValueAsString(deletedPersons)), String.class);
+            if (!result.equalsIgnoreCase("true"))
+                JOptionPane.showInternalMessageDialog(this, ThreadPoolManager.getLangValue("UNSUCCESSFUL_DELETE"));
+            else
+                JOptionPane.showInternalMessageDialog(this, ThreadPoolManager.getLangValue("SUCCESSFUL_DELETE"));
             refresh();
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

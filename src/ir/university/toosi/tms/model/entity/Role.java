@@ -25,6 +25,8 @@ public class Role extends BaseEntity {
     @JsonProperty
     private Set<Operation> operations;
 
+    private String descShow;
+
     public Role() {
     }
 
@@ -82,10 +84,18 @@ public class Role extends BaseEntity {
     }
 
     public String getDescText() {
-        return ThreadPoolManager.getLangValue(this.description);
+        return descText;
     }
 
     public void setDescText(String descText) {
         this.descText = descText;
+    }
+
+    public String getDescShow() {
+        return ThreadPoolManager.getLangValue(this.description);
+    }
+
+    public void setDescShow(String descShow) {
+        this.descShow = descShow;
     }
 }

@@ -26,6 +26,8 @@ public class ThreadPoolManager {
     public static final ForkJoinPool forkJoinPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
 
     public static String getLangValue(String key) {
+        if(key == null)
+            return null;
         if (langHash.containsKey(key))
             return langHash.get(key).getTitle();
         return key + "_NOT_DEF";

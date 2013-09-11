@@ -340,7 +340,11 @@ public class PCManagement extends TMSInternalFrame {
 
         pcService.setServiceName("/deletePCs");
         try {
-            new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(pcService.getServerUrl(), pcService.getServiceName(), new ObjectMapper().writeValueAsString(deletedPCs)), Boolean.class);
+            String result = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(pcService.getServerUrl(), pcService.getServiceName(), new ObjectMapper().writeValueAsString(deletedPCs)), String.class);
+            if (!result.equalsIgnoreCase("true"))
+                JOptionPane.showInternalMessageDialog(this, ThreadPoolManager.getLangValue("UNSUCCESSFUL_DELETE"));
+            else
+                JOptionPane.showInternalMessageDialog(this, ThreadPoolManager.getLangValue("SUCCESSFUL_DELETE"));
             refresh();
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

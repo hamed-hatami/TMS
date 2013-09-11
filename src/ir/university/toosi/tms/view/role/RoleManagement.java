@@ -3,7 +3,6 @@ package ir.university.toosi.tms.view.role;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.Role;
-import ir.university.toosi.tms.model.entity.RoleSearchItems;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
@@ -13,8 +12,6 @@ import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -113,7 +110,7 @@ public class RoleManagement extends TMSInternalFrame {
         });
 
         delete.setText(ThreadPoolManager.getLangValue("TMS_DELETE"));
-        delete.setVisible(ThreadPoolManager.hasPermission("DELETe_ROLE"));
+        delete.setVisible(ThreadPoolManager.hasPermission("DELETE_ROLE"));
         delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 int result = JOptionPane.showConfirmDialog(null, "DELETE_USER", "DELETE", JOptionPane.OK_CANCEL_OPTION);
@@ -273,10 +270,10 @@ public class RoleManagement extends TMSInternalFrame {
 
     private void showData() {
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, roleList, mainTable, "");
-        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
-        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_NAME"));
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${description}"));
+//        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
+//        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_NAME"));
+//        columnBinding.setColumnClass(String.class);
+        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${descShow}"));
         columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_DESC"));
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${enabled}"));
@@ -308,6 +305,7 @@ public class RoleManagement extends TMSInternalFrame {
             indexes[j++] = mainTable.convertRowIndexToModel(i);
         }
 
+        roleService.setServiceName("/deleteRoleList");
         List<Role> deletedRoles = new ArrayList<>();
         for (int index : indexes) {
             Role role = roleList.get(index);
@@ -315,9 +313,12 @@ public class RoleManagement extends TMSInternalFrame {
             deletedRoles.add(role);
         }
 
-        roleService.setServiceName("/deleteRoleList");
         try {
-            new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(deletedRoles)), Boolean.class);
+            String result = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(deletedRoles)), String.class);
+            if (!result.equalsIgnoreCase("true"))
+                JOptionPane.showInternalMessageDialog(this, ThreadPoolManager.getLangValue("UNSUCCESSFUL_DELETE"));
+            else
+                JOptionPane.showInternalMessageDialog(this, ThreadPoolManager.getLangValue("SUCCESSFUL_DELETE"));
             refresh();
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -348,15 +349,15 @@ public class RoleManagement extends TMSInternalFrame {
     private JButton add;
     private JButton delete;
     private JButton edit;
-//    private JComboBox searchCombo;
+    //    private JComboBox searchCombo;
 //    private JLabel by;
 //    private JLabel filter;
     private TMSPanel mainPanel;
-//    private TMSPanel searchPanel;
+    //    private TMSPanel searchPanel;
     private JScrollPane tableScroll;
     private JTable mainTable;
     private JDesktopPane jdpDesktop;
-//    private JTextField searchText;
+    //    private JTextField searchText;
     private WebServiceInfo roleService = new WebServiceInfo();
     private List<Role> roleList = new ArrayList<>();
 //    private String[] searchItems;

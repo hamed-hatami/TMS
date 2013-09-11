@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import ir.university.toosi.tms.model.entity.calendar.Calendar;
+import ir.university.toosi.tms.util.ThreadPoolManager;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -28,6 +29,7 @@ public class WorkGroup extends BaseEntity {
     private boolean selected;
     @JsonProperty
     private Set<Role> roles;
+    private String descShow;
 
 
     public WorkGroup() {
@@ -91,5 +93,13 @@ public class WorkGroup extends BaseEntity {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getDescShow() {
+        return ThreadPoolManager.getLangValue(description);
+    }
+
+    public void setDescShow(String descShow) {
+        this.descShow = descShow;
     }
 }

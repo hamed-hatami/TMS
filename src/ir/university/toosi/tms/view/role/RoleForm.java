@@ -32,6 +32,7 @@ package ir.university.toosi.tms.view.role;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ir.university.toosi.tms.model.entity.LanguageManagement;
 import ir.university.toosi.tms.model.entity.Operation;
 import ir.university.toosi.tms.model.entity.Role;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
@@ -112,7 +113,7 @@ public class RoleForm extends TMSInternalFrame {
         descLabel.setText(ThreadPoolManager.getLangValue("TMS_DESC"));
 
         if (editMode)
-            roleDesc.setText(role.getDescription());
+            roleDesc.setText(role.getDescShow());
         else
             roleDesc.setText("");
 
@@ -258,6 +259,11 @@ public class RoleForm extends TMSInternalFrame {
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
+
+        LanguageManagement languageManagement = new LanguageManagement();
+        languageManagement.setTitle(roleDesc.getText());
+        languageManagement.setType(ThreadPoolManager.currentLanguage);
+        ThreadPoolManager.langHash.put(role.getDescription(), languageManagement);
        /* try {
             if (role != null)
                 roleService.setServiceName("/createLanguageManagement");

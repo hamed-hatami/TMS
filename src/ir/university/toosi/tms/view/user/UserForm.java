@@ -38,8 +38,8 @@ public class UserForm extends TMSInternalFrame {
 
         allWorkGroupList = new RESTfulClientUtil().callListWorkGroup(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName());
         for (WorkGroup workGroup : allWorkGroupList) {
-            workGroupListModel.addElement(workGroup.getName());
-            workGroupHashtable.put(workGroup.getName(), workGroup);
+            workGroupListModel.addElement(workGroup.getDescription());
+            workGroupHashtable.put(workGroup.getDescription(), workGroup);
         }
 
         buttonGroup1 = new ButtonGroup();
@@ -86,8 +86,8 @@ public class UserForm extends TMSInternalFrame {
 
         allWorkGroupList = new RESTfulClientUtil().callListWorkGroup(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName());
         for (WorkGroup workGroup : allWorkGroupList) {
-            workGroupListModel.addElement(workGroup.getName());
-            workGroupHashtable.put(workGroup.getName(), workGroup);
+            workGroupListModel.addElement(workGroup.getDescription());
+            workGroupHashtable.put(workGroup.getDescription(), workGroup);
         }
 
 
@@ -133,11 +133,11 @@ public class UserForm extends TMSInternalFrame {
             }
             if (user.getWorkGroups() != null) {
                 for (WorkGroup workGroup : user.getWorkGroups()) {
-                    selectedWorkGroupListModel.addElement(workGroup.getName());
-                    if (workGroupHashtable.containsKey(workGroup.getName())) {
-                        workGroupListModel.removeElement(workGroup.getName());
+                    selectedWorkGroupListModel.addElement(workGroup.getDescription());
+                    if (workGroupHashtable.containsKey(workGroup.getDescription())) {
+                        workGroupListModel.removeElement(workGroup.getDescription());
                     } else
-                        workGroupHashtable.put(workGroup.getName(), workGroup);
+                        workGroupHashtable.put(workGroup.getDescription(), workGroup);
                 }
 
                 assignList.setModel(selectedWorkGroupListModel);
@@ -592,8 +592,8 @@ public class UserForm extends TMSInternalFrame {
     private void refreshSelectedList() {
         DefaultListModel<String> workGroupListModel = new DefaultListModel<>();
         for (WorkGroup workGroup : selectedWorkGroupList) {
-            workGroupListModel.addElement(workGroup.getName());
-            workGroupHashtable.put(workGroup.getName(), workGroup);
+            workGroupListModel.addElement(workGroup.getDescription());
+            workGroupHashtable.put(workGroup.getDescription(), workGroup);
         }
         assignList.setModel(workGroupListModel);
 
@@ -602,8 +602,8 @@ public class UserForm extends TMSInternalFrame {
     private void refreshAllList() {
         DefaultListModel<String> workGroupListModel = new DefaultListModel<>();
         for (WorkGroup workGroup : allWorkGroupList) {
-            workGroupListModel.addElement(workGroup.getName());
-            workGroupHashtable.put(workGroup.getName(), workGroup);
+            workGroupListModel.addElement(workGroup.getDescription());
+            workGroupHashtable.put(workGroup.getDescription(), workGroup);
         }
         allList.setModel(workGroupListModel);
     }

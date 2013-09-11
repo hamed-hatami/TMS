@@ -35,7 +35,7 @@ public class WorkGroupForm extends TMSInternalFrame {
             });
 
             for (Role role : allRoleList) {
-                roleListModel.addElement(role.getDescription());
+                roleListModel.addElement(role.getDescShow());
                 roles.put(role.getDescription(), role);
             }
 
@@ -58,7 +58,7 @@ public class WorkGroupForm extends TMSInternalFrame {
         this.workGroupManagement = workGroupManagement;
         this.workGroup = workGroup;
 //        nameText.setText(workGroup.getName());
-        descriptionText.setText(workGroup.getDescription());
+        descriptionText.setText(ThreadPoolManager.getLangValue(workGroup.getDescription()));
         selectedRoleList = new ArrayList<>(workGroup.getRoles());
         workGroupService.setServiceName("/getAllRole");
 
@@ -69,7 +69,7 @@ public class WorkGroupForm extends TMSInternalFrame {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
         for (Role role : allRoleList) {
-            roleListModel.addElement(role.getDescription());
+            roleListModel.addElement(role.getDescShow());
             roles.put(role.getDescription(), role);
         }
 
@@ -248,7 +248,6 @@ public class WorkGroupForm extends TMSInternalFrame {
             }
         }
         refreshAllList();
-        ;
         refreshSelectedList();
     }//GEN-LAST:event_addActionPerformed
 
@@ -262,7 +261,6 @@ public class WorkGroupForm extends TMSInternalFrame {
             }
         }
         refreshAllList();
-        ;
         refreshSelectedList();
     }//GEN-LAST:event_removeActionPerformed
 
@@ -278,6 +276,10 @@ public class WorkGroupForm extends TMSInternalFrame {
                 newWorkGroup.setRoles(roleSet);
                 workGroupService.setServiceName("/createWorkGroup");
                 newWorkGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName(), new ObjectMapper().writeValueAsString(newWorkGroup)), WorkGroup.class);
+                LanguageManagement languageManagement = new LanguageManagement();
+                languageManagement.setTitle(descriptionText.getText());
+                languageManagement.setType(ThreadPoolManager.currentLanguage);
+                ThreadPoolManager.langHash.put(newWorkGroup.getDescription(), languageManagement);
                /* if (newWorkGroup != null)
                     workGroupService.setServiceName("/createLanguageManagement");
                 LanguageManagement languageManagement = new LanguageManagement();
@@ -308,7 +310,7 @@ public class WorkGroupForm extends TMSInternalFrame {
                 this.dispose();
             }
             workGroupManagement.refresh();
-            ;
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -322,7 +324,7 @@ public class WorkGroupForm extends TMSInternalFrame {
     private void refreshSelectedList() {
         DefaultListModel<String> roleListModel = new DefaultListModel<>();
         for (Role role : selectedRoleList) {
-            roleListModel.addElement(role.getDescription());
+            roleListModel.addElement(role.getDescShow());
             roles.put(role.getDescription(), role);
         }
         assignList.setModel(roleListModel);
@@ -332,7 +334,7 @@ public class WorkGroupForm extends TMSInternalFrame {
     private void refreshAllList() {
         DefaultListModel<String> roleListModel = new DefaultListModel<>();
         for (Role role : allRoleList) {
-            roleListModel.addElement(role.getDescription());
+            roleListModel.addElement(role.getDescShow());
             roles.put(role.getDescription(), role);
         }
         allList.setModel(roleListModel);

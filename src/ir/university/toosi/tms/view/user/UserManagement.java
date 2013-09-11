@@ -117,7 +117,7 @@ public class UserManagement extends TMSInternalFrame {
         TMSPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_USER_MANAGEMENT")));
 
         userTable.setAutoCreateRowSorter(true);
-        userTable.setEnabled(false);
+//        userTable.setEnabled(false);
         refresh();
         userTable.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(userTable);

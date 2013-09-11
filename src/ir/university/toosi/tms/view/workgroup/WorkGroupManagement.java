@@ -233,10 +233,10 @@ public class WorkGroupManagement extends TMSInternalFrame {
         });
 
         JTableBinding jTableBinding = SwingBindings.createJTableBinding(AutoBinding.UpdateStrategy.READ_WRITE, workGroupList, mainTable, "");
-        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(ELProperty.create("${name}"));
-        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_NAME"));
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${description}"));
+//        columnBinding = jTableBinding.addColumnBinding(ELProperty.create("${name}"));
+//        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_NAME"));
+//        columnBinding.setColumnClass(String.class);
+        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${descShow}"));
         columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_DESC"));
         columnBinding.setColumnClass(String.class);
         BindingGroup bindingGroup = new BindingGroup();
@@ -245,8 +245,8 @@ public class WorkGroupManagement extends TMSInternalFrame {
     }
 
     private void deleteActionPerformed(java.awt.event.ActionEvent evt) {
-
-       /* int[] indexes = new int[mainTable.getSelectedRows().length];
+/*
+        int[] indexes = new int[mainTable.getSelectedRows().length];
         int j = 0;
         for (int i : mainTable.getSelectedRows()) {
             indexes[j++] = mainTable.convertRowIndexToModel(i);
@@ -279,7 +279,7 @@ public class WorkGroupManagement extends TMSInternalFrame {
         WorkGroupForm workGroupForm = new WorkGroupForm(this,workGroup);
         workGroupForm.setVisible(true);
         jdpDesktop.add(workGroupForm);
-        workGroupForm.setSelected(true);;
+        workGroupForm.setSelected(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
