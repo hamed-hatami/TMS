@@ -76,7 +76,7 @@ public class WorkGroupForm extends TMSInternalFrame {
         List<Role> allRoles = new ArrayList<>(allRoleList);
         for (Role allRole : allRoles) {
             for (Role role : selectedRoleList) {
-                if (role.getDescription().equalsIgnoreCase(allRole.getDescription())) {
+                if (role.getDescription() != null && role.getDescription().equalsIgnoreCase(allRole.getDescription())) {
                     allRoleList.remove(allRole);
                 }
             }
@@ -268,6 +268,8 @@ public class WorkGroupForm extends TMSInternalFrame {
         Set<Role> roleSet = new HashSet<>(selectedRoleList);
         try {
             if (!editable) {
+                if(descriptionText.getText() == null || roleSet.size() == 0 )
+                    JOptionPane.showInternalMessageDialog(this, ThreadPoolManager.getLangValue("FILL_MANDATORY"));
                 WorkGroup newWorkGroup = new WorkGroup();
                 newWorkGroup.setDeleted("0");
 //                newWorkGroup.setName(nameText.getText());
@@ -307,6 +309,10 @@ public class WorkGroupForm extends TMSInternalFrame {
                 workGroup.setCurrentLang(ThreadPoolManager.currentLanguage);
                 workGroupService.setServiceName("/editWorkGroup");
                 workGroup = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName(), new ObjectMapper().writeValueAsString(workGroup)), WorkGroup.class);
+                LanguageManagement languageManagement = new LanguageManagement();
+                languageManagement.setTitle(descriptionText.getText());
+                languageManagement.setType(ThreadPoolManager.currentLanguage);
+                ThreadPoolManager.langHash.put(workGroup.getDescription(), languageManagement);
                 this.dispose();
             }
             workGroupManagement.refresh();
