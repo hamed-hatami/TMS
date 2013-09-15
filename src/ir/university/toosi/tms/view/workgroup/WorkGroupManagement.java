@@ -89,7 +89,7 @@ public class WorkGroupManagement extends TMSInternalFrame {
         refresh();
 
 
-        mainTable.setColumnSelectionAllowed(true);
+        mainTable.setRowSelectionAllowed(true);
         tableScroll.setViewportView(mainTable);
         mainTable.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 

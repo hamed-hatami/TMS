@@ -88,7 +88,7 @@ public class EventLogList extends TMSInternalFrame {
         refresh();
 
 
-        mainTable.setColumnSelectionAllowed(true);
+        mainTable.setRowSelectionAllowed(true);
         tableScroll.setViewportView(mainTable);
 
         org.jdesktop.layout.GroupLayout TMSPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);

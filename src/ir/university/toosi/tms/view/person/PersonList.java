@@ -151,7 +151,7 @@ public class PersonList extends TMSInternalFrame {
         mainTable.setAutoCreateRowSorter(true);
         refresh();
 
-        mainTable.setColumnSelectionAllowed(true);
+        mainTable.setRowSelectionAllowed(true);
         tableScroll.setViewportView(mainTable);
         mainTable.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 

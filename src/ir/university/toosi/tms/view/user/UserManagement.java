@@ -119,7 +119,7 @@ public class UserManagement extends TMSInternalFrame {
         userTable.setAutoCreateRowSorter(true);
 //        userTable.setEnabled(false);
         refresh();
-        userTable.setColumnSelectionAllowed(true);
+        userTable.setRowSelectionAllowed(true);
         jScrollPane1.setViewportView(userTable);
         userTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 

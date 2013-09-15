@@ -218,7 +218,7 @@ public class UserForm extends TMSInternalFrame {
         }
 
 
-        mainTable.setColumnSelectionAllowed(true);
+        mainTable.setRowSelectionAllowed(true);
         tableScroll.setViewportView(mainTable);
         mainTable.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 

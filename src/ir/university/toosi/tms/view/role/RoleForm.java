@@ -99,7 +99,7 @@ public class RoleForm extends TMSInternalFrame {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
 
-        mainTable.setColumnSelectionAllowed(true);
+        mainTable.setRowSelectionAllowed(true);
         tableScroll.setViewportView(mainTable);
         mainTable.getColumnModel().getSelectionModel().setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
