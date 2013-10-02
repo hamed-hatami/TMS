@@ -170,8 +170,8 @@ public class Login extends TMSInternalFrame {
                         direction = ComponentOrientation.LEFT_TO_RIGHT;
                     }
 
-                    mainForm.setJMenuBar(mainForm.createMenuBar(direction));
-                    mainForm.getLoginForm().dispose();
+                   //// mainForm.setJMenuBar(mainForm.createMenuBar(direction));
+                  //todo  mainForm.getLoginForm().dispose();
                 }
             }
         });

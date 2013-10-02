@@ -1,18 +1,18 @@
 package ir.university.toosi.tms.view;
 
+//import ir.university.toosi.tms.view.newMenu.MenuPanel;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.controller.LanguageAction;
 import ir.university.toosi.tms.model.entity.Languages;
-import ir.university.toosi.tms.model.entity.Lookup;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
-import ir.university.toosi.tms.view.basicinfo.BasicInfoManagement;
 import ir.university.toosi.tms.view.calendar.CalendarManagement;
 import ir.university.toosi.tms.view.eventlog.EventLogList;
 import ir.university.toosi.tms.view.language.LanguageForm;
 import ir.university.toosi.tms.view.language.LanguageManagementForm;
+import ir.university.toosi.tms.view.newMenu.*;
 import ir.university.toosi.tms.view.person.PersonManagement;
 import ir.university.toosi.tms.view.role.RoleManagement;
 import ir.university.toosi.tms.view.user.UserManagement;
@@ -22,48 +22,31 @@ import javax.swing.*;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.List;
 import java.beans.PropertyVetoException;
-import java.util.List;
-
-/**
- * @author : Hamed Hatami ,  Farzad Sedaghatbin, Atefeh Ahmadi
- * @version : 1.0
- */
+import java.util.*;
 
 public class MainForm extends JFrame implements InternalFrameListener {
 
-    private TMSDesktop jdpDesktop;
-    private Login loginForm;
-    private WebServiceInfo webServiceInfo = new WebServiceInfo();
-
-    public MainForm() {
-
+    public MainForm(){
         try {
             Toolkit toolkit = Toolkit.getDefaultToolkit();
             int xSize = ((int) toolkit.getScreenSize().getWidth());
             int ySize = ((int) toolkit.getScreenSize().getHeight());
-            setSize(xSize, ySize);
+            setSize(xSize,  ySize);
 
             setDefaultLookAndFeelDecorated(true);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 
+           // ThreadPoolManager.mainForm = this;
             ThreadPoolManager.mainForm = this;
 
             webServiceInfo.setServiceName("/getAllLanguage");
 
-            List<Languages> languageList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName()), new TypeReference<List<Languages>>() {
+            java.util.List<Languages> languageList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName()), new TypeReference<java.util.List<Languages>>() {
             });
 
-            loginForm = new Login(this);
-            loginForm.setVisible(true);
-            jdpDesktop = new TMSDesktop();
-            jdpDesktop.add(loginForm);
-            loginForm.setSelected(true);
-            setContentPane(jdpDesktop);
-            jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,294 +55,100 @@ public class MainForm extends JFrame implements InternalFrameListener {
     }
 
     public static void main(String[] args) {
-        MainForm main = new MainForm();
-        main.setVisible(true);
+        MainForm mainForm = new MainForm();
+        mainForm.createAndShowGUI();
     }
 
-    protected void showPersonEdit() {
-        /*Login loginForm = new Login();
-        loginForm.setVisible(true);
-        jdpDesktop.add(loginForm);*/
-   /*     try {
-            loginForm.setSelected(true);
-        } catch (java.beans.PropertyVetoException e) {
-        }*/
-    }
+    private TMSDesktop desktopPane;
+    private Login loginForm;
+    private WebServiceInfo webServiceInfo = new WebServiceInfo();
+    private void createAndShowGUI() {
 
-    private void showUserManagement() throws PropertyVetoException {
-        UserManagement userManagement = new UserManagement(jdpDesktop);
-        userManagement.setVisible(true);
-        jdpDesktop.add(userManagement);
-        userManagement.setSelected(true);
+        //set Main window Properties
+        setVisible(true);
+        setMinimumSize(new Dimension(800, 600));
+        setMaximumSize(new Dimension(1024, 800));
+        setBackground(new Color(234, 234, 255));
+        Container contentPane = getContentPane();
+        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.PAGE_AXIS));
 
-    }
+        //add graphical menu panel
+        MenuPaneActionAvailable menuPaneActionAvailable = new MenuPaneActionAvailable();
+        menuPaneActionAvailable.setMinimumSize(new Dimension((int) menuPaneActionAvailable.getPreferredSize().getWidth(), 100));
+        menuPaneActionAvailable.setPreferredSize(new Dimension((int) menuPaneActionAvailable.getPreferredSize().getWidth(), 100));
+        contentPane.add(menuPaneActionAvailable);
 
-    private void showLanguageForm() throws PropertyVetoException {
-        LanguageForm languageForm = new LanguageForm(jdpDesktop);
-        languageForm.setVisible(true);
-        jdpDesktop.add(languageForm);
-        languageForm.setSelected(true);
+        //add divider
+        JPanel dividerPanel = new JPanel();
+        dividerPanel.setBackground(Color.green);
+        dividerPanel.setPreferredSize(new Dimension((int) dividerPanel.getPreferredSize().getWidth(), 2));
+        contentPane.add(dividerPanel);
 
-    }
 
-    private void showWorkGroupManagement() throws PropertyVetoException {
-        WorkGroupManagement workGroupManagement = new WorkGroupManagement(jdpDesktop);
-        workGroupManagement.setVisible(true);
-        jdpDesktop.add(workGroupManagement);
-        workGroupManagement.setSelected(true);
+        //add desktopPane for handling JInternalFrames
+        //desktopPane = new JDesktopPane();
+        desktopPane = new TMSDesktop();
+        desktopPane.setBackground(new Color(238, 238, 238));
+        contentPane.add(desktopPane);
 
-    }
+        //add sample internal frame
+        JInternalFrame sampleInternalFrame = new JInternalFrame();
+        sampleInternalFrame.setVisible(true);
+        sampleInternalFrame.setIconifiable(true);
+        sampleInternalFrame.setMaximizable(true);
+        sampleInternalFrame.setResizable(true);
+        Container internalFrame1ContentPane = sampleInternalFrame.getContentPane();
+        internalFrame1ContentPane.setLayout(null);
 
-    private void showCalendarManagment() throws PropertyVetoException {
-        CalendarManagement calendarManagement = new CalendarManagement(jdpDesktop);
-        calendarManagement.setVisible(true);
-        jdpDesktop.add(calendarManagement);
-        calendarManagement.setSelected(true);
-
-    }
-
-    private void showPersonManagment() throws PropertyVetoException {
-        PersonManagement personManagement = new PersonManagement(jdpDesktop);
-        personManagement.setVisible(true);
-        jdpDesktop.add(personManagement);
-        personManagement.setSelected(true);
-
-    }
-
-    private void showRoleManagement() throws PropertyVetoException {
-        RoleManagement roleManagement = new RoleManagement(jdpDesktop);
-        roleManagement.setVisible(true);
-        jdpDesktop.add(roleManagement);
-        roleManagement.setSelected(true);
-    }
-
-    private void showEventLogList() throws PropertyVetoException {
-        EventLogList eventLogList = new EventLogList(jdpDesktop);
-        eventLogList.setVisible(true);
-        jdpDesktop.add(eventLogList);
-        eventLogList.setSelected(true);
-    }
-
-    private void refreshMainForm() {
-        jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
-        //languageMenu.setText(ThreadPoolManager.getLangValue("language"));
-        //languageDefItem.setText(ThreadPoolManager.getLangValue("languageDef"));
-        jdpDesktop.removeAll();
-        jdpDesktop.revalidate();
-        jdpDesktop.repaint();
-    }
-
-    private void showLookupInfo(Lookup lookup) throws PropertyVetoException {
-        BasicInfoManagement basicInfoManagement = new BasicInfoManagement(jdpDesktop, lookup);
-        basicInfoManagement.setVisible(true);
-        jdpDesktop.add(basicInfoManagement);
-        basicInfoManagement.setSelected(true);
-    }
-
-    private void showLanguageDef() throws PropertyVetoException {
-        LanguageManagementForm languageManagement = new LanguageManagementForm(jdpDesktop);
-        languageManagement.setVisible(true);
-        jdpDesktop.add(languageManagement);
-        languageManagement.setSelected(true);
-    }
-
-    public JMenuBar createMenuBar(ComponentOrientation direction) {
-        JMenuBar menuBar = null;
-        try {
-            menuBar = new JMenuBar();
-            menuBar.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
-            JMenu languageMenu = new JMenu();
-            JMenuItem languageDefItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("lang.png")));
-            languageDefItem.setComponentOrientation(direction);
-            JMenuItem importLanguage = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("keyboard.png")));
-            importLanguage.setComponentOrientation(direction);
-            languageMenu.setText(ThreadPoolManager.getLangValue("language"));
-            languageDefItem.setText(ThreadPoolManager.getLangValue("languageDef"));
-            importLanguage.setText(ThreadPoolManager.getLangValue("importLanguage"));
-            languageMenu.add(languageDefItem);
-            languageMenu.addSeparator();
-            languageMenu.add(importLanguage);
-            JMenu managementMenu = new JMenu();
-            JMenuItem workGroupManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("groups.png")));
-            workGroupManagementItem.setComponentOrientation(direction);
-            JMenuItem calendarManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("calendar.png")));
-            calendarManagementItem.setComponentOrientation(direction);
-            calendarManagementItem.setVisible(false);
-            JMenuItem personManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("person-mgnt.png")));
-            personManagementItem.setComponentOrientation(direction);
-            JMenuItem userManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("user-mgnt.png")));
-            userManagementItem.setComponentOrientation(direction);
-            JMenuItem operationManagementItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("operation.png")));
-            operationManagementItem.setComponentOrientation(direction);
-            JMenuItem eventLogListItem = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("event.png")));
-            eventLogListItem.setComponentOrientation(direction);
-            workGroupManagementItem.setText(ThreadPoolManager.getLangValue("workgroup_management"));
-            calendarManagementItem.setText(ThreadPoolManager.getLangValue("calendar_management"));
-            personManagementItem.setText(ThreadPoolManager.getLangValue("person_management"));
-            managementMenu.setText(ThreadPoolManager.getLangValue("management"));
-            operationManagementItem.setText(ThreadPoolManager.getLangValue("operation_management"));
-            userManagementItem.setText(ThreadPoolManager.getLangValue("user_management"));
-            eventLogListItem.setText(ThreadPoolManager.getLangValue("eventLog_list"));
-            managementMenu.add(workGroupManagementItem);
-            managementMenu.addSeparator();
-            managementMenu.add(operationManagementItem);
-            managementMenu.addSeparator();
-            managementMenu.add(userManagementItem);
-            managementMenu.addSeparator();
-            managementMenu.add(eventLogListItem);
-            //managementMenu.addSeparator();
-            managementMenu.add(calendarManagementItem);
-            managementMenu.addSeparator();
-            managementMenu.add(personManagementItem);
-            JMenu basicInfoMenu = new JMenu();
-            basicInfoMenu.setVisible(false);
-            basicInfoMenu.setText(ThreadPoolManager.getLangValue("BasicInfo"));
-            JMenuItem exit = new JMenuItem(new ImageIcon(MainForm.class.getClassLoader().getResource("exit.png")));
-            exit.setComponentOrientation(direction);
-            JMenu exitMenu = new JMenu();
-            exit.setText(ThreadPoolManager.getLangValue("exit"));
-            exitMenu.setText(ThreadPoolManager.getLangValue("operation"));
-            exitMenu.add(exit);
-
-            userManagementItem.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        showUserManagement();
-                    } catch (PropertyVetoException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            });
-            operationManagementItem.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        showRoleManagement();
-                    } catch (PropertyVetoException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            });
-            workGroupManagementItem.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        showWorkGroupManagement();
-                    } catch (PropertyVetoException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            });
-            eventLogListItem.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        showEventLogList();
-                    } catch (PropertyVetoException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            });
-            calendarManagementItem.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        showCalendarManagment();
-                    } catch (PropertyVetoException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            });
-            personManagementItem.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        showPersonManagment();
-                    } catch (PropertyVetoException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            });
-            languageDefItem.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        showLanguageDef();
-                    } catch (PropertyVetoException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            });
-            importLanguage.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        showLanguageForm();
-                    } catch (PropertyVetoException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            });
-            exit.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    System.exit(0);
-                }
-            });
-
-            webServiceInfo.setServiceName("/getAllDefinableLookup");
-            final List<Lookup> lookups = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName()), new TypeReference<List<Lookup>>() {
-            });
-            JMenuItem[] basicInfoMenus = new JMenuItem[lookups.size()];
-            int i = 0;
-            for (final Lookup lookup : lookups) {
-                JMenuItem jMenuItem = new JMenuItem();
-                jMenuItem.setVisible(false);
-                jMenuItem.setText(ThreadPoolManager.getLangValue(lookup.getName()));
-                jMenuItem.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        try {
-                            showLookupInfo(lookup);
-                        } catch (PropertyVetoException e1) {
-                            e1.printStackTrace();
-                        }
-                    }
-                });
-                basicInfoMenus[i++] = jMenuItem;
-                basicInfoMenu.add(jMenuItem);
+        { // compute preferred size
+            Dimension preferredSize = new Dimension();
+            for (int i = 0; i < internalFrame1ContentPane.getComponentCount(); i++) {
+                Rectangle bounds = internalFrame1ContentPane.getComponent(i).getBounds();
+                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
             }
-
-            menuBar.add(languageMenu);
-            menuBar.add(managementMenu);
-            menuBar.add(exitMenu);
-            menuBar.add(basicInfoMenu);
-        } catch (Exception e) {
-            e.printStackTrace();
+            Insets insets = internalFrame1ContentPane.getInsets();
+            preferredSize.width += insets.right;
+            preferredSize.height += insets.bottom;
+            internalFrame1ContentPane.setMinimumSize(preferredSize);
+            internalFrame1ContentPane.setPreferredSize(preferredSize);
         }
-        return menuBar;
+        sampleInternalFrame.setBounds(170, 65, 175, 105);
+        desktopPane.add(sampleInternalFrame, JLayeredPane.DEFAULT_LAYER);
+
+
+        loginForm = new Login(this);
+        loginForm.setVisible(true);
+        //desktopPane = new TMSDesktop();
+        desktopPane.add(loginForm);
+        try {
+            loginForm.setSelected(true);
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+       // setContentPane(jdpDesktop);
+        //jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
+        changeComonentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
+
     }
 
-    public JDesktopPane getJdpDesktop() {
-        return jdpDesktop;
+
+    public void changeComonentOrientationRecurcive(Component[] components, ComponentOrientation orientation) {
+        for (Component c : components) {
+            c.setComponentOrientation(orientation);
+            if (c instanceof java.awt.Container)
+                changeComonentOrientationRecurcive(((java.awt.Container) c).getComponents(), orientation);
+        }
     }
 
-    public void setJdpDesktop(TMSDesktop jdpDesktop) {
-        this.jdpDesktop = jdpDesktop;
-    }
-
-    public Login getLoginForm() {
-        return loginForm;
-    }
-
-    public void setLoginForm(Login loginForm) {
-        this.loginForm = loginForm;
+    public void changeComonentOrientation(ComponentOrientation orientation) {
+        changeComonentOrientationRecurcive(this.getComponents(), orientation);
+        repaint();
+        revalidate();
     }
 
     @Override
     public void internalFrameOpened(InternalFrameEvent e) {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
@@ -369,26 +158,141 @@ public class MainForm extends JFrame implements InternalFrameListener {
 
     @Override
     public void internalFrameClosed(InternalFrameEvent e) {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     public void internalFrameIconified(InternalFrameEvent e) {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     public void internalFrameDeiconified(InternalFrameEvent e) {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     public void internalFrameActivated(InternalFrameEvent e) {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     public void internalFrameDeactivated(InternalFrameEvent e) {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
+
+    //define innerClass to Override its methods for handle events
+    class MenuPaneActionAvailable extends MenuPanel {
+        MenuPaneActionAvailable() {
+            super();
+        }
+
+        @Override
+        protected void showUserManagement(){
+            UserManagement userManagement = new UserManagement(desktopPane);
+            userManagement.setVisible(true);
+            desktopPane.add(userManagement);
+            try {
+                userManagement.setSelected(true);
+            } catch (PropertyVetoException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
+
+        @Override
+        protected void showRoleManagement(){
+            RoleManagement roleManagement = new RoleManagement(desktopPane);
+            roleManagement.setVisible(true);
+            desktopPane.add(roleManagement);
+            try {
+                roleManagement.setSelected(true);
+            } catch (PropertyVetoException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
+
+        @Override
+        protected void showWorkGroupManagement(){
+            WorkGroupManagement workGroupManagement = new WorkGroupManagement(desktopPane);
+            workGroupManagement.setVisible(true);
+            desktopPane.add(workGroupManagement);
+            try {
+                workGroupManagement.setSelected(true);
+            } catch (PropertyVetoException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
+
+        @Override
+        protected void showEventLogList(){
+            EventLogList eventLogList = new EventLogList(desktopPane);
+            eventLogList.setVisible(true);
+            desktopPane.add(eventLogList);
+            try {
+                eventLogList.setSelected(true);
+            } catch (PropertyVetoException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
+
+        @Override
+        protected void showCalendarManagment(){
+            CalendarManagement calendarManagement = new CalendarManagement(desktopPane);
+            calendarManagement.setVisible(true);
+            desktopPane.add(calendarManagement);
+            try {
+                calendarManagement.setSelected(true);
+            } catch (PropertyVetoException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
+
+        @Override
+        protected void showPersonManagment(){
+            PersonManagement personManagement = new PersonManagement(desktopPane);
+            personManagement.setVisible(true);
+            desktopPane.add(personManagement);
+            try {
+                personManagement.setSelected(true);
+            } catch (PropertyVetoException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
+
+        @Override
+        protected void showLanguageDef(){
+            LanguageManagementForm languageManagement = new LanguageManagementForm(desktopPane);
+            languageManagement.setVisible(true);
+            desktopPane.add(languageManagement);
+            try {
+                languageManagement.setSelected(true);
+            } catch (PropertyVetoException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
+
+        @Override
+        protected void showLanguageForm(){
+            LanguageForm languageForm = new LanguageForm(desktopPane);
+            languageForm.setVisible(true);
+            desktopPane.add(languageForm);
+            try {
+                languageForm.setSelected(true);
+            } catch (PropertyVetoException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
+
+        @Override
+        protected void exit(){
+           /* int confirm = JOptionPane.showOptionDialog(this,"",);
+            int confirm = JOptionPane.showOptionDialog(this, "ExitMassage),
+                    "Exit Confirmation", JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, null, null);
+            if (confirm == JOptionPane.YES_OPTION) {
+               // saveSettings(); //save prop
+                System.exit(1);
+            }*/
+            System.exit(1);
+        }
+
+
+
+    }
+
 }

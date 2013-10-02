@@ -2,6 +2,7 @@ package ir.university.toosi.tms.util;
 
 import ir.university.toosi.tms.model.entity.*;
 import ir.university.toosi.tms.view.MainForm;
+//import ir.university.toosi.tms.view.exec;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -19,6 +20,7 @@ public class ThreadPoolManager {
 
     public static final ExecutorService executors = Executors.newCachedThreadPool();
     public static MainForm mainForm;
+    //public static exec execInstance;
     public static User me;
     public static Languages currentLanguage = null;
     public static Hashtable<String, LanguageManagement> langHash = new Hashtable<>();
