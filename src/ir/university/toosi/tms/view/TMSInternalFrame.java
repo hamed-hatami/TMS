@@ -18,16 +18,13 @@ public class TMSInternalFrame extends JInternalFrame  {
         super();
        // setFrameIcon(new ImageIcon(getClass().getClassLoader().getResource("logo.png")));
         setFrameIcon(new ImageIcon("./images/logo.png")); //todo
-        setIconifiable(true);
+        setIconifiable(false);
         setMaximizable(false);
         setResizable(false);
         setClosable(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (int) (dimension.getWidth() / 4);
-        int y = (int) (dimension.getHeight() / 4);
-        setLocation(x, y);
+
     }
 
 

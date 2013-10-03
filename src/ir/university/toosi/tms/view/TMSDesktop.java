@@ -20,4 +20,19 @@ public class TMSDesktop extends JDesktopPane {
         g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
         setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
     }
+
+    @Override
+    public Component add(Component comp) {
+        //Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension dimension = getSize();
+        int x = (int)(dimension.getWidth()-comp.getSize().getWidth()) / 2;
+        int y = (int)(dimension.getHeight()-comp.getSize().getHeight()) / 2;
+        comp.setLocation(x, y);
+        addImpl(comp, null, -1);
+        return comp;
+    }
+
+
+
+
 }

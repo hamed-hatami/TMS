@@ -18,7 +18,6 @@ import ir.university.toosi.tms.view.role.RoleManagement;
 import ir.university.toosi.tms.view.role.RoleManagementCode;
 import ir.university.toosi.tms.view.role.RoleManagementDesign;
 import ir.university.toosi.tms.view.user.UserManagement;
-import ir.university.toosi.tms.view.user.UserManagementCode;
 import ir.university.toosi.tms.view.workgroup.WorkGroupManagement;
 import ir.university.toosi.tms.view.workgroup.WorkGroupManagementCode;
 
@@ -155,13 +154,13 @@ public class MainForm extends JFrame {
 
         @Override
         protected void showUserManagement(){
-            UserManagementCode userManagementCode = new UserManagementCode();
-            userManagementCode.setVisible(true);
-            desktopPane.add(userManagementCode);
+            UserManagement userManagement = new UserManagement(desktopPane);
+            userManagement.setVisible(true);
+            desktopPane.add(userManagement);
             try {
-                userManagementCode.setSelected(true);
+                userManagement.setSelected(true);
             } catch (PropertyVetoException e) {
-                e.printStackTrace();
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
         }
 
@@ -190,13 +189,13 @@ public class MainForm extends JFrame {
 
         @Override
         protected void showWorkGroupManagement(){
-            WorkGroupManagementCode workGroupManagementCode = new WorkGroupManagementCode();
-            workGroupManagementCode.setVisible(true);
-            desktopPane.add(workGroupManagementCode);
+            WorkGroupManagement workGroupManagement = new WorkGroupManagement(desktopPane);
+            workGroupManagement.setVisible(true);
+            desktopPane.add(workGroupManagement);
             try {
-                workGroupManagementCode.setSelected(true);
+                workGroupManagement.setSelected(true);
             } catch (PropertyVetoException e) {
-                e.printStackTrace();
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
         }
 
