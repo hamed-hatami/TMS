@@ -6,7 +6,7 @@ new FormModel {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 			name: "this"
 			"visible": true
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) ) {
 				name: "panel1"
 				"border": new javax.swing.border.TitledBorder( "defined WorkGroup" )
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
@@ -16,14 +16,14 @@ new FormModel {
 						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
 							add( new java.util.Vector {
 								add( "مدیر" )
-								add( true )
+								add( null )
 							} )
 						}, new java.util.Vector {
-							add( "title" )
-							add( "active status" )
+							add( "name" )
+							add( "IP" )
 						}, new java.util.Vector {
 							add( class java.lang.String )
-							add( class java.lang.Boolean )
+							add( class java.lang.String )
 						}, new java.util.Vector {
 							add( false )
 							add( false )
@@ -32,11 +32,6 @@ new FormModel {
 							add( new com.jformdesigner.model.SwingTableColumn( null, 0, 0, 0, false ) )
 						} )
 					} )
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 15
-					"y": 50
-					"width": 495
-					"height": 164
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 5

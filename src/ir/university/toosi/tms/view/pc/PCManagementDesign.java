@@ -2,7 +2,7 @@
  * Created by JFormDesigner on Wed Oct 02 20:01:16 AFT 2013
  */
 
-package ir.university.toosi.tms.view.workgroup;
+package ir.university.toosi.tms.view.pc;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -15,8 +15,8 @@ import java.awt.event.ActionListener;
 /**
  * @author a_hadadi
  */
-public abstract class WorkGroupManagementDesign extends  JPanel {
-    public WorkGroupManagementDesign() {
+public abstract class PCManagementDesign extends  JPanel {
+    public PCManagementDesign() {
         initComponents();
     }
 
@@ -54,7 +54,7 @@ public abstract class WorkGroupManagementDesign extends  JPanel {
         //======== panel1 ========
         {
             panel1.setBorder(new TitledBorder("defined WorkGroup"));
-            panel1.setLayout(null);
+            panel1.setLayout(new BoxLayout(panel1, BoxLayout.X_AXIS));
 
             //======== scrollPane1 ========
             {
@@ -62,14 +62,14 @@ public abstract class WorkGroupManagementDesign extends  JPanel {
                 //---- table1 ----
                 table1.setModel(new DefaultTableModel(
                     new Object[][] {
-                        {"\u0645\u062f\u06cc\u0631", true},
+                        {"\u0645\u062f\u06cc\u0631", null},
                     },
                     new String[] {
-                        "title", "active status"
+                        "name", "IP"
                     }
                 ) {
                     Class<?>[] columnTypes = new Class<?>[] {
-                        String.class, Boolean.class
+                        String.class, String.class
                     };
                     boolean[] columnEditable = new boolean[] {
                         false, false
@@ -94,21 +94,6 @@ public abstract class WorkGroupManagementDesign extends  JPanel {
                 scrollPane1.setViewportView(table1);
             }
             panel1.add(scrollPane1);
-            scrollPane1.setBounds(15, 50, 495, 164);
-
-            { // compute preferred size
-                Dimension preferredSize = new Dimension();
-                for(int i = 0; i < panel1.getComponentCount(); i++) {
-                    Rectangle bounds = panel1.getComponent(i).getBounds();
-                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                }
-                Insets insets = panel1.getInsets();
-                preferredSize.width += insets.right;
-                preferredSize.height += insets.bottom;
-                panel1.setMinimumSize(preferredSize);
-                panel1.setPreferredSize(preferredSize);
-            }
         }
         add(panel1);
         panel1.setBounds(5, 5, 530, 245);

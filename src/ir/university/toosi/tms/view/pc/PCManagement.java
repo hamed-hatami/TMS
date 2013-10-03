@@ -1,4 +1,4 @@
-package ir.university.toosi.tms.view.user;
+package ir.university.toosi.tms.view.pc;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,6 +10,7 @@ import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
 import ir.university.toosi.tms.view.TMSPanel;
+import ir.university.toosi.tms.view.user.UserForm;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 

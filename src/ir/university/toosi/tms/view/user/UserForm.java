@@ -10,6 +10,7 @@ import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
 import ir.university.toosi.tms.view.TMSPanel;
+import ir.university.toosi.tms.view.pc.PCManagement;
 import ir.university.toosi.tms.view.person.PersonList;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
