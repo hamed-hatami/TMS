@@ -18,8 +18,8 @@ import ir.university.toosi.tms.view.role.RoleManagement;
 import ir.university.toosi.tms.view.role.RoleManagementCode;
 import ir.university.toosi.tms.view.role.RoleManagementDesign;
 import ir.university.toosi.tms.view.user.UserManagement;
+import ir.university.toosi.tms.view.workgroup.LoginForm;
 import ir.university.toosi.tms.view.workgroup.WorkGroupManagement;
-import ir.university.toosi.tms.view.workgroup.WorkGroupManagementCode;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameEvent;
@@ -84,6 +84,13 @@ public class MainForm extends JFrame {
 
     private void createAndShowGUI() {
 
+        LoginForm loginForm2 = new LoginForm();
+        loginForm2.setModal(true);
+        loginForm2.setVisible(true);
+
+        if(!loginForm2.isLogin()){
+          //  System.exit(1); todo
+        }
         //set Main window Properties
         setVisible(true);
 
@@ -118,6 +125,7 @@ public class MainForm extends JFrame {
         loginForm.setVisible(true);
         //desktopPane = new TMSDesktop();
         desktopPane.add(loginForm);
+        loginForm.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,100);
 
         try {
             loginForm.setSelected(true);
