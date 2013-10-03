@@ -81,7 +81,7 @@ public class RoleManagement extends TMSInternalFrame {
     public void initComponents() throws IOException {
 
 
-        this.addInternalFrameListener(ThreadPoolManager.mainForm);
+       // this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle(ThreadPoolManager.getLangValue("TMS_ROLE_MANAGEMENT"));

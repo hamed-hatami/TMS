@@ -86,7 +86,7 @@ public class CalendarManagement extends TMSInternalFrame {
     public void initComponents() throws IOException {
 
 
-        this.addInternalFrameListener(ThreadPoolManager.mainForm);
+       // this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("CALENDARMANAGEMENT");

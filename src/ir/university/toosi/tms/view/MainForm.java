@@ -15,6 +15,8 @@ import ir.university.toosi.tms.view.language.LanguageManagementForm;
 import ir.university.toosi.tms.view.newMenu.*;
 import ir.university.toosi.tms.view.person.PersonManagement;
 import ir.university.toosi.tms.view.role.RoleManagement;
+import ir.university.toosi.tms.view.role.RoleManagementCode;
+import ir.university.toosi.tms.view.role.RoleManagementDesign;
 import ir.university.toosi.tms.view.user.UserManagement;
 import ir.university.toosi.tms.view.workgroup.WorkGroupManagement;
 
@@ -26,14 +28,15 @@ import java.awt.List;
 import java.beans.PropertyVetoException;
 import java.util.*;
 
-public class MainForm extends JFrame implements InternalFrameListener {
+public class MainForm extends JFrame {
 
     public MainForm(){
         try {
-            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            /*Toolkit toolkit = Toolkit.getDefaultToolkit();
             int xSize = ((int) toolkit.getScreenSize().getWidth());
             int ySize = ((int) toolkit.getScreenSize().getHeight());
-            setSize(xSize,  ySize);
+            setSize(xSize,  ySize);*/
+            setSize();
 
             setDefaultLookAndFeelDecorated(true);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,6 +58,8 @@ public class MainForm extends JFrame implements InternalFrameListener {
     }
 
     public static void main(String[] args) {
+       // LoginF
+
         MainForm mainForm = new MainForm();
         mainForm.createAndShowGUI();
     }
@@ -62,12 +67,27 @@ public class MainForm extends JFrame implements InternalFrameListener {
     private TMSDesktop desktopPane;
     private Login loginForm;
     private WebServiceInfo webServiceInfo = new WebServiceInfo();
+
+
+    public void setSize() {
+        setMinimumSize(new Dimension(600, 400));
+        setPreferredSize(new Dimension(600, 400));
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = kit.getScreenSize();
+        setLocation(20, 20);
+        screenSize.setSize( screenSize.getWidth()-40,screenSize.getHeight() - 80);
+        setSize(screenSize);
+        setMaximumSize(screenSize);
+
+    }
+
     private void createAndShowGUI() {
 
         //set Main window Properties
         setVisible(true);
-        setMinimumSize(new Dimension(800, 600));
-        setMaximumSize(new Dimension(1024, 800));
+
+
+       // setMaximumSize(new Dimension(1024, 800));
         setBackground(new Color(234, 234, 255));
         Container contentPane = getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.PAGE_AXIS));
@@ -80,7 +100,7 @@ public class MainForm extends JFrame implements InternalFrameListener {
 
         //add divider
         JPanel dividerPanel = new JPanel();
-        dividerPanel.setBackground(Color.green);
+        dividerPanel.setBackground(new Color(240, 240, 240));
         dividerPanel.setPreferredSize(new Dimension((int) dividerPanel.getPreferredSize().getWidth(), 2));
         contentPane.add(dividerPanel);
 
@@ -91,36 +111,13 @@ public class MainForm extends JFrame implements InternalFrameListener {
         desktopPane.setBackground(new Color(238, 238, 238));
         contentPane.add(desktopPane);
 
-        //add sample internal frame
-        JInternalFrame sampleInternalFrame = new JInternalFrame();
-        sampleInternalFrame.setVisible(true);
-        sampleInternalFrame.setIconifiable(true);
-        sampleInternalFrame.setMaximizable(true);
-        sampleInternalFrame.setResizable(true);
-        Container internalFrame1ContentPane = sampleInternalFrame.getContentPane();
-        internalFrame1ContentPane.setLayout(null);
-
-        { // compute preferred size
-            Dimension preferredSize = new Dimension();
-            for (int i = 0; i < internalFrame1ContentPane.getComponentCount(); i++) {
-                Rectangle bounds = internalFrame1ContentPane.getComponent(i).getBounds();
-                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-            }
-            Insets insets = internalFrame1ContentPane.getInsets();
-            preferredSize.width += insets.right;
-            preferredSize.height += insets.bottom;
-            internalFrame1ContentPane.setMinimumSize(preferredSize);
-            internalFrame1ContentPane.setPreferredSize(preferredSize);
-        }
-        sampleInternalFrame.setBounds(170, 65, 175, 105);
-        desktopPane.add(sampleInternalFrame, JLayeredPane.DEFAULT_LAYER);
 
 
         loginForm = new Login(this);
         loginForm.setVisible(true);
         //desktopPane = new TMSDesktop();
         desktopPane.add(loginForm);
+
         try {
             loginForm.setSelected(true);
         } catch (PropertyVetoException e) {
@@ -147,34 +144,6 @@ public class MainForm extends JFrame implements InternalFrameListener {
         revalidate();
     }
 
-    @Override
-    public void internalFrameOpened(InternalFrameEvent e) {
-    }
-
-    @Override
-    public void internalFrameClosing(InternalFrameEvent e) {
-        e.getInternalFrame().dispose();
-    }
-
-    @Override
-    public void internalFrameClosed(InternalFrameEvent e) {
-    }
-
-    @Override
-    public void internalFrameIconified(InternalFrameEvent e) {
-    }
-
-    @Override
-    public void internalFrameDeiconified(InternalFrameEvent e) {
-    }
-
-    @Override
-    public void internalFrameActivated(InternalFrameEvent e) {
-    }
-
-    @Override
-    public void internalFrameDeactivated(InternalFrameEvent e) {
-    }
 
     //define innerClass to Override its methods for handle events
     class MenuPaneActionAvailable extends MenuPanel {
@@ -196,13 +165,24 @@ public class MainForm extends JFrame implements InternalFrameListener {
 
         @Override
         protected void showRoleManagement(){
-            RoleManagement roleManagement = new RoleManagement(desktopPane);
+           /* RoleManagement roleManagement = new RoleManagement(desktopPane);
             roleManagement.setVisible(true);
             desktopPane.add(roleManagement);
             try {
                 roleManagement.setSelected(true);
             } catch (PropertyVetoException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }*/
+
+            RoleManagementCode roleManagementCode = new RoleManagementCode();
+            roleManagementCode.setVisible(true);
+           // roleManagementCode.setBounds(170, 65, 175, 105);
+           // desktopPane.add(roleManagementCode, JLayeredPane.DEFAULT_LAYER);
+            desktopPane.add(roleManagementCode);
+            try {
+                roleManagementCode.setSelected(true);
+            } catch (PropertyVetoException e) {
+                e.printStackTrace();
             }
         }
 

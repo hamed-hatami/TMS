@@ -60,7 +60,7 @@ public class CalendarForm extends TMSInternalFrame {
 
     private void initComponents() {
 
-        this.addInternalFrameListener(ThreadPoolManager.mainForm);
+       // this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Calendar Info");

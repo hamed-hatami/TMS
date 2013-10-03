@@ -111,7 +111,7 @@ public class UserManagement extends TMSInternalFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(ThreadPoolManager.getLangValue("TMS_USER_MANAGEMENT"));
-        this.addInternalFrameListener(ThreadPoolManager.mainForm);
+       // this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
         setResizable(true);
         TMSPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_USER_MANAGEMENT")));

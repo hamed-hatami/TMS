@@ -100,7 +100,7 @@ public class WorkGroupForm extends TMSInternalFrame {
 
 
         setClosable(true);
-        this.addInternalFrameListener(ThreadPoolManager.mainForm);
+       // this.addInternalFrameListener(ThreadPoolManager.mainForm);
         TMSPanel1 = new TMSPanel();
 //        nameLable = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();

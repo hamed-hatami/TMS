@@ -42,7 +42,7 @@ public class LanguageForm extends TMSInternalFrame {
 
 
         setClosable(true);
-        this.addInternalFrameListener(ThreadPoolManager.mainForm);
+       // this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(ThreadPoolManager.getLangValue("TMS_LANGUAGE_FORM"));
 

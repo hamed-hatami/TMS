@@ -171,7 +171,7 @@ public class UserForm extends TMSInternalFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(ThreadPoolManager.getLangValue("TMS_USER_MANAGEMENT"));
         setClosable(true);
-        this.addInternalFrameListener(ThreadPoolManager.mainForm);
+     //   this.addInternalFrameListener(ThreadPoolManager.mainForm);
 
         if (ThreadPoolManager.currentLanguage.isRtl())
             add.setText("<");

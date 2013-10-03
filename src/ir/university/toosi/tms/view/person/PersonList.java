@@ -77,7 +77,7 @@ public class PersonList extends TMSInternalFrame {
     private void initComponents() throws IOException {
 
 
-        this.addInternalFrameListener(ThreadPoolManager.mainForm);
+        //this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle(ThreadPoolManager.getLangValue("TMS_PERSON_MANAGEMENT"));

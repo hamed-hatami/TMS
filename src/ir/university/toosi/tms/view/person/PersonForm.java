@@ -78,7 +78,7 @@ public class PersonForm extends TMSInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        this.addInternalFrameListener(ThreadPoolManager.mainForm);
+      //  this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(ThreadPoolManager.getLangValue("TMS_PERSONNEL_INFO"));

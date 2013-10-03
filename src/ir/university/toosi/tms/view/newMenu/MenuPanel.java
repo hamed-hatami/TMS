@@ -14,7 +14,7 @@ import org.jdesktop.swingx.*;
 /**
  * @author a_hadadi
  */
-public class MenuPanel extends JPanel {
+public abstract class MenuPanel extends JPanel {
 
 
     public MenuPanel() {
@@ -28,42 +28,23 @@ public class MenuPanel extends JPanel {
 
 
 
-    protected void showUserManagement() {
-        // TODO add your code here
-    }
+    protected abstract void showUserManagement();
 
-    protected void showRoleManagement() {
-        // TODO add your code here
-    }
+    protected abstract void showRoleManagement();
 
+    protected abstract void showWorkGroupManagement();
 
-    protected void showWorkGroupManagement() {
-        // TODO add your code here
-    }
+    protected abstract void showEventLogList();
 
-    protected void showEventLogList() {
-        // TODO add your code here
-    }
+    protected abstract void showCalendarManagment();
 
-    protected void showCalendarManagment() {
-        // TODO add your code here
-    }
+    protected abstract void showPersonManagment();
 
-    protected void showPersonManagment() {
-        // TODO add your code here
-    }
+    protected abstract void showLanguageDef();
 
-    protected void showLanguageDef() {
-        // TODO add your code here
-    }
+    protected abstract void showLanguageForm();
 
-    protected void showLanguageForm() {
-        // TODO add your code here
-    }
-
-    protected void exit() {
-        // TODO add your code here
-    }
+    protected abstract void exit();
 
 
 
