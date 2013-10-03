@@ -19,6 +19,7 @@ import ir.university.toosi.tms.view.role.RoleManagementCode;
 import ir.university.toosi.tms.view.role.RoleManagementDesign;
 import ir.university.toosi.tms.view.user.UserManagement;
 import ir.university.toosi.tms.view.workgroup.WorkGroupManagement;
+import ir.university.toosi.tms.view.workgroup.WorkGroupManagementCode;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameEvent;
@@ -188,13 +189,15 @@ public class MainForm extends JFrame {
 
         @Override
         protected void showWorkGroupManagement(){
-            WorkGroupManagement workGroupManagement = new WorkGroupManagement(desktopPane);
-            workGroupManagement.setVisible(true);
-            desktopPane.add(workGroupManagement);
+            WorkGroupManagementCode workGroupManagementCode = new WorkGroupManagementCode();
+            workGroupManagementCode.setVisible(true);
+            // roleManagementCode.setBounds(170, 65, 175, 105);
+            // desktopPane.add(roleManagementCode, JLayeredPane.DEFAULT_LAYER);
+            desktopPane.add(workGroupManagementCode);
             try {
-                workGroupManagement.setSelected(true);
+                workGroupManagementCode.setSelected(true);
             } catch (PropertyVetoException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                e.printStackTrace();
             }
         }
 
