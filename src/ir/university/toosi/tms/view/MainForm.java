@@ -18,6 +18,7 @@ import ir.university.toosi.tms.view.role.RoleManagement;
 import ir.university.toosi.tms.view.role.RoleManagementCode;
 import ir.university.toosi.tms.view.role.RoleManagementDesign;
 import ir.university.toosi.tms.view.user.UserManagement;
+import ir.university.toosi.tms.view.user.UserManagementCode;
 import ir.university.toosi.tms.view.workgroup.WorkGroupManagement;
 import ir.university.toosi.tms.view.workgroup.WorkGroupManagementCode;
 
@@ -154,13 +155,13 @@ public class MainForm extends JFrame {
 
         @Override
         protected void showUserManagement(){
-            UserManagement userManagement = new UserManagement(desktopPane);
-            userManagement.setVisible(true);
-            desktopPane.add(userManagement);
+            UserManagementCode userManagementCode = new UserManagementCode();
+            userManagementCode.setVisible(true);
+            desktopPane.add(userManagementCode);
             try {
-                userManagement.setSelected(true);
+                userManagementCode.setSelected(true);
             } catch (PropertyVetoException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                e.printStackTrace();
             }
         }
 
@@ -191,8 +192,6 @@ public class MainForm extends JFrame {
         protected void showWorkGroupManagement(){
             WorkGroupManagementCode workGroupManagementCode = new WorkGroupManagementCode();
             workGroupManagementCode.setVisible(true);
-            // roleManagementCode.setBounds(170, 65, 175, 105);
-            // desktopPane.add(roleManagementCode, JLayeredPane.DEFAULT_LAYER);
             desktopPane.add(workGroupManagementCode);
             try {
                 workGroupManagementCode.setSelected(true);
