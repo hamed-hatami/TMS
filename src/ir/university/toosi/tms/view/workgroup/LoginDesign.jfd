@@ -14,8 +14,11 @@ new FormModel {
 				name: "panel1"
 				"border": new javax.swing.border.EtchedBorder( 1, null, null )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label1"
-					"text": "text"
+					name: "userNameLabel"
+					"text": "userNameLabel"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 160
 					"y": 20
@@ -23,22 +26,31 @@ new FormModel {
 					"height": 20
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label2"
-					"text": "text"
+					name: "passwordLabel"
+					"text": "passwordLabel"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 160
 					"y": 45
 					"width": 75
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "textField1"
+					name: "userName"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 25
 					"y": 20
 					"width": 130
 				} )
-				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "textField2"
+				add( new FormComponent( "javax.swing.JPasswordField" ) {
+					name: "password"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 25
 					"y": 45
@@ -64,8 +76,11 @@ new FormModel {
 				"preferredSize": new java.awt.Dimension( 100, 100 )
 				"border": new javax.swing.border.EtchedBorder( 1, null, null )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "buttonLogin"
-					"text": "buttonLogin"
+					name: "login"
+					"text": "login"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonLoginActionPerformed", false ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 110
@@ -73,8 +88,11 @@ new FormModel {
 					"width": 75
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "buttonCancel"
-					"text": "buttonCancel"
+					name: "cancel"
+					"text": "cancel"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonCancelActionPerformed", false ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 25
@@ -82,15 +100,21 @@ new FormModel {
 					"width": 75
 				} )
 				add( new FormComponent( "javax.swing.JComboBox" ) {
-					name: "comboBox1"
+					name: "language"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 25
 					"y": 20
 					"width": 130
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label4"
-					"text": "text"
+					name: "langLabel"
+					"text": "langLabel"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 75
 					"height": 16
@@ -106,8 +130,11 @@ new FormModel {
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
 				"autoSize": false
 			} ) {
-				name: "panel3"
+				name: "panelLogo"
 				"border": new javax.swing.border.EtchedBorder( 1, null, null )
+				auxiliary() {
+					"JavaCodeGenerator.variableModifiers": 4
+				}
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 10
 				"y": 20

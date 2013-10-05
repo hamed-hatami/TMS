@@ -4,6 +4,7 @@
 
 package ir.university.toosi.tms.view.workgroup;
 
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -25,17 +26,17 @@ public abstract class LoginDesign extends JPanel {
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         panel1 = new JPanel();
-        label1 = new JLabel();
-        label2 = new JLabel();
-        textField1 = new JTextField();
-        textField2 = new JTextField();
+        userNameLabel = new JLabel();
+        passwordLabel = new JLabel();
+        userName = new JTextField();
+        password = new JPasswordField();
         label3 = new JLabel();
         panel2 = new JPanel();
-        buttonLogin = new JButton();
-        buttonCancel = new JButton();
-        comboBox1 = new JComboBox();
-        label4 = new JLabel();
-        panel3 = new JPanel();
+        login = new JButton();
+        cancel = new JButton();
+        language = new JComboBox();
+        langLabel = new JLabel();
+        panelLogo = new JPanel();
 
         //======== this ========
         setMaximumSize(new Dimension(480, 230));
@@ -48,19 +49,19 @@ public abstract class LoginDesign extends JPanel {
             panel1.setBorder(new EtchedBorder());
             panel1.setLayout(null);
 
-            //---- label1 ----
-            label1.setText("text");
-            panel1.add(label1);
-            label1.setBounds(160, 20, 92, 20);
+            //---- userNameLabel ----
+            userNameLabel.setText("userNameLabel");
+            panel1.add(userNameLabel);
+            userNameLabel.setBounds(160, 20, 92, 20);
 
-            //---- label2 ----
-            label2.setText("text");
-            panel1.add(label2);
-            label2.setBounds(160, 45, 75, label2.getPreferredSize().height);
-            panel1.add(textField1);
-            textField1.setBounds(25, 20, 130, textField1.getPreferredSize().height);
-            panel1.add(textField2);
-            textField2.setBounds(25, 45, 130, textField2.getPreferredSize().height);
+            //---- passwordLabel ----
+            passwordLabel.setText("passwordLabel");
+            panel1.add(passwordLabel);
+            passwordLabel.setBounds(160, 45, 75, passwordLabel.getPreferredSize().height);
+            panel1.add(userName);
+            userName.setBounds(25, 20, 130, userName.getPreferredSize().height);
+            panel1.add(password);
+            password.setBounds(25, 45, 130, password.getPreferredSize().height);
 
             //---- label3 ----
             label3.setText("text");
@@ -91,34 +92,34 @@ public abstract class LoginDesign extends JPanel {
             panel2.setBorder(new EtchedBorder());
             panel2.setLayout(null);
 
-            //---- buttonLogin ----
-            buttonLogin.setText("buttonLogin");
-            buttonLogin.addActionListener(new ActionListener() {
+            //---- login ----
+            login.setText("login");
+            login.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     buttonLoginActionPerformed();
                 }
             });
-            panel2.add(buttonLogin);
-            buttonLogin.setBounds(110, 55, 75, buttonLogin.getPreferredSize().height);
+            panel2.add(login);
+            login.setBounds(110, 55, 75, login.getPreferredSize().height);
 
-            //---- buttonCancel ----
-            buttonCancel.setText("buttonCancel");
-            buttonCancel.addActionListener(new ActionListener() {
+            //---- cancel ----
+            cancel.setText("cancel");
+            cancel.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     buttonCancelActionPerformed();
                 }
             });
-            panel2.add(buttonCancel);
-            buttonCancel.setBounds(25, 55, 75, buttonCancel.getPreferredSize().height);
-            panel2.add(comboBox1);
-            comboBox1.setBounds(25, 20, 130, comboBox1.getPreferredSize().height);
+            panel2.add(cancel);
+            cancel.setBounds(25, 55, 75, cancel.getPreferredSize().height);
+            panel2.add(language);
+            language.setBounds(25, 20, 130, language.getPreferredSize().height);
 
-            //---- label4 ----
-            label4.setText("text");
-            panel2.add(label4);
-            label4.setBounds(160, 25, 75, 16);
+            //---- langLabel ----
+            langLabel.setText("langLabel");
+            panel2.add(langLabel);
+            langLabel.setBounds(160, 25, 75, 16);
 
             { // compute preferred size
                 Dimension preferredSize = new Dimension();
@@ -137,13 +138,13 @@ public abstract class LoginDesign extends JPanel {
         add(panel2);
         panel2.setBounds(220, 110, 245, 105);
 
-        //======== panel3 ========
+        //======== panelLogo ========
         {
-            panel3.setBorder(new EtchedBorder());
-            panel3.setLayout(null);
+            panelLogo.setBorder(new EtchedBorder());
+            panelLogo.setLayout(null);
         }
-        add(panel3);
-        panel3.setBounds(10, 20, 205, 195);
+        add(panelLogo);
+        panelLogo.setBounds(10, 20, 205, 195);
 
         setPreferredSize(new Dimension(480, 230));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -151,16 +152,16 @@ public abstract class LoginDesign extends JPanel {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel panel1;
-    private JLabel label1;
-    private JLabel label2;
-    private JTextField textField1;
-    private JTextField textField2;
+    protected JLabel userNameLabel;
+    protected JLabel passwordLabel;
+    protected JTextField userName;
+    protected JPasswordField password;
     private JLabel label3;
     private JPanel panel2;
-    private JButton buttonLogin;
-    private JButton buttonCancel;
-    private JComboBox comboBox1;
-    private JLabel label4;
-    private JPanel panel3;
+    protected JButton login;
+    protected JButton cancel;
+    protected JComboBox language;
+    protected JLabel langLabel;
+    protected JPanel panelLogo;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

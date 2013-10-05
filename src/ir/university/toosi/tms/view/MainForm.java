@@ -66,8 +66,9 @@ public class MainForm extends JFrame {
     }
 
     private TMSDesktop desktopPane;
-    private Login loginForm;
+   // private Login loginForm;
     private WebServiceInfo webServiceInfo = new WebServiceInfo();
+    private ComponentOrientation direction;
 
 
     public void setSize() {
@@ -84,13 +85,15 @@ public class MainForm extends JFrame {
 
     private void createAndShowGUI() {
 
-        LoginForm loginForm2 = new LoginForm();
-        loginForm2.setModal(true);
-        loginForm2.setVisible(true);
+        LoginForm loginFormDialog = new LoginForm();
+        loginFormDialog.setModal(true);
+        loginFormDialog.setVisible(true);
 
-        if(!loginForm2.isLogin()){
-          //  System.exit(1); todo
+        if(!loginFormDialog.isLogin()){
+            System.exit(1);// todo
         }
+        direction =loginFormDialog.direction;
+
         //set Main window Properties
         setVisible(true);
 
@@ -121,20 +124,9 @@ public class MainForm extends JFrame {
 
 
 
-        loginForm = new Login(this);
-        loginForm.setVisible(true);
-        //desktopPane = new TMSDesktop();
-        desktopPane.add(loginForm);
-        loginForm.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-200,100);
 
-        try {
-            loginForm.setSelected(true);
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-       // setContentPane(jdpDesktop);
-        //jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
-        changeComonentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
+       // changeComonentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
+         changeComonentOrientation(direction);
 
     }
 
