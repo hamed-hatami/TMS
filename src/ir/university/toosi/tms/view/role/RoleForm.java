@@ -356,10 +356,10 @@ public class RoleForm extends TMSInternalFrame {
 
     private void assignActionPerformed(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
 
-        OperationManagement operationManagement = new OperationManagement(jDesktopPane, role, this);
-        operationManagement.setVisible(true);
-        jDesktopPane.add(operationManagement);
-        operationManagement.setSelected(true);
+//        OperationManagement operationManagement = new OperationManagement(jDesktopPane, role, this);
+//        operationManagement.setVisible(true);
+//        jDesktopPane.add(operationManagement);
+//        operationManagement.setSelected(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

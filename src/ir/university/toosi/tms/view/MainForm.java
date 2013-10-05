@@ -145,6 +145,10 @@ public class MainForm extends JFrame {
         revalidate();
     }
 
+    public TMSDesktop getDesktopPane() {
+        return desktopPane;
+    }
+
 
     //define innerClass to Override its methods for handle events
     class MenuPaneActionAvailable extends MenuPanel {

@@ -37,6 +37,7 @@ public abstract class LoginDesign extends JPanel {
         language = new JComboBox();
         langLabel = new JLabel();
         panelLogo = new JPanel();
+        button1 = new JButton();
 
         //======== this ========
         setMaximumSize(new Dimension(480, 230));
@@ -142,6 +143,11 @@ public abstract class LoginDesign extends JPanel {
         {
             panelLogo.setBorder(new EtchedBorder());
             panelLogo.setLayout(null);
+
+            //---- button1 ----
+            button1.setIcon(new ImageIcon("D:\\ARIA\\CVSROOT\\project\\TMS\\resources\\images\\big-logo.png"));
+            panelLogo.add(button1);
+            button1.setBounds(0, 0, 205, 195);
         }
         add(panelLogo);
         panelLogo.setBounds(10, 20, 205, 195);
@@ -163,5 +169,6 @@ public abstract class LoginDesign extends JPanel {
     protected JComboBox language;
     protected JLabel langLabel;
     protected JPanel panelLogo;
+    private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

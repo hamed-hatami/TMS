@@ -12,13 +12,8 @@ new FormModel {
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 					name: "scrollPane1"
 					add( new FormComponent( "javax.swing.JTable" ) {
-						name: "table1"
-						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
-							add( new java.util.Vector {
-								add( "مدیر" )
-								add( true )
-							} )
-						}, new java.util.Vector {
+						name: "mainTable"
+						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
 							add( "title" )
 							add( "active status" )
 						}, new java.util.Vector {
@@ -31,6 +26,9 @@ new FormModel {
 							add( new com.jformdesigner.model.SwingTableColumn( null, 100, 100, 300, false ) )
 							add( new com.jformdesigner.model.SwingTableColumn( null, 0, 0, 0, false ) )
 						} )
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 4
+						}
 					} )
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
@@ -45,7 +43,7 @@ new FormModel {
 				name: "panel2"
 				"border": new javax.swing.border.TitledBorder( "available Operations" )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button1"
+					name: "add"
 					"text": "add"
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1ActionPerformed", false ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
@@ -54,7 +52,7 @@ new FormModel {
 					"width": 76
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button2"
+					name: "delete"
 					"text": "delete"
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button2ActionPerformed", false ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
@@ -63,7 +61,7 @@ new FormModel {
 					"width": 76
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button3"
+					name: "edit"
 					"text": "modify"
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button3ActionPerformed", false ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {

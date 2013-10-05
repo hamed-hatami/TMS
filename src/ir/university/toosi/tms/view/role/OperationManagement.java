@@ -8,6 +8,7 @@ import ir.university.toosi.tms.model.entity.Role;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
+import ir.university.toosi.tms.view.TMSDesktop;
 import ir.university.toosi.tms.view.TMSInternalFrame;
 import ir.university.toosi.tms.view.TMSPanel;
 import org.jdesktop.beansbinding.BindingGroup;
@@ -45,7 +46,7 @@ public class OperationManagement extends TMSInternalFrame {
         }
     }
 
-    public OperationManagement(JDesktopPane jDesktopPane, Role role, RoleForm roleForm) {
+    public OperationManagement(TMSDesktop jDesktopPane, Role role, AddRoleCode roleForm) {
         fillSearchCombo();
         jdpDesktop = jDesktopPane;
         mainPanel = new TMSPanel();
@@ -324,7 +325,7 @@ public class OperationManagement extends TMSInternalFrame {
     private List<Operation> operationList = new ArrayList<>();
     private String[] searchItems;
     private Role role;
-    private RoleForm roleForm;
+    private AddRoleCode roleForm;
 
     public JTable getMainTable() {
         return mainTable;

@@ -32,11 +32,11 @@ public abstract class RoleManagementDesign extends  JPanel {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         panel1 = new JPanel();
         scrollPane1 = new JScrollPane();
-        table1 = new JTable();
+        mainTable = new JTable();
         panel2 = new JPanel();
-        button1 = new JButton();
-        button2 = new JButton();
-        button3 = new JButton();
+        add = new JButton();
+        delete = new JButton();
+        edit = new JButton();
 
         //======== this ========
         setVisible(true);
@@ -50,10 +50,9 @@ public abstract class RoleManagementDesign extends  JPanel {
             //======== scrollPane1 ========
             {
 
-                //---- table1 ----
-                table1.setModel(new DefaultTableModel(
+                //---- mainTable ----
+                mainTable.setModel(new DefaultTableModel(
                     new Object[][] {
-                        {"\u0645\u062f\u06cc\u0631", true},
                     },
                     new String[] {
                         "title", "active status"
@@ -75,14 +74,14 @@ public abstract class RoleManagementDesign extends  JPanel {
                     }
                 });
                 {
-                    TableColumnModel cm = table1.getColumnModel();
+                    TableColumnModel cm = mainTable.getColumnModel();
                     cm.getColumn(0).setResizable(false);
                     cm.getColumn(0).setMinWidth(100);
                     cm.getColumn(0).setMaxWidth(300);
                     cm.getColumn(0).setPreferredWidth(100);
                     cm.getColumn(1).setResizable(false);
                 }
-                scrollPane1.setViewportView(table1);
+                scrollPane1.setViewportView(mainTable);
             }
             panel1.add(scrollPane1);
         }
@@ -94,38 +93,38 @@ public abstract class RoleManagementDesign extends  JPanel {
             panel2.setBorder(new TitledBorder("available Operations"));
             panel2.setLayout(null);
 
-            //---- button1 ----
-            button1.setText("add");
-            button1.addActionListener(new ActionListener() {
+            //---- add ----
+            add.setText("add");
+            add.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     button1ActionPerformed();
                 }
             });
-            panel2.add(button1);
-            button1.setBounds(105, 25, 76, button1.getPreferredSize().height);
+            panel2.add(add);
+            add.setBounds(105, 25, 76, add.getPreferredSize().height);
 
-            //---- button2 ----
-            button2.setText("delete");
-            button2.addActionListener(new ActionListener() {
+            //---- delete ----
+            delete.setText("delete");
+            delete.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     button2ActionPerformed();
                 }
             });
-            panel2.add(button2);
-            button2.setBounds(220, 25, 76, button2.getPreferredSize().height);
+            panel2.add(delete);
+            delete.setBounds(220, 25, 76, delete.getPreferredSize().height);
 
-            //---- button3 ----
-            button3.setText("modify");
-            button3.addActionListener(new ActionListener() {
+            //---- edit ----
+            edit.setText("modify");
+            edit.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     button3ActionPerformed();
                 }
             });
-            panel2.add(button3);
-            button3.setBounds(335, 25, 76, button3.getPreferredSize().height);
+            panel2.add(edit);
+            edit.setBounds(335, 25, 76, edit.getPreferredSize().height);
         }
         add(panel2);
         panel2.setBounds(5, 250, 530, 75);
@@ -149,10 +148,10 @@ public abstract class RoleManagementDesign extends  JPanel {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel panel1;
     private JScrollPane scrollPane1;
-    private JTable table1;
+    protected JTable mainTable;
     private JPanel panel2;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
+    private JButton add;
+    private JButton delete;
+    private JButton edit;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

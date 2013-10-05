@@ -121,9 +121,9 @@ public class Login extends TMSInternalFrame {
                 });
 
                 if (result == null) {
-                    JOptionPane.showMessageDialog(new JFrame(), "کاربری با این مشخصات یافت نشد");
+                    JOptionPane.showMessageDialog(new JFrame(), "کاربر? با ا?ن مشخصات ?افت نشد");
                 } else if (result.getUsername().equalsIgnoreCase("null")) {
-                    JOptionPane.showMessageDialog(new JFrame(), "کاربری با این مشخصات یافت نشد");
+                    JOptionPane.showMessageDialog(new JFrame(), "کاربر? با ا?ن مشخصات ?افت نشد");
                 } else {
                     try {
                         String ipAddress = InetAddress.getLocalHost().getHostAddress();
@@ -136,7 +136,7 @@ public class Login extends TMSInternalFrame {
                         }
 
                         if (!allowed) {
-                            JOptionPane.showMessageDialog(new JFrame(), "استفاده از این کامپیوتر برای شما مجاز نیست" +
+                            JOptionPane.showMessageDialog(new JFrame(), "استفاده از ا?ن کامپ?وتر برا? شما مجاز ن?ست" +
                                     "");
                             return;
                         }
