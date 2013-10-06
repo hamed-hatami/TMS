@@ -145,7 +145,7 @@ public abstract class LoginDesign extends JPanel {
             panelLogo.setLayout(null);
 
             //---- button1 ----
-            button1.setIcon(new ImageIcon("D:\\ARIA\\CVSROOT\\project\\TMS\\resources\\images\\big-logo.png"));
+            button1.setIcon(new ImageIcon(getClass().getResource("/ir/university/toosi/tms/view/images/big-logo.png")));
             panelLogo.add(button1);
             button1.setBounds(0, 0, 205, 195);
         }

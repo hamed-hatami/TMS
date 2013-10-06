@@ -44,7 +44,7 @@ public abstract class RoleManagementDesign extends  JPanel {
 
         //======== panel1 ========
         {
-            panel1.setBorder(new TitledBorder("defined roles"));
+            panel1.setBorder(new TitledBorder("\u0644\u06cc\u0633\u062a \u0646\u0642\u0634 \u0647\u0627"));
             panel1.setLayout(new BoxLayout(panel1, BoxLayout.X_AXIS));
 
             //======== scrollPane1 ========
@@ -90,11 +90,11 @@ public abstract class RoleManagementDesign extends  JPanel {
 
         //======== panel2 ========
         {
-            panel2.setBorder(new TitledBorder("available Operations"));
+            panel2.setBorder(new TitledBorder("\u0639\u0645\u0644\u06cc\u0627\u062a"));
             panel2.setLayout(null);
 
             //---- add ----
-            add.setText("add");
+            add.setText("\u0627\u0641\u0632\u0648\u062f\u0646");
             add.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -105,7 +105,7 @@ public abstract class RoleManagementDesign extends  JPanel {
             add.setBounds(105, 25, 76, add.getPreferredSize().height);
 
             //---- delete ----
-            delete.setText("delete");
+            delete.setText("\u062d\u0630\u0641");
             delete.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -116,7 +116,7 @@ public abstract class RoleManagementDesign extends  JPanel {
             delete.setBounds(220, 25, 76, delete.getPreferredSize().height);
 
             //---- edit ----
-            edit.setText("modify");
+            edit.setText("\u0648\u06cc\u0631\u0627\u06cc\u0634");
             edit.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {

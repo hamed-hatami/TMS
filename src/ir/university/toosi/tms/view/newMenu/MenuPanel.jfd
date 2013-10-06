@@ -19,10 +19,10 @@ new FormModel {
 				"font": &Font0 new java.awt.Font( "Tahoma", 0, 11 )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "languageDefItem"
-					"icon": new com.jformdesigner.model.SwingIcon( 1, "C:\\Users\\a_hadadi\\Desktop\\icon\\2\\Save-icon.png" )
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "/root/project/TMS/out/production/TMS/ir/university/toosi/tms/view/images/lang.png" )
 					"maximumSize": new java.awt.Dimension( 80, 80 )
 					"minimumSize": new java.awt.Dimension( 80, 80 )
-					"text": "languageDefItem"
+					"text": "ایجاد"
 					"alignmentX": 0.5f
 					"verticalTextPosition": 3
 					"horizontalTextPosition": 0
@@ -32,18 +32,18 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "importLanguage"
-					"icon": new com.jformdesigner.model.SwingIcon( 1, "C:\\Users\\a_hadadi\\Desktop\\icon\\2\\folder-open-icon.png" )
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/ir/university/toosi/tms/view/images/globe-icon.png" )
 					"maximumSize": new java.awt.Dimension( 80, 80 )
 					"minimumSize": new java.awt.Dimension( 80, 80 )
 					"horizontalTextPosition": 0
 					"verticalTextPosition": 3
-					"text": "importLanguage"
+					"text": "ویرایش"
 					"preferredSize": new java.awt.Dimension( 80, 80 )
 					"font": #Font0
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showLanguageForm", false ) )
 				} )
 			}, new FormLayoutConstraints( null ) {
-				"title": "languageMenu"
+				"title": "زبان"
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
 				"axis": 2
@@ -53,10 +53,10 @@ new FormModel {
 				"font": #Font0
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "workGroupManagementItem"
-					"icon": new com.jformdesigner.model.SwingIcon( 1, "C:\\Users\\a_hadadi\\Desktop\\icon\\2\\Paste-icon.png" )
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/ir/university/toosi/tms/view/images/workgroup-menu.png" )
 					"maximumSize": new java.awt.Dimension( 80, 80 )
 					"minimumSize": new java.awt.Dimension( 80, 80 )
-					"text": "workGroupManagementItem"
+					"text": "گروه کاری"
 					"verticalTextPosition": 3
 					"horizontalTextPosition": 0
 					"alignmentX": 0.5f
@@ -66,12 +66,12 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "operationManagementItem"
-					"icon": new com.jformdesigner.model.SwingIcon( 1, "C:\\Users\\a_hadadi\\Desktop\\icon\\2\\Document-Copy-icon.png" )
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "/root/project/TMS/out/production/TMS/ir/university/toosi/tms/view/images/role-menu.png" )
 					"minimumSize": new java.awt.Dimension( 80, 80 )
 					"maximumSize": new java.awt.Dimension( 80, 80 )
 					"horizontalTextPosition": 0
 					"verticalTextPosition": 3
-					"text": "operationManagementItem"
+					"text": "نقش"
 					"alignmentX": 0.5f
 					"preferredSize": new java.awt.Dimension( 80, 80 )
 					"font": #Font0
@@ -79,12 +79,12 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "userManagementItem"
-					"icon": &SwingIcon0 new com.jformdesigner.model.SwingIcon( 1, "C:\\Users\\a_hadadi\\Desktop\\icon\\2\\Cut-icon.png" )
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "/root/project/TMS/out/production/TMS/ir/university/toosi/tms/view/images/users-menu.png" )
 					"maximumSize": &Dimension0 new java.awt.Dimension( 80, 80 )
 					"minimumSize": &Dimension1 new java.awt.Dimension( 80, 80 )
 					"verticalTextPosition": 3
 					"horizontalTextPosition": 0
-					"text": "userManagementItem"
+					"text": "کاربران"
 					"alignmentX": 0.5f
 					"preferredSize": new java.awt.Dimension( 80, 80 )
 					"font": #Font0
@@ -92,45 +92,32 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "eventLogListItem"
-					"icon": #SwingIcon0
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "/root/project/TMS/out/production/TMS/ir/university/toosi/tms/view/images/event.png" )
 					"maximumSize": #Dimension0
 					"minimumSize": #Dimension1
 					"verticalTextPosition": 3
 					"horizontalTextPosition": 0
-					"text": "eventLogListItem"
+					"text": "رویداد"
 					"alignmentX": 0.5f
 					"preferredSize": new java.awt.Dimension( 80, 80 )
 					"font": #Font0
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showEventLogList", false ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "calendarManagementItem"
-					"icon": #SwingIcon0
-					"maximumSize": #Dimension0
-					"minimumSize": #Dimension1
-					"verticalTextPosition": 3
-					"horizontalTextPosition": 0
-					"text": "calendarManagementItem"
-					"alignmentX": 0.5f
-					"preferredSize": new java.awt.Dimension( 80, 80 )
-					"font": #Font0
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showCalendarManagment", false ) )
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "personManagementItem"
-					"icon": #SwingIcon0
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "/root/project/TMS/out/production/TMS/ir/university/toosi/tms/view/images/account-menu.png" )
 					"maximumSize": #Dimension0
 					"minimumSize": #Dimension1
 					"verticalTextPosition": 3
 					"horizontalTextPosition": 0
-					"text": "personManagementItem"
+					"text": "اشخاص"
 					"alignmentX": 0.5f
 					"preferredSize": new java.awt.Dimension( 80, 80 )
 					"font": #Font0
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showPersonManagment", false ) )
 				} )
 			}, new FormLayoutConstraints( null ) {
-				"title": "managementMenu"
+				"title": "مدیریت"
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
 				"axis": 2
@@ -140,7 +127,7 @@ new FormModel {
 				"font": #Font0
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "exit"
-					"icon": new com.jformdesigner.model.SwingIcon( 1, "C:\\Users\\a_hadadi\\Desktop\\icon\\2\\logout-icon.png" )
+					"icon": new com.jformdesigner.model.SwingIcon( 1, "/root/project/TMS/out/production/TMS/ir/university/toosi/tms/view/images/exit.png" )
 					"maximumSize": new java.awt.Dimension( 80, 80 )
 					"minimumSize": new java.awt.Dimension( 80, 80 )
 					"text": "exit"
@@ -152,15 +139,7 @@ new FormModel {
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "exit", false ) )
 				} )
 			}, new FormLayoutConstraints( null ) {
-				"title": "exitMenu"
-			} )
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
-				"axis": 0
-			} ) {
-				name: "basicInfoMenu"
-				"font": #Font0
-			}, new FormLayoutConstraints( null ) {
-				"title": "basicInfoMenu"
+				"title": "عملیات"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 10 )

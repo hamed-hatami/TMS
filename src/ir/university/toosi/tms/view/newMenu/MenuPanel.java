@@ -23,7 +23,7 @@ public abstract class MenuPanel extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         initComponents();
         setVisible(true);
-      //  setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        //  setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
     }
 
 
@@ -60,11 +60,10 @@ public abstract class MenuPanel extends JPanel {
         operationManagementItem = new JButton();
         userManagementItem = new JButton();
         eventLogListItem = new JButton();
-        calendarManagementItem = new JButton();
         personManagementItem = new JButton();
         exitMenu = new JPanel();
         exit = new JButton();
-        basicInfoMenu = new JPanel();
+
 
         //======== tabbedPane1 ========
         {
@@ -82,10 +81,10 @@ public abstract class MenuPanel extends JPanel {
                 languageMenu.setLayout(new BoxLayout(languageMenu, BoxLayout.LINE_AXIS));
 
                 //---- languageDefItem ----
-                languageDefItem.setIcon(new ImageIcon("C:\\Users\\a_hadadi\\Desktop\\icon\\2\\Save-icon.png"));
+                languageDefItem.setIcon(new ImageIcon(getClass().getClassLoader().getResource("lang.png")));
                 languageDefItem.setMaximumSize(new Dimension(80, 80));
                 languageDefItem.setMinimumSize(new Dimension(80, 80));
-                languageDefItem.setText("languageDefItem");
+                languageDefItem.setText("\u0627\u06cc\u062c\u0627\u062f");
                 languageDefItem.setAlignmentX(0.5F);
                 languageDefItem.setVerticalTextPosition(SwingConstants.BOTTOM);
                 languageDefItem.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -100,12 +99,12 @@ public abstract class MenuPanel extends JPanel {
                 languageMenu.add(languageDefItem);
 
                 //---- importLanguage ----
-                importLanguage.setIcon(new ImageIcon("C:\\Users\\a_hadadi\\Desktop\\icon\\2\\folder-open-icon.png"));
+                importLanguage.setIcon(new ImageIcon(getClass().getClassLoader().getResource("globe-icon.png")));
                 importLanguage.setMaximumSize(new Dimension(80, 80));
                 importLanguage.setMinimumSize(new Dimension(80, 80));
                 importLanguage.setHorizontalTextPosition(SwingConstants.CENTER);
                 importLanguage.setVerticalTextPosition(SwingConstants.BOTTOM);
-                importLanguage.setText("importLanguage");
+                importLanguage.setText("\u0648\u06cc\u0631\u0627\u06cc\u0634");
                 importLanguage.setPreferredSize(new Dimension(80, 80));
                 importLanguage.setFont(new Font("Tahoma", Font.PLAIN, 11));
                 importLanguage.addActionListener(new ActionListener() {
@@ -116,7 +115,7 @@ public abstract class MenuPanel extends JPanel {
                 });
                 languageMenu.add(importLanguage);
             }
-            tabbedPane1.addTab("languageMenu", languageMenu);
+            tabbedPane1.addTab("\u0632\u0628\u0627\u0646", languageMenu);
 
             //======== managementMenu ========
             {
@@ -125,10 +124,10 @@ public abstract class MenuPanel extends JPanel {
                 managementMenu.setLayout(new BoxLayout(managementMenu, BoxLayout.LINE_AXIS));
 
                 //---- workGroupManagementItem ----
-                workGroupManagementItem.setIcon(new ImageIcon("C:\\Users\\a_hadadi\\Desktop\\icon\\2\\Paste-icon.png"));
+                workGroupManagementItem.setIcon(new ImageIcon(getClass().getClassLoader().getResource("workgroup-menu.png")));
                 workGroupManagementItem.setMaximumSize(new Dimension(80, 80));
                 workGroupManagementItem.setMinimumSize(new Dimension(80, 80));
-                workGroupManagementItem.setText("workGroupManagementItem");
+                workGroupManagementItem.setText("\u06af\u0631\u0648\u0647 \u06a9\u0627\u0631\u06cc");
                 workGroupManagementItem.setVerticalTextPosition(SwingConstants.BOTTOM);
                 workGroupManagementItem.setHorizontalTextPosition(SwingConstants.CENTER);
                 workGroupManagementItem.setAlignmentX(0.5F);
@@ -143,12 +142,12 @@ public abstract class MenuPanel extends JPanel {
                 managementMenu.add(workGroupManagementItem);
 
                 //---- operationManagementItem ----
-                operationManagementItem.setIcon(new ImageIcon("C:\\Users\\a_hadadi\\Desktop\\icon\\2\\Document-Copy-icon.png"));
+                operationManagementItem.setIcon(new ImageIcon(getClass().getClassLoader().getResource("role-menu.png")));
                 operationManagementItem.setMinimumSize(new Dimension(80, 80));
                 operationManagementItem.setMaximumSize(new Dimension(80, 80));
                 operationManagementItem.setHorizontalTextPosition(SwingConstants.CENTER);
                 operationManagementItem.setVerticalTextPosition(SwingConstants.BOTTOM);
-                operationManagementItem.setText("operationManagementItem");
+                operationManagementItem.setText("\u0646\u0642\u0634");
                 operationManagementItem.setAlignmentX(0.5F);
                 operationManagementItem.setPreferredSize(new Dimension(80, 80));
                 operationManagementItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -161,12 +160,12 @@ public abstract class MenuPanel extends JPanel {
                 managementMenu.add(operationManagementItem);
 
                 //---- userManagementItem ----
-                userManagementItem.setIcon(new ImageIcon("C:\\Users\\a_hadadi\\Desktop\\icon\\2\\Cut-icon.png"));
+                userManagementItem.setIcon(new ImageIcon(getClass().getClassLoader().getResource("users-menu.png")));
                 userManagementItem.setMaximumSize(new Dimension(80, 80));
                 userManagementItem.setMinimumSize(new Dimension(80, 80));
                 userManagementItem.setVerticalTextPosition(SwingConstants.BOTTOM);
                 userManagementItem.setHorizontalTextPosition(SwingConstants.CENTER);
-                userManagementItem.setText("userManagementItem");
+                userManagementItem.setText("\u06a9\u0627\u0631\u0628\u0631\u0627\u0646");
                 userManagementItem.setAlignmentX(0.5F);
                 userManagementItem.setPreferredSize(new Dimension(80, 80));
                 userManagementItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -179,12 +178,12 @@ public abstract class MenuPanel extends JPanel {
                 managementMenu.add(userManagementItem);
 
                 //---- eventLogListItem ----
-                eventLogListItem.setIcon(new ImageIcon("C:\\Users\\a_hadadi\\Desktop\\icon\\2\\Cut-icon.png"));
+                eventLogListItem.setIcon(new ImageIcon(getClass().getClassLoader().getResource("event.png")));
                 eventLogListItem.setMaximumSize(new Dimension(80, 80));
                 eventLogListItem.setMinimumSize(new Dimension(80, 80));
                 eventLogListItem.setVerticalTextPosition(SwingConstants.BOTTOM);
                 eventLogListItem.setHorizontalTextPosition(SwingConstants.CENTER);
-                eventLogListItem.setText("eventLogListItem");
+                eventLogListItem.setText("\u0631\u0648\u06cc\u062f\u0627\u062f");
                 eventLogListItem.setAlignmentX(0.5F);
                 eventLogListItem.setPreferredSize(new Dimension(80, 80));
                 eventLogListItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -196,31 +195,13 @@ public abstract class MenuPanel extends JPanel {
                 });
                 managementMenu.add(eventLogListItem);
 
-                //---- calendarManagementItem ----
-                calendarManagementItem.setIcon(new ImageIcon("C:\\Users\\a_hadadi\\Desktop\\icon\\2\\Cut-icon.png"));
-                calendarManagementItem.setMaximumSize(new Dimension(80, 80));
-                calendarManagementItem.setMinimumSize(new Dimension(80, 80));
-                calendarManagementItem.setVerticalTextPosition(SwingConstants.BOTTOM);
-                calendarManagementItem.setHorizontalTextPosition(SwingConstants.CENTER);
-                calendarManagementItem.setText("calendarManagementItem");
-                calendarManagementItem.setAlignmentX(0.5F);
-                calendarManagementItem.setPreferredSize(new Dimension(80, 80));
-                calendarManagementItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
-                calendarManagementItem.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        showCalendarManagment();
-                    }
-                });
-                managementMenu.add(calendarManagementItem);
-
                 //---- personManagementItem ----
-                personManagementItem.setIcon(new ImageIcon("C:\\Users\\a_hadadi\\Desktop\\icon\\2\\Cut-icon.png"));
+                personManagementItem.setIcon(new ImageIcon(getClass().getClassLoader().getResource("account-menu.png")));
                 personManagementItem.setMaximumSize(new Dimension(80, 80));
                 personManagementItem.setMinimumSize(new Dimension(80, 80));
                 personManagementItem.setVerticalTextPosition(SwingConstants.BOTTOM);
                 personManagementItem.setHorizontalTextPosition(SwingConstants.CENTER);
-                personManagementItem.setText("personManagementItem");
+                personManagementItem.setText("\u0627\u0634\u062e\u0627\u0635");
                 personManagementItem.setAlignmentX(0.5F);
                 personManagementItem.setPreferredSize(new Dimension(80, 80));
                 personManagementItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -232,7 +213,7 @@ public abstract class MenuPanel extends JPanel {
                 });
                 managementMenu.add(personManagementItem);
             }
-            tabbedPane1.addTab("managementMenu", managementMenu);
+            tabbedPane1.addTab("\u0645\u062f\u06cc\u0631\u06cc\u062a", managementMenu);
 
             //======== exitMenu ========
             {
@@ -241,10 +222,10 @@ public abstract class MenuPanel extends JPanel {
                 exitMenu.setLayout(new BoxLayout(exitMenu, BoxLayout.LINE_AXIS));
 
                 //---- exit ----
-                exit.setIcon(new ImageIcon("C:\\Users\\a_hadadi\\Desktop\\icon\\2\\logout-icon.png"));
+                exit.setIcon(new ImageIcon(getClass().getClassLoader().getResource("exit.png")));
                 exit.setMaximumSize(new Dimension(80, 80));
                 exit.setMinimumSize(new Dimension(80, 80));
-                exit.setText("exit");
+                exit.setText("خروج");
                 exit.setAlignmentX(0.5F);
                 exit.setVerticalTextPosition(SwingConstants.BOTTOM);
                 exit.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -258,14 +239,9 @@ public abstract class MenuPanel extends JPanel {
                 });
                 exitMenu.add(exit);
             }
-            tabbedPane1.addTab("exitMenu", exitMenu);
+            tabbedPane1.addTab("\u0639\u0645\u0644\u06cc\u0627\u062a", exitMenu);
 
-            //======== basicInfoMenu ========
-            {
-                basicInfoMenu.setFont(new Font("Tahoma", Font.PLAIN, 11));
-                basicInfoMenu.setLayout(new BoxLayout(basicInfoMenu, BoxLayout.X_AXIS));
-            }
-            tabbedPane1.addTab("basicInfoMenu", basicInfoMenu);
+
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
         add(tabbedPane1);
@@ -281,11 +257,10 @@ public abstract class MenuPanel extends JPanel {
     private JButton operationManagementItem;
     private JButton userManagementItem;
     private JButton eventLogListItem;
-    private JButton calendarManagementItem;
     private JButton personManagementItem;
     private JPanel exitMenu;
     private JButton exit;
-    private JPanel basicInfoMenu;
+
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
 
