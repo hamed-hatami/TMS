@@ -6,11 +6,13 @@ import ir.university.toosi.tms.model.entity.*;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import org.jdesktop.swingx.JXImagePanel;
+import ir.university.toosi.tms.util.ImageCanvas;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.MalformedURLException;
 import java.net.UnknownHostException;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
@@ -35,10 +37,10 @@ public class LoginForm extends JDialog {
 
         panel = new LoginFormPanel();
         panel.setLocation(0, 0);
-        setSize((int) panel.getSize().getWidth() + 4, panel.getHeight() + 25);
+
+        setSize((int) panel.getSize().getWidth() , panel.getHeight() );
         panel.setVisible(true);
         setLayout(null);
-       // getContentPane().setBackground(Color.getColor("Control"));
         this.add(panel);
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int)(dimension.getWidth()-getSize().getWidth()) / 2;
@@ -46,7 +48,7 @@ public class LoginForm extends JDialog {
         this.setLocation(x,y);
         setResizable(false);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
+        setUndecorated(true);
         fillSearchCombo();
         init1();
 
@@ -57,12 +59,6 @@ public class LoginForm extends JDialog {
        // panel.repaint();
 
     }
-
-
-
-
-
-
 
     private void init1() {
 
@@ -79,8 +75,43 @@ public class LoginForm extends JDialog {
         panel.userNameLabel.setText(ThreadPoolManager.getLangValue("TMS_USERNAME"));
         panel.passwordLabel.setText(ThreadPoolManager.getLangValue("TMS_PASSWORD"));
         panel.langLabel.setText(ThreadPoolManager.getLangValue("TMS_LANGUAGE"));
-    }
 
+
+        /*try {
+            Image image ;//= Toolkit.getDefaultToolkit().getImage("/ir/university/toosi/tms/view/images/big-logo.png");
+            String s = "file:/ir/university/toosi/tms/view/images/big-logo.png";
+            image =
+                    Toolkit.getDefaultToolkit().getImage(new java.net.URL(s));
+            ImageCanvas imageCanvas = new ImageCanvas(image);
+            imageCanvas.setVisible(true);
+            panel.panelLogo.add(imageCanvas);
+            panel.panelLogo.repaint();
+            validate();
+        }catch (MalformedURLException e){
+            e.printStackTrace();
+        }*/
+        try {
+            Image image ;//= Toolkit.getDefaultToolkit().getImage("/ir/university/toosi/tms/view/images/big-logo.png");
+            String s = "/ir/university/toosi/tms/view/images/big-logo.png";
+            image =new ImageIcon(getClass().getResource(s)).getImage();
+            ImageCanvas imageCanvas = new ImageCanvas(image);
+            imageCanvas.setBounds(0,0,426,272);
+            imageCanvas.setVisible(true);
+            panel.add(imageCanvas);
+          //  panel.panelLogo.repaint();
+          //  validate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        panel.langLabel.setOpaque(true);
+        panel.repaint();
+        validate();
+
+
+
+
+    }
 
     private void fillSearchCombo() {
 
@@ -102,7 +133,6 @@ public class LoginForm extends JDialog {
         panel.language.setModel(new DefaultComboBoxModel(langItems));
        // panel.language.setSelectedItem(defaultedLang);
     }
-
 
     public boolean isLogin() {
         return blogin;
@@ -207,4 +237,7 @@ public class LoginForm extends JDialog {
             System.exit(0);
         }
     }
+
+
+
 }

@@ -16,8 +16,9 @@ public class TMSInternalFrame extends JInternalFrame  {
 
     public TMSInternalFrame() {
         super();
-       setFrameIcon(new ImageIcon(getClass().getClassLoader().getResource("logo.png")));
-//        setFrameIcon(new ImageIcon("./images/logo.png")); //todo
+      // setFrameIcon(new ImageIcon(getClass().getClassLoader().getResource("logo.png"))); //todo enable for jar deploy
+        setFrameIcon(new ImageIcon(getClass().getResource("/ir/university/toosi/tms/view/images/logo.png")));  //todo enable for idea
+
         setIconifiable(false);
         setMaximizable(false);
         setResizable(false);

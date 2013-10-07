@@ -64,7 +64,6 @@ public abstract class MenuPanel extends JPanel {
         exitMenu = new JPanel();
         exit = new JButton();
 
-
         //======== tabbedPane1 ========
         {
             tabbedPane1.setBorder(null);
@@ -81,7 +80,7 @@ public abstract class MenuPanel extends JPanel {
                 languageMenu.setLayout(new BoxLayout(languageMenu, BoxLayout.LINE_AXIS));
 
                 //---- languageDefItem ----
-                languageDefItem.setIcon(new ImageIcon(getClass().getClassLoader().getResource("lang.png")));
+                languageDefItem.setIcon(new ImageIcon(getClass().getResource("/ir/university/toosi/tms/view/images/lang.png")));
                 languageDefItem.setMaximumSize(new Dimension(80, 80));
                 languageDefItem.setMinimumSize(new Dimension(80, 80));
                 languageDefItem.setText("\u0627\u06cc\u062c\u0627\u062f");
@@ -99,7 +98,7 @@ public abstract class MenuPanel extends JPanel {
                 languageMenu.add(languageDefItem);
 
                 //---- importLanguage ----
-                importLanguage.setIcon(new ImageIcon(getClass().getClassLoader().getResource("globe-icon.png")));
+                importLanguage.setIcon(new ImageIcon(getClass().getResource("/ir/university/toosi/tms/view/images/globe-icon.png")));
                 importLanguage.setMaximumSize(new Dimension(80, 80));
                 importLanguage.setMinimumSize(new Dimension(80, 80));
                 importLanguage.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -124,7 +123,7 @@ public abstract class MenuPanel extends JPanel {
                 managementMenu.setLayout(new BoxLayout(managementMenu, BoxLayout.LINE_AXIS));
 
                 //---- workGroupManagementItem ----
-                workGroupManagementItem.setIcon(new ImageIcon(getClass().getClassLoader().getResource("workgroup-menu.png")));
+                workGroupManagementItem.setIcon(new ImageIcon(getClass().getResource("/ir/university/toosi/tms/view/images/workgroup-menu.png")));
                 workGroupManagementItem.setMaximumSize(new Dimension(80, 80));
                 workGroupManagementItem.setMinimumSize(new Dimension(80, 80));
                 workGroupManagementItem.setText("\u06af\u0631\u0648\u0647 \u06a9\u0627\u0631\u06cc");
@@ -142,7 +141,7 @@ public abstract class MenuPanel extends JPanel {
                 managementMenu.add(workGroupManagementItem);
 
                 //---- operationManagementItem ----
-                operationManagementItem.setIcon(new ImageIcon(getClass().getClassLoader().getResource("role-menu.png")));
+                operationManagementItem.setIcon(new ImageIcon("/root/project/TMS/out/production/TMS/ir/university/toosi/tms/view/images/role-menu.png"));
                 operationManagementItem.setMinimumSize(new Dimension(80, 80));
                 operationManagementItem.setMaximumSize(new Dimension(80, 80));
                 operationManagementItem.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -160,7 +159,7 @@ public abstract class MenuPanel extends JPanel {
                 managementMenu.add(operationManagementItem);
 
                 //---- userManagementItem ----
-                userManagementItem.setIcon(new ImageIcon(getClass().getClassLoader().getResource("users-menu.png")));
+                userManagementItem.setIcon(new ImageIcon("/root/project/TMS/out/production/TMS/ir/university/toosi/tms/view/images/users-menu.png"));
                 userManagementItem.setMaximumSize(new Dimension(80, 80));
                 userManagementItem.setMinimumSize(new Dimension(80, 80));
                 userManagementItem.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -178,7 +177,7 @@ public abstract class MenuPanel extends JPanel {
                 managementMenu.add(userManagementItem);
 
                 //---- eventLogListItem ----
-                eventLogListItem.setIcon(new ImageIcon(getClass().getClassLoader().getResource("event.png")));
+                eventLogListItem.setIcon(new ImageIcon("/root/project/TMS/out/production/TMS/ir/university/toosi/tms/view/images/event.png"));
                 eventLogListItem.setMaximumSize(new Dimension(80, 80));
                 eventLogListItem.setMinimumSize(new Dimension(80, 80));
                 eventLogListItem.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -196,7 +195,7 @@ public abstract class MenuPanel extends JPanel {
                 managementMenu.add(eventLogListItem);
 
                 //---- personManagementItem ----
-                personManagementItem.setIcon(new ImageIcon(getClass().getClassLoader().getResource("account-menu.png")));
+                personManagementItem.setIcon(new ImageIcon("/root/project/TMS/out/production/TMS/ir/university/toosi/tms/view/images/account-menu.png"));
                 personManagementItem.setMaximumSize(new Dimension(80, 80));
                 personManagementItem.setMinimumSize(new Dimension(80, 80));
                 personManagementItem.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -222,10 +221,10 @@ public abstract class MenuPanel extends JPanel {
                 exitMenu.setLayout(new BoxLayout(exitMenu, BoxLayout.LINE_AXIS));
 
                 //---- exit ----
-                exit.setIcon(new ImageIcon(getClass().getClassLoader().getResource("exit.png")));
+                exit.setIcon(new ImageIcon("/root/project/TMS/out/production/TMS/ir/university/toosi/tms/view/images/exit.png"));
                 exit.setMaximumSize(new Dimension(80, 80));
                 exit.setMinimumSize(new Dimension(80, 80));
-                exit.setText("خروج");
+                exit.setText("exit");
                 exit.setAlignmentX(0.5F);
                 exit.setVerticalTextPosition(SwingConstants.BOTTOM);
                 exit.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -240,8 +239,6 @@ public abstract class MenuPanel extends JPanel {
                 exitMenu.add(exit);
             }
             tabbedPane1.addTab("\u0639\u0645\u0644\u06cc\u0627\u062a", exitMenu);
-
-
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
         add(tabbedPane1);
@@ -260,7 +257,6 @@ public abstract class MenuPanel extends JPanel {
     private JButton personManagementItem;
     private JPanel exitMenu;
     private JButton exit;
-
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
 

@@ -19,7 +19,7 @@ new FormModel {
 				"font": &Font0 new java.awt.Font( "Tahoma", 0, 11 )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "languageDefItem"
-					"icon": new com.jformdesigner.model.SwingIcon( 1, "/root/project/TMS/out/production/TMS/ir/university/toosi/tms/view/images/lang.png" )
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/ir/university/toosi/tms/view/images/lang.png" )
 					"maximumSize": new java.awt.Dimension( 80, 80 )
 					"minimumSize": new java.awt.Dimension( 80, 80 )
 					"text": "ایجاد"

@@ -16,7 +16,7 @@ import javax.swing.border.*;
 public abstract class LoginDesign extends JPanel {
     public LoginDesign() {
         initComponents();
-        setSize(480, 230);
+        setSize(426, 272);
     }
 
     abstract void buttonLoginActionPerformed();
@@ -25,150 +25,117 @@ public abstract class LoginDesign extends JPanel {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        panel1 = new JPanel();
-        userNameLabel = new JLabel();
-        passwordLabel = new JLabel();
-        userName = new JTextField();
-        password = new JPasswordField();
-        label3 = new JLabel();
-        panel2 = new JPanel();
         login = new JButton();
         cancel = new JButton();
         language = new JComboBox();
         langLabel = new JLabel();
-        panelLogo = new JPanel();
-        button1 = new JButton();
+        passwordLabel = new JLabel();
+        password = new JPasswordField();
+        userNameLabel = new JLabel();
+        userName = new JTextField();
 
         //======== this ========
-        setMaximumSize(new Dimension(480, 230));
-        setMinimumSize(new Dimension(480, 230));
-        setPreferredSize(new Dimension(480, 230));
+        setMinimumSize(new Dimension(426, 272));
+        setMaximumSize(new Dimension(426, 272));
+        setBorder(UIManager.getBorder("InternalFrame.paletteBorder"));
+        setPreferredSize(new Dimension(426, 272));
+        setAlignmentX(0.0F);
+        setAlignmentY(0.0F);
+        setForeground(new Color(204, 255, 0));
+        setBackground(new Color(7, 96, 153));
         setLayout(null);
 
-        //======== panel1 ========
-        {
-            panel1.setBorder(new EtchedBorder());
-            panel1.setLayout(null);
-
-            //---- userNameLabel ----
-            userNameLabel.setText("userNameLabel");
-            panel1.add(userNameLabel);
-            userNameLabel.setBounds(160, 20, 92, 20);
-
-            //---- passwordLabel ----
-            passwordLabel.setText("passwordLabel");
-            panel1.add(passwordLabel);
-            passwordLabel.setBounds(160, 45, 75, passwordLabel.getPreferredSize().height);
-            panel1.add(userName);
-            userName.setBounds(25, 20, 130, userName.getPreferredSize().height);
-            panel1.add(password);
-            password.setBounds(25, 45, 130, password.getPreferredSize().height);
-
-            //---- label3 ----
-            label3.setText("text");
-            panel1.add(label3);
-            label3.setBounds(190, 95, 37, label3.getPreferredSize().height);
-
-            { // compute preferred size
-                Dimension preferredSize = new Dimension();
-                for(int i = 0; i < panel1.getComponentCount(); i++) {
-                    Rectangle bounds = panel1.getComponent(i).getBounds();
-                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                }
-                Insets insets = panel1.getInsets();
-                preferredSize.width += insets.right;
-                preferredSize.height += insets.bottom;
-                panel1.setMinimumSize(preferredSize);
-                panel1.setPreferredSize(preferredSize);
+        //---- login ----
+        login.setText("login");
+        login.setFont(new Font("Tahoma", login.getFont().getStyle() & ~Font.BOLD, login.getFont().getSize()));
+        login.setBorder(null);
+        login.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buttonLoginActionPerformed();
             }
-        }
-        add(panel1);
-        panel1.setBounds(220, 20, 245, 85);
+        });
+        add(login);
+        login.setBounds(275, 185, 75, 25);
 
-        //======== panel2 ========
-        {
-            panel2.setMinimumSize(new Dimension(100, 100));
-            panel2.setPreferredSize(new Dimension(100, 100));
-            panel2.setBorder(new EtchedBorder());
-            panel2.setLayout(null);
-
-            //---- login ----
-            login.setText("login");
-            login.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    buttonLoginActionPerformed();
-                }
-            });
-            panel2.add(login);
-            login.setBounds(110, 55, 75, login.getPreferredSize().height);
-
-            //---- cancel ----
-            cancel.setText("cancel");
-            cancel.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    buttonCancelActionPerformed();
-                }
-            });
-            panel2.add(cancel);
-            cancel.setBounds(25, 55, 75, cancel.getPreferredSize().height);
-            panel2.add(language);
-            language.setBounds(25, 20, 130, language.getPreferredSize().height);
-
-            //---- langLabel ----
-            langLabel.setText("langLabel");
-            panel2.add(langLabel);
-            langLabel.setBounds(160, 25, 75, 16);
-
-            { // compute preferred size
-                Dimension preferredSize = new Dimension();
-                for(int i = 0; i < panel2.getComponentCount(); i++) {
-                    Rectangle bounds = panel2.getComponent(i).getBounds();
-                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                }
-                Insets insets = panel2.getInsets();
-                preferredSize.width += insets.right;
-                preferredSize.height += insets.bottom;
-                panel2.setMinimumSize(preferredSize);
-                panel2.setPreferredSize(preferredSize);
+        //---- cancel ----
+        cancel.setText("cancel");
+        cancel.setFont(new Font("Tahoma", cancel.getFont().getStyle() & ~Font.BOLD, cancel.getFont().getSize()));
+        cancel.setBorder(null);
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buttonCancelActionPerformed();
             }
-        }
-        add(panel2);
-        panel2.setBounds(220, 110, 245, 105);
+        });
+        add(cancel);
+        cancel.setBounds(195, 185, 75, 25);
 
-        //======== panelLogo ========
-        {
-            panelLogo.setBorder(new EtchedBorder());
-            panelLogo.setLayout(null);
+        //---- language ----
+        language.setBorder(null);
+        language.setFont(new Font("Tahoma", language.getFont().getStyle() & ~Font.BOLD, language.getFont().getSize()));
+        language.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        add(language);
+        language.setBounds(193, 124, 120, 26);
 
-            //---- button1 ----
-            button1.setIcon(new ImageIcon(getClass().getResource("/ir/university/toosi/tms/view/images/big-logo.png")));
-            panelLogo.add(button1);
-            button1.setBounds(0, 0, 205, 195);
-        }
-        add(panelLogo);
-        panelLogo.setBounds(10, 20, 205, 195);
+        //---- langLabel ----
+        langLabel.setText("langLabel");
+        langLabel.setFont(new Font("Tahoma", langLabel.getFont().getStyle() & ~Font.BOLD, langLabel.getFont().getSize()));
+        langLabel.setForeground(new Color(205, 225, 245));
+        langLabel.setFocusable(false);
+        langLabel.setBackground(new Color(7, 96, 153));
+        langLabel.setOpaque(true);
+        add(langLabel);
+        langLabel.setBounds(315, 126, 90, 16);
 
-        setPreferredSize(new Dimension(480, 230));
+        //---- passwordLabel ----
+        passwordLabel.setText("passwordLabel");
+        passwordLabel.setFont(new Font("Tahoma", passwordLabel.getFont().getStyle() & ~Font.BOLD, passwordLabel.getFont().getSize()));
+        passwordLabel.setForeground(new Color(205, 225, 245));
+        passwordLabel.setFocusable(false);
+        passwordLabel.setBackground(new Color(7, 96, 153));
+        passwordLabel.setOpaque(true);
+        add(passwordLabel);
+        passwordLabel.setBounds(315, 89, 90, 16);
+
+        //---- password ----
+        password.setBackground(new Color(7, 96, 153));
+        password.setForeground(new Color(205, 225, 245));
+        password.setBorder(new LineBorder(new Color(205, 225, 245)));
+        password.setFont(new Font("Tahoma", password.getFont().getStyle() & ~Font.BOLD, password.getFont().getSize()));
+        add(password);
+        password.setBounds(195, 87, 115, 21);
+
+        //---- userNameLabel ----
+        userNameLabel.setText("userNameLabel");
+        userNameLabel.setFont(new Font("Tahoma", userNameLabel.getFont().getStyle() & ~Font.BOLD, userNameLabel.getFont().getSize()));
+        userNameLabel.setForeground(new Color(205, 225, 245));
+        userNameLabel.setFocusable(false);
+        userNameLabel.setBackground(new Color(7, 96, 153));
+        userNameLabel.setOpaque(true);
+        add(userNameLabel);
+        userNameLabel.setBounds(315, 53, 90, 16);
+
+        //---- userName ----
+        userName.setBackground(new Color(7, 96, 153));
+        userName.setForeground(new Color(205, 225, 245));
+        userName.setBorder(new LineBorder(new Color(205, 225, 245)));
+        userName.setFont(new Font("Tahoma", userName.getFont().getStyle() & ~Font.BOLD, userName.getFont().getSize()));
+        add(userName);
+        userName.setBounds(195, 50, 115, 21);
+
+        setPreferredSize(new Dimension(425, 270));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JPanel panel1;
-    protected JLabel userNameLabel;
-    protected JLabel passwordLabel;
-    protected JTextField userName;
-    protected JPasswordField password;
-    private JLabel label3;
-    private JPanel panel2;
     protected JButton login;
     protected JButton cancel;
     protected JComboBox language;
     protected JLabel langLabel;
-    protected JPanel panelLogo;
-    private JButton button1;
+    protected JLabel passwordLabel;
+    protected JPasswordField password;
+    protected JLabel userNameLabel;
+    protected JTextField userName;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
