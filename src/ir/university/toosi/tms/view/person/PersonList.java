@@ -78,8 +78,8 @@ public class PersonList extends TMSInternalFrame {
 
 
         //this.addInternalFrameListener(ThreadPoolManager.mainForm);
-        setClosable(true);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+       // setClosable(true);
+       // setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle(ThreadPoolManager.getLangValue("TMS_PERSON_MANAGEMENT"));
 
         searchPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_PERSON_SEARCH")));

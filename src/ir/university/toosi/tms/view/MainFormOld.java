@@ -11,8 +11,7 @@ import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.basicinfo.BasicInfoManagement;
 import ir.university.toosi.tms.view.calendar.CalendarManagement;
 import ir.university.toosi.tms.view.eventlog.EventLogList;
-import ir.university.toosi.tms.view.language.LanguageForm;
-import ir.university.toosi.tms.view.language.LanguageManagementForm;
+import ir.university.toosi.tms.view.language.LanguageAddForm;
 import ir.university.toosi.tms.view.person.PersonManagement;
 import ir.university.toosi.tms.view.role.RoleManagement;
 import ir.university.toosi.tms.view.user.UserManagement;
@@ -87,18 +86,18 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
     }
 
     private void showUserManagement() throws PropertyVetoException {
-        UserManagement userManagement = new UserManagement(jdpDesktop);
+       /* UserManagement userManagement = new UserManagement(jdpDesktop);
         userManagement.setVisible(true);
         jdpDesktop.add(userManagement);
-        userManagement.setSelected(true);
+        userManagement.setSelected(true);*/
 
     }
 
     private void showLanguageForm() throws PropertyVetoException {
-        LanguageForm languageForm = new LanguageForm(jdpDesktop);
+      /*  LanguageAddForm languageForm = new LanguageAddForm(jdpDesktop);
         languageForm.setVisible(true);
         jdpDesktop.add(languageForm);
-        languageForm.setSelected(true);
+        languageForm.setSelected(true);*/
 
     }
 
@@ -119,10 +118,10 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
     }
 
     private void showPersonManagment() throws PropertyVetoException {
-        PersonManagement personManagement = new PersonManagement(jdpDesktop);
+        /*PersonManagement personManagement = new PersonManagement(jdpDesktop);
         personManagement.setVisible(true);
         jdpDesktop.add(personManagement);
-        personManagement.setSelected(true);
+        personManagement.setSelected(true);*/
 
     }
 
@@ -134,13 +133,13 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
     }
 
     private void showEventLogList() throws PropertyVetoException {
-        EventLogList eventLogList = new EventLogList(jdpDesktop);
+       /* EventLogList eventLogList = new EventLogList(jdpDesktop);
         eventLogList.setVisible(true);
         jdpDesktop.add(eventLogList);
-        eventLogList.setSelected(true);
+        eventLogList.setSelected(true);*/
     }
 
-    private void refreshMainForm() {
+   /* private void refreshMainForm() {
         jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
         //languageMenu.setText(ThreadPoolManager.getLangValue("language"));
         //languageDefItem.setText(ThreadPoolManager.getLangValue("languageDef"));
@@ -148,7 +147,7 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
         jdpDesktop.revalidate();
         jdpDesktop.repaint();
     }
-
+*/
     private void showLookupInfo(Lookup lookup) throws PropertyVetoException {
         BasicInfoManagement basicInfoManagement = new BasicInfoManagement(jdpDesktop, lookup);
         basicInfoManagement.setVisible(true);
@@ -157,10 +156,10 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
     }
 
     private void showLanguageDef() throws PropertyVetoException {
-        LanguageManagementForm languageManagement = new LanguageManagementForm(jdpDesktop);
+       /* LanguageAddForm languageManagement = new LanguageAddForm(jdpDesktop);
         languageManagement.setVisible(true);
         jdpDesktop.add(languageManagement);
-        languageManagement.setSelected(true);
+        languageManagement.setSelected(true);*/
     }
 
     public JMenuBar createMenuBar(ComponentOrientation direction) {

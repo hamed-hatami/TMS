@@ -29,7 +29,6 @@ public class AddRoleCode extends TMSInternalFrame {
 
     public AddRoleCode(){
         super();
-
         panel = new AddRolePanel();
         panel.setLocation(0, 0);
         panel.setSize(panel.getPreferredSize());
@@ -37,6 +36,14 @@ public class AddRoleCode extends TMSInternalFrame {
         setLayout(null);
         getContentPane().setBackground(Color.getColor("Control"));
         this.add(panel);
+
+
+        this.setTitle(ThreadPoolManager.getLangValue("TMS_ROLE_MANAGEMENT"));
+        panel.mainTable.setAutoCreateRowSorter(true);
+        panel.buttonSave.setText(ThreadPoolManager.getLangValue("TMS_ADD"));
+        panel.buttonCancel.setText(ThreadPoolManager.getLangValue("TMS_CANCEL"));
+
+
         try {
             refresh();
         } catch (IOException e) {
@@ -74,13 +81,8 @@ public class AddRoleCode extends TMSInternalFrame {
 
 
 
-    public void exitForm(){
-       dispose();
-    }
 
     class AddRolePanel extends AddRoleDesign {
-
-
 
         @Override
         void saveActionPerformed() {
@@ -89,7 +91,7 @@ public class AddRoleCode extends TMSInternalFrame {
 
         @Override
         void cancelActionPerformed() {
-            exitForm();
+            dispose();
         }
     }
 }

@@ -17,33 +17,10 @@ import java.io.IOException;
 public class PersonForm extends TMSInternalFrame {
 
     public PersonForm() {
-
-        mainPanel = new TMSPanel();
-        mainPanel.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
-        nameLabel = new JLabel();
-        lastNameLabel = new JLabel();
-        name = new JTextField();
-        lastName = new JTextField();
-        personnelNo = new JTextField();
-        personnelNoLabel = new JLabel();
-        nationalCode = new JTextField();
-        nationalCodeLabel = new JLabel();
-        idNum = new JTextField();
-        idNumLabel = new JLabel();
-        pinLabel = new JLabel();
-        pin = new JTextField();
-        address = new JTextField();
-        addressLabel = new JLabel();
-        pictureLabel = new JLabel();
-        picture = new JTextField();
-        browse = new JButton();
-        cancel = new JButton();
-        edit = new JButton();
-        jobSetting = new JButton();
-        initComponents();
+        this(false, null);
     }
 
-    public PersonForm(boolean editMode, Person person, PersonManagement personManagement) {
+    public PersonForm(boolean editMode, Person person) {
 
         mainPanel = new TMSPanel();
         mainPanel.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
@@ -68,19 +45,20 @@ public class PersonForm extends TMSInternalFrame {
         edit = new JButton();
         jobSetting = new JButton();
         this.editMode = editMode;
-        this.personManagement = personManagement;
+        //this.personManagement = personManagement;
         this.person = person;
         added = editMode;
         initComponents();
     }
 
 
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
       //  this.addInternalFrameListener(ThreadPoolManager.mainForm);
-        setClosable(true);
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+       // setClosable(true);
+        //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(ThreadPoolManager.getLangValue("TMS_PERSONNEL_INFO"));
 
         mainPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_PERSONNEL_INFO")));
@@ -274,11 +252,11 @@ public class PersonForm extends TMSInternalFrame {
 
     private void close(ActionEvent evt) {
         this.dispose();
-        try {
+       /* try {
             personManagement.refresh();
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+        }*/
     }
 
     private void edit(ActionEvent evt) {
@@ -358,7 +336,7 @@ public class PersonForm extends TMSInternalFrame {
     private boolean editMode;
     private boolean added;
     private Person person;
-    private PersonManagement personManagement;
+   // private PersonManagement personManagement;
     private WebServiceInfo personService = new WebServiceInfo();
     // End of variables declaration//GEN-END:variables
 

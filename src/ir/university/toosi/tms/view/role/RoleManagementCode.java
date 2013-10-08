@@ -10,6 +10,7 @@ import ir.university.toosi.tms.view.TMSInternalFrame;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
+import javax.swing.*;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import java.awt.*;
@@ -26,7 +27,6 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class RoleManagementCode extends TMSInternalFrame {
-   private String formTitle = "this title";
 
     private RoleManagementPanel panel = null;
     private WebServiceInfo roleService = new WebServiceInfo();
@@ -42,6 +42,19 @@ public class RoleManagementCode extends TMSInternalFrame {
        setLayout(null);
        getContentPane().setBackground(Color.getColor("Control"));
        this.add(panel);
+
+
+        setTitle(ThreadPoolManager.getLangValue("TMS_ROLE_MANAGEMENT"));
+        panel.panelInfo.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_ROLE_MANAGEMENT")));
+        panel.add.setText(ThreadPoolManager.getLangValue("TMS_ADD"));
+        panel.add.setEnabled(ThreadPoolManager.hasPermission("ADD_ROLE"));
+        panel.delete.setText(ThreadPoolManager.getLangValue("TMS_DELETE"));
+        panel.delete.setEnabled(ThreadPoolManager.hasPermission("DELETE_ROLE"));
+        panel.edit.setText(ThreadPoolManager.getLangValue("TMS_EDIT"));
+        panel.edit.setEnabled(ThreadPoolManager.hasPermission("EDIT_ROLE"));
+        panel.buttonCancel.setText(ThreadPoolManager.getLangValue("TMS_CANCEL"));
+        panel.mainTable.setAutoCreateRowSorter(true);
+
 
         try {
             refresh();
@@ -85,8 +98,9 @@ public class RoleManagementCode extends TMSInternalFrame {
 
 
     class RoleManagementPanel extends RoleManagementDesign {
+
         @Override
-        protected void button1ActionPerformed() {
+        protected void buttonAddActionPerformed() {
             AddRoleCode addRoleCode = new AddRoleCode();
             addRoleCode.setVisible(true);
             // roleManagementCode.setBounds(170, 65, 175, 105);
@@ -98,21 +112,20 @@ public class RoleManagementCode extends TMSInternalFrame {
                 e.printStackTrace();
             }
 
-
         }
 
         @Override
-        protected void button2ActionPerformed() {
+        protected void buttonDeleteActionPerformed() {
             //todo
         }
 
         @Override
-        protected void button4ActionPerformed() {
-            //To change body of implemented methods use File | Settings | File Templates.
+        protected void buttonCancelActionPerformed() {
+            dispose();
         }
 
         @Override
-        protected void button3ActionPerformed() {
+        protected void buttonEditActionPerformed() {
             //todo
         }
     }

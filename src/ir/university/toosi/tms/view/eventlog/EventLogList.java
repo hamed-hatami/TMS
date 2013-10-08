@@ -42,7 +42,7 @@ public class EventLogList extends TMSInternalFrame {
         }
     }
 
-    public EventLogList(JDesktopPane jDesktopPane) {
+   /* public EventLogList(JDesktopPane jDesktopPane) {
         fillSearchCombo();
         jdpDesktop = jDesktopPane;
         mainPanel = new TMSPanel();
@@ -58,7 +58,7 @@ public class EventLogList extends TMSInternalFrame {
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-    }
+    }*/
 
     private void fillSearchCombo() {
         searchItems = new String[EventLogSearchItems.values().length];
@@ -78,8 +78,8 @@ public class EventLogList extends TMSInternalFrame {
     public void initComponents() throws IOException {
 
        // this.addInternalFrameListener(ThreadPoolManager.mainForm);
-        setClosable(true);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        //setClosable(true);
+       // setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle(ThreadPoolManager.getLangValue("TMS_EVENTLOGLIST"));
 
         mainPanel.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_EVENTLOGLIST")));

@@ -18,7 +18,7 @@ public abstract class MenuPanel extends JPanel {
 
 
     public MenuPanel() {
-        //super("InternalFrameDemo");
+       // super("InternalFrameDemo");
         //setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         initComponents();

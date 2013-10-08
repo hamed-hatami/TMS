@@ -20,32 +20,35 @@ public abstract class RoleManagementDesign extends  JPanel {
         initComponents();
     }
 
-    protected abstract void button1ActionPerformed();
+    protected abstract void buttonAddActionPerformed();
 
-    protected abstract void button2ActionPerformed();
+    protected abstract void buttonDeleteActionPerformed();
 
-    protected abstract void button4ActionPerformed();
+    protected abstract void buttonCancelActionPerformed();
 
-    protected abstract void button3ActionPerformed();
+    protected abstract void buttonEditActionPerformed();
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        panel1 = new JPanel();
+        panelInfo = new JPanel();
         scrollPane1 = new JScrollPane();
         mainTable = new JTable();
-        panel2 = new JPanel();
+        panelButton = new JPanel();
         add = new JButton();
         delete = new JButton();
         edit = new JButton();
+        buttonCancel = new JButton();
 
         //======== this ========
         setVisible(true);
         setLayout(null);
 
-        //======== panel1 ========
+        //======== panelInfo ========
         {
-            panel1.setBorder(new TitledBorder("\u0644\u06cc\u0633\u062a \u0646\u0642\u0634 \u0647\u0627"));
-            panel1.setLayout(new BoxLayout(panel1, BoxLayout.X_AXIS));
+            panelInfo.setBorder(new TitledBorder(null, "\u0644\u06cc\u0633\u062a \u0646\u0642\u0634 \u0647\u0627", TitledBorder.LEADING, TitledBorder.DEFAULT_POSITION,
+                new Font("Tahoma", Font.PLAIN, 11)));
+            panelInfo.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            panelInfo.setLayout(null);
 
             //======== scrollPane1 ========
             {
@@ -75,59 +78,92 @@ public abstract class RoleManagementDesign extends  JPanel {
                 });
                 {
                     TableColumnModel cm = mainTable.getColumnModel();
-                    cm.getColumn(0).setResizable(false);
-                    cm.getColumn(0).setMinWidth(100);
-                    cm.getColumn(0).setMaxWidth(300);
-                    cm.getColumn(0).setPreferredWidth(100);
-                    cm.getColumn(1).setResizable(false);
+                    cm.getColumn(0).setMinWidth(150);
+                    cm.getColumn(0).setMaxWidth(600);
+                    cm.getColumn(0).setPreferredWidth(150);
+                    cm.getColumn(1).setMinWidth(80);
+                    cm.getColumn(1).setMaxWidth(110);
+                    cm.getColumn(1).setPreferredWidth(80);
                 }
+                mainTable.setFont(new Font("Tahoma", Font.PLAIN, 11));
                 scrollPane1.setViewportView(mainTable);
             }
-            panel1.add(scrollPane1);
-        }
-        add(panel1);
-        panel1.setBounds(5, 5, 530, 245);
+            panelInfo.add(scrollPane1);
+            scrollPane1.setBounds(5, 15, 520, 240);
 
-        //======== panel2 ========
+            { // compute preferred size
+                Dimension preferredSize = new Dimension();
+                for(int i = 0; i < panelInfo.getComponentCount(); i++) {
+                    Rectangle bounds = panelInfo.getComponent(i).getBounds();
+                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                }
+                Insets insets = panelInfo.getInsets();
+                preferredSize.width += insets.right;
+                preferredSize.height += insets.bottom;
+                panelInfo.setMinimumSize(preferredSize);
+                panelInfo.setPreferredSize(preferredSize);
+            }
+        }
+        add(panelInfo);
+        panelInfo.setBounds(5, 5, 530, 260);
+
+        //======== panelButton ========
         {
-            panel2.setBorder(new TitledBorder("\u0639\u0645\u0644\u06cc\u0627\u062a"));
-            panel2.setLayout(null);
+            panelButton.setBorder(new EtchedBorder());
+            panelButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            panelButton.setLayout(null);
 
             //---- add ----
             add.setText("\u0627\u0641\u0632\u0648\u062f\u0646");
+            add.setFont(new Font("Tahoma", Font.PLAIN, 11));
             add.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    button1ActionPerformed();
+                    buttonAddActionPerformed();
                 }
             });
-            panel2.add(add);
-            add.setBounds(105, 25, 76, add.getPreferredSize().height);
+            panelButton.add(add);
+            add.setBounds(175, 20, 75, add.getPreferredSize().height);
 
             //---- delete ----
             delete.setText("\u062d\u0630\u0641");
+            delete.setFont(new Font("Tahoma", Font.PLAIN, 11));
             delete.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    button2ActionPerformed();
+                    buttonDeleteActionPerformed();
                 }
             });
-            panel2.add(delete);
-            delete.setBounds(220, 25, 76, delete.getPreferredSize().height);
+            panelButton.add(delete);
+            delete.setBounds(285, 20, 75, delete.getPreferredSize().height);
 
             //---- edit ----
             edit.setText("\u0648\u06cc\u0631\u0627\u06cc\u0634");
+            edit.setFont(new Font("Tahoma", Font.PLAIN, 11));
             edit.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    button3ActionPerformed();
+                    buttonEditActionPerformed();
                 }
             });
-            panel2.add(edit);
-            edit.setBounds(335, 25, 76, edit.getPreferredSize().height);
+            panelButton.add(edit);
+            edit.setBounds(395, 20, 75, edit.getPreferredSize().height);
+
+            //---- buttonCancel ----
+            buttonCancel.setText("\u0627\u0646\u0635\u0631\u0627\u0641");
+            buttonCancel.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            buttonCancel.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buttonCancelActionPerformed();
+                }
+            });
+            panelButton.add(buttonCancel);
+            buttonCancel.setBounds(65, 20, 75, buttonCancel.getPreferredSize().height);
         }
-        add(panel2);
-        panel2.setBounds(5, 250, 530, 75);
+        add(panelButton);
+        panelButton.setBounds(8, 271, 525, 61);
 
         { // compute preferred size
             Dimension preferredSize = new Dimension();
@@ -146,12 +182,13 @@ public abstract class RoleManagementDesign extends  JPanel {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JPanel panel1;
+    protected JPanel panelInfo;
     private JScrollPane scrollPane1;
     protected JTable mainTable;
-    private JPanel panel2;
-    private JButton add;
-    private JButton delete;
-    private JButton edit;
+    private JPanel panelButton;
+    protected JButton add;
+    protected JButton delete;
+    protected JButton edit;
+    protected JButton buttonCancel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

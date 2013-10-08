@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "5.1.1.0.120" Java: "1.7.0_21" encoding: "UTF-8"
+JFDML JFormDesigner: "5.1.1.0.120" Java: "1.7.0_10" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -7,75 +7,103 @@ new FormModel {
 			name: "this"
 			"visible": true
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) ) {
-				name: "panel1"
+				name: "panelInfo"
 				"border": new javax.swing.border.TitledBorder( "defined WorkGroup" )
+				"font": &Font0 new java.awt.Font( "Tahoma", 0, 11 )
+				auxiliary() {
+					"JavaCodeGenerator.variableModifiers": 4
+				}
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 					name: "scrollPane1"
 					add( new FormComponent( "javax.swing.JTable" ) {
-						name: "table1"
-						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
-							add( new java.util.Vector {
-								add( "مدیر" )
-								add( true )
-							} )
-						}, new java.util.Vector {
+						name: "tableInfo"
+						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
 							add( "userName" )
-							add( "active status" )
 						}, new java.util.Vector {
 							add( class java.lang.String )
-							add( class java.lang.Boolean )
 						}, new java.util.Vector {
 							add( false )
-							add( false )
 						}, new java.util.Vector {
-							add( new com.jformdesigner.model.SwingTableColumn( null, 100, 100, 300, false ) )
 							add( new com.jformdesigner.model.SwingTableColumn( null, 0, 0, 0, false ) )
 						} )
+						"font": #Font0
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 4
+						}
 					} )
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 5
 				"y": 5
 				"width": 530
-				"height": 245
+				"height": 255
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
 				"autoSize": false
 			} ) {
-				name: "panel2"
-				"border": new javax.swing.border.TitledBorder( "available Operations" )
+				name: "panelButton"
+				"border": new javax.swing.border.EtchedBorder( 1, null, null )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button1"
-					"text": "add"
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1ActionPerformed", false ) )
+					name: "buttonCancel"
+					"text": "انصراف"
+					"font": new java.awt.Font( "Tahoma", 0, 11 )
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonCancelActionPerformed", false ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 105
-					"y": 25
-					"width": 76
+					"width": 75
+					"height": 26
+					"x": 55
+					"y": 20
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button2"
-					"text": "delete"
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button2ActionPerformed", false ) )
+					name: "buttonAdd"
+					"text": "افزودن"
+					"font": &Font1 new java.awt.Font( "Tahoma", 0, 11 )
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonAddActionPerformed", false ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 220
-					"y": 25
-					"width": 76
+					"width": 75
+					"height": 26
+					"x": 165
+					"y": 20
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button3"
-					"text": "modify"
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button3ActionPerformed", false ) )
+					name: "buttonDelete"
+					"text": "حذف"
+					"font": #Font1
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonDeleteActionPerformed", false ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 335
-					"y": 25
-					"width": 76
+					"width": 75
+					"height": 26
+					"x": 275
+					"y": 20
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonEdit"
+					"text": "ویرایش"
+					"font": #Font1
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonEditActionPerformed", false ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 75
+					"height": 26
+					"x": 385
+					"y": 20
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 5
-				"y": 250
+				"y": 265
 				"width": 530
-				"height": 75
+				"height": 60
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

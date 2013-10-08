@@ -17,18 +17,16 @@ import java.util.List;
 /**
  * @author farzad
  */
-public class LanguageForm extends TMSInternalFrame {
+public class LanguageAddForm extends TMSInternalFrame {
 
-    private JDesktopPane jdpDesktop;
 
     /**
      * Creates new form Language
      *
-     * @param jdpDesktop
+     * @param
      */
-    public LanguageForm(JDesktopPane jdpDesktop) {
+    public LanguageAddForm() {
 
-        this.jdpDesktop = jdpDesktop;
         name = new JTextField();
         rtlCheckBox = new JCheckBox();
         defaultCheckBox = new JCheckBox();
@@ -41,9 +39,9 @@ public class LanguageForm extends TMSInternalFrame {
     private void initComponents() {
 
 
-        setClosable(true);
+       // setClosable(true);
        // this.addInternalFrameListener(ThreadPoolManager.mainForm);
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+       // setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(ThreadPoolManager.getLangValue("TMS_LANGUAGE_FORM"));
 
 

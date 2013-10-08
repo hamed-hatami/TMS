@@ -26,10 +26,9 @@ public class UserManagement extends TMSInternalFrame {
     /**
      * Creates new form ContactEditor
      */
-    private JDesktopPane jdpDesktop;
     private List<User> userList;
 
-    public UserManagement(JDesktopPane jDesktopPane) {
+    public UserManagement() {
         fillSearchCombo();
         buttonGroup1 = new javax.swing.ButtonGroup();
         TMSPanel1 = new TMSPanel();
@@ -43,7 +42,6 @@ public class UserManagement extends TMSInternalFrame {
         searchKey = new javax.swing.JTextField();
         searchLable = new javax.swing.JLabel();
         byLable = new javax.swing.JLabel();
-        jdpDesktop = jDesktopPane;
         try {
             initComponents();
         } catch (IOException e) {
@@ -109,7 +107,7 @@ public class UserManagement extends TMSInternalFrame {
     public void initComponents() throws IOException {
 
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+       // setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(ThreadPoolManager.getLangValue("TMS_USER_MANAGEMENT"));
        // this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
@@ -283,18 +281,20 @@ public class UserManagement extends TMSInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addUser() throws PropertyVetoException {
-        UserForm user = new UserForm(this, null, jdpDesktop, false);
-        user.setVisible(true);
-        jdpDesktop.add(user);
-        user.setSelected(true);
+        UserForm userForm = new UserForm();
+        userForm.setVisible(true);
+        ThreadPoolManager.mainForm.getDesktopPane().add(userForm);
+        //jdpDesktop.add(user);
+        userForm.setSelected(true);
 
     }
 
     private void editUser() throws PropertyVetoException {
         User user = userList.get(userTable.convertRowIndexToModel(userTable.getSelectedRow()));
-        UserForm userForm = new UserForm(this, user, jdpDesktop, true);
+        UserForm userForm = new UserForm(user,true);
         userForm.setVisible(true);
-        jdpDesktop.add(userForm);
+        ThreadPoolManager.mainForm.getDesktopPane().add(userForm);
+        //jdpDesktop.add(userForm);
         userForm.setSelected(true);
     }
 

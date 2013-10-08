@@ -1,8 +1,23 @@
 package ir.university.toosi.tms.view.workgroup;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import ir.university.toosi.tms.model.entity.WebServiceInfo;
+import ir.university.toosi.tms.model.entity.WorkGroup;
+import ir.university.toosi.tms.util.RESTfulClientUtil;
+import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.BindingGroup;
+import org.jdesktop.swingbinding.JTableBinding;
+import org.jdesktop.swingbinding.SwingBindings;
 
+import javax.swing.*;
 import java.awt.*;
+import java.beans.PropertyVetoException;
+import java.io.IOException;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,8 +27,11 @@ import java.awt.*;
  * To change this template use File | Settings | File Templates.
  */
 public class WorkGroupManagementCode extends TMSInternalFrame {
-   private String formTitle = "this title";
-   private WorkGroupManagementPanel panel = null;
+
+    private WorkGroupManagementPanel panel = null;
+    private WebServiceInfo workGroupService = new WebServiceInfo();
+    private List<WorkGroup> workGroupList = new ArrayList<>();
+
    public WorkGroupManagementCode(){
        super();
 
@@ -26,29 +44,75 @@ public class WorkGroupManagementCode extends TMSInternalFrame {
        this.add(panel);
 
 
+       this.setTitle(ThreadPoolManager.getLangValue("TMS_WORKGROUP_MANAGEMENT"));
+       panel.panelInfo.setBorder(BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_WORKGROUP_MANAGEMENT")));
+       panel.tableInfo.setAutoCreateRowSorter(true);
+       panel.buttonAdd.setText(ThreadPoolManager.getLangValue("TMS_ADD"));
+       panel.buttonAdd.setEnabled(ThreadPoolManager.hasPermission("ADD_WORKGROUP"));
+
+       panel.buttonCancel.setText(ThreadPoolManager.getLangValue("TMS_CANCEL"));
+       //panel.buttonCancel.setEnabled(ThreadPoolManager.getLangValue("TMS_CANCEL"));
+
+       panel.buttonModify.setText(ThreadPoolManager.getLangValue("TMS_EDIT"));
+       panel.buttonModify.setEnabled(ThreadPoolManager.hasPermission("EDIT_WORKGROUP"));
+
+       panel.buttonDelete.setText(ThreadPoolManager.getLangValue("TMS_DELETE"));
+       panel.buttonDelete.setEnabled(ThreadPoolManager.hasPermission("DELETE_WORKGROUP"));
+
+       try {
+           loadInfo();
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+
    }
 
 
+    public void loadInfo() throws IOException {
+        workGroupService.setServiceName("/getAllWorkGroup");
+        workGroupList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName()), new TypeReference<List<WorkGroup>>() {
+        });
+
+        JTableBinding jTableBinding = SwingBindings.createJTableBinding(AutoBinding.UpdateStrategy.READ_WRITE, workGroupList, panel.tableInfo, "");
+//        columnBinding = jTableBinding.addColumnBinding(ELProperty.create("${name}"));
+//        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_NAME"));
+//        columnBinding.setColumnClass(String.class);
+        JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${descShow}"));
+        columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_DESC"));
+        columnBinding.setColumnClass(String.class);
+        BindingGroup bindingGroup = new BindingGroup();
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+    }
 
 
     class WorkGroupManagementPanel extends WorkGroupManagementDesign {
+       @Override
+        protected void buttonAddActionPerformed() {
+          /* AddRoleCode addRoleCode = new AddRoleCode();
+           addRoleCode.setVisible(true);
+           // roleManagementCode.setBounds(170, 65, 175, 105);
+           // desktopPane.add(roleManagementCode, JLayeredPane.DEFAULT_LAYER);
+           ThreadPoolManager.mainForm.getDesktopPane().add(addRoleCode);
+           try {
+               addRoleCode.setSelected(true);
+           } catch (PropertyVetoException e) {
+               e.printStackTrace();
+           }*/
+        }
+
         @Override
-        protected void button1ActionPerformed() {
+        protected void buttonEditActionPerformed() {
             //todo
         }
 
         @Override
-        protected void button2ActionPerformed() {
-            //todo
+        protected void buttonCancelActionPerformed() {
+            dispose();
         }
 
         @Override
-        protected void button4ActionPerformed() {
-            //To change body of implemented methods use File | Settings | File Templates.
-        }
-
-        @Override
-        protected void button3ActionPerformed() {
+        protected void buttonModifyActionPerformed() {
             //todo
         }
     }

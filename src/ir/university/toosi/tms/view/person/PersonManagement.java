@@ -45,7 +45,7 @@ public class PersonManagement extends TMSInternalFrame {
         }
     }
 
-    public PersonManagement(JDesktopPane jDesktopPane) {
+  /*  public PersonManagement(JDesktopPane jDesktopPane) {
 
         fillSearchCombo();
         jFileChooser1 = new JFileChooser();
@@ -67,7 +67,7 @@ public class PersonManagement extends TMSInternalFrame {
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-    }
+    }*/
 
     private void fillSearchCombo() {
         searchItems = new String[PersonSearchItems.values().length];
@@ -82,7 +82,7 @@ public class PersonManagement extends TMSInternalFrame {
 
        // this.addInternalFrameListener(ThreadPoolManager.mainForm);
         setClosable(true);
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(ThreadPoolManager.getLangValue("TMS_PERSON_MANAGEMENT"));
 
         searchPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_SEARCH")));
@@ -327,18 +327,26 @@ public class PersonManagement extends TMSInternalFrame {
     }
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
-        PersonForm personForm = new PersonForm(false, null, this);
+        PersonForm personForm = new PersonForm();
+        ThreadPoolManager.mainForm.getDesktopPane().add(personForm);
         personForm.setVisible(true);
-        jDesktopPane.add(personForm);
         personForm.setSelected(true);
+
+/*
+
+        try {
+            personForm.setSelected(true);
+        } catch (PropertyVetoException e) {
+            e.printStackTrace();
+        }*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
         Person person = personList.get(mainTable.convertRowIndexToModel(mainTable.getSelectedRow()));
-        PersonForm personForm = new PersonForm(true, person, this);
+        PersonForm personForm = new PersonForm(true, person);
         personForm.setVisible(true);
-        jDesktopPane.add(personForm);
+        ThreadPoolManager.mainForm.getDesktopPane().add(personForm);
         personForm.setSelected(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -356,7 +364,7 @@ public class PersonManagement extends TMSInternalFrame {
     private JScrollPane tableScroll;
     private JTable mainTable;
     private JTextField searchText;
-    private JDesktopPane jDesktopPane;
+   // private JDesktopPane jDesktopPane;
 
     private WebServiceInfo personService = new WebServiceInfo();
     private List<Person> personList;

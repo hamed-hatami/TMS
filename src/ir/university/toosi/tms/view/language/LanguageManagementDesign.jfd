@@ -1,0 +1,95 @@
+JFDML JFormDesigner: "5.1.1.0.120" Java: "1.7.0_10" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "panel2"
+				"border": new javax.swing.border.EtchedBorder( 1, null, null )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonCancel"
+					"text": "انصراف"
+					"font": &Font0 new java.awt.Font( "Tahoma", 0, 11 )
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonCancelActionPerformed", false ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 10
+					"y": 15
+					"width": 81
+					"height": 25
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonSave"
+					"text": "ذخیره"
+					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonSaveActionPerformed", false ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 81
+					"height": 25
+					"x": 105
+					"y": 15
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 448
+				"height": 55
+				"x": 5
+				"y": 235
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
+				"autoSize": false
+			} ) {
+				name: "panel1"
+				"border": new javax.swing.border.TitledBorder( null, "مدیریت زبان", 4, 0, new java.awt.Font( "Tahoma", 0, 11 ), null )
+				"componentOrientation": sfield java.awt.ComponentOrientation RIGHT_TO_LEFT
+				auxiliary() {
+					"JavaCodeGenerator.variableModifiers": 4
+				}
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "tableLanguageData"
+						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
+							add( "کلید" )
+							add( "مقدار" )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+						}, new java.util.Vector {
+							add( false )
+							add( null )
+						}, new java.util.Vector {
+							add( new com.jformdesigner.model.SwingTableColumn( null, 150, 150, 200, true ) )
+							add( new com.jformdesigner.model.SwingTableColumn( null, 200, 150, 300, true ) )
+						} )
+						"selectionMode": 1
+						"font": #Font0
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 4
+							"JavaCodeGenerator.postInitCode": " tableLanguageData.getDefaultEditor(String.class).addCellEditorListener(new CellEditorListener() {\n            @Override\n            public void editingStopped(ChangeEvent e) {\n               cellEditingStopped(); \n            }\n\n            @Override\n            public void editingCanceled(ChangeEvent e) {\n\n            }\n        });"
+						}
+					} )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 5
+					"y": 25
+					"width": 440
+					"height": 195
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 450
+				"height": 225
+				"x": 5
+				"y": 10
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 15 )
+			"size": new java.awt.Dimension( 460, 300 )
+		} )
+	}
+}

@@ -32,7 +32,7 @@ public class TMSInternalFrame extends JInternalFrame  {
     @Override
     public Component add(Component comp) {
         addImpl(comp, null, -1);
-        setSize((int) comp.getSize().getWidth() + 15, (int) comp.getSize().getHeight() + 30);
+        setSize((int) comp.getSize().getWidth() + 20, (int) comp.getSize().getHeight() + 35);
         return comp;
     }
 

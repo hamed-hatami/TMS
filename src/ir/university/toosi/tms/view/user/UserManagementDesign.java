@@ -5,6 +5,7 @@
 package ir.university.toosi.tms.view.user;
 
 import javax.swing.*;
+import javax.swing.border.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -20,59 +21,55 @@ public abstract class UserManagementDesign extends  JPanel {
         initComponents();
     }
 
-    protected abstract void button1ActionPerformed();
 
-    protected abstract void button2ActionPerformed();
 
-    protected abstract void button4ActionPerformed();
+    protected abstract void buttonCancelActionPerformed();
 
-    protected abstract void button3ActionPerformed();
+    protected abstract void buttonAddActionPerformed();
+
+    protected abstract void buttonDeleteActionPerformed();
+
+    protected abstract void buttonEditActionPerformed();
+
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - farzad sedaghatbin
-        panel1 = new JPanel();
+        panelInfo = new JPanel();
         scrollPane1 = new JScrollPane();
-        table1 = new JTable();
-        panel2 = new JPanel();
-        button1 = new JButton();
-        button2 = new JButton();
-        button3 = new JButton();
+        tableInfo = new JTable();
+        panelButton = new JPanel();
+        buttonCancel = new JButton();
+        buttonAdd = new JButton();
+        buttonDelete = new JButton();
+        buttonEdit = new JButton();
 
         //======== this ========
         setVisible(true);
-
-        // JFormDesigner evaluation mark
-        setBorder(new javax.swing.border.CompoundBorder(
-            new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-                "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
-                javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-                java.awt.Color.red), getBorder())); addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
-
         setLayout(null);
 
-        //======== panel1 ========
+        //======== panelInfo ========
         {
-            panel1.setBorder(new TitledBorder("defined WorkGroup"));
-            panel1.setLayout(new BoxLayout(panel1, BoxLayout.X_AXIS));
+            panelInfo.setBorder(new TitledBorder("defined WorkGroup"));
+            panelInfo.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            panelInfo.setLayout(new BoxLayout(panelInfo, BoxLayout.X_AXIS));
 
             //======== scrollPane1 ========
             {
 
-                //---- table1 ----
-                table1.setModel(new DefaultTableModel(
+                //---- tableInfo ----
+                tableInfo.setModel(new DefaultTableModel(
                     new Object[][] {
-                        {"\u0645\u062f\u06cc\u0631", true},
                     },
                     new String[] {
-                        "userName", "active status"
+                        "userName"
                     }
                 ) {
                     Class<?>[] columnTypes = new Class<?>[] {
-                        String.class, Boolean.class
+                        String.class
                     };
                     boolean[] columnEditable = new boolean[] {
-                        false, false
+                        false
                     };
                     @Override
                     public Class<?> getColumnClass(int columnIndex) {
@@ -84,60 +81,72 @@ public abstract class UserManagementDesign extends  JPanel {
                     }
                 });
                 {
-                    TableColumnModel cm = table1.getColumnModel();
+                    TableColumnModel cm = tableInfo.getColumnModel();
                     cm.getColumn(0).setResizable(false);
-                    cm.getColumn(0).setMinWidth(100);
-                    cm.getColumn(0).setMaxWidth(300);
-                    cm.getColumn(0).setPreferredWidth(100);
-                    cm.getColumn(1).setResizable(false);
                 }
-                scrollPane1.setViewportView(table1);
+                tableInfo.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                scrollPane1.setViewportView(tableInfo);
             }
-            panel1.add(scrollPane1);
+            panelInfo.add(scrollPane1);
         }
-        add(panel1);
-        panel1.setBounds(5, 5, 530, 245);
+        add(panelInfo);
+        panelInfo.setBounds(5, 5, 530, 255);
 
-        //======== panel2 ========
+        //======== panelButton ========
         {
-            panel2.setBorder(new TitledBorder("available Operations"));
-            panel2.setLayout(null);
+            panelButton.setBorder(new EtchedBorder());
+            panelButton.setLayout(null);
 
-            //---- button1 ----
-            button1.setText("add");
-            button1.addActionListener(new ActionListener() {
+            //---- buttonCancel ----
+            buttonCancel.setText("\u0627\u0646\u0635\u0631\u0627\u0641");
+            buttonCancel.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            buttonCancel.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    button1ActionPerformed();
+                    buttonCancelActionPerformed();
                 }
             });
-            panel2.add(button1);
-            button1.setBounds(105, 25, 76, button1.getPreferredSize().height);
+            panelButton.add(buttonCancel);
+            buttonCancel.setBounds(55, 20, 75, 26);
 
-            //---- button2 ----
-            button2.setText("delete");
-            button2.addActionListener(new ActionListener() {
+            //---- buttonAdd ----
+            buttonAdd.setText("\u0627\u0641\u0632\u0648\u062f\u0646");
+            buttonAdd.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            buttonAdd.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    button2ActionPerformed();
+                    buttonAddActionPerformed();
                 }
             });
-            panel2.add(button2);
-            button2.setBounds(220, 25, 76, button2.getPreferredSize().height);
+            panelButton.add(buttonAdd);
+            buttonAdd.setBounds(165, 20, 75, 26);
 
-            //---- button3 ----
-            button3.setText("modify");
-            button3.addActionListener(new ActionListener() {
+            //---- buttonDelete ----
+            buttonDelete.setText("\u062d\u0630\u0641");
+            buttonDelete.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            buttonDelete.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    button3ActionPerformed();
+                    buttonDeleteActionPerformed();
                 }
             });
-            panel2.add(button3);
-            button3.setBounds(335, 25, 76, button3.getPreferredSize().height);
+            panelButton.add(buttonDelete);
+            buttonDelete.setBounds(275, 20, 75, 26);
+
+            //---- buttonEdit ----
+            buttonEdit.setText("\u0648\u06cc\u0631\u0627\u06cc\u0634");
+            buttonEdit.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            buttonEdit.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buttonEditActionPerformed();
+                }
+            });
+            panelButton.add(buttonEdit);
+            buttonEdit.setBounds(385, 20, 75, 26);
         }
-        add(panel2);
-        panel2.setBounds(5, 250, 530, 75);
+        add(panelButton);
+        panelButton.setBounds(5, 265, 530, 60);
 
         { // compute preferred size
             Dimension preferredSize = new Dimension();
@@ -156,13 +165,13 @@ public abstract class UserManagementDesign extends  JPanel {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - farzad sedaghatbin
-    private JPanel panel1;
+    protected JPanel panelInfo;
     private JScrollPane scrollPane1;
-    private JTable table1;
-    private JPanel panel2;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
+    protected JTable tableInfo;
+    private JPanel panelButton;
+    protected JButton buttonCancel;
+    protected JButton buttonAdd;
+    protected JButton buttonDelete;
+    protected JButton buttonEdit;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

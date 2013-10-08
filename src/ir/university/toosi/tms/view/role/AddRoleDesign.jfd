@@ -11,6 +11,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label2"
 					"text": "وضعیت"
+					"font": &Font0 new java.awt.Font( "Tahoma", 0, 11 )
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4
 					}
@@ -32,6 +33,7 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label1"
 					"text": "توضیح"
+					"font": #Font0
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4
 					}
@@ -42,6 +44,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "textField1"
+					"font": #Font0
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4
 					}
@@ -76,6 +79,8 @@ new FormModel {
 							add( new com.jformdesigner.model.SwingTableColumn( null, 0, 0, 0, false ) )
 							add( new com.jformdesigner.model.SwingTableColumn( null, 80, 80, 120, true ) )
 						} )
+						"font": #Font0
+						"selectionMode": 1
 						auxiliary() {
 							"JavaCodeGenerator.variableModifiers": 4
 						}
@@ -96,8 +101,9 @@ new FormModel {
 				name: "panel3"
 				"border": new javax.swing.border.EtchedBorder( 1, null, null )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "cancel"
-					"text": "بازگشت"
+					name: "buttonCancel"
+					"text": "cancel"
+					"font": #Font0
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4
 					}
@@ -108,8 +114,9 @@ new FormModel {
 					"width": 80
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "ok"
+					name: "buttonSave"
 					"text": "ذخیره"
+					"font": #Font0
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4
 					}
