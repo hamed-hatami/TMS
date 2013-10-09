@@ -4,6 +4,7 @@ import ir.university.toosi.tms.model.entity.*;
 import ir.university.toosi.tms.view.MainForm;
 //import ir.university.toosi.tms.view.exec;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -20,9 +21,12 @@ public class ThreadPoolManager {
 
     public static final ExecutorService executors = Executors.newCachedThreadPool();
     public static MainForm mainForm;
+    public static boolean isDebugMode;
     //public static exec execInstance;
     public static User me;
     public static Languages currentLanguage = null;
+    public static ComponentOrientation direction = ComponentOrientation.RIGHT_TO_LEFT;
+
     public static Hashtable<String, LanguageManagement> langHash = new Hashtable<>();
     public static Hashtable<String, Boolean> permissionHash = new Hashtable<>();
     public static final ForkJoinPool forkJoinPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());

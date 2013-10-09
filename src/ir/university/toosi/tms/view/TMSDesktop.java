@@ -1,6 +1,7 @@
 package ir.university.toosi.tms.view;
 
 import ir.university.toosi.tms.controller.LanguageAction;
+import ir.university.toosi.tms.util.ComponentUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,9 +11,7 @@ import java.awt.*;
  * @version : 1.0
  */
 public class TMSDesktop extends JDesktopPane {
-
-  // Image image = new ImageIcon(TMSDesktop.class.getClassLoader().getResource("bg.png")).getImage(); ////todo enable for jar deploy
-   Image image = new ImageIcon(getClass().getResource("/ir/university/toosi/tms/view/images/bg.png")).getImage(); ////todo enable for idea
+    Image image = ComponentUtil.getImageIcon("bg.png", getClass()).getImage();
 
     @Override
     public void paintComponent(Graphics g) {

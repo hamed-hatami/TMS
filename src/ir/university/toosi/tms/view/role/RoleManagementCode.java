@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.Role;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
+import ir.university.toosi.tms.util.ComponentUtil;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
@@ -20,12 +21,9 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: a_hadadi
- * Date: 10/2/13
- * Time: 8:24 PM
- * To change this template use File | Settings | File Templates.
+ * @author a_hadadi
  */
+
 public class RoleManagementCode extends TMSInternalFrame {
 
     private RoleManagementPanel panel = null;
@@ -68,6 +66,10 @@ public class RoleManagementCode extends TMSInternalFrame {
     public void refresh() throws IOException {
         getAll();
         showData();
+        Font tahoma = new Font("Tahoma", Font.PLAIN, 12);
+        ComponentUtil.setFont(panel, tahoma, ThreadPoolManager.direction);
+       // this.changeComonentOrientation(ThreadPoolManager.direction);
+        ComponentUtil.SetJTableAlignment(panel.mainTable,ThreadPoolManager.direction);
     }
 
     private void showData() {
@@ -116,7 +118,21 @@ public class RoleManagementCode extends TMSInternalFrame {
 
         @Override
         protected void buttonDeleteActionPerformed() {
-            //todo
+            if(panel.mainTable.getSelectedRow()==-1){
+                return;//todo show error
+            }
+            int result = JOptionPane.showConfirmDialog(this, ThreadPoolManager.getLangValue("deleteMessage"), "", JOptionPane.OK_CANCEL_OPTION);
+            if (result == JOptionPane.OK_OPTION) {
+               /* try {
+                   *//* User user = userList.get(panel.tableInfo.convertRowIndexToModel(tableInfo.getSelectedRow()));
+                    WebServiceInfo serviceInfo = new WebServiceInfo();
+                    serviceInfo.setServiceName("/deleteUser");
+                    new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), new ObjectMapper().writeValueAsString(user));
+                    refresh();*//*
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }*/
+            }
         }
 
         @Override

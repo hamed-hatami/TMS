@@ -3,6 +3,7 @@ package ir.university.toosi.tms.view.workgroup;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.*;
+import ir.university.toosi.tms.util.ComponentUtil;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import org.jdesktop.swingx.JXImagePanel;
@@ -18,6 +19,10 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.*;
 import java.util.List;
+
+/**
+ * @author a_hadadi
+ */
 
 public class LoginForm extends JDialog {
 
@@ -76,24 +81,8 @@ public class LoginForm extends JDialog {
         panel.passwordLabel.setText(ThreadPoolManager.getLangValue("TMS_PASSWORD"));
         panel.langLabel.setText(ThreadPoolManager.getLangValue("TMS_LANGUAGE"));
 
-
-        /*try {
-            Image image ;//= Toolkit.getDefaultToolkit().getImage("/ir/university/toosi/tms/view/images/big-logo.png");
-            String s = "file:/ir/university/toosi/tms/view/images/big-logo.png";
-            image =
-                    Toolkit.getDefaultToolkit().getImage(new java.net.URL(s));
-            ImageCanvas imageCanvas = new ImageCanvas(image);
-            imageCanvas.setVisible(true);
-            panel.panelLogo.add(imageCanvas);
-            panel.panelLogo.repaint();
-            validate();
-        }catch (MalformedURLException e){
-            e.printStackTrace();
-        }*/
         try {
-            Image image ;//= Toolkit.getDefaultToolkit().getImage("/ir/university/toosi/tms/view/images/big-logo.png");
-            String s = "/ir/university/toosi/tms/view/images/big-logo.png";
-            image =new ImageIcon(getClass().getResource(s)).getImage();
+            Image image = ComponentUtil.getImageIcon("big-logo.png",getClass()).getImage();
             ImageCanvas imageCanvas = new ImageCanvas(image);
             imageCanvas.setBounds(0,0,426,272);
             imageCanvas.setVisible(true);

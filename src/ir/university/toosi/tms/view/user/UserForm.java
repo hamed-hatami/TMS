@@ -120,10 +120,10 @@ public class UserForm extends TMSInternalFrame {
     public void initComponents() {
         setResizable(true);
         setAutoscrolls(true);
-        setSize(800, 900);
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setSize(700, 600);
+       // setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(ThreadPoolManager.getLangValue("TMS_USER_MANAGEMENT"));
-        setClosable(true);
+       // setClosable(true);
      //   this.addInternalFrameListener(ThreadPoolManager.mainForm);
 
         if (ThreadPoolManager.currentLanguage.isRtl())

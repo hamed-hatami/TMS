@@ -4,14 +4,18 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.User;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
+import ir.university.toosi.tms.util.ComponentUtil;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
+import org.primefaces.util.ComponentUtils;
 
 import javax.swing.*;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
 import java.awt.*;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
@@ -25,7 +29,7 @@ import java.util.List;
  * Time: 8:24 PM
  * To change this template use File | Settings | File Templates.
  */
-public class UserManagementCode extends TMSInternalFrame {
+public class UserManagementCode extends TMSInternalFrame implements InternalFrameListener {
    private UserManagementPanel panel = null;
     private WebServiceInfo userService = new WebServiceInfo();
     private List<User> userList;
@@ -70,6 +74,10 @@ public class UserManagementCode extends TMSInternalFrame {
     public void refresh() throws IOException {
         getAll();
         showData();
+        Font tahoma = new Font("Tahoma", Font.PLAIN, 12);
+        ComponentUtil.setFont(panel, tahoma, ThreadPoolManager.direction);
+        // this.changeComonentOrientation(ThreadPoolManager.direction);
+        ComponentUtil.SetJTableAlignment(panel.tableInfo,ThreadPoolManager.direction);
     }
 
     private void getAll() {
@@ -87,9 +95,43 @@ public class UserManagementCode extends TMSInternalFrame {
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${username}"));
         columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_USERNAME"));
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         BindingGroup bindingGroup = new BindingGroup();
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
+    }
+
+    @Override
+    public void internalFrameOpened(InternalFrameEvent e) {
+    }
+
+    @Override
+    public void internalFrameClosing(InternalFrameEvent e) {
+    }
+
+    @Override
+    public void internalFrameClosed(InternalFrameEvent e) {
+    }
+
+    @Override
+    public void internalFrameIconified(InternalFrameEvent e) {
+    }
+
+    @Override
+    public void internalFrameDeiconified(InternalFrameEvent e) {
+    }
+
+    @Override
+    public void internalFrameActivated(InternalFrameEvent e) {
+        try {
+            refresh();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    @Override
+    public void internalFrameDeactivated(InternalFrameEvent e) {
     }
 
 
@@ -102,12 +144,11 @@ public class UserManagementCode extends TMSInternalFrame {
 
         @Override
         protected void buttonAddActionPerformed() {
-            UserForm userForm = new UserForm();
-            userForm.setVisible(true);
-            ThreadPoolManager.mainForm.getDesktopPane().add(userForm);
-            //jdpDesktop.add(user);
+            UserAddCode userAddForm = new UserAddCode();
+            userAddForm.setVisible(true);
+            ThreadPoolManager.mainForm.getDesktopPane().add(userAddForm);
             try {
-                userForm.setSelected(true);
+                userAddForm.setSelected(true);
             } catch (PropertyVetoException e) {
                 e.printStackTrace();
             }
@@ -119,7 +160,7 @@ public class UserManagementCode extends TMSInternalFrame {
             if(panel.tableInfo.getSelectedRow()==-1){
                 return;//todo show error
             }
-            int result = JOptionPane.showConfirmDialog(null, "DELETE_USER", "DELETE", JOptionPane.OK_CANCEL_OPTION);
+            int result = JOptionPane.showConfirmDialog(null, ThreadPoolManager.getLangValue("deleteMessage"), "", JOptionPane.OK_CANCEL_OPTION);
             if (result == JOptionPane.OK_OPTION) {
                 try {
                     User user = userList.get(panel.tableInfo.convertRowIndexToModel(tableInfo.getSelectedRow()));
@@ -133,6 +174,22 @@ public class UserManagementCode extends TMSInternalFrame {
             }
         }
 
+        @Override
+        protected void buttonMembershipManagementActionPerformed() {
+            if(panel.tableInfo.getSelectedRow()==-1){
+                return;//todo show error
+            }
+            User user = userList.get(panel.tableInfo.convertRowIndexToModel(tableInfo.getSelectedRow()));
+            UserMembershipManagementCode userMembershipManagement = new UserMembershipManagementCode(user);
+            userMembershipManagement.setVisible(true);
+            ThreadPoolManager.mainForm.getDesktopPane().add(userMembershipManagement);
+            try {
+                userMembershipManagement.setSelected(true);
+            } catch (PropertyVetoException e) {
+                e.printStackTrace();
+            }
+        }
+
 
         @Override
         protected void buttonEditActionPerformed() {
@@ -140,12 +197,14 @@ public class UserManagementCode extends TMSInternalFrame {
                return; //todo show error
             }
             User user = userList.get(panel.tableInfo.convertRowIndexToModel(panel.tableInfo.getSelectedRow()));
-            UserForm userForm = new UserForm(user,true);
-            userForm.setVisible(true);
-            ThreadPoolManager.mainForm.getDesktopPane().add(userForm);
+
+            UserAddCode userAddForm = new UserAddCode(user);
+            userAddForm.setVisible(true);
+
+            ThreadPoolManager.mainForm.getDesktopPane().add(userAddForm);
             //jdpDesktop.add(userForm);
             try {
-                userForm.setSelected(true);
+                userAddForm.setSelected(true);
             } catch (PropertyVetoException e) {
                 e.printStackTrace();
             }

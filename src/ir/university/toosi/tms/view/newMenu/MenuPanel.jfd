@@ -19,7 +19,7 @@ new FormModel {
 				"font": &Font0 new java.awt.Font( "Tahoma", 0, 11 )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "languageDefItem"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/ir/university/toosi/tms/view/images/lang.png" )
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"maximumSize": new java.awt.Dimension( 80, 80 )
 					"minimumSize": new java.awt.Dimension( 80, 80 )
 					"text": "ایجاد"
@@ -28,11 +28,14 @@ new FormModel {
 					"horizontalTextPosition": 0
 					"preferredSize": new java.awt.Dimension( 80, 80 )
 					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showLanguageDef", false ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "importLanguage"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/ir/university/toosi/tms/view/images/globe-icon.png" )
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"maximumSize": new java.awt.Dimension( 80, 80 )
 					"minimumSize": new java.awt.Dimension( 80, 80 )
 					"horizontalTextPosition": 0
@@ -40,6 +43,9 @@ new FormModel {
 					"text": "ویرایش"
 					"preferredSize": new java.awt.Dimension( 80, 80 )
 					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showLanguageForm", false ) )
 				} )
 			}, new FormLayoutConstraints( null ) {
@@ -53,7 +59,7 @@ new FormModel {
 				"font": #Font0
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "workGroupManagementItem"
-					"icon": new com.jformdesigner.model.SwingIcon( 0, "/ir/university/toosi/tms/view/images/workgroup-menu.png" )
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"maximumSize": new java.awt.Dimension( 80, 80 )
 					"minimumSize": new java.awt.Dimension( 80, 80 )
 					"text": "گروه کاری"
@@ -62,11 +68,14 @@ new FormModel {
 					"alignmentX": 0.5f
 					"preferredSize": new java.awt.Dimension( 80, 80 )
 					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showWorkGroupManagement", false ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "operationManagementItem"
-					"icon": new com.jformdesigner.model.SwingIcon( 1, "/root/project/TMS/out/production/TMS/ir/university/toosi/tms/view/images/role-menu.png" )
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"minimumSize": new java.awt.Dimension( 80, 80 )
 					"maximumSize": new java.awt.Dimension( 80, 80 )
 					"horizontalTextPosition": 0
@@ -75,11 +84,14 @@ new FormModel {
 					"alignmentX": 0.5f
 					"preferredSize": new java.awt.Dimension( 80, 80 )
 					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showRoleManagement", false ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "userManagementItem"
-					"icon": new com.jformdesigner.model.SwingIcon( 1, "/root/project/TMS/out/production/TMS/ir/university/toosi/tms/view/images/users-menu.png" )
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"maximumSize": &Dimension0 new java.awt.Dimension( 80, 80 )
 					"minimumSize": &Dimension1 new java.awt.Dimension( 80, 80 )
 					"verticalTextPosition": 3
@@ -88,11 +100,14 @@ new FormModel {
 					"alignmentX": 0.5f
 					"preferredSize": new java.awt.Dimension( 80, 80 )
 					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showUserManagement", false ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "eventLogListItem"
-					"icon": new com.jformdesigner.model.SwingIcon( 1, "/root/project/TMS/out/production/TMS/ir/university/toosi/tms/view/images/event.png" )
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"maximumSize": #Dimension0
 					"minimumSize": #Dimension1
 					"verticalTextPosition": 3
@@ -101,11 +116,14 @@ new FormModel {
 					"alignmentX": 0.5f
 					"preferredSize": new java.awt.Dimension( 80, 80 )
 					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showEventLogList", false ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "personManagementItem"
-					"icon": new com.jformdesigner.model.SwingIcon( 1, "/root/project/TMS/out/production/TMS/ir/university/toosi/tms/view/images/account-menu.png" )
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"maximumSize": #Dimension0
 					"minimumSize": #Dimension1
 					"verticalTextPosition": 3
@@ -114,6 +132,9 @@ new FormModel {
 					"alignmentX": 0.5f
 					"preferredSize": new java.awt.Dimension( 80, 80 )
 					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showPersonManagment", false ) )
 				} )
 			}, new FormLayoutConstraints( null ) {
@@ -127,15 +148,18 @@ new FormModel {
 				"font": #Font0
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "exit"
-					"icon": new com.jformdesigner.model.SwingIcon( 1, "/root/project/TMS/out/production/TMS/ir/university/toosi/tms/view/images/exit.png" )
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"maximumSize": new java.awt.Dimension( 80, 80 )
 					"minimumSize": new java.awt.Dimension( 80, 80 )
-					"text": "exit"
+					"text": "خروج"
 					"alignmentX": 0.5f
 					"verticalTextPosition": 3
 					"horizontalTextPosition": 0
 					"preferredSize": new java.awt.Dimension( 80, 80 )
 					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "exit", false ) )
 				} )
 			}, new FormLayoutConstraints( null ) {

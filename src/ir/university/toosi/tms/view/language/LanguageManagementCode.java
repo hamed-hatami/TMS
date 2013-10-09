@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.LanguageKeyValue;
 import ir.university.toosi.tms.model.entity.LanguageManagement;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
+import ir.university.toosi.tms.util.ComponentUtil;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
@@ -53,6 +54,10 @@ public class LanguageManagementCode  extends TMSInternalFrame {
             e.printStackTrace();
         }
 
+        Font tahoma = new Font("Tahoma", Font.PLAIN, 12);
+        ComponentUtil.setFont(panel, tahoma, ThreadPoolManager.direction);
+        // this.changeComonentOrientation(ThreadPoolManager.direction);
+        ComponentUtil.SetJTableAlignment(panel.tableLanguageData,ThreadPoolManager.direction);
 
     }
 

@@ -29,6 +29,8 @@ public abstract class UserManagementDesign extends  JPanel {
 
     protected abstract void buttonDeleteActionPerformed();
 
+    protected abstract void buttonMembershipManagementActionPerformed();
+
     protected abstract void buttonEditActionPerformed();
 
 
@@ -43,6 +45,7 @@ public abstract class UserManagementDesign extends  JPanel {
         buttonAdd = new JButton();
         buttonDelete = new JButton();
         buttonEdit = new JButton();
+        buttonMembershipManagement = new JButton();
 
         //======== this ========
         setVisible(true);
@@ -50,7 +53,7 @@ public abstract class UserManagementDesign extends  JPanel {
 
         //======== panelInfo ========
         {
-            panelInfo.setBorder(new TitledBorder("defined WorkGroup"));
+            panelInfo.setBorder(new TitledBorder("defined Users"));
             panelInfo.setFont(new Font("Tahoma", Font.PLAIN, 11));
             panelInfo.setLayout(new BoxLayout(panelInfo, BoxLayout.X_AXIS));
 
@@ -107,7 +110,7 @@ public abstract class UserManagementDesign extends  JPanel {
                 }
             });
             panelButton.add(buttonCancel);
-            buttonCancel.setBounds(55, 20, 75, 26);
+            buttonCancel.setBounds(30, 20, 75, 26);
 
             //---- buttonAdd ----
             buttonAdd.setText("\u0627\u0641\u0632\u0648\u062f\u0646");
@@ -119,7 +122,7 @@ public abstract class UserManagementDesign extends  JPanel {
                 }
             });
             panelButton.add(buttonAdd);
-            buttonAdd.setBounds(165, 20, 75, 26);
+            buttonAdd.setBounds(350, 20, 75, 26);
 
             //---- buttonDelete ----
             buttonDelete.setText("\u062d\u0630\u0641");
@@ -131,7 +134,7 @@ public abstract class UserManagementDesign extends  JPanel {
                 }
             });
             panelButton.add(buttonDelete);
-            buttonDelete.setBounds(275, 20, 75, 26);
+            buttonDelete.setBounds(110, 20, 75, 26);
 
             //---- buttonEdit ----
             buttonEdit.setText("\u0648\u06cc\u0631\u0627\u06cc\u0634");
@@ -143,7 +146,19 @@ public abstract class UserManagementDesign extends  JPanel {
                 }
             });
             panelButton.add(buttonEdit);
-            buttonEdit.setBounds(385, 20, 75, 26);
+            buttonEdit.setBounds(270, 20, 75, 26);
+
+            //---- buttonMembershipManagement ----
+            buttonMembershipManagement.setText("\u062a\u062e\u0635\u06cc\u0635");
+            buttonMembershipManagement.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            buttonMembershipManagement.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buttonMembershipManagementActionPerformed();
+                }
+            });
+            panelButton.add(buttonMembershipManagement);
+            buttonMembershipManagement.setBounds(190, 20, 75, 26);
         }
         add(panelButton);
         panelButton.setBounds(5, 265, 530, 60);
@@ -173,5 +188,6 @@ public abstract class UserManagementDesign extends  JPanel {
     protected JButton buttonAdd;
     protected JButton buttonDelete;
     protected JButton buttonEdit;
+    protected JButton buttonMembershipManagement;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

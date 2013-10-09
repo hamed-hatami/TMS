@@ -24,7 +24,7 @@ public class TMSInternalFrame extends JInternalFrame  {
         setResizable(false);
         setClosable(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+
 
     }
 
@@ -36,24 +36,6 @@ public class TMSInternalFrame extends JInternalFrame  {
         return comp;
     }
 
-    public static void setFont(JComponent component, Font font) {
-        component.setFont(font);
-        if(component instanceof JPanel) {
-            JPanel panel = (JPanel)component;
-            if(panel.getBorder() != null && panel.getBorder() instanceof TitledBorder) {
-                ((TitledBorder)panel.getBorder()).setTitleFont(font);
-            }
-            for(Component cmp : component.getComponents()) {
-                setFont((JComponent)cmp, font);
-            }
-        }
 
-        if(component instanceof JTabbedPane) {
-            JTabbedPane tabbedPane = (JTabbedPane)component;
-            int tabCount = tabbedPane.getTabCount();
-            for(int i = 0 ; i < tabCount ; i++) {
-                setFont((JComponent)tabbedPane.getComponentAt(i), font);
-            }
-        }
-    }
+
 }

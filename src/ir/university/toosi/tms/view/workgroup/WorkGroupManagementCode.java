@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.model.entity.WorkGroup;
+import ir.university.toosi.tms.util.ComponentUtil;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
@@ -61,6 +62,10 @@ public class WorkGroupManagementCode extends TMSInternalFrame {
 
        try {
            loadInfo();
+           Font tahoma = new Font("Tahoma", Font.PLAIN, 12);
+           ComponentUtil.setFont(panel, tahoma, ThreadPoolManager.direction);
+           // this.changeComonentOrientation(ThreadPoolManager.direction);
+           ComponentUtil.SetJTableAlignment(panel.tableInfo,ThreadPoolManager.direction);
        } catch (IOException e) {
            e.printStackTrace();
        }
@@ -80,6 +85,7 @@ public class WorkGroupManagementCode extends TMSInternalFrame {
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${descShow}"));
         columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_DESC"));
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         BindingGroup bindingGroup = new BindingGroup();
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
