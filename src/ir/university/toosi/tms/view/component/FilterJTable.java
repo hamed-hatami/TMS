@@ -20,9 +20,11 @@ public class FilterJTable extends JTable {
     private JPopupMenu filterPopup;
     private TableRowSorter sorter;
     private int currentColumnIndex = 0;
+   // private String headerTextStartWith = "";
 
     public FilterJTable(Object[][] data, Object[] headers) {
         super(data, headers);
+       // this.headerTextStartWith = headerTextStartWith;
         this.customeJTable();
     }
 
@@ -206,11 +208,12 @@ public class FilterJTable extends JTable {
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            if (label.getText().isEmpty()) {
-                setLabelText(value.toString());
+            String textValue = value.toString();
+           if(label.getText().isEmpty()){
+                setLabelText(textValue);
                 setTextFieldText("");
-            } else {
-                setTextFieldText(value.toString());
+            }else {
+                setTextFieldText(textValue);
             }
             return this;
         }
