@@ -58,9 +58,10 @@ public class FilterJTable extends JTable {
 
         text.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                modifyColumn();
+                finalizeFilterModification();
             }
         });
+
         text.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -68,7 +69,7 @@ public class FilterJTable extends JTable {
 
             @Override
             public void focusLost(FocusEvent e) {
-                modifyColumn();
+                finalizeFilterModification();
             }
         });
 
@@ -124,7 +125,7 @@ public class FilterJTable extends JTable {
 
 
 
-    private void modifyColumn() {
+    private void finalizeFilterModification() {
         column.setHeaderValue(text.getText());
         filterPopup.setVisible(false);
         getTableHeader().repaint();
