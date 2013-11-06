@@ -25,8 +25,8 @@ new FormModel {
 				}
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonLoginActionPerformed", false ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 275
-				"y": 185
+				"x": 274
+				"y": 188
 				"width": 75
 				"height": 25
 			} )
@@ -40,8 +40,8 @@ new FormModel {
 				}
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonCancelActionPerformed", false ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 195
-				"y": 185
+				"x": 194
+				"y": 188
 				"width": 75
 				"height": 25
 			} )
@@ -54,7 +54,7 @@ new FormModel {
 					"JavaCodeGenerator.variableModifiers": 4
 				}
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"x": 193
+				"x": 194
 				"y": 124
 				"width": 120
 				"height": 26
@@ -73,8 +73,8 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 90
 				"height": 16
-				"x": 315
-				"y": 126
+				"x": 319
+				"y": 129
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "passwordLabel"
@@ -95,13 +95,16 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JPasswordField" ) {
 				name: "password"
-				"background": &Color2 new java.awt.Color( 7, 96, 153, 255 )
-				"foreground": &Color3 new java.awt.Color( 205, 225, 245, 255 )
+				"foreground": &Color2 new java.awt.Color( 205, 225, 245, 255 )
 				"border": &LineBorder0 new javax.swing.border.LineBorder( new java.awt.Color( 205, 225, 245, 255 ), 1, false )
 				"font": #SwingDerivedFont0
+				"background": new java.awt.Color( 7, 96, 153, 255 )
 				auxiliary() {
 					"JavaCodeGenerator.variableModifiers": 4
 				}
+				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusGained", "passwordFocusGained", false ) )
+				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusLost", "passwordFocusLost", false ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "passwordActionPerformed", false ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 195
 				"y": 87
@@ -127,18 +130,53 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "userName"
-				"background": #Color2
-				"foreground": #Color3
+				"foreground": #Color2
 				"border": #LineBorder0
 				"font": #SwingDerivedFont0
+				"background": new java.awt.Color( 7, 96, 153, 255 )
 				auxiliary() {
 					"JavaCodeGenerator.variableModifiers": 4
 				}
+				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusGained", "userNameFocusGained", false ) )
+				addEvent( new FormEvent( "java.awt.event.FocusListener", "focusLost", "userNameFocusLost", false ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "userNameActionPerformed", false ) )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 195
 				"y": 50
 				"width": 115
 				"height": 21
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "comboBoxLookAndFeel"
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"font": #SwingDerivedFont0
+				"componentOrientation": sfield java.awt.ComponentOrientation RIGHT_TO_LEFT
+				auxiliary() {
+					"JavaCodeGenerator.variableModifiers": 4
+				}
+				addEvent( new FormEvent( "java.awt.event.ItemListener", "itemStateChanged", "comboBoxLookAndFeelItemStateChanged", false ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 120
+				"height": 26
+				"x": 194
+				"y": 155
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "lookAndFeelLabel"
+				"text": "تم"
+				"font": #SwingDerivedFont0
+				"foreground": #Color1
+				"focusable": false
+				"background": #Color0
+				"opaque": true
+				auxiliary() {
+					"JavaCodeGenerator.variableModifiers": 4
+				}
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 90
+				"height": 16
+				"x": 319
+				"y": 158
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

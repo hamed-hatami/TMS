@@ -23,7 +23,7 @@ public abstract class WorkGroupManagementDesign extends  JPanel {
 
     protected abstract void buttonAddActionPerformed();
 
-    protected abstract void buttonEditActionPerformed();
+    protected abstract void buttonDeleteActionPerformed();
 
     protected abstract void buttonCancelActionPerformed();
 
@@ -138,7 +138,7 @@ public abstract class WorkGroupManagementDesign extends  JPanel {
             buttonDelete.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    buttonEditActionPerformed();
+                    buttonDeleteActionPerformed();
                 }
             });
             panelButtons.add(buttonDelete);

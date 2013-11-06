@@ -70,6 +70,12 @@ public class ComponentUtil {
 
     public static void setFont(JComponent component, Font font, ComponentOrientation componentOrientation) {
         component.setFont(font);
+
+        if(component instanceof JTextField){
+            component.setComponentOrientation(componentOrientation);
+        }
+
+
         if(component instanceof JPanel) {
             JPanel panel = (JPanel)component;
             if(panel.getBorder() != null && panel.getBorder() instanceof TitledBorder) {

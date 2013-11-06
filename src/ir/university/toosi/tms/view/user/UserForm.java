@@ -18,7 +18,7 @@ import org.jdesktop.swingbinding.JTableBinding;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyVetoException;
+
 import java.io.IOException;
 import java.util.*;
 
@@ -126,19 +126,19 @@ public class UserForm extends TMSInternalFrame {
        // setClosable(true);
      //   this.addInternalFrameListener(ThreadPoolManager.mainForm);
 
-        if (ThreadPoolManager.currentLanguage.isRtl())
+       /* if (ThreadPoolManager.currentLanguage.isRtl())
             add.setText("<");
         else
-            add.setText(">");
+            add.setText(">");*/
         add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addActionPerformed(evt);
             }
         });
-        if (ThreadPoolManager.currentLanguage.isRtl())
+      /*  if (ThreadPoolManager.currentLanguage.isRtl())
             remove.setText(">");
         else
-            remove.setText("<");
+            remove.setText("<");*/
         remove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 removeActionPerformed(evt);
@@ -318,7 +318,7 @@ public class UserForm extends TMSInternalFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
                     assignPCToUser(evt);
-                } catch (PropertyVetoException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -332,7 +332,7 @@ public class UserForm extends TMSInternalFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
                     assignPersonToUser(evt);
-                } catch (PropertyVetoException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -457,14 +457,14 @@ public class UserForm extends TMSInternalFrame {
 
     }
 
-    private void assignPCToUser(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
+    private void assignPCToUser(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_jButton1ActionPerformed
         /*PCManagement pcManagement = new PCManagement(this, user, jdpDesktop);
         pcManagement.setVisible(true);
         jdpDesktop.add(pcManagement);
         pcManagement.setSelected(true);*/
     }
 
-    private void assignPersonToUser(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
+    private void assignPersonToUser(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_jButton1ActionPerformed
        /* PersonList personListForm = new PersonList(this, user, jdpDesktop);
         personListForm.setVisible(true);
         jdpDesktop.add(personListForm);

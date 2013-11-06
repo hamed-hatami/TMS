@@ -2,9 +2,11 @@ package ir.university.toosi.tms.view.workgroup;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ir.university.toosi.tms.model.entity.User;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.model.entity.WorkGroup;
 import ir.university.toosi.tms.util.ComponentUtil;
+import ir.university.toosi.tms.util.DialogUtil;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
@@ -15,17 +17,12 @@ import org.jdesktop.swingbinding.SwingBindings;
 
 import javax.swing.*;
 import java.awt.*;
-import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
  * User: a_hadadi
- * Date: 10/2/13
- * Time: 8:24 PM
- * To change this template use File | Settings | File Templates.
  */
 public class WorkGroupManagementCode extends TMSInternalFrame {
 
@@ -64,7 +61,6 @@ public class WorkGroupManagementCode extends TMSInternalFrame {
            loadInfo();
            Font tahoma = new Font("Tahoma", Font.PLAIN, 12);
            ComponentUtil.setFont(panel, tahoma, ThreadPoolManager.direction);
-           // this.changeComonentOrientation(ThreadPoolManager.direction);
            ComponentUtil.SetJTableAlignment(panel.tableInfo,ThreadPoolManager.direction);
        } catch (IOException e) {
            e.printStackTrace();
@@ -89,28 +85,62 @@ public class WorkGroupManagementCode extends TMSInternalFrame {
         BindingGroup bindingGroup = new BindingGroup();
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
+        ComponentUtil.SetJTableAlignment(panel.tableInfo,ThreadPoolManager.direction);
     }
 
 
     class WorkGroupManagementPanel extends WorkGroupManagementDesign {
+
        @Override
         protected void buttonAddActionPerformed() {
-          /* AddRoleCode addRoleCode = new AddRoleCode();
-           addRoleCode.setVisible(true);
-           // roleManagementCode.setBounds(170, 65, 175, 105);
-           // desktopPane.add(roleManagementCode, JLayeredPane.DEFAULT_LAYER);
-           ThreadPoolManager.mainForm.getDesktopPane().add(addRoleCode);
+           WorkGroupCode wg = new WorkGroupCode(null);
+           wg.setVisible(true);
+           ThreadPoolManager.mainForm.getDesktopPane().add(wg);
            try {
-               addRoleCode.setSelected(true);
-           } catch (PropertyVetoException e) {
+               wg.setSelected(true);
+           } catch (Exception e) {
                e.printStackTrace();
-           }*/
+           }
+           dispose();
         }
 
         @Override
-        protected void buttonEditActionPerformed() {
-            //todo
+        protected void buttonDeleteActionPerformed() {
+
+            if(panel.tableInfo.getSelectedRow()==-1){
+                //todo read from bundle
+                DialogUtil.showErrorDialog(this
+                        ,"لطفا یک گروه کاری را انتخاب فرمائید"
+                        ,"خطای ورودی"
+                );
+                return;
+            }
+
+            if (!DialogUtil.showDeleteQuestionDialog(this)) {
+                return;
+            }
+
+            try {
+                WorkGroup workGroup = workGroupList.get(panel.tableInfo.convertRowIndexToModel(panel.tableInfo.getSelectedRow()));
+                WebServiceInfo serviceInfo = new WebServiceInfo();
+                serviceInfo.setServiceName("/deleteWorkGroup");
+                new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), new ObjectMapper().writeValueAsString(workGroup));
+                //todo read from bundle
+                DialogUtil.showOKDialog(this
+                        ,"گروه کاری مورد نظر حذف شد"
+                        ,"اطلاع رسانی"
+                );
+                loadInfo();
+            } catch (IOException e) {
+                //todo read from bundle
+                DialogUtil.showErrorDialog(this
+                        ,"در حذف گروه کاری خطا رخ داده است"
+                        ,"خطای سیستمی"
+                );
+                e.printStackTrace();
+            }
         }
+
 
         @Override
         protected void buttonCancelActionPerformed() {
@@ -119,7 +149,25 @@ public class WorkGroupManagementCode extends TMSInternalFrame {
 
         @Override
         protected void buttonModifyActionPerformed() {
-            //todo
+            if(panel.tableInfo.getSelectedRow()==-1){
+                //todo read from bundle
+                DialogUtil.showErrorDialog(this
+                        ,"لطفا یک گروه کاری را انتخاب فرمائید"
+                        ,"خطای ورودی"
+                );
+                return;
+
+            }
+            WorkGroup workGroup = workGroupList.get(panel.tableInfo.convertRowIndexToModel(panel.tableInfo.getSelectedRow()));
+            WorkGroupCode wg = new WorkGroupCode(workGroup);
+            wg.setVisible(true);
+            ThreadPoolManager.mainForm.getDesktopPane().add(wg);
+            try {
+                wg.setSelected(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            dispose();
         }
     }
 }

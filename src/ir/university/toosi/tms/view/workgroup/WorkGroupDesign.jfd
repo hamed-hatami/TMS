@@ -1,0 +1,127 @@
+JFDML JFormDesigner: "5.1.1.0.120" Java: "1.7.0_10" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "panel1"
+				"border": &EtchedBorder0 new javax.swing.border.EtchedBorder( 1, null, null )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldDescription"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 178
+					"y": 6
+					"width": 169
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelDescription"
+					"text": "labelDescription"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 353
+					"y": 8
+					"width": 107
+				} )
+				add( new FormComponent( "javax.swing.JCheckBox" ) {
+					name: "checkBoxActive"
+					"text": "checkBoxActiveTitle"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 330
+					"y": 27
+					"width": 135
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 5
+				"y": 10
+				"width": 475
+				"height": 55
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "panel2"
+				"border": #EtchedBorder0
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonCancel"
+					"text": "buttonCancel"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonCancelActionPerformed", false ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 15
+					"y": 10
+					"width": 80
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonOK"
+					"text": "buttonOK"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonOKActionPerformed", false ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 105
+					"y": 10
+					"width": 80
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 475
+				"height": 45
+				"x": 5
+				"y": 290
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "panelRole"
+				"border": new javax.swing.border.TitledBorder( "relative roles" )
+				auxiliary() {
+					"JavaCodeGenerator.variableModifiers": 4
+				}
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "tableRole"
+						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector, new java.util.Vector {
+							add( "title" )
+							add( "active status" )
+						}, new java.util.Vector {
+							add( class java.lang.String )
+							add( class java.lang.Boolean )
+						}, new java.util.Vector {
+							add( false )
+							add( false )
+						}, new java.util.Vector {
+							add( new com.jformdesigner.model.SwingTableColumn( null, 150, 150, 500, false ) )
+							add( new com.jformdesigner.model.SwingTableColumn( null, 120, 120, 120, false ) )
+						} )
+						"font": new java.awt.Font( "Tahoma", 0, 11 )
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 4
+						}
+					} )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 465
+					"height": 195
+					"x": 5
+					"y": 15
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 475
+				"height": 215
+				"x": 5
+				"y": 70
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 485, 340 )
+		} )
+	}
+}

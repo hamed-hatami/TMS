@@ -17,7 +17,6 @@ import javax.swing.*;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import java.awt.*;
-import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
@@ -149,7 +148,7 @@ public class UserManagementCode extends TMSInternalFrame implements InternalFram
             ThreadPoolManager.mainForm.getDesktopPane().add(userAddForm);
             try {
                 userAddForm.setSelected(true);
-            } catch (PropertyVetoException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -185,9 +184,10 @@ public class UserManagementCode extends TMSInternalFrame implements InternalFram
             ThreadPoolManager.mainForm.getDesktopPane().add(userMembershipManagement);
             try {
                 userMembershipManagement.setSelected(true);
-            } catch (PropertyVetoException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
+
         }
 
 
@@ -205,9 +205,10 @@ public class UserManagementCode extends TMSInternalFrame implements InternalFram
             //jdpDesktop.add(userForm);
             try {
                 userAddForm.setSelected(true);
-            } catch (PropertyVetoException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
+
         }
     }
 }

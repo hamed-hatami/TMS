@@ -10,12 +10,14 @@ import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
 import ir.university.toosi.tms.view.TMSPanel;
+import org.jboss.seam.remoting.model.Model;
+import org.jdesktop.beansbinding.BeanProperty;
 import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
+import org.jdesktop.swingbinding.SwingBindings;
 
 import javax.swing.*;
 import java.awt.*;
-import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
@@ -81,6 +83,9 @@ public class AddRoleCode extends TMSInternalFrame {
         BindingGroup bindingGroup = new BindingGroup();
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
+
+
+
     }
 
 

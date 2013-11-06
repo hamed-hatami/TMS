@@ -10,12 +10,24 @@ import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.basicinfo.BasicInfoManagement;
 import ir.university.toosi.tms.view.calendar.CalendarManagement;
-import ir.university.toosi.tms.view.eventlog.EventLogList;
 import ir.university.toosi.tms.view.language.LanguageAddForm;
+import ir.university.toosi.tms.view.language.LanguageManagementCode;
+import ir.university.toosi.tms.view.pc.PCForm;
+import ir.university.toosi.tms.view.pc.PCManagement;
+import ir.university.toosi.tms.view.pc.PCManagementCode;
+import ir.university.toosi.tms.view.person.PersonForm;
+import ir.university.toosi.tms.view.person.PersonList;
 import ir.university.toosi.tms.view.person.PersonManagement;
+import ir.university.toosi.tms.view.role.AddRoleCode;
+import ir.university.toosi.tms.view.role.RoleForm;
 import ir.university.toosi.tms.view.role.RoleManagement;
+import ir.university.toosi.tms.view.role.RoleManagementCode;
+import ir.university.toosi.tms.view.user.UserAddCode;
+import ir.university.toosi.tms.view.user.UserForm;
 import ir.university.toosi.tms.view.user.UserManagement;
+import ir.university.toosi.tms.view.workgroup.WorkGroupForm;
 import ir.university.toosi.tms.view.workgroup.WorkGroupManagement;
+import ir.university.toosi.tms.view.workgroup.WorkGroupManagementCode;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameEvent;
@@ -23,13 +35,10 @@ import javax.swing.event.InternalFrameListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyVetoException;
 import java.util.List;
 
-/**
- * @author : Hamed Hatami ,  Farzad Sedaghatbin, Atefeh Ahmadi
- * @version : 1.0
- */
+ 
+
 
 public class MainFormOld extends JFrame implements InternalFrameListener {
 
@@ -38,7 +47,7 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
     private WebServiceInfo webServiceInfo = new WebServiceInfo();
 
     public MainFormOld() {
-
+        ThreadPoolManager.isDebugMode = true;
         try {
             Toolkit toolkit = Toolkit.getDefaultToolkit();
             int xSize = ((int) toolkit.getScreenSize().getWidth());
@@ -56,12 +65,18 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
             List<Languages> languageList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName()), new TypeReference<List<Languages>>() {
             });
 
-           //todo  loginForm = new Login(this);
-            loginForm.setVisible(true);
+           //todo
+
+            TMSInternalFrame internalFrame ;
+
+            internalFrame = new AddRoleCode();//WorkGroupManagement();
+            internalFrame.setVisible(true);
             jdpDesktop = new TMSDesktop();
-            jdpDesktop.add(loginForm);
-            loginForm.setSelected(true);
+            jdpDesktop.add(internalFrame);
+            internalFrame.setSelected(true);
+            internalFrame.setLocation(200,200);
             setContentPane(jdpDesktop);
+
             jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
 
         } catch (Exception e) {
@@ -76,40 +91,46 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
     }
 
     protected void showPersonEdit() {
-        /*Login loginForm = new Login();
+/*
+Login loginForm = new Login();
         loginForm.setVisible(true);
-        jdpDesktop.add(loginForm);*/
-   /*     try {
+        jdpDesktop.add(loginForm);
+
+     try {
             loginForm.setSelected(true);
-        } catch (java.beans.PropertyVetoException e) {
-        }*/
+        } catch (java.beans.Exception e) {
+        }
+*/
+
     }
 
-    private void showUserManagement() throws PropertyVetoException {
-       /* UserManagement userManagement = new UserManagement(jdpDesktop);
+    private void showUserManagement() throws Exception {
+/* UserManagement userManagement = new UserManagement(jdpDesktop);
         userManagement.setVisible(true);
         jdpDesktop.add(userManagement);
         userManagement.setSelected(true);*/
 
+
     }
 
-    private void showLanguageForm() throws PropertyVetoException {
-      /*  LanguageAddForm languageForm = new LanguageAddForm(jdpDesktop);
+    private void showLanguageForm() throws Exception {
+        LanguageAddForm languageForm = new LanguageAddForm();
         languageForm.setVisible(true);
         jdpDesktop.add(languageForm);
-        languageForm.setSelected(true);*/
+        languageForm.setSelected(true);
+
 
     }
 
-    private void showWorkGroupManagement() throws PropertyVetoException {
-        WorkGroupManagement workGroupManagement = new WorkGroupManagement(jdpDesktop);
+    private void showWorkGroupManagement() throws Exception {
+/*        WorkGroupManagement workGroupManagement = new WorkGroupManagement(jdpDesktop);
         workGroupManagement.setVisible(true);
         jdpDesktop.add(workGroupManagement);
-        workGroupManagement.setSelected(true);
+        workGroupManagement.setSelected(true);*/
 
     }
 
-    private void showCalendarManagment() throws PropertyVetoException {
+    private void showCalendarManagment() throws Exception {
         CalendarManagement calendarManagement = new CalendarManagement(jdpDesktop);
         calendarManagement.setVisible(true);
         jdpDesktop.add(calendarManagement);
@@ -117,29 +138,31 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
 
     }
 
-    private void showPersonManagment() throws PropertyVetoException {
-        /*PersonManagement personManagement = new PersonManagement(jdpDesktop);
+    private void showPersonManagment() throws Exception {
+/*PersonManagement personManagement = new PersonManagement(jdpDesktop);
         personManagement.setVisible(true);
         jdpDesktop.add(personManagement);
         personManagement.setSelected(true);*/
 
+
     }
 
-    private void showRoleManagement() throws PropertyVetoException {
-        RoleManagement roleManagement = new RoleManagement(jdpDesktop);
+    private void showRoleManagement() throws Exception {
+/*        RoleManagement roleManagement = new RoleManagement(jdpDesktop);
         roleManagement.setVisible(true);
         jdpDesktop.add(roleManagement);
-        roleManagement.setSelected(true);
+        roleManagement.setSelected(true);*/
     }
 
-    private void showEventLogList() throws PropertyVetoException {
-       /* EventLogList eventLogList = new EventLogList(jdpDesktop);
+    private void showEventLogList() throws Exception {
+/* EventLogList eventLogList = new EventLogList(jdpDesktop);
         eventLogList.setVisible(true);
         jdpDesktop.add(eventLogList);
         eventLogList.setSelected(true);*/
+
     }
 
-   /* private void refreshMainForm() {
+ private void refreshMainForm() {
         jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
         //languageMenu.setText(ThreadPoolManager.getLangValue("language"));
         //languageDefItem.setText(ThreadPoolManager.getLangValue("languageDef"));
@@ -147,19 +170,21 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
         jdpDesktop.revalidate();
         jdpDesktop.repaint();
     }
-*/
-    private void showLookupInfo(Lookup lookup) throws PropertyVetoException {
+
+
+    private void showLookupInfo(Lookup lookup) throws Exception {
         BasicInfoManagement basicInfoManagement = new BasicInfoManagement(jdpDesktop, lookup);
         basicInfoManagement.setVisible(true);
         jdpDesktop.add(basicInfoManagement);
         basicInfoManagement.setSelected(true);
     }
 
-    private void showLanguageDef() throws PropertyVetoException {
-       /* LanguageAddForm languageManagement = new LanguageAddForm(jdpDesktop);
+    private void showLanguageDef() throws Exception {
+/* LanguageAddForm languageManagement = new LanguageAddForm(jdpDesktop);
         languageManagement.setVisible(true);
         jdpDesktop.add(languageManagement);
         languageManagement.setSelected(true);*/
+
     }
 
     public JMenuBar createMenuBar(ComponentOrientation direction) {
@@ -235,7 +260,7 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         showUserManagement();
-                    } catch (PropertyVetoException e1) {
+                    } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 }
@@ -245,7 +270,7 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         showRoleManagement();
-                    } catch (PropertyVetoException e1) {
+                    } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 }
@@ -255,7 +280,7 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         showWorkGroupManagement();
-                    } catch (PropertyVetoException e1) {
+                    } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 }
@@ -265,7 +290,7 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         showEventLogList();
-                    } catch (PropertyVetoException e1) {
+                    } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 }
@@ -275,7 +300,7 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         showCalendarManagment();
-                    } catch (PropertyVetoException e1) {
+                    } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 }
@@ -285,7 +310,7 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         showPersonManagment();
-                    } catch (PropertyVetoException e1) {
+                    } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 }
@@ -295,7 +320,7 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         showLanguageDef();
-                    } catch (PropertyVetoException e1) {
+                    } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 }
@@ -305,7 +330,7 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         showLanguageForm();
-                    } catch (PropertyVetoException e1) {
+                    } catch (Exception e1) {
                         e1.printStackTrace();
                     }
                 }
@@ -331,7 +356,7 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
                     public void actionPerformed(ActionEvent e) {
                         try {
                             showLookupInfo(lookup);
-                        } catch (PropertyVetoException e1) {
+                        } catch (Exception e1) {
                             e1.printStackTrace();
                         }
                     }

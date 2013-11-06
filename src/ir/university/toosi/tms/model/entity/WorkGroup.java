@@ -29,6 +29,7 @@ public class WorkGroup extends BaseEntity {
     private boolean selected;
     @JsonProperty
     private Set<Role> roles;
+    @JsonProperty
     private String descShow;
 
 
@@ -95,9 +96,11 @@ public class WorkGroup extends BaseEntity {
         this.roles = roles;
     }
 
+
     public String getDescShow() {
         return ThreadPoolManager.getLangValue(description);
     }
+
 
     public void setDescShow(String descShow) {
         this.descShow = descShow;

@@ -74,7 +74,7 @@ new FormModel {
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showWorkGroupManagement", false ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "operationManagementItem"
+					name: "roleManagementItem"
 					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"minimumSize": new java.awt.Dimension( 80, 80 )
 					"maximumSize": new java.awt.Dimension( 80, 80 )
@@ -130,12 +130,60 @@ new FormModel {
 					"horizontalTextPosition": 0
 					"text": "اشخاص"
 					"alignmentX": 0.5f
-					"preferredSize": new java.awt.Dimension( 80, 80 )
+					"preferredSize": &Dimension2 new java.awt.Dimension( 80, 80 )
 					"font": #Font0
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4
 					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showPersonManagment", false ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "pcManagementItem"
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"maximumSize": #Dimension0
+					"minimumSize": #Dimension1
+					"verticalTextPosition": 3
+					"horizontalTextPosition": 0
+					"text": "رایانه"
+					"alignmentX": 0.5f
+					"preferredSize": #Dimension2
+					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showPersonManagment", false ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "organManagementItem"
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"maximumSize": #Dimension0
+					"minimumSize": #Dimension1
+					"verticalTextPosition": 3
+					"horizontalTextPosition": 0
+					"text": "ارگان"
+					"alignmentX": 0.5f
+					"preferredSize": #Dimension2
+					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showOrganManagment", false ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "operationManagementItem"
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"maximumSize": #Dimension0
+					"minimumSize": #Dimension1
+					"verticalTextPosition": 3
+					"horizontalTextPosition": 0
+					"text": "عملیات"
+					"alignmentX": 0.5f
+					"preferredSize": #Dimension2
+					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showoperationManagment", false ) )
 				} )
 			}, new FormLayoutConstraints( null ) {
 				"title": "مدیریت"
@@ -167,7 +215,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 10 )
-			"size": new java.awt.Dimension( 520, 95 )
+			"size": new java.awt.Dimension( 715, 95 )
 		} )
 	}
 }

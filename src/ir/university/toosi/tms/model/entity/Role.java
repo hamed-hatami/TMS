@@ -24,7 +24,7 @@ public class Role extends BaseEntity {
     private String descText;
     @JsonProperty
     private Set<Operation> operations;
-
+    @JsonProperty
     private String descShow;
 
     public Role() {

@@ -15,7 +15,6 @@ import javax.swing.*;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import java.awt.*;
-import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
@@ -110,7 +109,7 @@ public class RoleManagementCode extends TMSInternalFrame {
             ThreadPoolManager.mainForm.getDesktopPane().add(addRoleCode);
             try {
                 addRoleCode.setSelected(true);
-            } catch (PropertyVetoException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 

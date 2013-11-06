@@ -38,11 +38,19 @@ public abstract class MenuPanel extends JPanel {
 
     protected abstract void showCalendarManagment();
 
-    protected abstract void showPersonManagment();
+    protected abstract void showPCManagment();
 
     protected abstract void showLanguageDef();
 
     protected abstract void showLanguageForm();
+
+    protected abstract void showOperationManagment();
+
+    protected abstract void showOrganManagment();
+
+    protected abstract void showoperationManagment();
+
+    protected abstract void showPersonManagment();
 
     protected abstract void exit();
 
@@ -58,10 +66,13 @@ public abstract class MenuPanel extends JPanel {
         importLanguage = new JButton();
         managementMenu = new JPanel();
         workGroupManagementItem = new JButton();
-        operationManagementItem = new JButton();
+        roleManagementItem = new JButton();
         userManagementItem = new JButton();
         eventLogListItem = new JButton();
         personManagementItem = new JButton();
+        pcManagementItem = new JButton();
+        organManagementItem = new JButton();
+        operationManagementItem = new JButton();
         exitMenu = new JPanel();
         exit = new JButton();
 
@@ -141,23 +152,23 @@ public abstract class MenuPanel extends JPanel {
                 });
                 managementMenu.add(workGroupManagementItem);
 
-                //---- operationManagementItem ----
-                operationManagementItem.setIcon(null);
-                operationManagementItem.setMinimumSize(new Dimension(80, 80));
-                operationManagementItem.setMaximumSize(new Dimension(80, 80));
-                operationManagementItem.setHorizontalTextPosition(SwingConstants.CENTER);
-                operationManagementItem.setVerticalTextPosition(SwingConstants.BOTTOM);
-                operationManagementItem.setText("\u0646\u0642\u0634");
-                operationManagementItem.setAlignmentX(0.5F);
-                operationManagementItem.setPreferredSize(new Dimension(80, 80));
-                operationManagementItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
-                operationManagementItem.addActionListener(new ActionListener() {
+                //---- roleManagementItem ----
+                roleManagementItem.setIcon(null);
+                roleManagementItem.setMinimumSize(new Dimension(80, 80));
+                roleManagementItem.setMaximumSize(new Dimension(80, 80));
+                roleManagementItem.setHorizontalTextPosition(SwingConstants.CENTER);
+                roleManagementItem.setVerticalTextPosition(SwingConstants.BOTTOM);
+                roleManagementItem.setText("\u0646\u0642\u0634");
+                roleManagementItem.setAlignmentX(0.5F);
+                roleManagementItem.setPreferredSize(new Dimension(80, 80));
+                roleManagementItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                roleManagementItem.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         showRoleManagement();
                     }
                 });
-                managementMenu.add(operationManagementItem);
+                managementMenu.add(roleManagementItem);
 
                 //---- userManagementItem ----
                 userManagementItem.setIcon(null);
@@ -212,6 +223,60 @@ public abstract class MenuPanel extends JPanel {
                     }
                 });
                 managementMenu.add(personManagementItem);
+
+                //---- pcManagementItem ----
+                pcManagementItem.setIcon(null);
+                pcManagementItem.setMaximumSize(new Dimension(80, 80));
+                pcManagementItem.setMinimumSize(new Dimension(80, 80));
+                pcManagementItem.setVerticalTextPosition(SwingConstants.BOTTOM);
+                pcManagementItem.setHorizontalTextPosition(SwingConstants.CENTER);
+                pcManagementItem.setText("\u0631\u0627\u06cc\u0627\u0646\u0647");
+                pcManagementItem.setAlignmentX(0.5F);
+                pcManagementItem.setPreferredSize(new Dimension(80, 80));
+                pcManagementItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                pcManagementItem.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        showPersonManagment();
+                    }
+                });
+                managementMenu.add(pcManagementItem);
+
+                //---- organManagementItem ----
+                organManagementItem.setIcon(null);
+                organManagementItem.setMaximumSize(new Dimension(80, 80));
+                organManagementItem.setMinimumSize(new Dimension(80, 80));
+                organManagementItem.setVerticalTextPosition(SwingConstants.BOTTOM);
+                organManagementItem.setHorizontalTextPosition(SwingConstants.CENTER);
+                organManagementItem.setText("\u0627\u0631\u06af\u0627\u0646");
+                organManagementItem.setAlignmentX(0.5F);
+                organManagementItem.setPreferredSize(new Dimension(80, 80));
+                organManagementItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                organManagementItem.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        showOrganManagment();
+                    }
+                });
+                managementMenu.add(organManagementItem);
+
+                //---- operationManagementItem ----
+                operationManagementItem.setIcon(null);
+                operationManagementItem.setMaximumSize(new Dimension(80, 80));
+                operationManagementItem.setMinimumSize(new Dimension(80, 80));
+                operationManagementItem.setVerticalTextPosition(SwingConstants.BOTTOM);
+                operationManagementItem.setHorizontalTextPosition(SwingConstants.CENTER);
+                operationManagementItem.setText("\u0639\u0645\u0644\u06cc\u0627\u062a");
+                operationManagementItem.setAlignmentX(0.5F);
+                operationManagementItem.setPreferredSize(new Dimension(80, 80));
+                operationManagementItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                operationManagementItem.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        showoperationManagment();
+                    }
+                });
+                managementMenu.add(operationManagementItem);
             }
             tabbedPane1.addTab("\u0645\u062f\u06cc\u0631\u06cc\u062a", managementMenu);
 
@@ -252,10 +317,13 @@ public abstract class MenuPanel extends JPanel {
     protected JButton importLanguage;
     private JPanel managementMenu;
     protected JButton workGroupManagementItem;
-    protected JButton operationManagementItem;
+    protected JButton roleManagementItem;
     protected JButton userManagementItem;
     protected JButton eventLogListItem;
     protected JButton personManagementItem;
+    protected JButton pcManagementItem;
+    protected JButton organManagementItem;
+    protected JButton operationManagementItem;
     private JPanel exitMenu;
     protected JButton exit;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

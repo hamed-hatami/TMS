@@ -17,7 +17,6 @@ import org.jdesktop.swingbinding.SwingBindings;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.List;
 
@@ -127,7 +126,7 @@ public class UserManagement extends TMSInternalFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
                     addUser();
-                } catch (PropertyVetoException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -155,7 +154,7 @@ public class UserManagement extends TMSInternalFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
                     editUser();
-                } catch (PropertyVetoException e) {
+                } catch (Exception e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
             }
@@ -280,22 +279,30 @@ public class UserManagement extends TMSInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addUser() throws PropertyVetoException {
+    private void addUser() {
         UserForm userForm = new UserForm();
         userForm.setVisible(true);
         ThreadPoolManager.mainForm.getDesktopPane().add(userForm);
         //jdpDesktop.add(user);
-        userForm.setSelected(true);
+        try {
+            userForm.setSelected(true);
+        }   catch (Exception e){
+           e.printStackTrace();
+        }
 
     }
 
-    private void editUser() throws PropertyVetoException {
+    private void editUser() {
         User user = userList.get(userTable.convertRowIndexToModel(userTable.getSelectedRow()));
         UserForm userForm = new UserForm(user,true);
         userForm.setVisible(true);
         ThreadPoolManager.mainForm.getDesktopPane().add(userForm);
         //jdpDesktop.add(userForm);
-        userForm.setSelected(true);
+        try{
+            userForm.setSelected(true);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void deleteUser() throws IOException {

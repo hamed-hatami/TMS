@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class Login extends TMSInternalFrame {
 
-    private MainForm mainForm;
+    private MainFormOld mainFormOld;
     private JButton login;
     private JButton cancel;
     private JLabel userNameLabel;
@@ -39,10 +39,10 @@ public class Login extends TMSInternalFrame {
     private String defaultedLang;
     private List<Languages> languagesList;
 
-    public Login(MainForm mainForm) {
+    public Login(MainFormOld mainFormOld) {
 
         fillSearchCombo();
-        this.mainForm = mainForm;
+        this.mainFormOld = mainFormOld;
         TMSPanel1 = new TMSPanel();
         login = new JButton();
         cancel = new JButton();
@@ -170,8 +170,9 @@ public class Login extends TMSInternalFrame {
                         direction = ComponentOrientation.LEFT_TO_RIGHT;
                     }
 
-                   //// mainForm.setJMenuBar(mainForm.createMenuBar(direction));
-                  //todo  mainForm.getLoginForm().dispose();
+                    mainFormOld.setJMenuBar(mainFormOld.createMenuBar(direction));
+                  //todo
+                    mainFormOld.getLoginForm().dispose();
                 }
             }
         });

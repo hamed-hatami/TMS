@@ -19,16 +19,52 @@ public class FilterJTable extends JTable {
     private JTextField text;
     private JPopupMenu filterPopup;
     private TableRowSorter sorter;
-    private int currentColumnIndex = 0;
+    private int currentColumnIndex = -1;
+    private final String labelPrefix ="@#";
+
+
    // private String headerTextStartWith = "";
 
     public FilterJTable(Object[][] data, Object[] headers) {
-        super(data, headers);
-       // this.headerTextStartWith = headerTextStartWith;
-        this.customeJTable();
+       // super(data, headers);
+
+        for(int i = 0;i< headers.length;i++){
+            headers[i] = labelPrefix + headers[i].toString() ;
+        }
+
+
+        DefaultTableModel model = new DefaultTableModel(data, headers);
+        setModel(model);
+        init();
+
+       /* for (int column = 0; column < getColumnModel().getColumnCount(); column++) {
+            TableColumn tableColumn = getColumnModel().getColumn(column);
+            TableCellRenderer renderer = tableColumn.getHeaderRenderer();
+            if (renderer == null) {
+                renderer = getTableHeader().getDefaultRenderer();
+            }
+            Component component = renderer.getTableCellRendererComponent(this,
+                    //tableColumn.getHeaderValue(), false, false, -1, column);
+                    headers[column].toString(), false, false, -1, column);
+
+            if(component instanceof MyPanel){
+               // ((MyPanel) component).setLabelText(getModel().getColumnName(column));
+                ((MyPanel) component).setLabelText(headers[column].toString());
+
+                MyPanel component1 = new MyPanel();
+                component1.setLabelText(headers[column].toString());
+                component=component1;
+                this.getCellEditor(-1,column).
+            }
+        }*/
+
+
+        // this.headerTextStartWith = headerTextStartWith;
     }
 
-    public void customeJTable(){
+
+
+    public void init(){
 
         MyPanel tableHeaderRenderer = new MyPanel();
         getTableHeader().setDefaultRenderer(tableHeaderRenderer);
@@ -42,12 +78,11 @@ public class FilterJTable extends JTable {
         });
 
         String headerToolTipText ;
-       /* if(getAutoCreateRowSorter()){
+        if(getAutoCreateRowSorter()){
             headerToolTipText = "Click to sort; Shift-Click to sort in reverse order;Right-Click to Filter";
         }else{
             headerToolTipText = "Right-Click to Filter";
-        }*/
-        headerToolTipText = "Right-Click to Filter";
+        }
         getTableHeader().setToolTipText(headerToolTipText);
 
         text = new JTextField();
@@ -123,6 +158,7 @@ public class FilterJTable extends JTable {
             }
         });*/
 
+
     }
 
 
@@ -130,7 +166,7 @@ public class FilterJTable extends JTable {
     private void finalizeFilterModification() {
         column.setHeaderValue(text.getText());
         filterPopup.setVisible(false);
-        getTableHeader().repaint();
+      //  getTableHeader().repaint();
     }
 
     private void editColumnAt(Point p) {
@@ -139,11 +175,17 @@ public class FilterJTable extends JTable {
         if (currentColumnIndex != -1) {
             column = getTableHeader().getColumnModel().getColumn(currentColumnIndex);
             Rectangle columnRectangle = getTableHeader().getHeaderRect(currentColumnIndex);
-            text.setText(column.getHeaderValue().toString());
+             String headerValue = column.getHeaderValue().toString();
+            text.setText(headerValue);
+            /*if(!headerValue.startsWith(labelPrefix)){
+                text.setText(headerValue);
+            }*/
             filterPopup.setPreferredSize(new Dimension(columnRectangle.width - 8, columnRectangle.height - (getTableHeader().getHeight() / 2) - 4));
             filterPopup.show(getTableHeader(), columnRectangle.x+4, columnRectangle.height - (getTableHeader().getHeight() / 2));
             text.requestFocusInWindow();
         }
+
+
     }
 
     private void doMultiFilter(String text) {
@@ -179,7 +221,6 @@ public class FilterJTable extends JTable {
     }
 
     private class MyPanel extends JPanel implements TableCellRenderer {
-
         private javax.swing.JLabel label;
         private javax.swing.JTextField textField;
 
@@ -206,16 +247,37 @@ public class FilterJTable extends JTable {
             return textField;
         }
 
+
+        public String toString(){
+           return  textField.getText();
+        }
+
+        //TableCellRenderer defRnd = new DefaultTableCellRenderer();
+
+
+
         @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            String textValue = value.toString();
-           if(label.getText().isEmpty()){
-                setLabelText(textValue);
-                setTextFieldText("");
-            }else {
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+           String textValue = value.toString();
+
+            if(textValue.startsWith(labelPrefix)){
+                setLabelText(textValue.replaceFirst(labelPrefix,""));
+            }else{
                 setTextFieldText(textValue);
             }
+
+           // if(label.getText().isEmpty()){
+           /* if(currentColumnIndex<0){
+                setLabelText(textValue);
+            }
+            if(currentColumnIndex==column)  {
+                setTextFieldText(textValue);
+            }*/
+           /* setLabelText(textValue);
+            setTextFieldText(textValue);*/
             return this;
+
         }
+
     }
 }

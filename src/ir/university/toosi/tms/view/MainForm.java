@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.Languages;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.ComponentUtil;
+import ir.university.toosi.tms.util.DialogUtil;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.calendar.CalendarManagement;
@@ -19,10 +20,10 @@ import ir.university.toosi.tms.view.workgroup.LoginForm;
 import ir.university.toosi.tms.view.workgroup.WorkGroupManagementCode;
 
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.beans.PropertyVetoException;
 import java.io.IOException;
 
 public class MainForm extends JFrame implements WindowListener {
@@ -30,17 +31,20 @@ public class MainForm extends JFrame implements WindowListener {
     private TMSDesktop desktopPane;
     private WebServiceInfo webServiceInfo = new WebServiceInfo();
     private ComponentOrientation direction;
+    private String lookAndFeelUser;
+    private String lookAndFeelDefualt = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
 
     public MainForm() {
-        super("سامانه مدیریت تردد");//todo from bundle
+        super("سامانه مدیریت تردد");//todo load from bundle
         ThreadPoolManager.isDebugMode = true;//todo change when create jar file
         addWindowListener(this);
         setSize();
 
-        setDefaultLookAndFeelDecorated(true);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        setDefaultLookAndFeelDecorated(true);
         try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            UIManager.setLookAndFeel(lookAndFeelDefualt);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -86,9 +90,28 @@ public class MainForm extends JFrame implements WindowListener {
         loginFormDialog.setVisible(true);
 
         if (!loginFormDialog.isLogin()) {
-            System.exit(1);// todo
+            System.exit(1);
         }
         direction = loginFormDialog.direction;
+        lookAndFeelUser = loginFormDialog.lookAndFeel;
+        try {
+            setDefaultLookAndFeelDecorated(true);
+            UIManager.setLookAndFeel(lookAndFeelUser);
+            UIManager.getLookAndFeelDefaults().put("defaultFont", new Font("Tahoma", Font.PLAIN, 11));
+            Font tahoma10Font = new Font("Tahoma", Font.PLAIN, 10);
+            Font tahoma11Font = new Font("Tahoma", Font.PLAIN, 11);
+            Font tahoma12Font = new Font("Tahoma", Font.PLAIN, 12);
+            UIManager.put("OptionPane.buttonFont", tahoma11Font);
+            FontUIResource ax = new FontUIResource(tahoma12Font);
+            UIManager.put("OptionPane.messageFont", ax);
+            UIManager.put("OptionPane.font", tahoma11Font);
+            UIManager.put("Panel.font", tahoma11Font);
+            UIManager.put("TableHeader.font", tahoma10Font);
+            UIManager.put("TitledBorder.font", tahoma10Font);
+        } catch (Exception e) {
+            System.out.println("error setting LAF and default font");
+            e.printStackTrace();
+        }
 
         //set Main window Properties
         setVisible(true);
@@ -141,11 +164,8 @@ public class MainForm extends JFrame implements WindowListener {
     }
 
     private void exitOP() {
-        String msg = "آیا برای خروج مطمئن هستید ؟" ;
-       // msg =  ThreadPoolManager.getLangValue("closeConfirm");//todo load from lang
-        int confirm = JOptionPane.showOptionDialog(this,msg , "", JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE, null, null, null);
-        if (confirm == JOptionPane.YES_OPTION) {
+
+        if (DialogUtil.showExitQuestionDialog(this)) {
             // saveSettings(); //save prop
             System.exit(1);
         }
@@ -184,35 +204,28 @@ public class MainForm extends JFrame implements WindowListener {
     class MenuPaneActionAvailable extends MenuPanel {
         MenuPaneActionAvailable() {
             super();
-
+            //todo change icons
             languageDefItem.setIcon(ComponentUtil.getImageIcon("lang.png", getClass()));
             importLanguage.setIcon(ComponentUtil.getImageIcon("lang.png", getClass()));
             workGroupManagementItem.setIcon(ComponentUtil.getImageIcon("workgroup-menu.png", getClass()));
-            operationManagementItem.setIcon(ComponentUtil.getImageIcon("role-menu.png", getClass()));
+            roleManagementItem.setIcon(ComponentUtil.getImageIcon("role-menu.png", getClass()));
             userManagementItem.setIcon(ComponentUtil.getImageIcon("users-menu.png", getClass()));
             eventLogListItem.setIcon(ComponentUtil.getImageIcon("event.png", getClass()));
             personManagementItem.setIcon(ComponentUtil.getImageIcon("account-menu.png", getClass()));
+            pcManagementItem.setIcon(ComponentUtil.getImageIcon("account-menu.png", getClass()));
+            organManagementItem.setIcon(ComponentUtil.getImageIcon("account-menu.png", getClass()));
+            operationManagementItem.setIcon(ComponentUtil.getImageIcon("role-menu.png", getClass()));
             exit.setIcon(ComponentUtil.getImageIcon("exit.png", getClass()));
-
         }
 
         @Override
         protected void showUserManagement() {
-            /*UserManagement userManagement = new UserManagement();
-            userManagement.setVisible(true);
-            desktopPane.add(userManagement);
-            try {
-                userManagement.setSelected(true);
-            } catch (PropertyVetoException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            }*/
-
             UserManagementCode userManagement = new UserManagementCode();
             userManagement.setVisible(true);
             desktopPane.add(userManagement);
             try {
                 userManagement.setSelected(true);
-            } catch (PropertyVetoException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -226,7 +239,7 @@ public class MainForm extends JFrame implements WindowListener {
             desktopPane.add(roleManagementCode);
             try {
                 roleManagementCode.setSelected(true);
-            } catch (PropertyVetoException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -238,8 +251,8 @@ public class MainForm extends JFrame implements WindowListener {
             desktopPane.add(workGroupManagement);
             try {
                 workGroupManagement.setSelected(true);
-            } catch (PropertyVetoException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
@@ -250,7 +263,7 @@ public class MainForm extends JFrame implements WindowListener {
             desktopPane.add(eventLogList);
             try {
                 eventLogList.setSelected(true);
-            } catch (PropertyVetoException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -262,8 +275,8 @@ public class MainForm extends JFrame implements WindowListener {
             desktopPane.add(calendarManagement);
             try {
                 calendarManagement.setSelected(true);
-            } catch (PropertyVetoException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
@@ -274,8 +287,8 @@ public class MainForm extends JFrame implements WindowListener {
             desktopPane.add(personManagement);
             try {
                 personManagement.setSelected(true);
-            } catch (PropertyVetoException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
@@ -287,7 +300,7 @@ public class MainForm extends JFrame implements WindowListener {
             desktopPane.add(languageAddForm);
             try {
                 languageAddForm.setSelected(true);
-            } catch (PropertyVetoException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -300,7 +313,7 @@ public class MainForm extends JFrame implements WindowListener {
             desktopPane.add(languageManagementCode);
             try {
                 languageManagementCode.setSelected(true);
-            } catch (PropertyVetoException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -309,6 +322,27 @@ public class MainForm extends JFrame implements WindowListener {
         protected void exit() {
             exitOP();
         }
+
+        @Override
+        protected void showPCManagment() {
+            //todo
+        }
+
+        @Override
+        protected void showOperationManagment() {
+            //todo
+        }
+
+        @Override
+        protected void showOrganManagment() {
+            //todo
+        }
+
+        @Override
+        protected void showoperationManagment() {
+            //todo
+        }
+
 
     }
 
