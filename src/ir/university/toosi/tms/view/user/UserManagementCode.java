@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.User;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.ComponentUtil;
+import ir.university.toosi.tms.util.DialogUtil;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
@@ -22,13 +23,9 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
  * User: a_hadadi
- * Date: 10/2/13
- * Time: 8:24 PM
- * To change this template use File | Settings | File Templates.
  */
-public class UserManagementCode extends TMSInternalFrame implements InternalFrameListener {
+public class UserManagementCode extends TMSInternalFrame  {
    private UserManagementPanel panel = null;
     private WebServiceInfo userService = new WebServiceInfo();
     private List<User> userList;
@@ -75,7 +72,6 @@ public class UserManagementCode extends TMSInternalFrame implements InternalFram
         showData();
         Font tahoma = new Font("Tahoma", Font.PLAIN, 12);
         ComponentUtil.setFont(panel, tahoma, ThreadPoolManager.direction);
-        // this.changeComonentOrientation(ThreadPoolManager.direction);
         ComponentUtil.SetJTableAlignment(panel.tableInfo,ThreadPoolManager.direction);
     }
 
@@ -90,48 +86,28 @@ public class UserManagementCode extends TMSInternalFrame implements InternalFram
     }
     private void showData() {
         JTableBinding jTableBinding = SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, userList, panel.tableInfo, "");
-        //JTableBinding jTableBinding = SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, userList, panel.tableInfo, "");
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${username}"));
         columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_USERNAME"));
         columnBinding.setColumnClass(String.class);
         columnBinding.setEditable(false);
+
+
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${enable==1}"));
+        columnBinding.setColumnName("فعال");
+        columnBinding.setColumnClass(Boolean.class);
+        columnBinding.setEditable(false);
+
         BindingGroup bindingGroup = new BindingGroup();
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
+
+        ComponentUtil.SetJTableAlignment(panel.tableInfo,ThreadPoolManager.direction);
+        panel.tableInfo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        panel.tableInfo.getTableHeader().setReorderingAllowed(false);
+        panel.tableInfo.setColumnSelectionAllowed(false);
+
     }
 
-    @Override
-    public void internalFrameOpened(InternalFrameEvent e) {
-    }
-
-    @Override
-    public void internalFrameClosing(InternalFrameEvent e) {
-    }
-
-    @Override
-    public void internalFrameClosed(InternalFrameEvent e) {
-    }
-
-    @Override
-    public void internalFrameIconified(InternalFrameEvent e) {
-    }
-
-    @Override
-    public void internalFrameDeiconified(InternalFrameEvent e) {
-    }
-
-    @Override
-    public void internalFrameActivated(InternalFrameEvent e) {
-        try {
-            refresh();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-    }
-
-    @Override
-    public void internalFrameDeactivated(InternalFrameEvent e) {
-    }
 
 
     class UserManagementPanel extends UserManagementDesign {
@@ -143,7 +119,7 @@ public class UserManagementCode extends TMSInternalFrame implements InternalFram
 
         @Override
         protected void buttonAddActionPerformed() {
-            UserAddCode userAddForm = new UserAddCode();
+            UserAddCode userAddForm = new UserAddCode(null);
             userAddForm.setVisible(true);
             ThreadPoolManager.mainForm.getDesktopPane().add(userAddForm);
             try {
@@ -151,33 +127,50 @@ public class UserManagementCode extends TMSInternalFrame implements InternalFram
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            dispose();
 
         }
 
         @Override
         protected void buttonDeleteActionPerformed() {
+
             if(panel.tableInfo.getSelectedRow()==-1){
-                return;//todo show error
+                //todo read from bundle
+                DialogUtil.showErrorDialog(this
+                        , "کاربر مورد نظر را جهت ویرایش انتخاب نمائید."
+                        , "خطای ورودی"
+                );
+                return;
             }
-            int result = JOptionPane.showConfirmDialog(null, ThreadPoolManager.getLangValue("deleteMessage"), "", JOptionPane.OK_CANCEL_OPTION);
-            if (result == JOptionPane.OK_OPTION) {
-                try {
-                    User user = userList.get(panel.tableInfo.convertRowIndexToModel(tableInfo.getSelectedRow()));
-                    WebServiceInfo serviceInfo = new WebServiceInfo();
-                    serviceInfo.setServiceName("/deleteUser");
-                    new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), new ObjectMapper().writeValueAsString(user));
-                    refresh();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
+            if (!DialogUtil.showDeleteQuestionDialog(this)) {
+                return;
             }
+
+            try {
+                User user = userList.get(panel.tableInfo.convertRowIndexToModel(tableInfo.getSelectedRow()));
+                WebServiceInfo serviceInfo = new WebServiceInfo();
+                serviceInfo.setServiceName("/deleteUser");
+                new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), new ObjectMapper().writeValueAsString(user));
+                refresh();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
 
         @Override
         protected void buttonMembershipManagementActionPerformed() {
             if(panel.tableInfo.getSelectedRow()==-1){
-                return;//todo show error
+                //todo read from bundle
+                DialogUtil.showErrorDialog(this
+                        , "جهت تخصیص، کاربر مورد نظر را انتخاب نمائید."
+                        , "خطای ورودی"
+                );
+                return;
             }
+
+
             User user = userList.get(panel.tableInfo.convertRowIndexToModel(tableInfo.getSelectedRow()));
             UserMembershipManagementCode userMembershipManagement = new UserMembershipManagementCode(user);
             userMembershipManagement.setVisible(true);
@@ -187,6 +180,7 @@ public class UserManagementCode extends TMSInternalFrame implements InternalFram
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            dispose();
 
         }
 
@@ -194,8 +188,14 @@ public class UserManagementCode extends TMSInternalFrame implements InternalFram
         @Override
         protected void buttonEditActionPerformed() {
             if(panel.tableInfo.getSelectedRow()==-1){
-               return; //todo show error
+                //todo read from bundle
+                DialogUtil.showErrorDialog(this
+                        , "کاربر مورد نظر را جهت ویرایش انتخاب نمائید."
+                        , "خطای ورودی"
+                );
+                return;
             }
+
             User user = userList.get(panel.tableInfo.convertRowIndexToModel(panel.tableInfo.getSelectedRow()));
 
             UserAddCode userAddForm = new UserAddCode(user);
@@ -209,6 +209,7 @@ public class UserManagementCode extends TMSInternalFrame implements InternalFram
                 e.printStackTrace();
             }
 
+            dispose();
         }
     }
 }

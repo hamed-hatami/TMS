@@ -18,7 +18,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Set;
 
@@ -93,11 +92,9 @@ public class RoleCode extends TMSInternalFrame {
 
     private void showData() {
 
-
         if(!newMode){
            operationList = fillSelectedOperations();
         }
-
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, operationList, panel.mainTable, "");
 //         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
@@ -156,7 +153,7 @@ public class RoleCode extends TMSInternalFrame {
         return true;
     }
 
-    protected void showWorkGroupManagementAndExit() {
+    protected void showRoleManagementAndExit() {
         RoleManagementCode roleManagementCode = new RoleManagementCode();
         roleManagementCode.setVisible(true);
         ThreadPoolManager.mainForm.getDesktopPane().add(roleManagementCode);
@@ -221,7 +218,7 @@ public class RoleCode extends TMSInternalFrame {
                     ,"ثبت نقش جدید با موفقیت انجام شد."
                     , "اطلاع رسانی"
             );
-            showWorkGroupManagementAndExit();
+            showRoleManagementAndExit();
         }else{
             //todo read from bundle
             DialogUtil.showErrorDialog(this
@@ -245,14 +242,20 @@ public class RoleCode extends TMSInternalFrame {
         role.setEffectorUser(ThreadPoolManager.me.getUsername());
         role.setCurrentLang(ThreadPoolManager.currentLanguage);
         roleService.setServiceName("/editRole");
+
+        boolean success = false;
+
         try {
-            new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl(), roleService.getServiceName(), new ObjectMapper().writeValueAsString(role)), Boolean.class);
+            success = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl()
+                    , roleService.getServiceName()
+                    , new ObjectMapper().writeValueAsString(role))
+                    , Boolean.class);
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
 
-        boolean success = false;
-        try {
+
+        /*try {
             String result= new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(roleService.getServerUrl()
                     , roleService.getServiceName()
                     , new ObjectMapper().writeValueAsString(role))
@@ -261,7 +264,7 @@ public class RoleCode extends TMSInternalFrame {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
         if(success){
             reloadLanguageKeys();
             //todo read from bundle
@@ -270,7 +273,7 @@ public class RoleCode extends TMSInternalFrame {
                     , "ویرایش نقش با موفقیت انجام شد."
                     , "پیغام"
                     ,JOptionPane.INFORMATION_MESSAGE);
-            showWorkGroupManagementAndExit();
+            showRoleManagementAndExit();
         }else{
             //todo read from bundle
             JOptionPane.showMessageDialog(this,
@@ -296,7 +299,7 @@ public class RoleCode extends TMSInternalFrame {
 
         @Override
         void cancelActionPerformed() {
-            showWorkGroupManagementAndExit();
+            showRoleManagementAndExit();
         }
     }
 }

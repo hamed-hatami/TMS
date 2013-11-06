@@ -24,11 +24,11 @@ public class User extends BaseEntity {
     @JsonProperty
     private String enable;
     @JsonProperty
+    private String failedLoginCount;
+    @JsonProperty
     private String lastLoginDate;
     @JsonProperty
     private String lastLoginIP;
-    @JsonProperty
-    private String failedLoginCount;
     @JsonProperty
     private boolean online;
     @JsonProperty
@@ -49,6 +49,16 @@ public class User extends BaseEntity {
     public User() {
     }
 
+    public User(Set<PC> pcs, String username, String password, String enable, boolean online, Set<WorkGroup> workGroups, Person person) {
+        this.pcs = pcs;
+        this.username = username;
+        this.password = password;
+        this.enable = enable;
+        this.online = online;
+        this.workGroups = workGroups;
+        this.person = person;
+    }
+
     public User(long id) {
         this.id = id;
     }
@@ -63,44 +73,21 @@ public class User extends BaseEntity {
         this.enable = enable;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEnable() {
-        return enable;
-    }
-
-    public void setEnable(String enable) {
-        this.enable = enable;
-    }
-
     public String getFailedLoginCount() {
         return failedLoginCount;
     }
 
     public void setFailedLoginCount(String failedLoginCount) {
         this.failedLoginCount = failedLoginCount;
+    }
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getLastLoginDate() {
@@ -119,12 +106,20 @@ public class User extends BaseEntity {
         this.lastLoginIP = lastLoginIP;
     }
 
-    public boolean isOnline() {
-        return online;
+    public String getPassword() {
+        return password;
     }
 
-    public void setOnline(boolean online) {
-        this.online = online;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Set<WorkGroup> getWorkGroups() {
@@ -133,6 +128,22 @@ public class User extends BaseEntity {
 
     public void setWorkGroups(Set<WorkGroup> workGroups) {
         this.workGroups = workGroups;
+    }
+
+    public String getEnable() {
+        return enable;
+    }
+
+    public void setEnable(String enable) {
+        this.enable = enable;
+    }
+
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
     }
 
     public String getExtraField1() {
@@ -176,7 +187,7 @@ public class User extends BaseEntity {
     }
 
     public Set<PC> getPcs() {
-        if(pcs == null)
+        if (pcs == null)
             return new HashSet<>();
         return pcs;
     }
