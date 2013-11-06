@@ -11,23 +11,8 @@ import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.basicinfo.BasicInfoManagement;
 import ir.university.toosi.tms.view.calendar.CalendarManagement;
 import ir.university.toosi.tms.view.language.LanguageAddForm;
-import ir.university.toosi.tms.view.language.LanguageManagementCode;
-import ir.university.toosi.tms.view.pc.PCForm;
-import ir.university.toosi.tms.view.pc.PCManagement;
-import ir.university.toosi.tms.view.pc.PCManagementCode;
-import ir.university.toosi.tms.view.person.PersonForm;
-import ir.university.toosi.tms.view.person.PersonList;
-import ir.university.toosi.tms.view.person.PersonManagement;
-import ir.university.toosi.tms.view.role.AddRoleCode;
+import ir.university.toosi.tms.view.role.RoleCode;
 import ir.university.toosi.tms.view.role.RoleForm;
-import ir.university.toosi.tms.view.role.RoleManagement;
-import ir.university.toosi.tms.view.role.RoleManagementCode;
-import ir.university.toosi.tms.view.user.UserAddCode;
-import ir.university.toosi.tms.view.user.UserForm;
-import ir.university.toosi.tms.view.user.UserManagement;
-import ir.university.toosi.tms.view.workgroup.WorkGroupForm;
-import ir.university.toosi.tms.view.workgroup.WorkGroupManagement;
-import ir.university.toosi.tms.view.workgroup.WorkGroupManagementCode;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameEvent;
@@ -69,13 +54,13 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
 
             TMSInternalFrame internalFrame ;
 
-            internalFrame = new AddRoleCode();//WorkGroupManagement();
+           /* internalFrame = new RoleForm();//WorkGroupManagement();
             internalFrame.setVisible(true);
             jdpDesktop = new TMSDesktop();
             jdpDesktop.add(internalFrame);
             internalFrame.setSelected(true);
             internalFrame.setLocation(200,200);
-            setContentPane(jdpDesktop);
+            setContentPane(jdpDesktop);*/
 
             jdpDesktop.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
 

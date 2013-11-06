@@ -46,7 +46,7 @@ public class OperationManagement extends TMSInternalFrame {
         }
     }
 
-    public OperationManagement(TMSDesktop jDesktopPane, Role role, AddRoleCode roleForm) {
+    public OperationManagement(TMSDesktop jDesktopPane, Role role, RoleCode roleForm) {
         fillSearchCombo();
         jdpDesktop = jDesktopPane;
         mainPanel = new TMSPanel();
@@ -325,7 +325,7 @@ public class OperationManagement extends TMSInternalFrame {
     private List<Operation> operationList = new ArrayList<>();
     private String[] searchItems;
     private Role role;
-    private AddRoleCode roleForm;
+    private RoleCode roleForm;
 
     public JTable getMainTable() {
         return mainTable;

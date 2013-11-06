@@ -113,8 +113,10 @@ public class WorkGroupCode extends TMSInternalFrame {
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
 
+        ComponentUtil.SetJTableAlignment(panel.tableRole,ThreadPoolManager.direction);
+        panel.tableRole.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         panel.tableRole.getTableHeader().setReorderingAllowed(false);
-
+        panel.tableRole.setColumnSelectionAllowed(false);
        /* panel.tableRole.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         panel.tableRole.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         panel.tableRole.getColumnModel().getColumn(0).setPreferredWidth(150);
@@ -147,15 +149,18 @@ public class WorkGroupCode extends TMSInternalFrame {
         newWorkGroup.setDescText(panel.textFieldDescription.getText());
         newWorkGroup.setRoles(getSelectedRoleList());
         newWorkGroup.setCurrentLang(ThreadPoolManager.currentLanguage);
+        newWorkGroup.setDeleted("0");
+        newWorkGroup.setEffectorUser(ThreadPoolManager.me.getUsername());
+
 
         workGroupService.setServiceName("/createWorkGroup");
         boolean success = false;
         try {
-            WorkGroup result=  new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl()
+            workGroup=  new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl()
                     , workGroupService.getServiceName()
                     , new ObjectMapper().writeValueAsString(newWorkGroup))
                     , WorkGroup.class);
-            success = result != null;
+            success = workGroup != null;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -204,7 +209,7 @@ public class WorkGroupCode extends TMSInternalFrame {
     }
 
     private void reloadLanguageKeys() {
-        languageService.setServiceName("/loadLanguage");
+       /* languageService.setServiceName("/loadLanguage");
         try {
             ThreadPoolManager.langHash = new ObjectMapper().readValue(new RESTfulClientUtil().restFullServiceString(languageService.getServerUrl()
                     , languageService.getServiceName()
@@ -214,7 +219,13 @@ public class WorkGroupCode extends TMSInternalFrame {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
+
+        LanguageManagement languageManagement = new LanguageManagement();
+        languageManagement.setTitle(panel.textFieldDescription.getText());
+        languageManagement.setType(ThreadPoolManager.currentLanguage);
+        ThreadPoolManager.langHash.put(workGroup.getDescription(), languageManagement);
+
     }
 
     public void editWorkGroup() {
@@ -227,6 +238,8 @@ public class WorkGroupCode extends TMSInternalFrame {
         //workGroup.setDescShow(panel.textFieldDescription.getText());
         workGroup.setDescText(panel.textFieldDescription.getText());
         workGroup.setRoles(getSelectedRoleList());
+        workGroup.setEffectorUser(ThreadPoolManager.me.getUsername());
+        workGroup.setEffectorUser(ThreadPoolManager.me.getUsername());
         workGroup.setCurrentLang(ThreadPoolManager.currentLanguage);
 
         workGroupService.setServiceName("/editWorkGroup");
@@ -269,7 +282,6 @@ public class WorkGroupCode extends TMSInternalFrame {
             }
         return selectedRoleList;
     }
-
 
     class WorkGroupPanel extends WorkGroupDesign {
         @Override

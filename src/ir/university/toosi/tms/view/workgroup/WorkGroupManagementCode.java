@@ -62,6 +62,7 @@ public class WorkGroupManagementCode extends TMSInternalFrame {
            Font tahoma = new Font("Tahoma", Font.PLAIN, 12);
            ComponentUtil.setFont(panel, tahoma, ThreadPoolManager.direction);
            ComponentUtil.SetJTableAlignment(panel.tableInfo,ThreadPoolManager.direction);
+
        } catch (IOException e) {
            e.printStackTrace();
        }
@@ -82,10 +83,23 @@ public class WorkGroupManagementCode extends TMSInternalFrame {
         columnBinding.setColumnName(ThreadPoolManager.getLangValue("TMS_DESC"));
         columnBinding.setColumnClass(String.class);
         columnBinding.setEditable(false);
+
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${enabled==1}"));
+        columnBinding.setColumnName("فعال");
+        columnBinding.setColumnClass(Boolean.class);
+        columnBinding.setEditable(false);
+
         BindingGroup bindingGroup = new BindingGroup();
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
+
         ComponentUtil.SetJTableAlignment(panel.tableInfo,ThreadPoolManager.direction);
+        panel.tableInfo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        panel.tableInfo.getTableHeader().setReorderingAllowed(false);
+        panel.tableInfo.setColumnSelectionAllowed(false);
+        /*panel.tableInfo.setRowSelectionAllowed(true);
+        panel.tableInfo.setCellSelectionEnabled(false);*/
+       // panel.tableInfo.setColumnSelectionAllowed(false);
     }
 
 

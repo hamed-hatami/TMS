@@ -22,7 +22,7 @@ new FormModel {
 					"y": 37
 				} )
 				add( new FormComponent( "javax.swing.JCheckBox" ) {
-					name: "checkBox1"
+					name: "checkBoxActive"
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4
 					}
@@ -43,7 +43,7 @@ new FormModel {
 					"width": 82
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "textField1"
+					name: "textFieldDescription"
 					"font": #Font0
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4

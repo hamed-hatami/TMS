@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.Role;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.ComponentUtil;
+import ir.university.toosi.tms.util.DialogUtil;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
@@ -12,8 +13,6 @@ import org.jdesktop.beansbinding.BindingGroup;
 import org.jdesktop.swingbinding.JTableBinding;
 
 import javax.swing.*;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
 import java.awt.*;
 import java.io.IOException;
 import java.util.*;
@@ -88,8 +87,11 @@ public class RoleManagementCode extends TMSInternalFrame {
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
 
+        ComponentUtil.SetJTableAlignment(panel.mainTable,ThreadPoolManager.direction);
+        panel.mainTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        panel.mainTable.getTableHeader().setReorderingAllowed(false);
+        panel.mainTable.setColumnSelectionAllowed(false);
     }
-
 
     private void getAll() throws IOException {
         roleService.setServiceName("/getAllRole");
@@ -102,35 +104,51 @@ public class RoleManagementCode extends TMSInternalFrame {
 
         @Override
         protected void buttonAddActionPerformed() {
-            AddRoleCode addRoleCode = new AddRoleCode();
-            addRoleCode.setVisible(true);
-            // roleManagementCode.setBounds(170, 65, 175, 105);
-            // desktopPane.add(roleManagementCode, JLayeredPane.DEFAULT_LAYER);
-            ThreadPoolManager.mainForm.getDesktopPane().add(addRoleCode);
+            RoleCode roleCode = new RoleCode(null);
+            roleCode.setVisible(true);
+            ThreadPoolManager.mainForm.getDesktopPane().add(roleCode);
             try {
-                addRoleCode.setSelected(true);
+                roleCode.setSelected(true);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            dispose();
         }
+
 
         @Override
         protected void buttonDeleteActionPerformed() {
             if(panel.mainTable.getSelectedRow()==-1){
-                return;//todo show error
+                //todo read from bundle
+                DialogUtil.showErrorDialog(this
+                        , "نقش مورد نظر را جهت ویرایش انتخاب فرمائید."
+                        , "خطای ورودی"
+                );
+                return;
             }
-            int result = JOptionPane.showConfirmDialog(this, ThreadPoolManager.getLangValue("deleteMessage"), "", JOptionPane.OK_CANCEL_OPTION);
-            if (result == JOptionPane.OK_OPTION) {
-               /* try {
-                   *//* User user = userList.get(panel.tableInfo.convertRowIndexToModel(tableInfo.getSelectedRow()));
-                    WebServiceInfo serviceInfo = new WebServiceInfo();
-                    serviceInfo.setServiceName("/deleteUser");
-                    new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), new ObjectMapper().writeValueAsString(user));
-                    refresh();*//*
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
+
+            if (!DialogUtil.showDeleteQuestionDialog(this)) {
+                return;
+            }
+
+            try {
+                Role role = roleList.get(panel.mainTable.convertRowIndexToModel(panel.mainTable.getSelectedRow()));
+                WebServiceInfo serviceInfo = new WebServiceInfo();
+                serviceInfo.setServiceName("/deleteRole");
+                new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), new ObjectMapper().writeValueAsString(role));
+                //todo read from bundle
+                DialogUtil.showOKDialog(this
+                        ,"نقش مورد نظر حذف شد."
+                        ,"اطلاع رسانی"
+                );
+                refresh();
+            } catch (IOException e) {
+                //todo read from bundle
+                DialogUtil.showErrorDialog(this
+                        ,"در حذف نقش خطا رخ داده است"
+                        ,"خطای سیستمی"
+                );
+                e.printStackTrace();
             }
         }
 
@@ -141,7 +159,26 @@ public class RoleManagementCode extends TMSInternalFrame {
 
         @Override
         protected void buttonEditActionPerformed() {
-            //todo
+            if(panel.mainTable.getSelectedRow()==-1){
+                //todo read from bundle
+                DialogUtil.showErrorDialog(this
+                        , "نقش مورد نظر را جهت ویرایش انتخاب فرمائید."
+                        , "خطای ورودی"
+                );
+                return;
+            }
+            Role role = roleList.get(panel.mainTable.convertRowIndexToModel(panel.mainTable.getSelectedRow()));
+            RoleCode roleCode = new RoleCode(role);
+            roleCode.setVisible(true);
+            ThreadPoolManager.mainForm.getDesktopPane().add(roleCode);
+            try {
+                dispose();
+                roleCode.setSelected(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            dispose();
         }
     }
 }

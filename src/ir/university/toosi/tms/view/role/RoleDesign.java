@@ -13,8 +13,9 @@ import javax.swing.table.*;
 /**
  * @author a_hadadi
  */
-public abstract class AddRoleDesign extends JPanel {
-    public AddRoleDesign() {
+
+public abstract class RoleDesign extends JPanel {
+    public RoleDesign() {
         initComponents();
     }
 
@@ -26,9 +27,9 @@ public abstract class AddRoleDesign extends JPanel {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         panel1 = new JPanel();
         label2 = new JLabel();
-        checkBox1 = new JCheckBox();
+        checkBoxActive = new JCheckBox();
         label1 = new JLabel();
-        textField1 = new JTextField();
+        textFieldDescription = new JTextField();
         panel2 = new JPanel();
         scrollPane1 = new JScrollPane();
         mainTable = new JTable();
@@ -49,8 +50,8 @@ public abstract class AddRoleDesign extends JPanel {
             label2.setFont(new Font("Tahoma", Font.PLAIN, 11));
             panel1.add(label2);
             label2.setBounds(469, 37, 82, 16);
-            panel1.add(checkBox1);
-            checkBox1.setBounds(new Rectangle(new Point(440, 35), checkBox1.getPreferredSize()));
+            panel1.add(checkBoxActive);
+            checkBoxActive.setBounds(new Rectangle(new Point(440, 35), checkBoxActive.getPreferredSize()));
 
             //---- label1 ----
             label1.setText("\u062a\u0648\u0636\u06cc\u062d");
@@ -58,10 +59,10 @@ public abstract class AddRoleDesign extends JPanel {
             panel1.add(label1);
             label1.setBounds(470, 13, 82, label1.getPreferredSize().height);
 
-            //---- textField1 ----
-            textField1.setFont(new Font("Tahoma", Font.PLAIN, 11));
-            panel1.add(textField1);
-            textField1.setBounds(285, 10, 175, textField1.getPreferredSize().height);
+            //---- textFieldDescription ----
+            textFieldDescription.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            panel1.add(textFieldDescription);
+            textFieldDescription.setBounds(285, 10, 175, textFieldDescription.getPreferredSize().height);
 
             { // compute preferred size
                 Dimension preferredSize = new Dimension();
@@ -207,9 +208,9 @@ public abstract class AddRoleDesign extends JPanel {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel panel1;
     protected JLabel label2;
-    protected JCheckBox checkBox1;
+    protected JCheckBox checkBoxActive;
     protected JLabel label1;
-    protected JTextField textField1;
+    protected JTextField textFieldDescription;
     private JPanel panel2;
     private JScrollPane scrollPane1;
     protected JTable mainTable;
