@@ -65,8 +65,6 @@ public class UserManagementCode extends TMSInternalFrame  {
        }
    }
 
-
-
     public void refresh() throws IOException {
         getAll();
         showData();
@@ -84,6 +82,7 @@ public class UserManagementCode extends TMSInternalFrame  {
             e.printStackTrace();
         }
     }
+
     private void showData() {
         JTableBinding jTableBinding = SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, userList, panel.tableInfo, "");
         JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${username}"));
@@ -107,8 +106,6 @@ public class UserManagementCode extends TMSInternalFrame  {
         panel.tableInfo.setColumnSelectionAllowed(false);
 
     }
-
-
 
     class UserManagementPanel extends UserManagementDesign {
 

@@ -2,12 +2,10 @@ package ir.university.toosi.tms.view.user;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ir.university.toosi.tms.model.entity.PC;
-import ir.university.toosi.tms.model.entity.User;
-import ir.university.toosi.tms.model.entity.WebServiceInfo;
-import ir.university.toosi.tms.model.entity.WorkGroup;
+import ir.university.toosi.tms.model.entity.*;
 import ir.university.toosi.tms.model.entity.person.Person;
 import ir.university.toosi.tms.util.ComponentUtil;
+import ir.university.toosi.tms.util.DialogUtil;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
@@ -34,7 +32,7 @@ public class UserMembershipManagementCode extends TMSInternalFrame {
     private User user;
     private WebServiceInfo pcService = new WebServiceInfo();
     private WebServiceInfo workGroupService = new WebServiceInfo();
-
+    private WebServiceInfo userService = new WebServiceInfo();
     private WebServiceInfo personService = new WebServiceInfo();
     private List<Person> personList;
 
@@ -92,18 +90,60 @@ public class UserMembershipManagementCode extends TMSInternalFrame {
         try {
             pcList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(pcService.getServerUrl(), pcService.getServiceName()), new TypeReference<List<PC>>() {});
             personList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(personService.getServerUrl(), personService.getServiceName()), new TypeReference<List<Person>>() { });
-            workGroupList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName()), new TypeReference<List<WorkGroup>>() {
-            });
+            workGroupList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(workGroupService.getServerUrl(), workGroupService.getServiceName()), new TypeReference<List<WorkGroup>>() {});
+
+            pcList = getMixUserSelectedPCs();
+            workGroupList = getMixUserSelectedWorkGroups();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-       /* pcList = new ArrayList<>(); //todo previus selected pc list
-        if (user == null)
-            return;
-        for (PC pc : user.getPcs()) {
-            pcList.add(pc);
-        }*/
     }
+
+    private List<WorkGroup> getMixUserSelectedWorkGroups() {
+        for(WorkGroup userWorkGroup :  user.getWorkGroups()){
+            for(WorkGroup tableWorkGroup :  workGroupList){
+                if(userWorkGroup.getId() == tableWorkGroup.getId()){
+                    tableWorkGroup.setSelected(true);
+                    break;
+                }
+            }
+        }
+        return workGroupList;
+    }
+
+    public Set<WorkGroup> getSelectedWorkGroupList(){
+        Set<WorkGroup> selectedWorkGroupList = new HashSet<>();
+        for(WorkGroup tableWorkGroup :  workGroupList){
+            if(tableWorkGroup.isSelected()){
+                selectedWorkGroupList.add(tableWorkGroup);
+            }
+        }
+        return selectedWorkGroupList;
+    }
+
+    private List<PC> getMixUserSelectedPCs() {
+        for(PC userPC :  user.getPcs()){
+            for(PC tablePC :  pcList){
+                if(userPC.getId() == tablePC.getId()){
+                    tablePC.setSelected(true);
+                    break;
+                }
+            }
+        }
+        return pcList;
+    }
+
+    public Set<PC> getSelectedPCList(){
+        Set<PC> selectedPCList = new HashSet<>();
+        for(PC tablePC :  pcList){
+            if(tablePC.isSelected()){
+                selectedPCList.add(tablePC);
+            }
+        }
+        return selectedPCList;
+    }
+
     private void showData() {
 
         //data for PC
@@ -123,7 +163,7 @@ public class UserMembershipManagementCode extends TMSInternalFrame {
 
         columnBindingPC = jTableBindingPC.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${selected}"));
 
-        columnBindingPC.setColumnName("انتخاب");
+        columnBindingPC.setColumnName("انتخاب");//todo lang
         columnBindingPC.setColumnClass(Boolean.class);
 
 
@@ -144,13 +184,13 @@ public class UserMembershipManagementCode extends TMSInternalFrame {
         columnBindingWG.setColumnClass(String.class);
         columnBindingWG = jTableBindingWG.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${selected}"));
 
-        columnBindingWG.setColumnName("انتخاب");
+        columnBindingWG.setColumnName("انتخاب");//todo lang
         columnBindingWG.setColumnClass(Boolean.class);
         columnBindingWG.setEditable(true);
         BindingGroup bindingGroupWG = new BindingGroup();
         bindingGroupWG.addBinding(jTableBindingWG);
         jTableBindingWG.bind();
-        //todo add select column
+
 
         //data for person
         org.jdesktop.swingbinding.JTableBinding jTableBindingPerson = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, personList, panel.tablePerson, "");
@@ -173,23 +213,130 @@ public class UserMembershipManagementCode extends TMSInternalFrame {
         bindingGroupPerson.addBinding(jTableBindingPerson);
         jTableBindingPerson.bind();
 
+       //  select current person
+        if(user.getPerson()!=null){
+            for(int i = 0 ; i<panel.tablePerson.getRowCount();i++){
+               Person person = personList.get(panel.tablePerson.convertRowIndexToModel(i));
+                  if(person.getId() == user.getPerson().getId()){
+                      panel.tablePerson.setRowSelectionInterval(i,i);
+                      break;
+                  }
+            }
+        }
+    }
 
+    private boolean validateForm() {
+        if(panel.tablePerson.getSelectedRow() == -1){
+            //todo bundle
+           if(!DialogUtil.showYesNOQuestionDialog(this
+                    ,"شخص مرتبط با این کاربر انتخاب نشده است، آیا ادامه می دهید؟"
+            ,"بله"
+            ,"خیر"
+            ,"اطلاعات ناقص")){
+               return false;
+           }
+        }
 
+        if(getSelectedWorkGroupList().isEmpty()){
+            //todo bundle
+            if(!DialogUtil.showYesNOQuestionDialog(this
+                    ,"گروه کاری مرتبط با این کاربر انتخاب نشده است، آیا ادامه می دهید؟"
+                    ,"بله"
+                    ,"خیر"
+                    ,"اطلاعات ناقص")){
+                return false;
+            }
+        }
 
+        if(getSelectedPCList().isEmpty()){
+            //todo bundle
+            if(!DialogUtil.showYesNOQuestionDialog(this
+                    ,"رایانه مرتبط با این کاربر انتخاب نشده است، آیا ادامه می دهید؟"
+                    ,"بله"
+                    ,"خیر"
+                    ,"اطلاعات ناقص")){
+                return false;
+            }
+        }
 
+        return true;
+    }
+
+    private void save(){
+        if(!validateForm()){
+            return;
+        }
+
+       // user.setUsername(panel.textFieldUserName.getText());
+       // user.setEnable(panel.checkBoxStatus.isSelected() ? "1" : "0");
+       // user.setPassword(Arrays.toString(panel.textFieldUserPassword.getPassword()));
+        user.setPcs(getSelectedPCList());
+        user.setWorkGroups(getSelectedWorkGroupList());
+        user.setPerson(getSelectedPerson());
+
+        user.setDeleted("0");
+        user.setEffectorUser(ThreadPoolManager.me.getUsername());
+        user.setCurrentLang(ThreadPoolManager.currentLanguage);
+        userService.setServiceName("/editUser");
+        boolean success = false;
+
+        try {
+            success = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(userService.getServerUrl()
+                    , userService.getServiceName()
+                    , new ObjectMapper().writeValueAsString(this.user))
+                    , Boolean.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (success) {
+            //todo read from bundle
+            //ThreadPoolManager.getLangValue("TMS_WORKGROUP_EDIT")
+            DialogUtil.showOKDialog(this
+                    , "ویرایش  کاربر با موفقیت انجام شد"
+                    , "اطلاع رسانی"
+            );
+            showUserManagementAndExit();
+        } else {
+            //todo read from bundle
+            DialogUtil.showErrorDialog(this
+                    , "ویرایش کاربر با خطا مواجه شد"
+                    , "خطای سیستمی"
+            );
+        }
+
+    }
+
+    private Person getSelectedPerson() {
+        if(panel.tablePerson.getSelectedRow() == -1){
+           return null;
+        }
+        return personList.get(panel.tablePerson.convertRowIndexToModel(panel.tablePerson.getSelectedRow()));
+    }
+
+    protected void showUserManagementAndExit() {
+        UserManagementCode userManagement = new UserManagementCode();
+        userManagement.setVisible(true);
+        ThreadPoolManager.mainForm.getDesktopPane().add(userManagement);
+        try {
+            userManagement.setSelected(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        dispose();
     }
 
     private class UserMembershipManagementDesignPanel extends  UserMembershipManagementDesign {
 
         @Override
         protected void cancelActionPerformed() {
-            dispose();
+            showUserManagementAndExit();
         }
 
         @Override
         protected void saveActionPerformed() {
-            //todo save
-            dispose();
+            save();
+
         }
     }
 }

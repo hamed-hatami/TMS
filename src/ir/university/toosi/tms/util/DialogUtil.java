@@ -26,7 +26,7 @@ public class DialogUtil {
     public static void showErrorDialog(Component parentComponent
             ,String mainMessage
             ,String titleMessage){
-        Object[] options = {"باشد"}; //and every desire text unlimited
+        Object[] options = {"تائید"}; //todo
         JOptionPane.showOptionDialog(parentComponent,
                 mainMessage,
                 titleMessage,
@@ -39,11 +39,19 @@ public class DialogUtil {
 
     public static boolean showDeleteQuestionDialog(Component parentComponent){
         //todo read from bundle
-        Object[] options = {"بله، حذف شود",
-                "خیر، حذف نشود"}; //and every desire text unlimited
+        return showYesNOQuestionDialog(parentComponent
+                ,ThreadPoolManager.getLangValue("deleteMessage")
+                ,"بله، حذف شود"
+                ,"خیر، حذف نشود"
+                , "تایید حذف");
+    }
+
+    public static boolean showYesNOQuestionDialog(Component parentComponent,String mainMessage,String yesMessage,String noMessage ,String titleMessage){
+
+        Object[] options = {yesMessage,noMessage}; //and every desire text unlimited
         int confirm = JOptionPane.showOptionDialog(parentComponent,
-                ThreadPoolManager.getLangValue("deleteMessage"),
-                "تایید حذف",
+                mainMessage,
+                titleMessage,
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
@@ -52,22 +60,14 @@ public class DialogUtil {
         return confirm == JOptionPane.YES_OPTION;
     }
 
+
      public static boolean showExitQuestionDialog(Component parentComponent){
         //todo read from bundle
-         String msg = "آیا برای خروج مطمئن هستید ؟" ;
-         // msg =  ThreadPoolManager.getLangValue("closeConfirm");//todo load from bundle
-         //Custom button text
-         Object[] options = {"بله، خارج می شوم",
-                 "خیر، ادامه کار"}; //and every desire text unlimited
-         int confirm = JOptionPane.showOptionDialog(parentComponent,
-                 msg,
-                 "تایید خروج",
-                 JOptionPane.YES_NO_OPTION,
-                 JOptionPane.QUESTION_MESSAGE,
-                 null,
-                 options,
-                 options[1]);
-         return confirm == JOptionPane.YES_OPTION;
+         return showYesNOQuestionDialog(parentComponent
+                 , "آیا برای خروج مطمئن هستید ؟"
+                 ,"بله، خارج می شوم"
+                 ,"خیر، ادامه کار"
+                 , "تایید خروج");
     }
 
 

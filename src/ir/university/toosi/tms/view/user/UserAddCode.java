@@ -198,7 +198,7 @@ public class UserAddCode extends TMSInternalFrame {
                     , new ObjectMapper().writeValueAsString(this.user))
                     , Boolean.class);
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
 
         if (success) {
