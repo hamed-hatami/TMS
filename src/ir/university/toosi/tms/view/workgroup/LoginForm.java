@@ -253,7 +253,7 @@ public class LoginForm extends JDialog {
                             , "استفاده از این کامپیوتر برای شما مجاز نیست."
                             , "احراز هویت"
                     );
-                    // return;todo after all un commnet this line
+                     return;
                 }
 
             } catch (UnknownHostException e) {

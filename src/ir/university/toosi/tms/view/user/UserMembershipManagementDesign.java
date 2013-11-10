@@ -70,7 +70,7 @@ public abstract class UserMembershipManagementDesign extends JPanel {
                 scrollPane1.setViewportView(tablePerson);
             }
             panelPerson.add(scrollPane1);
-            scrollPane1.setBounds(10, 20, 535, 85);
+            scrollPane1.setBounds(10, 20, 630, 110);
 
             { // compute preferred size
                 Dimension preferredSize = new Dimension();
@@ -87,7 +87,7 @@ public abstract class UserMembershipManagementDesign extends JPanel {
             }
         }
         add(panelPerson);
-        panelPerson.setBounds(15, 10, 555, 110);
+        panelPerson.setBounds(15, 10, 650, 135);
 
         //======== panelWorkgroup ========
         {
@@ -134,7 +134,7 @@ public abstract class UserMembershipManagementDesign extends JPanel {
                 scrollPane2.setViewportView(tableWorkgroup);
             }
             panelWorkgroup.add(scrollPane2);
-            scrollPane2.setBounds(10, 15, 535, 80);
+            scrollPane2.setBounds(10, 15, 630, 135);
 
             { // compute preferred size
                 Dimension preferredSize = new Dimension();
@@ -151,7 +151,7 @@ public abstract class UserMembershipManagementDesign extends JPanel {
             }
         }
         add(panelWorkgroup);
-        panelWorkgroup.setBounds(16, 123, 554, 100);
+        panelWorkgroup.setBounds(16, 144, 649, 155);
 
         //======== panelPC ========
         {
@@ -206,7 +206,7 @@ public abstract class UserMembershipManagementDesign extends JPanel {
                 scrollPane3.setViewportView(tablePC);
             }
             panelPC.add(scrollPane3);
-            scrollPane3.setBounds(10, 20, 535, 105);
+            scrollPane3.setBounds(5, 20, 640, 120);
 
             { // compute preferred size
                 Dimension preferredSize = new Dimension();
@@ -223,7 +223,7 @@ public abstract class UserMembershipManagementDesign extends JPanel {
             }
         }
         add(panelPC);
-        panelPC.setBounds(17, 225, 553, 130);
+        panelPC.setBounds(15, 295, 650, 145);
 
         //======== panel3 ========
         {
@@ -269,7 +269,7 @@ public abstract class UserMembershipManagementDesign extends JPanel {
             }
         }
         add(panel3);
-        panel3.setBounds(20, 360, 550, 45);
+        panel3.setBounds(15, 445, 650, 45);
 
         { // compute preferred size
             Dimension preferredSize = new Dimension();

@@ -37,14 +37,14 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 10
 					"y": 20
-					"width": 535
-					"height": 85
+					"width": 630
+					"height": 110
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 15
 				"y": 10
-				"width": 555
-				"height": 110
+				"width": 650
+				"height": 135
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 				name: "panelWorkgroup"
@@ -77,16 +77,16 @@ new FormModel {
 						}
 					} )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"width": 535
-					"height": 80
+					"width": 630
+					"height": 135
 					"x": 10
 					"y": 15
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 554
-				"height": 100
+				"width": 649
+				"height": 155
 				"x": 16
-				"y": 123
+				"y": 144
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 				name: "panelPC"
@@ -127,16 +127,16 @@ new FormModel {
 						}
 					} )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"width": 535
-					"height": 105
-					"x": 10
+					"width": 640
+					"height": 120
+					"x": 5
 					"y": 20
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 553
-				"height": 130
-				"x": 17
-				"y": 225
+				"width": 650
+				"height": 145
+				"x": 15
+				"y": 295
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 				name: "panel3"
@@ -170,14 +170,14 @@ new FormModel {
 					"height": 24
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 550
+				"width": 650
 				"height": 45
-				"x": 20
-				"y": 360
+				"x": 15
+				"y": 445
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 585, 415 )
+			"size": new java.awt.Dimension( 675, 500 )
 		} )
 	}
 }

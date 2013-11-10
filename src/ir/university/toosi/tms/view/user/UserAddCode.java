@@ -136,7 +136,8 @@ public class UserAddCode extends TMSInternalFrame {
 //        newRole.setDescription(roleDesc.getText());
         user.setUsername(panel.textFieldUserName.getText());
         user.setEnable(panel.checkBoxStatus.isSelected() ? "1" : "0");
-        user.setPassword(Arrays.toString(panel.textFieldUserPassword.getPassword()));
+       // user.setPassword(Arrays.toString(panel.textFieldUserPassword.getPassword()));
+        user.setPassword(panel.textFieldUserPassword.getText());
         Set<PC> selectedPCs = new HashSet<>();
         user.setPcs(selectedPCs);
         Set<WorkGroup> selectedWorkGroups = new HashSet<>();
@@ -184,7 +185,8 @@ public class UserAddCode extends TMSInternalFrame {
 //        newRole.setDescription(roleDesc.getText());
         user.setUsername(panel.textFieldUserName.getText());
         user.setEnable(panel.checkBoxStatus.isSelected() ? "1" : "0");
-        user.setPassword(Arrays.toString(panel.textFieldUserPassword.getPassword()));
+       // user.setPassword(Arrays.toString(panel.textFieldUserPassword.getPassword()));
+        user.setPassword(panel.textFieldUserPassword.getText());
 
         user.setDeleted("0");
         user.setEffectorUser(ThreadPoolManager.me.getUsername());
