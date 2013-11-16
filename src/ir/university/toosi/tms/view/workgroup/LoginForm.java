@@ -24,7 +24,6 @@ import java.util.Properties;
 
 public class LoginForm extends JDialog {
 
-    private final String settingFileName = "TMS.dat";
     public ComponentOrientation direction;
     public String lookAndFeel;
     private String formTitle = "login";
@@ -95,11 +94,11 @@ public class LoginForm extends JDialog {
 
     private void initAppSettings() {
         try {
-            FileInputStream in = new FileInputStream(settingFileName);
+            FileInputStream in = new FileInputStream(ThreadPoolManager.settingFileName);
             settings.load(in);
         } catch (IOException e) {
             // e.printStackTrace();
-            System.out.println("prop File not found.. '" + settingFileName + "'");
+            System.out.println("prop File not found.. '" + ThreadPoolManager.settingFileName + "'");
             return;
         }
 
@@ -124,7 +123,7 @@ public class LoginForm extends JDialog {
         settings.setProperty("prop_userName", prop_userName);
 
         try {
-            FileOutputStream propFileOutputStream = new FileOutputStream(settingFileName);
+            FileOutputStream propFileOutputStream = new FileOutputStream(ThreadPoolManager.settingFileName);
             settings.store(propFileOutputStream, "Settings and preferences for TMS"); // save properties
             propFileOutputStream.close();
         } catch (IOException ioException) {
@@ -215,7 +214,7 @@ public class LoginForm extends JDialog {
 
             user = new User();
             user.setUsername(userName.getText());
-            user.setPassword(password.getText());
+            user.setPassword(password.getText());//todo Encryption ?
 
 
             AccessController.doPrivileged(new PrivilegedAction() {

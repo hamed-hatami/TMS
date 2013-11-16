@@ -3,7 +3,7 @@ package ir.university.toosi.tms.view.person;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.controller.LanguageAction;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
-import ir.university.toosi.tms.model.entity.person.Person;
+import ir.university.toosi.tms.model.entity.personnel.Person;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
@@ -14,13 +14,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
-public class PersonForm extends TMSInternalFrame {
+public class PersonFormOLD extends TMSInternalFrame {
 
-    public PersonForm() {
+    public PersonFormOLD() {
         this(false, null);
     }
 
-    public PersonForm(boolean editMode, Person person) {
+    public PersonFormOLD(boolean editMode, Person person) {
 
         mainPanel = new TMSPanel();
         mainPanel.setComponentOrientation(ComponentOrientation.getOrientation(LanguageAction.getLocale()));
@@ -85,7 +85,7 @@ public class PersonForm extends TMSInternalFrame {
             pin.setText(person.getPin());
             personnelNo.setText(person.getPersonnelNo());
             nationalCode.setText(person.getNationalCode());
-            picture.setText(person.getPicture());
+            //picture.setText(person.getPicture());
         } else {
             name.setText("");
             lastName.setText("");
@@ -265,7 +265,7 @@ public class PersonForm extends TMSInternalFrame {
         person.setLastName(lastName.getText());
         person.setNationalCode(nationalCode.getText());
         person.setPersonnelNo(personnelNo.getText());
-        person.setPicture(picture.getText());
+       // person.setPicture(picture.getText());
         person.setPersonnelNo(personnelNo.getText());
         person.setPin(pin.getText());
 
@@ -285,7 +285,7 @@ public class PersonForm extends TMSInternalFrame {
         newPerson.setLastName(lastName.getText());
         newPerson.setNationalCode(nationalCode.getText());
         newPerson.setPersonnelNo(personnelNo.getText());
-        newPerson.setPicture(picture.getText());
+       // newPerson.setPicture(picture.getText());
         newPerson.setPersonnelNo(personnelNo.getText());
         newPerson.setPin(pin.getText());
 

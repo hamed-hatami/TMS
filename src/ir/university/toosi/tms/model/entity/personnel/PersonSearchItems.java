@@ -1,4 +1,4 @@
-package ir.university.toosi.tms.model.entity.person;
+package ir.university.toosi.tms.model.entity.personnel;
 
 import ir.university.toosi.tms.util.ThreadPoolManager;
 

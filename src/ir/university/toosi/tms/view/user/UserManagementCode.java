@@ -26,7 +26,7 @@ import java.util.List;
  * User: a_hadadi
  */
 public class UserManagementCode extends TMSInternalFrame  {
-   private UserManagementPanel panel = null;
+    private UserManagementPanel panel = null;
     private WebServiceInfo userService = new WebServiceInfo();
     private List<User> userList;
 

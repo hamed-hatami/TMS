@@ -1,4 +1,4 @@
-package ir.university.toosi.tms.model.entity.person;
+package ir.university.toosi.tms.model.entity.personnel;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -6,8 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.university.toosi.tms.model.entity.BLookup;
 import ir.university.toosi.tms.model.entity.BaseEntity;
 import ir.university.toosi.tms.model.entity.calendar.Calendar;
-
-import java.io.Serializable;
 
 /**
  * @author : Hamed Hatami ,  Farzad Sedaghatbin, Atefeh Ahmadi

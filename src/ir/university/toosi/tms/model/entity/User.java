@@ -3,7 +3,7 @@ package ir.university.toosi.tms.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import ir.university.toosi.tms.model.entity.person.Person;
+import ir.university.toosi.tms.model.entity.personnel.Person;
 
 import java.util.HashSet;
 import java.util.Set;

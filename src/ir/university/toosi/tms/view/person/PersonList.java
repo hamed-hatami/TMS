@@ -4,8 +4,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.User;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
-import ir.university.toosi.tms.model.entity.person.Person;
-import ir.university.toosi.tms.model.entity.person.PersonSearchItems;
+import ir.university.toosi.tms.model.entity.personnel.Person;
+import ir.university.toosi.tms.model.entity.personnel.PersonSearchItems;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
@@ -17,7 +17,6 @@ import org.jdesktop.swingbinding.JTableBinding;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.List;
 

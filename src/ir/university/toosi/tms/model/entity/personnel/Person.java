@@ -1,4 +1,4 @@
-package ir.university.toosi.tms.model.entity.person;
+package ir.university.toosi.tms.model.entity.personnel;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -43,6 +43,10 @@ import java.util.Set;
                 query = "select p from Person p where p.personnelNo like :personnelNo"
         ),
         @NamedQuery(
+                name = "Person.findByOrganAndRulePackage",
+                query = "select p from Person p where p.organRef.id =:organId and p.rulePackage.id =:rulepackageId"
+        ),
+        @NamedQuery(
                 name = "Person.exist",
                 query = "select p from Person p where p.personnelNo=:personnelNo and p.deleted='0'"
         ), @NamedQuery(
@@ -64,8 +68,9 @@ public class Person extends BaseEntity {
     @Column(name = "lastName")
     private String lastName;
     @JsonProperty
-    @Column(name = "Tpicture")
-    private String picture;
+    @Lob
+    @Column(name = "picture")
+    private byte[] picture;
     @JsonProperty
     @Column(name = "personnelNo")
     private String personnelNo;
@@ -118,13 +123,16 @@ public class Person extends BaseEntity {
     @Column(name = "createBy")
     private String createBy;
     @JsonProperty
+    @Column(name = "workStation")
+    private String workStation;
+    @JsonProperty
     @ManyToOne
     private Organ organRef;
 
     public Person() {
     }
 
-    public Person(String name, String lastName, String picture, String personnelNo, String nationalCode, String pin, Organ organRef) {
+    public Person(String name, String lastName, byte[] picture, String personnelNo, String nationalCode, String pin, Organ organRef) {
         this.name = name;
         this.lastName = lastName;
         this.picture = picture;
@@ -166,11 +174,11 @@ public class Person extends BaseEntity {
         this.lastName = lastName;
     }
 
-    public String getPicture() {
+    public byte[] getPicture() {
         return picture;
     }
 
-    public void setPicture(String picture) {
+    public void setPicture(byte[] picture) {
         this.picture = picture;
     }
 
@@ -300,6 +308,14 @@ public class Person extends BaseEntity {
 
     public void setCreateBy(String createBy) {
         this.createBy = createBy;
+    }
+
+    public String getWorkStation() {
+        return workStation;
+    }
+
+    public void setWorkStation(String workStation) {
+        this.workStation = workStation;
     }
 
     public RulePackage getRulePackage() {

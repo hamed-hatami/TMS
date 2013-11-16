@@ -3,7 +3,7 @@ package ir.university.toosi.tms.view.user;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.*;
-import ir.university.toosi.tms.model.entity.person.Person;
+import ir.university.toosi.tms.model.entity.personnel.Person;
 import ir.university.toosi.tms.util.ComponentUtil;
 import ir.university.toosi.tms.util.DialogUtil;
 import ir.university.toosi.tms.util.RESTfulClientUtil;

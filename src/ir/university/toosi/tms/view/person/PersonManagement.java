@@ -3,8 +3,8 @@ package ir.university.toosi.tms.view.person;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
-import ir.university.toosi.tms.model.entity.person.Person;
-import ir.university.toosi.tms.model.entity.person.PersonSearchItems;
+import ir.university.toosi.tms.model.entity.personnel.Person;
+import ir.university.toosi.tms.model.entity.personnel.PersonSearchItems;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
@@ -15,7 +15,6 @@ import org.jdesktop.swingbinding.JTableBinding;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -177,7 +176,7 @@ public class PersonManagement extends TMSInternalFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
                     editActionPerformed(evt);
-                } catch (PropertyVetoException e) {
+                } catch (Exception e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
             }
@@ -189,7 +188,7 @@ public class PersonManagement extends TMSInternalFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
                     addActionPerformed(evt);
-                } catch (PropertyVetoException e) {
+                } catch (Exception e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
             }
@@ -326,8 +325,8 @@ public class PersonManagement extends TMSInternalFrame {
         }
     }
 
-    private void addActionPerformed(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
-        PersonForm personForm = new PersonForm();
+    private void addActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_jButton1ActionPerformed
+        PersonFormOLD personForm = new PersonFormOLD();
         ThreadPoolManager.mainForm.getDesktopPane().add(personForm);
         personForm.setVisible(true);
         personForm.setSelected(true);
@@ -336,15 +335,15 @@ public class PersonManagement extends TMSInternalFrame {
 
         try {
             personForm.setSelected(true);
-        } catch (PropertyVetoException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
-    private void editActionPerformed(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
+    private void editActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_jButton1ActionPerformed
         Person person = personList.get(mainTable.convertRowIndexToModel(mainTable.getSelectedRow()));
-        PersonForm personForm = new PersonForm(true, person);
+        PersonFormOLD personForm = new PersonFormOLD(true, person);
         personForm.setVisible(true);
         ThreadPoolManager.mainForm.getDesktopPane().add(personForm);
         personForm.setSelected(true);

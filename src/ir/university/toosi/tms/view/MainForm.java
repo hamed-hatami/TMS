@@ -14,6 +14,7 @@ import ir.university.toosi.tms.view.language.LanguageAddForm;
 import ir.university.toosi.tms.view.language.LanguageManagementCode;
 import ir.university.toosi.tms.view.newMenu.MenuPanel;
 import ir.university.toosi.tms.view.person.PersonManagement;
+import ir.university.toosi.tms.view.person.PersonManagementCode;
 import ir.university.toosi.tms.view.role.RoleManagementCode;
 import ir.university.toosi.tms.view.user.UserManagementCode;
 import ir.university.toosi.tms.view.workgroup.LoginForm;
@@ -282,11 +283,20 @@ public class MainForm extends JFrame implements WindowListener {
 
         @Override
         protected void showPersonManagment() {
-            PersonManagement personManagement = new PersonManagement();
+           /* PersonManagement personManagement = new PersonManagement();
             personManagement.setVisible(true);
             desktopPane.add(personManagement);
             try {
                 personManagement.setSelected(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }*/
+
+            PersonManagementCode personManagementCode = new PersonManagementCode();
+            personManagementCode.setVisible(true);
+            desktopPane.add(personManagementCode);
+            try {
+                personManagementCode.setSelected(true);
             } catch (Exception e) {
                 e.printStackTrace();
             }

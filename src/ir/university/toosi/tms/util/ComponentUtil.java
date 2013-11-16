@@ -50,6 +50,9 @@ public class ComponentUtil {
                 jTable.getColumnModel().getColumn(columnIndex).setPreferredWidth(60);
                 continue;
             }
+            if(jTable.getModel().getColumnClass(columnIndex).equals(ImageIcon.class)){
+                continue;
+            }
             jTable.getColumnModel().getColumn(columnIndex).setCellRenderer(defaultTableCellRenderer);
 
         }
@@ -74,7 +77,13 @@ public class ComponentUtil {
         if(component instanceof JTextField){
             component.setComponentOrientation(componentOrientation);
         }
+        if(component instanceof JComboBox ){
+            component.setComponentOrientation(componentOrientation);
+        }
 
+       /* if(component instanceof JLabel) {
+            ((JLabel)component).setHorizontalTextPosition(SwingConstants.RIGHT);
+        }*/
 
         if(component instanceof JPanel) {
             JPanel panel = (JPanel)component;

@@ -1,0 +1,283 @@
+JFDML JFormDesigner: "5.1.1.0.120" Java: "1.7.0_10" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "panelInfo"
+				"border": new javax.swing.border.TitledBorder( "text" )
+				auxiliary() {
+					"JavaCodeGenerator.variableModifiers": 4
+				}
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldName"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 270
+					"y": 25
+					"width": 130
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldLastName"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 135
+					"height": 20
+					"x": 15
+					"y": 25
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelName"
+					"text": "text"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 402
+					"y": 26
+					"width": 95
+					"height": 16
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelLastName"
+					"text": "text"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 112
+					"height": 16
+					"x": 153
+					"y": 25
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelPersonelID"
+					"text": "text"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 95
+					"height": 16
+					"x": 402
+					"y": 51
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldPersonelID"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 130
+					"height": 20
+					"x": 270
+					"y": 50
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelNationalCode"
+					"text": "text"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 112
+					"height": 16
+					"x": 153
+					"y": 50
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldNationalCode"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 135
+					"height": 20
+					"x": 15
+					"y": 50
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelCode"
+					"text": "text"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 95
+					"height": 16
+					"x": 402
+					"y": 76
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldCode"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 130
+					"height": 20
+					"x": 270
+					"y": 75
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelPin"
+					"text": "text"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 112
+					"height": 16
+					"x": 153
+					"y": 75
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldPIN"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 135
+					"height": 20
+					"x": 15
+					"y": 75
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelAddress"
+					"text": "text"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 95
+					"height": 16
+					"x": 402
+					"y": 101
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldAddress"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 385
+					"height": 20
+					"x": 15
+					"y": 100
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 10
+				"y": 5
+				"width": 505
+				"height": 130
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "panelButton"
+				"border": new javax.swing.border.EtchedBorder( 1, null, null )
+				auxiliary() {
+					"JavaCodeGenerator.variableModifiers": 4
+				}
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonCancel"
+					"text": "text"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonCancelActionPerformed", false ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 15
+					"y": 10
+					"width": 85
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonSave"
+					"text": "text"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonSaveActionPerformed", false ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 85
+					"height": 26
+					"x": 115
+					"y": 10
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 10
+				"y": 273
+				"width": 505
+				"height": 45
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "panel1"
+				"border": new javax.swing.border.EtchedBorder( 1, null, null )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "buttonPicBrowse"
+					"text": "text"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonPicBrowseActionPerformed", false ) )
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 140
+					"y": 75
+					"width": 65
+					"height": 21
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldPicAddress"
+					"editable": false
+					"background": new java.awt.Color( 253, 253, 216, 255 )
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 195
+					"height": 20
+					"x": 210
+					"y": 75
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelPicAddress"
+					"text": "text"
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 90
+					"height": 16
+					"x": 409
+					"y": 78
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelPicPanel"
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"horizontalAlignment": 0
+					"border": new javax.swing.border.BevelBorder( 1, null, null, null, null )
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 15
+					"y": 5
+					"width": 115
+					"height": 125
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 10
+				"y": 135
+				"width": 505
+				"height": 135
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 525, 325 )
+		} )
+	}
+}
