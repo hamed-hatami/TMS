@@ -7,7 +7,6 @@ import ir.university.toosi.tms.model.entity.BaseEntity;
 import ir.university.toosi.tms.model.entity.rule.RulePackage;
 import ir.university.toosi.tms.model.entity.zone.Gateway;
 
-import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -15,118 +14,53 @@ import java.util.Set;
  * @version : 0.8
  */
 
-@Entity
-@Table(name = "tb_person")
-@NamedQueries({
-        @NamedQuery(
-                name = "Person.list",
-                query = "select p from Person p where p.deleted = '0'"
-        ),
-        @NamedQuery(
-                name = "Person.findById",
-                query = "select p from Person p where p.id=:id"
-        ),
-        @NamedQuery(
-                name = "Person.findByName",
-                query = "select p from Person p where p.name like :name"
-        ),
-        @NamedQuery(
-                name = "Person.findByLastName",
-                query = "select p from Person p where p.lastName  like :lastName"
-        ),
-        @NamedQuery(
-                name = "Person.findByNationalCode",
-                query = "select p from Person p where p.nationalCode like :nationalCode"
-        ),
-        @NamedQuery(
-                name = "Person.findByPersonnelNo",
-                query = "select p from Person p where p.personnelNo like :personnelNo"
-        ),
-        @NamedQuery(
-                name = "Person.findByOrganAndRulePackage",
-                query = "select p from Person p where p.organRef.id =:organId and p.rulePackage.id =:rulepackageId"
-        ),
-        @NamedQuery(
-                name = "Person.exist",
-                query = "select p from Person p where p.personnelNo=:personnelNo and p.deleted='0'"
-        ), @NamedQuery(
-        name = "Person.maximum",
-        query = "select max(p.id) from Person p"
-)
-})
 public class Person extends BaseEntity {
 
-    @Id
-    @GeneratedValue
     @JsonProperty
-    @Column(name = "id")
     private long id;
     @JsonProperty
-    @Column(name = "name")
     private String name;
     @JsonProperty
-    @Column(name = "lastName")
     private String lastName;
     @JsonProperty
-    @Lob
-    @Column(name = "picture")
     private byte[] picture;
     @JsonProperty
-    @Column(name = "personnelNo")
     private String personnelNo;
     @JsonProperty
-    @Column(name = "nationalCode")
     private String nationalCode;
     @JsonProperty
-    @Column(name = "pin")
     private String pin;
     @JsonProperty
-    @ManyToOne
     private RulePackage rulePackage;
     @JsonProperty
-    @Column(name = "extraField1")
     private String extraField1;
     @JsonProperty
-    @Column(name = "extraField2")
     private String extraField2;
     @JsonProperty
-    @Column(name = "extraField3")
     private String extraField3;
     @JsonProperty
-    @Column(name = "extraField4")
     private String extraField4;
     @JsonProperty
-    @ManyToOne
     private BLookup personStatus;
     @JsonProperty
-    @OneToMany(fetch = FetchType.EAGER)
     private Set<Gateway> gateways;
     @JsonProperty
-    @Column(name = "mobile")
     private String mobile;
     @JsonProperty
-    @Column(name = "email")
     private String email;
     @JsonProperty
-    @Column(name = "address")
     private String address;
     @JsonProperty
-    @Column(name = "phone")
     private String phone;
     @JsonProperty
-    @Column(name = "createDate")
     private String createDate;
     @JsonProperty
-    @Column(name = "createTime")
     private String createTime;
     @JsonProperty
-    @Column(name = "createBy")
     private String createBy;
     @JsonProperty
-    @Column(name = "workStation")
     private String workStation;
     @JsonProperty
-    @ManyToOne
     private Organ organRef;
 
     public Person() {

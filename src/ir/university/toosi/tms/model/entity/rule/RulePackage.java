@@ -4,56 +4,32 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.university.toosi.tms.model.entity.BaseEntity;
 import ir.university.toosi.tms.model.entity.calendar.Calendar;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+
 
 /**
  * @author : Hamed Hatami , Javad Sarhadi , Farzad Sedaghatbin, Atefeh Ahmadi
  * @version : 0.8
  */
-@Entity
-@Table(name = "tb_RulePackage")
-@NamedQueries({
-        @NamedQuery(
-                name = "RulePackage.list",
-                query = "select r from RulePackage r where r.deleted='0' "
-        ),
-        @NamedQuery(
-                name = "RulePackage.findById",
-                query = "select r from RulePackage r where r.id=:id"
 
-        ), @NamedQuery(
-        name = "RulePackage.maximum",
-        query = "select max(r.id) from RulePackage r"
-)
-})
 public class RulePackage extends BaseEntity {
 
-    @Id
     @JsonProperty
-    @Column(name = "id")
     private long id;
     @JsonProperty
-    @Column(name = "name")
     private String name;
     @JsonProperty
-    @ManyToOne
     private Calendar calendar;
-    @OneToMany(fetch = FetchType.EAGER)
     @JsonProperty
     private Set<Rule> rules = new HashSet<>();
-    @OneToMany(fetch = FetchType.EAGER)
     @JsonProperty
     private Set<RuleException> ruleExceptions = new HashSet<>();
     @JsonProperty
-    @Column(name = "aniPassBack")
     private boolean aniPassBack;
     @JsonProperty
-    @Column(name = "allowExit")
     private boolean allowExit;
     @JsonProperty
-    @Column(name = "allowExitGadget")
     private boolean allowExitGadget;
 
     public RulePackage() {

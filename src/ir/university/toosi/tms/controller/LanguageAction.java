@@ -1,9 +1,7 @@
 package ir.university.toosi.tms.controller;
 
-import com.google.common.io.Files;
 import ir.university.toosi.tms.util.LangUtils;
 
-import java.io.*;
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.MissingResourceException;
@@ -14,9 +12,8 @@ public class LanguageAction {
 
     private static final String BUNDLE_NAME = "ir.university.toosi.tms.resources.Messages";
     public static Locale locale = new Locale("fa");
-    private static Properties newLanguage= null;
-    private static boolean hasLanguage= false;
-
+    private static Properties newLanguage = null;
+    private static boolean hasLanguage = false;
 
     private static ResourceBundle getBundle() {
         return ResourceBundle.getBundle(BUNDLE_NAME, getLocale());
@@ -25,21 +22,14 @@ public class LanguageAction {
     public static String getBundleMessage(String bundleKey, String... arguments) {
         if (bundleKey == null)
             return "?";
-        if(hasLanguage){
-            return  getFromProperty(bundleKey);
+        if (hasLanguage) {
+            return getFromProperty(bundleKey);
         }
         try {
             return MessageFormat.format(getBundle().getString(bundleKey), arguments);
         } catch (MissingResourceException mre) {
             return bundleKey;
         }
-    }
-
-    public static void initProperty(byte[] content) throws IOException {
-        File f= new File(System.getenv("java.io.tmpdir"));
-        Files.write(content,f);
-        InputStream inputStream= new FileInputStream(f);
-        newLanguage.load(inputStream);
     }
 
     private static String getFromProperty(String bundleKey) {
@@ -60,7 +50,7 @@ public class LanguageAction {
         if (currentLanguage.equalsIgnoreCase("fa")) {
             locale = new Locale(language);
         } else if (language.equalsIgnoreCase("other")) {
-            hasLanguage= true;
+            hasLanguage = true;
         }
     }
 

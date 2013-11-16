@@ -3,39 +3,19 @@ package ir.university.toosi.tms.model.entity.calendar;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.university.toosi.tms.model.entity.BaseEntity;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "TB_DayType")
-@NamedQueries({
-        @NamedQuery(
-                name = "DayType.list",
-                query = "select d from DayType d"
-        ),
-        @NamedQuery(
-                name = "DayType.findById",
-                query = "select d from DayType d where d.id=:id"
-        )
-})
 
 public class DayType extends BaseEntity {
 
-    @Column(name = "id")
-    @GeneratedValue
-    @Id
     @JsonProperty
     private long id;
 
     @JsonProperty
-    @Column(name = "title")
     private String title;
 
     @JsonProperty
-    @Column(name = "color")
     private String color;
 
     @JsonProperty
-    @Column(name = "description")
     private String description;
 
     public DayType() {

@@ -7,7 +7,6 @@ import ir.university.toosi.tms.model.entity.BLookup;
 import ir.university.toosi.tms.model.entity.BaseEntity;
 import ir.university.toosi.tms.model.entity.rule.RulePackage;
 
-import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -15,69 +14,32 @@ import java.util.Set;
  * @version : 0.8
  */
 
-@Entity
-@Table(name = "tb_organ")
-@NamedQueries({
-        @NamedQuery(
-                name = "Organ.exist",
-                query = "select count(o) from Organ o where o.name = :name or o.code = :code"
-        ),
-        @NamedQuery(
-                name = "Organ.list",
-                query = "select o from Organ o"
-        ),
-        @NamedQuery(
-                name = "Organ.active.list",
-                query = "select o from Organ o where o.deleted <> '1' and o.parentOrgan is null"
-        ),
-        @NamedQuery(
-                name = "Organ.active.by.parent.list",
-                query = "select o from Organ o where o.deleted <> '1' and o.parentOrgan is not null and o.parentOrgan.id = :parentId"
-        ),
-        @NamedQuery(
-                name = "Organ.findById",
-                query = "select o from Organ o where o.id=:id"
-        )
-})
+
 public class Organ extends BaseEntity {
 
-    @Id
-    @GeneratedValue
     @JsonProperty
-    @Column(name = "id")
     private long id;
     @JsonProperty
-    @Column(name = "name")
     private String name;
     @JsonProperty
-    @Column(name = "code")
     private String code;
     @JsonProperty
-    @Column(name = "title")
     private String title;
     @JsonProperty
-    @ManyToOne
     private BLookup organType;
     @JsonProperty
-    @ManyToOne
     private Organ parentOrgan;
     @JsonIgnore
-    @OneToMany(mappedBy = "parentOrgan", fetch = FetchType.EAGER)
     private Set<Organ> childOrgans;
     @JsonProperty
-    @Column(name = "extraField1")
     private String extraField1;
     @JsonProperty
-    @Column(name = "extraField2")
     private String extraField2;
     @JsonProperty
-    @Column(name = "extraField3")
     private String extraField3;
     @JsonProperty
-    @Column(name = "extraField4")
     private String extraField4;
     @JsonProperty
-    @ManyToOne
     private RulePackage rulePackage;
 
     public Organ() {

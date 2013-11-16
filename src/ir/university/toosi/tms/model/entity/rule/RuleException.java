@@ -3,57 +3,30 @@ package ir.university.toosi.tms.model.entity.rule;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.university.toosi.tms.model.entity.BaseEntity;
 
-import javax.persistence.*;
 
 /**
  * @author : Hamed Hatami , Javad Sarhadi , Farzad Sedaghatbin, Atefeh Ahmadi
  * @version : 0.8
  */
-@Entity
-@Table(name = "tb_RuleException")
-@NamedQueries({
-        @NamedQuery(
-                name = "RuleException.list",
-                query = "select r from RuleException  r where r.deleted='0' "
-        ),
-        @NamedQuery(
-                name = "RuleException.findById",
-                query = "select r from RuleException r where r.id=:id"
-
-        ), @NamedQuery(
-        name = "RuleException.maximum",
-        query = "select max(r.id) from RuleException r"
-)
-})
 public class RuleException extends BaseEntity {
 
-    @Id
     @JsonProperty
-    @Column(name = "id")
     private long id;
     @JsonProperty
-    @Column(name = "exceptionDate")
     private String date;
     @JsonProperty
-    @Column(name = "startTime")
     private String startTime;
     @JsonProperty
-    @Column(name = "endTime")
     private String endTime;
     @JsonProperty
-    @Column(name = "entranceCount")
     private String entranceCount;
     @JsonProperty
-    @Column(name = "exitCount")
     private String exitCount;
     @JsonProperty
-    @Column(name = "antiPassBack")
     private boolean aniPassBack;
     @JsonProperty
-    @Column(name = "allowExit")
     private boolean allowExit;
     @JsonProperty
-    @Column(name = "allowExitGadget")
     private boolean allowExitGadget;
 
     public RuleException() {

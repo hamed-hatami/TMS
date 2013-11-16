@@ -4,48 +4,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.university.toosi.tms.model.entity.BaseEntity;
 import ir.university.toosi.tms.model.entity.calendar.DayType;
 
-import javax.persistence.*;
-
 /**
  * @author : Hamed Hatami , Javad Sarhadi , Farzad Sedaghatbin, Atefeh Ahmadi
  * @version : 0.8
  */
-@Entity
-@Table(name = "tb_Rule")
-@NamedQueries({
-        @NamedQuery(
-                name = "Rule.list",
-                query = "select r from Rule r where r.deleted='0' "
-        ),
-        @NamedQuery(
-                name = "Rule.findById",
-                query = "select r from Rule r where r.id=:id"
-
-        ), @NamedQuery(
-        name = "Rule.maximum",
-        query = "select max(r.id) from Rule r"
-)
-})
 public class Rule extends BaseEntity {
 
-    @Id
     @JsonProperty
-    @Column(name = "id")
     private long id;
     @JsonProperty
-    @ManyToOne
     private DayType dayType;
     @JsonProperty
-    @Column(name = "startTime")
     private String startTime;
     @JsonProperty
-    @Column(name = "endTime")
     private String endTime;
     @JsonProperty
-    @Column(name = "entranceCount")
     private String entranceCount;
     @JsonProperty
-    @Column(name = "exitCount")
     private String exitCount;
 
     public Rule() {

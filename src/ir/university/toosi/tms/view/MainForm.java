@@ -13,7 +13,6 @@ import ir.university.toosi.tms.view.eventlog.EventLogList;
 import ir.university.toosi.tms.view.language.LanguageAddForm;
 import ir.university.toosi.tms.view.language.LanguageManagementCode;
 import ir.university.toosi.tms.view.newMenu.MenuPanel;
-import ir.university.toosi.tms.view.person.PersonManagement;
 import ir.university.toosi.tms.view.person.PersonManagementCode;
 import ir.university.toosi.tms.view.role.RoleManagementCode;
 import ir.university.toosi.tms.view.user.UserManagementCode;
@@ -37,7 +36,7 @@ public class MainForm extends JFrame implements WindowListener {
 
     public MainForm() {
         super("سامانه مدیریت تردد");//todo load from bundle
-        ThreadPoolManager.isDebugMode = true;//todo change when create jar file
+        ThreadPoolManager.isDebugMode = false;//todo change when create jar file
         addWindowListener(this);
         setSize();
 
