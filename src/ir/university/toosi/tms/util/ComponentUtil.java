@@ -16,10 +16,10 @@ public class ComponentUtil {
         String pathPrefix = "/ir/university/toosi/tms/view/images/";
         if (ThreadPoolManager.isDebugMode) {
             //at IDE
-            return new ImageIcon(currentClass.getResource(pathPrefix + fileName));
+            return new ImageIcon(ComponentUtil.class.getClassLoader().getResource(pathPrefix + fileName));
         } else {
             //at jar file
-            return new ImageIcon(currentClass.getClassLoader().getResource(fileName));
+            return new ImageIcon(ComponentUtil.class.getClassLoader().getResource(fileName));
         }
     }
 
