@@ -2,7 +2,6 @@ package ir.university.toosi.tms.util;
 
 import ir.university.toosi.tms.model.entity.*;
 import ir.university.toosi.tms.view.MainForm;
-//import ir.university.toosi.tms.view.exec;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -12,6 +11,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ForkJoinPool;
 
+//import ir.university.toosi.tms.view.exec;
+
 /**
  * @author : Hamed Hatami ,  Farzad Sedaghatbin, Atefeh Ahmadi, Mostafa Rastgar
  * @version : 0.8
@@ -19,7 +20,7 @@ import java.util.concurrent.ForkJoinPool;
 
 public class ThreadPoolManager {
 
-    public static final ExecutorService executors = Executors.newCachedThreadPool();
+    public static ExecutorService executors = Executors.newCachedThreadPool();
     public static MainForm mainForm;
     public static final String settingFileName = "TMS.dat";
     public static boolean isDebugMode;
@@ -33,7 +34,7 @@ public class ThreadPoolManager {
     public static final ForkJoinPool forkJoinPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
 
     public static String getLangValue(String key) {
-        if(key == null)
+        if (key == null)
             return null;
         if (langHash.containsKey(key))
             return langHash.get(key).getTitle();
