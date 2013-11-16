@@ -7,14 +7,14 @@ import ir.university.toosi.tms.util.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Properties;
@@ -234,9 +234,23 @@ public class LoginForm extends JDialog {
             }
 
             try {
-                String ipAddress = InetAddress.getLocalHost().getHostAddress();
+                String ipAddress = "";
+                if (System.getProperty("os.name").equalsIgnoreCase("Linux")) {
+                    NetworkInterface ni = NetworkInterface.getByName(Configuration.getProperty("linux.network.interface"));
+                    Enumeration<InetAddress> inetAddresses = ni.getInetAddresses();
+                    while (inetAddresses.hasMoreElements()) {
+                        InetAddress ia = inetAddresses.nextElement();
+                        if (!ia.isLinkLocalAddress()) {
+                            ipAddress = ia.getHostAddress();
+                        }
+                    }
+                } else {
+                    ipAddress = InetAddress.getLocalHost().getHostAddress();
+                }
                 boolean allowed = false;
                 for (PC pc : result.getPcs()) {
+                    System.out.println(">>>>" + pc.getIp());
+                    System.out.println(">>>>" + ipAddress);
                     if (pc.getIp().equals(ipAddress)) {
                         allowed = true;
                         break;
@@ -248,12 +262,14 @@ public class LoginForm extends JDialog {
                             , "استفاده از این کامپیوتر برای شما مجاز نیست."
                             , "احراز هویت"
                     );
-                     return;
+                    return;
                 }
 
             } catch (UnknownHostException e) {
                 e.printStackTrace();
                 return;
+            } catch (SocketException e) {
+                e.printStackTrace();
             }
             ThreadPoolManager.me = result;
             ThreadPoolManager.currentLanguage = languagesList.get(language.getSelectedIndex());
