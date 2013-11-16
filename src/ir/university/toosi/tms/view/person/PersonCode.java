@@ -247,7 +247,7 @@ public class PersonCode extends TMSInternalFrame {
         } else {
             //todo read from bundle
             JOptionPane.showMessageDialog(this,
-                    "ویرایش شخص با خطا مواجه شد.",
+                    "افزودن شخص با خطا مواجه شد.",
                     "خطا",
                     JOptionPane.ERROR_MESSAGE);
         }
