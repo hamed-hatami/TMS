@@ -49,6 +49,7 @@ public class ComponentUtil {
 
         DefaultTableCellRenderer defaultTableCellRenderer = new DefaultTableCellRenderer();
         defaultTableCellRenderer.setHorizontalAlignment(labelAlighnment);
+       // defaultTableCellRenderer.setFont(tahoma);
 
         for (int columnIndex = 0; columnIndex < jTable.getColumnCount(); columnIndex++) {
             if (jTable.getModel().getColumnClass(columnIndex).equals(Boolean.class)) {

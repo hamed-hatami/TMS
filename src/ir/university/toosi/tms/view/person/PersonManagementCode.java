@@ -86,7 +86,6 @@ public class PersonManagementCode extends TMSInternalFrame {
         Font tahoma = new Font("Tahoma", Font.PLAIN, 12);
         ComponentUtil.setFont(panel, tahoma, ThreadPoolManager.direction);
         ComponentUtil.SetJTableAlignment(panel.tablePerson, ThreadPoolManager.direction);
-
         try {
             getAll();
             showData();

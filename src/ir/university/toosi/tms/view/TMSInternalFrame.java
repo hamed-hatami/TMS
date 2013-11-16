@@ -20,7 +20,6 @@ public class TMSInternalFrame extends JInternalFrame  {
         setClosable(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-
     }
 
 
