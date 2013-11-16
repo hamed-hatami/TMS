@@ -190,7 +190,7 @@ public class PersonManagementCode extends TMSInternalFrame {
         columnNames.add("نام و نام خانوادگی");//todo bundle
 
         Vector rowData = new Vector();
-        ImageIcon personNotFoundImageIcon = ComponentUtil.getImageIcon("image_not_found.png", getClass());
+        ImageIcon personNotFoundImageIcon = ComponentUtil.getImageIcon("image_not_found.png");
         for (Person currentPerson : personList) {
             Vector rowCurrent = new Vector();
             ImageIcon currentPersonelImageIcon;

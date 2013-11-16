@@ -12,8 +12,8 @@ import java.awt.*;
 
 public class ComponentUtil {
 
-    public static ImageIcon getImageIcon(String fileName, Class currentClass) {
-        String pathPrefix = "/ir/university/toosi/tms/view/images/";
+    public static ImageIcon getImageIcon(String fileName) {
+        String pathPrefix = "/resources/images/";
         if (ThreadPoolManager.isDebugMode) {
             //at IDE
             return new ImageIcon(ComponentUtil.class.getClassLoader().getResource(pathPrefix + fileName));

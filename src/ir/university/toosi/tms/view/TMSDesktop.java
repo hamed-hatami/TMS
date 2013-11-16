@@ -11,7 +11,7 @@ import java.awt.*;
  * @version : 1.0
  */
 public class TMSDesktop extends JDesktopPane {
-    Image image = ComponentUtil.getImageIcon("bg.png", getClass()).getImage();
+    Image image = ComponentUtil.getImageIcon("bg.png").getImage();
 
     @Override
     public void paintComponent(Graphics g) {

@@ -22,7 +22,7 @@ public class ThreadPoolManager {
 
     public static ExecutorService executors = Executors.newCachedThreadPool();
     public static MainForm mainForm;
-    public static final String settingFileName = "TMS.dat";
+    public static final String settingFileName = "tms_fa.properties";
     public static boolean isDebugMode;
     //public static exec execInstance;
     public static User me;

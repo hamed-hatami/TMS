@@ -64,6 +64,7 @@ public class Configuration {
         Properties props = new Properties();
         try {
             ClassLoader loader = Configuration.class.getClassLoader();
+            //InputStream in = new FileInputStream("/home/hatami/project/TMS/tms_fa.properties");
             InputStream in = loader.getResourceAsStream("tms_fa.properties");
             props.load(in);
         } catch (FileNotFoundException e) {

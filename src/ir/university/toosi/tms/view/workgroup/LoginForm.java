@@ -10,6 +10,7 @@ import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.AccessController;
@@ -93,14 +94,16 @@ public class LoginForm extends JDialog {
     }
 
     private void initAppSettings() {
+/*
         try {
-            FileInputStream in = new FileInputStream(ThreadPoolManager.settingFileName);
+            InputStream in = LoginForm.class.getClassLoader().getResourceAsStream(ThreadPoolManager.settingFileName);
             settings.load(in);
         } catch (IOException e) {
             // e.printStackTrace();
             System.out.println("prop File not found.. '" + ThreadPoolManager.settingFileName + "'");
             return;
         }
+*/
 
         if (!settings.isEmpty()) {
             prop_favoritLAF = Integer.parseInt(settings.getProperty("prop_favoritLAF"));
@@ -122,13 +125,6 @@ public class LoginForm extends JDialog {
         settings.setProperty("prop_favoritLAF", String.valueOf(prop_favoritLAF));
         settings.setProperty("prop_userName", prop_userName);
 
-        try {
-            FileOutputStream propFileOutputStream = new FileOutputStream(ThreadPoolManager.settingFileName);
-            settings.store(propFileOutputStream, "Settings and preferences for TMS"); // save properties
-            propFileOutputStream.close();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
     }
 
     private void init1() {
@@ -148,7 +144,7 @@ public class LoginForm extends JDialog {
         panel.langLabel.setText(ThreadPoolManager.getLangValue("TMS_LANGUAGE"));
 
         try {
-            Image image = ComponentUtil.getImageIcon("big-logo.png", getClass()).getImage();
+            Image image = ComponentUtil.getImageIcon("big-logo.png").getImage();
             ImageCanvas imageCanvas = new ImageCanvas(image);
             imageCanvas.setBounds(0, 0, 426, 272);
             imageCanvas.setVisible(true);

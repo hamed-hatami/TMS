@@ -5,19 +5,18 @@ import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.model.entity.personnel.Person;
 import ir.university.toosi.tms.util.ComponentUtil;
 import ir.university.toosi.tms.util.DialogUtil;
-import ir.university.toosi.tms.util.ImageUtil.DialogImagePreview;
-import ir.university.toosi.tms.util.ImageUtil.ImageFileView;
 import ir.university.toosi.tms.util.ImageUtil.ImageUtils;
 import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 /**
@@ -94,8 +93,8 @@ public class PersonCode extends TMSInternalFrame {
         panel.textFieldPicAddress.setText("");
     }
 
-    private void updatePersonFromForm(){
-        if(person == null){
+    private void updatePersonFromForm() {
+        if (person == null) {
             person = new Person();
         }
         person.setName(panel.textFieldName.getText());
@@ -106,7 +105,6 @@ public class PersonCode extends TMSInternalFrame {
         person.setPicture(ImageUtils.imageToByteArray(sourceBufferedImage));
 
     }
-
 
 
     protected void showPersonManagementAndExit() {
@@ -127,7 +125,7 @@ public class PersonCode extends TMSInternalFrame {
         }
 
 
-        boolean success ;
+        boolean success;
         personService.setServiceName("/editPerson");
         try {
             updatePersonFromForm();
@@ -164,16 +162,18 @@ public class PersonCode extends TMSInternalFrame {
 
         Properties defaultSettings = new Properties();
 
-        defaultSettings.put("prop_openDirectory",  prop_openDirectory);
+        defaultSettings.put("prop_openDirectory", prop_openDirectory);
         settings = defaultSettings;
 
+/*
         try {
-            FileInputStream in = new FileInputStream(ThreadPoolManager.settingFileName);
+            InputStream in = PersonCode.class.getClassLoader().getResourceAsStream(ThreadPoolManager.settingFileName);
             settings.load(in);
         } catch (IOException e) {
             // e.printStackTrace();
             System.out.println("prop File not found.. '" + ThreadPoolManager.settingFileName + "'");
         }
+*/
 
         prop_openDirectory = settings.getProperty("prop_openDirectory");
     }
@@ -181,6 +181,7 @@ public class PersonCode extends TMSInternalFrame {
     private void saveSettings() {
 
         settings.setProperty("prop_openDirectory", prop_openDirectory);
+/*
         try {
             FileOutputStream propFileOutputStream = new FileOutputStream(ThreadPoolManager.settingFileName);
             settings.store(propFileOutputStream, "Settings and preferences for chequePrimer"); // save properties
@@ -188,6 +189,7 @@ public class PersonCode extends TMSInternalFrame {
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
+*/
     }
 
     private void browsePicture() {
@@ -200,10 +202,10 @@ public class PersonCode extends TMSInternalFrame {
             //panelPreview.repaint();
             //validate();
             //initImageInfo(true);
-            float scaleRatio = ImageUtils.calculateScaleRatio(sourceBufferedImage.getWidth(),panel.labelPicPanel.getWidth());
-            if(scaleRatio > 0 && scaleRatio < 1){
+            float scaleRatio = ImageUtils.calculateScaleRatio(sourceBufferedImage.getWidth(), panel.labelPicPanel.getWidth());
+            if (scaleRatio > 0 && scaleRatio < 1) {
                 try {
-                    sourceBufferedImage =  ImageUtils.scaleImage(sourceBufferedImage,scaleRatio);
+                    sourceBufferedImage = ImageUtils.scaleImage(sourceBufferedImage, scaleRatio);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

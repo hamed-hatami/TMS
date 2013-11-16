@@ -112,6 +112,11 @@
                 <include name="**/tms/**/*.class"/>
                 <include name="**/tms_fa.properties"/>
             </fileset>
+            <fileset dir="${resources.dir}/images">
+                <include name="**/*.png"/>
+                <include name="**/*.gif"/>
+                <include name="**/*.jpg"/>
+            </fileset>
 
             <manifest>
                 <attribute name="Built-By" value="Hamed Hatami"/>

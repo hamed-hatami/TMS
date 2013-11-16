@@ -44,7 +44,12 @@ public class MainForm extends JFrame implements WindowListener {
 
         setDefaultLookAndFeelDecorated(true);
         try {
-            UIManager.setLookAndFeel(lookAndFeelDefualt);
+            if (System.getProperty("os.name").equalsIgnoreCase("Linux")) {
+                UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+            } else {
+                UIManager.setLookAndFeel(lookAndFeelDefualt);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -204,17 +209,17 @@ public class MainForm extends JFrame implements WindowListener {
         MenuPaneActionAvailable() {
             super();
             //todo change icons
-            languageDefItem.setIcon(ComponentUtil.getImageIcon("lang.png", getClass()));
-            importLanguage.setIcon(ComponentUtil.getImageIcon("lang.png", getClass()));
-            workGroupManagementItem.setIcon(ComponentUtil.getImageIcon("workgroup-menu.png", getClass()));
-            roleManagementItem.setIcon(ComponentUtil.getImageIcon("role-menu.png", getClass()));
-            userManagementItem.setIcon(ComponentUtil.getImageIcon("users-menu.png", getClass()));
-            eventLogListItem.setIcon(ComponentUtil.getImageIcon("event.png", getClass()));
-            personManagementItem.setIcon(ComponentUtil.getImageIcon("account-menu.png", getClass()));
-            pcManagementItem.setIcon(ComponentUtil.getImageIcon("account-menu.png", getClass()));
-            organManagementItem.setIcon(ComponentUtil.getImageIcon("account-menu.png", getClass()));
-            operationManagementItem.setIcon(ComponentUtil.getImageIcon("role-menu.png", getClass()));
-            exit.setIcon(ComponentUtil.getImageIcon("exit.png", getClass()));
+            languageDefItem.setIcon(ComponentUtil.getImageIcon("lang.png"));
+            importLanguage.setIcon(ComponentUtil.getImageIcon("lang.png"));
+            workGroupManagementItem.setIcon(ComponentUtil.getImageIcon("workgroup-menu.png"));
+            roleManagementItem.setIcon(ComponentUtil.getImageIcon("role-menu.png"));
+            userManagementItem.setIcon(ComponentUtil.getImageIcon("users-menu.png"));
+            eventLogListItem.setIcon(ComponentUtil.getImageIcon("event.png"));
+            personManagementItem.setIcon(ComponentUtil.getImageIcon("account-menu.png"));
+            pcManagementItem.setIcon(ComponentUtil.getImageIcon("account-menu.png"));
+            organManagementItem.setIcon(ComponentUtil.getImageIcon("account-menu.png"));
+            operationManagementItem.setIcon(ComponentUtil.getImageIcon("role-menu.png"));
+            exit.setIcon(ComponentUtil.getImageIcon("exit.png"));
         }
 
         @Override
