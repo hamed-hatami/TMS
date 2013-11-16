@@ -1,10 +1,15 @@
 package ir.university.toosi.tms.util;
 
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 
 /**
  * @author a_hadadi
@@ -13,10 +18,17 @@ import java.awt.*;
 public class ComponentUtil {
 
     public static ImageIcon getImageIcon(String fileName) {
-        String pathPrefix = "/resources/images/";
+        String pathPrefix = "D:\\TMS\\TMS\\resources\\images\\";
         if (ThreadPoolManager.isDebugMode) {
-            //at IDE
-            return new ImageIcon(ComponentUtil.class.getClassLoader().getResource(pathPrefix + fileName));
+            BufferedImage bufferedImage = null;
+            try {
+                bufferedImage = ImageIO.read(new File(pathPrefix + fileName));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            ImageIcon imageIcon = new ImageIcon(bufferedImage);
+            return imageIcon;
+
         } else {
             //at jar file
             return new ImageIcon(ComponentUtil.class.getClassLoader().getResource(fileName));

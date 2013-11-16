@@ -27,7 +27,6 @@ public class LoginForm extends JDialog {
 
     public ComponentOrientation direction;
     public String lookAndFeel;
-    private String formTitle = "login";
     private LoginFormPanel panel = null;
     private boolean blogin = false;
     private WebServiceInfo loginService = new WebServiceInfo();
@@ -37,7 +36,6 @@ public class LoginForm extends JDialog {
     private java.util.List<Languages> languagesList;
     private int prop_favoritLAF = 0;
     private String prop_userName = "";
-    private Properties settings = new Properties();
 
     public LoginForm() {
         super();
@@ -94,27 +92,20 @@ public class LoginForm extends JDialog {
     }
 
     private void initAppSettings() {
-/*
-        try {
-            InputStream in = LoginForm.class.getClassLoader().getResourceAsStream(ThreadPoolManager.settingFileName);
-            settings.load(in);
-        } catch (IOException e) {
-            // e.printStackTrace();
-            System.out.println("prop File not found.. '" + ThreadPoolManager.settingFileName + "'");
-            return;
-        }
-*/
 
-        if (!settings.isEmpty()) {
-            prop_favoritLAF = Integer.parseInt(settings.getProperty("prop_favoritLAF"));
-            prop_userName = settings.getProperty("prop_userName");
+        try {
+            prop_favoritLAF = Integer.parseInt(Configuration.getProperty("prop_favoritLAF"));
+            prop_userName = Configuration.getProperty("prop_userName");
 
             panel.comboBoxLookAndFeel.setSelectedIndex(prop_favoritLAF);
             panel.comboBoxLookAndFeelItemStateChanged();
             panel.userName.setText(prop_userName);
             panel.userName.selectAll();
             panel.userName.requestFocus();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
         }
+
     }
 
     private void saveSettings() {
@@ -122,8 +113,8 @@ public class LoginForm extends JDialog {
         prop_favoritLAF = panel.comboBoxLookAndFeel.getSelectedIndex();
         prop_userName = panel.userName.getText();
 
-        settings.setProperty("prop_favoritLAF", String.valueOf(prop_favoritLAF));
-        settings.setProperty("prop_userName", prop_userName);
+        Configuration.saveSettings("prop_favoritLAF", String.valueOf(prop_favoritLAF));
+        Configuration.saveSettings("prop_userName", prop_userName);
 
     }
 
@@ -149,8 +140,6 @@ public class LoginForm extends JDialog {
             imageCanvas.setBounds(0, 0, 426, 272);
             imageCanvas.setVisible(true);
             panel.add(imageCanvas);
-            //  panel.panelLogo.repaint();
-            //  validate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -249,8 +238,6 @@ public class LoginForm extends JDialog {
                 }
                 boolean allowed = false;
                 for (PC pc : result.getPcs()) {
-                    System.out.println(">>>>" + pc.getIp());
-                    System.out.println(">>>>" + ipAddress);
                     if (pc.getIp().equals(ipAddress)) {
                         allowed = true;
                         break;

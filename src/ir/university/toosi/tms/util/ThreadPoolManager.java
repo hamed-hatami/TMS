@@ -22,9 +22,7 @@ public class ThreadPoolManager {
 
     public static ExecutorService executors = Executors.newCachedThreadPool();
     public static MainForm mainForm;
-    public static final String settingFileName = "tms_fa.properties";
-    public static boolean isDebugMode;
-    //public static exec execInstance;
+    public final static boolean isDebugMode = true; //todo change when create jar file
     public static User me;
     public static Languages currentLanguage = null;
     public static ComponentOrientation direction = ComponentOrientation.RIGHT_TO_LEFT;

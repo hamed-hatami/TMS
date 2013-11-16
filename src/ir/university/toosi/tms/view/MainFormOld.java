@@ -32,7 +32,6 @@ public class MainFormOld extends JFrame implements InternalFrameListener {
     private WebServiceInfo webServiceInfo = new WebServiceInfo();
 
     public MainFormOld() {
-        ThreadPoolManager.isDebugMode = true;
         try {
             Toolkit toolkit = Toolkit.getDefaultToolkit();
             int xSize = ((int) toolkit.getScreenSize().getWidth());

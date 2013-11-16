@@ -32,22 +32,21 @@ public class MainForm extends JFrame implements WindowListener {
     private WebServiceInfo webServiceInfo = new WebServiceInfo();
     private ComponentOrientation direction;
     private String lookAndFeelUser;
-    private String lookAndFeelDefualt = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
 
     public MainForm() {
         super("سامانه مدیریت تردد");//todo load from bundle
-        ThreadPoolManager.isDebugMode = false;//todo change when create jar file
         addWindowListener(this);
         setSize();
 
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-        setDefaultLookAndFeelDecorated(true);
+
         try {
+            setDefaultLookAndFeelDecorated(true);
             if (System.getProperty("os.name").equalsIgnoreCase("Linux")) {
                 UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
             } else {
-                UIManager.setLookAndFeel(lookAndFeelDefualt);
+                UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             }
 
         } catch (Exception e) {

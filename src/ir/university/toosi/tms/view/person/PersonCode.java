@@ -3,11 +3,8 @@ package ir.university.toosi.tms.view.person;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.model.entity.personnel.Person;
-import ir.university.toosi.tms.util.ComponentUtil;
-import ir.university.toosi.tms.util.DialogUtil;
+import ir.university.toosi.tms.util.*;
 import ir.university.toosi.tms.util.ImageUtil.ImageUtils;
-import ir.university.toosi.tms.util.RESTfulClientUtil;
-import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.TMSInternalFrame;
 
 import javax.swing.*;
@@ -28,7 +25,6 @@ public class PersonCode extends TMSInternalFrame {
     private WebServiceInfo personService = new WebServiceInfo();
     private boolean newMode;
     private File sourceFile = null;
-    private Properties settings = new Properties();
     private String prop_openDirectory = "";
     private BufferedImage sourceBufferedImage = null;
 
@@ -78,7 +74,7 @@ public class PersonCode extends TMSInternalFrame {
 
         Font tahoma = new Font("Tahoma", Font.PLAIN, 12);
         ComponentUtil.setFont(panel, tahoma, ThreadPoolManager.direction);
-        initAppSettings();
+        prop_openDirectory = Configuration.getProperty("prop_openDirectory");
     }
 
     private void loadPersonToForm() {
@@ -116,6 +112,7 @@ public class PersonCode extends TMSInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Configuration.saveSettings("prop_openDirectory",prop_openDirectory);
         dispose();
     }
 
@@ -146,7 +143,7 @@ public class PersonCode extends TMSInternalFrame {
                     , "ویرایش شخص، با موفقیت انجام شد."
                     , "اطلاع رسانی"
             );
-            saveSettings();
+
             showPersonManagementAndExit();
         } else {
             //todo read from bundle
@@ -156,40 +153,6 @@ public class PersonCode extends TMSInternalFrame {
             );
         }
 
-    }
-
-    private void initAppSettings() {
-
-        Properties defaultSettings = new Properties();
-
-        defaultSettings.put("prop_openDirectory", prop_openDirectory);
-        settings = defaultSettings;
-
-/*
-        try {
-            InputStream in = PersonCode.class.getClassLoader().getResourceAsStream(ThreadPoolManager.settingFileName);
-            settings.load(in);
-        } catch (IOException e) {
-            // e.printStackTrace();
-            System.out.println("prop File not found.. '" + ThreadPoolManager.settingFileName + "'");
-        }
-*/
-
-        prop_openDirectory = settings.getProperty("prop_openDirectory");
-    }
-
-    private void saveSettings() {
-
-        settings.setProperty("prop_openDirectory", prop_openDirectory);
-/*
-        try {
-            FileOutputStream propFileOutputStream = new FileOutputStream(ThreadPoolManager.settingFileName);
-            settings.store(propFileOutputStream, "Settings and preferences for chequePrimer"); // save properties
-            propFileOutputStream.close();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
-*/
     }
 
     private void browsePicture() {
@@ -244,7 +207,7 @@ public class PersonCode extends TMSInternalFrame {
                     , "افزودن شخص با موفقیت انجام شد."
                     , "پیغام"
                     , JOptionPane.INFORMATION_MESSAGE);
-            saveSettings();
+
             showPersonManagementAndExit();
         } else {
             //todo read from bundle

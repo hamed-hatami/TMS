@@ -1,9 +1,7 @@
 package ir.university.toosi.tms.util;
 
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Hashtable;
 import java.util.Locale;
 import java.util.Properties;
@@ -20,6 +18,7 @@ public class Configuration {
     private static Properties configuration = null;
     private static Hashtable<String, String> SESSION = new Hashtable<String, String>();
     private static Locale locale = new Locale("fa");
+    private static final  String propFileName = "tms_fa.properties";
 
     public static void load() throws IOException {
         if (configuration != null)
@@ -63,11 +62,16 @@ public class Configuration {
 
         Properties props = new Properties();
         try {
-            ClassLoader loader = Configuration.class.getClassLoader();
-            //InputStream in = new FileInputStream("/home/hatami/project/TMS/tms_fa.properties");
-            InputStream in = loader.getResourceAsStream("tms_fa.properties");
-            props.load(in);
+            InputStream inputStream;
+            if (!ThreadPoolManager.isDebugMode) {
+                ClassLoader loader = Configuration.class.getClassLoader();
+                inputStream = loader.getResourceAsStream(propFileName);
+            } else {
+                inputStream = new FileInputStream(propFileName);//work with IDE
+            }
+            props.load(inputStream);
         } catch (FileNotFoundException e) {
+            System.out.println("prop File not found.. '" + propFileName + "'");
             throw e;
         } catch (IOException e) {
             throw e;
@@ -85,6 +89,21 @@ public class Configuration {
 
     public static Locale getLocale() {
         return locale;
+    }
+
+
+
+    public static  void saveSettings(String key,String value) {
+        try {
+            if (configuration == null) {
+                    configuration = readFile();
+            }
+            FileOutputStream propFileOutputStream = new FileOutputStream(propFileName);
+            configuration.setProperty(key, value);
+            propFileOutputStream.close();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
     }
 
 }
