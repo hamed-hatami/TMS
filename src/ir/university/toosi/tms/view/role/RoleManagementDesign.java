@@ -89,7 +89,7 @@ public abstract class RoleManagementDesign extends  JPanel {
                 scrollPane1.setViewportView(mainTable);
             }
             panelInfo.add(scrollPane1);
-            scrollPane1.setBounds(5, 15, 520, 240);
+            scrollPane1.setBounds(5, 15, 495, 240);
 
             { // compute preferred size
                 Dimension preferredSize = new Dimension();
@@ -106,7 +106,7 @@ public abstract class RoleManagementDesign extends  JPanel {
             }
         }
         add(panelInfo);
-        panelInfo.setBounds(5, 5, 530, 260);
+        panelInfo.setBounds(5, 5, 505, 260);
 
         //======== panelButton ========
         {
@@ -124,7 +124,7 @@ public abstract class RoleManagementDesign extends  JPanel {
                 }
             });
             panelButton.add(add);
-            add.setBounds(175, 20, 75, add.getPreferredSize().height);
+            add.setBounds(290, 15, 75, 26);
 
             //---- delete ----
             delete.setText("\u062d\u0630\u0641");
@@ -136,7 +136,7 @@ public abstract class RoleManagementDesign extends  JPanel {
                 }
             });
             panelButton.add(delete);
-            delete.setBounds(285, 20, 75, delete.getPreferredSize().height);
+            delete.setBounds(110, 15, 75, 26);
 
             //---- edit ----
             edit.setText("\u0648\u06cc\u0631\u0627\u06cc\u0634");
@@ -148,7 +148,7 @@ public abstract class RoleManagementDesign extends  JPanel {
                 }
             });
             panelButton.add(edit);
-            edit.setBounds(395, 20, 75, edit.getPreferredSize().height);
+            edit.setBounds(200, 15, 75, 26);
 
             //---- buttonCancel ----
             buttonCancel.setText("\u0627\u0646\u0635\u0631\u0627\u0641");
@@ -160,10 +160,10 @@ public abstract class RoleManagementDesign extends  JPanel {
                 }
             });
             panelButton.add(buttonCancel);
-            buttonCancel.setBounds(65, 20, 75, buttonCancel.getPreferredSize().height);
+            buttonCancel.setBounds(20, 15, 75, 26);
         }
         add(panelButton);
-        panelButton.setBounds(8, 271, 525, 61);
+        panelButton.setBounds(8, 267, 502, 55);
 
         { // compute preferred size
             Dimension preferredSize = new Dimension();

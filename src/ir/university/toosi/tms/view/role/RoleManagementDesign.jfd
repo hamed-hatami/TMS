@@ -38,13 +38,13 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 5
 					"y": 15
-					"width": 520
+					"width": 495
 					"height": 240
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 5
 				"y": 5
-				"width": 530
+				"width": 505
 				"height": 260
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
@@ -62,9 +62,10 @@ new FormModel {
 					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonAddActionPerformed", false ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 175
-					"y": 20
+					"x": 290
+					"y": 15
 					"width": 75
+					"height": 26
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "delete"
@@ -75,9 +76,10 @@ new FormModel {
 					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonDeleteActionPerformed", false ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 285
-					"y": 20
+					"x": 110
+					"y": 15
 					"width": 75
+					"height": 26
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "edit"
@@ -88,9 +90,10 @@ new FormModel {
 					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonEditActionPerformed", false ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 395
-					"y": 20
+					"x": 200
+					"y": 15
 					"width": 75
+					"height": 26
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "buttonCancel"
@@ -101,19 +104,20 @@ new FormModel {
 					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonCancelActionPerformed", false ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 65
-					"y": 20
+					"x": 20
+					"y": 15
 					"width": 75
+					"height": 26
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 8
-				"y": 271
-				"width": 525
-				"height": 61
+				"y": 267
+				"width": 502
+				"height": 55
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 540, 340 )
+			"size": new java.awt.Dimension( 515, 330 )
 		} )
 	}
 }

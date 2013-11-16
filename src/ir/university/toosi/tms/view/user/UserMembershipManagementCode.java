@@ -48,18 +48,11 @@ public class UserMembershipManagementCode extends TMSInternalFrame {
         getContentPane().setBackground(Color.getColor("Control"));
 
         this.setTitle(ThreadPoolManager.getLangValue("TMS_USER_MANAGEMENT"));
-       /* panel.panelInfo.setBorder(javax.swing.BorderFactory.createTitledBorder(ThreadPoolManager.getLangValue("TMS_USER_MANAGEMENT")));
-        panel.buttonAdd.setText(ThreadPoolManager.getLangValue("TMS_ADD"));
-        panel.buttonAdd.setEnabled(ThreadPoolManager.hasPermission("ADD_USER"));
 
-        panel.buttonDelete.setText(ThreadPoolManager.getLangValue("TMS_DELETE"));
-        panel.buttonDelete.setEnabled(ThreadPoolManager.hasPermission("DELETE_USER"));
-
-        panel.buttonDelete.setText(ThreadPoolManager.getLangValue("TMS_DELETE"));
-        panel.buttonDelete.setEnabled(ThreadPoolManager.hasPermission("DELETE_USER"));
-
-        panel.buttonEdit.setText(ThreadPoolManager.getLangValue("TMS_EDIT"));
-        panel.buttonEdit.setEnabled(ThreadPoolManager.hasPermission("EDIT_USER"));*/
+        panel.buttonCancel.setText(ThreadPoolManager.getLangValue("TMS_CANCEL"));
+        //panel.buttonAllocate.setText(ThreadPoolManager.getLangValue("TMS_ALLOCATE"));//todo
+        panel.buttonSave.setText("تخصیص");//todo
+        panel.buttonSave.setEnabled(true);//todo
 
         this.add(panel);
 

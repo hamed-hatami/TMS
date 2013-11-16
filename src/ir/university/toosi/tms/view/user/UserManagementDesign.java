@@ -110,7 +110,7 @@ public abstract class UserManagementDesign extends  JPanel {
                 }
             });
             panelButton.add(buttonCancel);
-            buttonCancel.setBounds(30, 20, 75, 26);
+            buttonCancel.setBounds(30, 15, 75, 26);
 
             //---- buttonAdd ----
             buttonAdd.setText("\u0627\u0641\u0632\u0648\u062f\u0646");
@@ -122,7 +122,7 @@ public abstract class UserManagementDesign extends  JPanel {
                 }
             });
             panelButton.add(buttonAdd);
-            buttonAdd.setBounds(350, 20, 75, 26);
+            buttonAdd.setBounds(375, 15, 75, 26);
 
             //---- buttonDelete ----
             buttonDelete.setText("\u062d\u0630\u0641");
@@ -134,7 +134,7 @@ public abstract class UserManagementDesign extends  JPanel {
                 }
             });
             panelButton.add(buttonDelete);
-            buttonDelete.setBounds(110, 20, 75, 26);
+            buttonDelete.setBounds(115, 15, 75, 26);
 
             //---- buttonEdit ----
             buttonEdit.setText("\u0648\u06cc\u0631\u0627\u06cc\u0634");
@@ -146,7 +146,7 @@ public abstract class UserManagementDesign extends  JPanel {
                 }
             });
             panelButton.add(buttonEdit);
-            buttonEdit.setBounds(270, 20, 75, 26);
+            buttonEdit.setBounds(290, 15, 75, 26);
 
             //---- buttonMembershipManagement ----
             buttonMembershipManagement.setText("\u062a\u062e\u0635\u06cc\u0635");
@@ -158,10 +158,10 @@ public abstract class UserManagementDesign extends  JPanel {
                 }
             });
             panelButton.add(buttonMembershipManagement);
-            buttonMembershipManagement.setBounds(190, 20, 75, 26);
+            buttonMembershipManagement.setBounds(200, 15, 75, 26);
         }
         add(panelButton);
-        panelButton.setBounds(5, 265, 530, 60);
+        panelButton.setBounds(5, 262, 530, 55);
 
         { // compute preferred size
             Dimension preferredSize = new Dimension();

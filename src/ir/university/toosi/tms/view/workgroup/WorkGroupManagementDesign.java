@@ -130,7 +130,7 @@ public abstract class WorkGroupManagementDesign extends  JPanel {
                 }
             });
             panelButtons.add(buttonAdd);
-            buttonAdd.setBounds(161, 15, 81, buttonAdd.getPreferredSize().height);
+            buttonAdd.setBounds(315, 15, 81, 26);
 
             //---- buttonDelete ----
             buttonDelete.setText("delete");
@@ -142,7 +142,7 @@ public abstract class WorkGroupManagementDesign extends  JPanel {
                 }
             });
             panelButtons.add(buttonDelete);
-            buttonDelete.setBounds(282, 15, 81, buttonDelete.getPreferredSize().height);
+            buttonDelete.setBounds(125, 15, 81, 26);
 
             //---- buttonModify ----
             buttonModify.setText("modify");
@@ -154,7 +154,7 @@ public abstract class WorkGroupManagementDesign extends  JPanel {
                 }
             });
             panelButtons.add(buttonModify);
-            buttonModify.setBounds(403, 15, 81, buttonModify.getPreferredSize().height);
+            buttonModify.setBounds(220, 15, 81, 26);
 
             //---- buttonCancel ----
             buttonCancel.setText("Cancel");
@@ -166,7 +166,7 @@ public abstract class WorkGroupManagementDesign extends  JPanel {
                 }
             });
             panelButtons.add(buttonCancel);
-            buttonCancel.setBounds(40, 15, 81, buttonCancel.getPreferredSize().height);
+            buttonCancel.setBounds(30, 15, 81, 26);
         }
         add(panelButtons);
         panelButtons.setBounds(8, 265, 527, 55);
