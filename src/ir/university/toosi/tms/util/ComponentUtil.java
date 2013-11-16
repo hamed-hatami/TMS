@@ -1,14 +1,9 @@
 package ir.university.toosi.tms.util;
 
 
-import sun.swing.table.DefaultTableCellHeaderRenderer;
-
-
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumnModel;
 import java.awt.*;
 
 /**
@@ -31,9 +26,9 @@ public class ComponentUtil {
 
     public static void SetJTableAlignment(javax.swing.JTable jTable, ComponentOrientation componentOrientation) {
         Font tahoma = new Font("Tahoma", Font.PLAIN, 11);
-        int  labelAlighnment = JLabel.RIGHT;
-        int  headerAlighnment = JLabel.RIGHT;
-        if(componentOrientation == ComponentOrientation.LEFT_TO_RIGHT){
+        int labelAlighnment = JLabel.RIGHT;
+        int headerAlighnment = JLabel.RIGHT;
+        if (componentOrientation == ComponentOrientation.LEFT_TO_RIGHT) {
             labelAlighnment = JLabel.LEFT;
             headerAlighnment = JLabel.LEFT;
         }
@@ -43,14 +38,14 @@ public class ComponentUtil {
         defaultTableCellRenderer.setHorizontalAlignment(labelAlighnment);
 
         for (int columnIndex = 0; columnIndex < jTable.getColumnCount(); columnIndex++) {
-            if(jTable.getModel().getColumnClass(columnIndex).equals(Boolean.class)){
+            if (jTable.getModel().getColumnClass(columnIndex).equals(Boolean.class)) {
                 jTable.getColumnModel().getColumn(columnIndex).setWidth(60);
                 jTable.getColumnModel().getColumn(columnIndex).setMaxWidth(90);
                 jTable.getColumnModel().getColumn(columnIndex).setMinWidth(10);
                 jTable.getColumnModel().getColumn(columnIndex).setPreferredWidth(60);
                 continue;
             }
-            if(jTable.getModel().getColumnClass(columnIndex).equals(ImageIcon.class)){
+            if (jTable.getModel().getColumnClass(columnIndex).equals(ImageIcon.class)) {
                 continue;
             }
             jTable.getColumnModel().getColumn(columnIndex).setCellRenderer(defaultTableCellRenderer);
@@ -67,17 +62,17 @@ public class ComponentUtil {
                 jTable.getTableHeader().getDefaultRenderer();
         renderer.setHorizontalAlignment(headerAlighnment);
 
-       jTable.getTableHeader().setDefaultRenderer(renderer);
+        jTable.getTableHeader().setDefaultRenderer(renderer);
 
     }
 
     public static void setFont(JComponent component, Font font, ComponentOrientation componentOrientation) {
         component.setFont(font);
 
-        if(component instanceof JTextField){
+        if (component instanceof JTextField) {
             component.setComponentOrientation(componentOrientation);
         }
-        if(component instanceof JComboBox ){
+        if (component instanceof JComboBox) {
             component.setComponentOrientation(componentOrientation);
         }
 
@@ -85,22 +80,22 @@ public class ComponentUtil {
             ((JLabel)component).setHorizontalTextPosition(SwingConstants.RIGHT);
         }*/
 
-        if(component instanceof JPanel) {
-            JPanel panel = (JPanel)component;
-            if(panel.getBorder() != null && panel.getBorder() instanceof TitledBorder) {
-                ((TitledBorder)panel.getBorder()).setTitleFont(font);
+        if (component instanceof JPanel) {
+            JPanel panel = (JPanel) component;
+            if (panel.getBorder() != null && panel.getBorder() instanceof TitledBorder) {
+                ((TitledBorder) panel.getBorder()).setTitleFont(font);
                 panel.setComponentOrientation(componentOrientation);
             }
-            for(Component cmp : component.getComponents()) {
-                setFont((JComponent)cmp, font,componentOrientation);
+            for (Component cmp : component.getComponents()) {
+                setFont((JComponent) cmp, font, componentOrientation);
             }
         }
 
-        if(component instanceof JTabbedPane) {
-            JTabbedPane tabbedPane = (JTabbedPane)component;
+        if (component instanceof JTabbedPane) {
+            JTabbedPane tabbedPane = (JTabbedPane) component;
             int tabCount = tabbedPane.getTabCount();
-            for(int i = 0 ; i < tabCount ; i++) {
-                setFont((JComponent)tabbedPane.getComponentAt(i), font,componentOrientation);
+            for (int i = 0; i < tabCount; i++) {
+                setFont((JComponent) tabbedPane.getComponentAt(i), font, componentOrientation);
             }
         }
     }

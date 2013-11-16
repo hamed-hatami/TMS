@@ -3,10 +3,6 @@ package ir.university.toosi.tms.util.ImageUtil;
 //import com.jhlabs.image.ContrastFilter;
 //import com.jhlabs.image.GlowFilter;
 
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGDecodeParam;
-import com.sun.image.codec.jpeg.JPEGEncodeParam;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import net.coobird.thumbnailator.Thumbnails;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -188,106 +184,6 @@ writer.write(image);
         return contentLength / 1024;
     }
 
-    public static BufferedImage changeDPI(BufferedImage bufferedImage, int targetDPI, float dpiRatio) throws IOException {
-
-        JPEGEncodeParam jpegEncodeParam = JPEGCodec.getDefaultJPEGEncodeParam(bufferedImage);
-        jpegEncodeParam.setXDensity(targetDPI);
-        jpegEncodeParam.setYDensity(targetDPI);
-        jpegEncodeParam.setDensityUnit(JPEGDecodeParam.DENSITY_UNIT_DOTS_INCH);
-        jpegEncodeParam.setQuality(dpiRatio, false);
-
-        // ByteArrayOutputStream tmp = new ByteArrayOutputStream();
-
-        File tempFile = File.createTempFile("temp-file-name", ".tmp");
-        FileOutputStream fos = new FileOutputStream(tempFile);
-        JPEGImageEncoder jpegEncoder = JPEGCodec.createJPEGEncoder(fos);
-        jpegEncoder.encode(bufferedImage, jpegEncodeParam);
-        fos.flush();
-        fos.close();
-        return ImageIO.read(tempFile);
-
-       /* Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName("jpeg");
-
-        if (!writers.hasNext())
-            throw new IllegalStateException("No writers found");
-
-        ImageWriter writer =  writers.next();
-        OutputStream os = new FileOutputStream(new File(bufferedImage));
-        ImageOutputStream ios = ImageIO.createImageOutputStream(os);
-        writer.setOutput(ios);
-
-
-        ImageWriteParam param = writer.getDefaultWriteParam();
-
-        param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-        param.setCompressionQuality(dpiRatio);
-
-        writer.write(null, new IIOImage(bufferedImage, null, null), param);
-
-        os.close();
-        ios.close();
-        writer.dispose();*/
-
-    }
-
-    public static String saveFile(BufferedImage bufferedImage, String startDirectory, java.awt.Component parent) throws IOException {
-
-        //write modified image
-        final JFileChooser fc = new JFileChooser();
-        String url = startDirectory;
-        fc.setDialogTitle("Specify an image file to save");//todo use bundle
-        FileFilter ftJpg = new FileNameExtensionFilter("*.jpg, *.jpeg", "jpg", "jpeg");
-        FileFilter ftPng = new FileNameExtensionFilter("*.png", "png");
-        FileFilter ftGif = new FileNameExtensionFilter("*.gif", "gif");
-        FileFilter ftAll = new FileNameExtensionFilter("Image Files (*.png,*.jpg,*.jpeg,*.gif)", "png", "jpg", "jpeg", "gif");
-        fc.removeChoosableFileFilter(fc.getFileFilter());
-        fc.addChoosableFileFilter(ftAll);
-        fc.addChoosableFileFilter(ftJpg);
-        fc.addChoosableFileFilter(ftPng);
-        fc.addChoosableFileFilter(ftGif);
-
-
-        File fileStartDirectory = new File(startDirectory);
-        if (!fileStartDirectory.isDirectory()) {
-            fileStartDirectory = fileStartDirectory.getParentFile();
-            //System.out.println("start directory not found.  open dialog start directory set to default.");
-        }
-        fc.setCurrentDirectory(fileStartDirectory);
-
-
-        fc.setMultiSelectionEnabled(false);
-        fc.setFileView(new ImageFileView());
-
-        int userSelection = fc.showSaveDialog(parent);
-        File fileToSave = null;
-        if (userSelection == JFileChooser.APPROVE_OPTION) {
-            fileToSave = fc.getSelectedFile();
-            String fileExtension = "jpg";
-            url = fileToSave.getPath();
-            if (url.lastIndexOf(".") == -1) {
-                if (fc.getFileFilter() == ftAll) {
-                    fileExtension = "jpg";
-                }
-                if (fc.getFileFilter() == ftGif) {
-                    fileExtension = "gif";
-                }
-                if (fc.getFileFilter() == ftJpg) {
-                    fileExtension = "jpg";
-                }
-                if (fc.getFileFilter() == ftPng) {
-                    fileExtension = "png";
-                }
-                url += "." + fileExtension;
-            }
-            FileOutputStream fos = new FileOutputStream(url);
-            ImageIO.write(bufferedImage, fileExtension, fos);
-            fos.flush();
-            fos.close();
-            System.out.println("Save as file: " + url);
-        }
-
-        return fileToSave != null ? fileToSave.getParent() : null;
-    }
 
     public static BufferedImage getBufferedImage(String sourceImagePath) {
         File tempFile = new File(sourceImagePath);
@@ -303,44 +199,6 @@ writer.write(image);
             e.printStackTrace();
         }
         return bufferedImage;
-    }
-
-    public static BufferedImage removeBackground(BufferedImage originalImage) {
-        //it's or previous work:
-        BufferedImage destinationImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
-        //filter by matrix
-           /* float[] matrix = {
-                    0,1,0,
-                    1,2,1,
-                    0,1,0,
-
-            };
-            Kernel kernel = new Kernel(3, 3, matrix);
-            BufferedImageOp op = new ConvolveOp(kernel);
-
-
-            FileOutputStream fos = new FileOutputStream(writeAddress1);
-            ImageIO.write(op.filter(originalImage, null), "jpg", fos);
-            fos.flush();
-            fos.close();
-
-            */
-
-        //filter modify contrast direct mode
-      /*  ContrastFilter contrastFilter = new ContrastFilter();
-        contrastFilter.setContrast(1.1f);
-        destinationImage = contrastFilter.filter(originalImage, destinationImage);
-
-        //filter modify contrast and sharpness
-        GlowFilter glowFilter = new GlowFilter();
-        glowFilter.setAmount(0.03f);
-        destinationImage = glowFilter.filter(destinationImage, destinationImage);*/
-
-        //filter remove details and smoothing picture
-           /* ReduceNoiseFilter reduceNoiseFilter = new ReduceNoiseFilter();
-            destinationImage = reduceNoiseFilter.filter(originalImage, destinationImage);*/
-
-        return destinationImage;
     }
 
 

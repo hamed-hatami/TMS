@@ -97,7 +97,6 @@
                deprecation="${javac.deprecation}"
                encoding="UTF-8"
                source="1.7"
-               failonerror="false"
                nowarn="on">
             <src path="${src.dir}"/>
         </javac>
@@ -112,11 +111,6 @@
             <fileset dir="${classes.dir}">
                 <include name="**/tms/**/*.class"/>
                 <include name="**/tms_fa.properties"/>
-            </fileset>
-            <fileset dir="${resources.dir}/images">
-                <include name="**/*.png"/>
-                <include name="**/*.gif"/>
-                <include name="**/*.jpg"/>
             </fileset>
 
             <manifest>
