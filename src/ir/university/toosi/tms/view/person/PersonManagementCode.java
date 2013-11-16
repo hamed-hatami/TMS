@@ -186,8 +186,8 @@ public class PersonManagementCode extends TMSInternalFrame {
     private DefaultTableModel createModel() {
 
         Vector columnNames = new Vector();
-        columnNames.add("name");//todo bundle
-        columnNames.add("picture");//todo bundle
+        columnNames.add("تصویر");//todo bundle
+        columnNames.add("نام و نام خانوادگی");//todo bundle
 
         Vector rowData = new Vector();
         ImageIcon personNotFoundImageIcon = ComponentUtil.getImageIcon("image_not_found.png", getClass());
@@ -201,14 +201,14 @@ public class PersonManagementCode extends TMSInternalFrame {
                 currentPersonelImageIcon = new ImageIcon(currentPerson.getPicture());
             }
 
-            rowCurrent.add(currentPerson.getName() + " " + currentPerson.getLastName());
             rowCurrent.add(currentPersonelImageIcon);
+            rowCurrent.add(currentPerson.getName() + " " + currentPerson.getLastName());
             rowData.add(rowCurrent);
         }
 
 
         DefaultTableModel tableModel = new DefaultTableModel(rowData, columnNames) {
-            private final int columnNO = 1;
+            private final int columnNO = 0;
 
             @Override
             public Class getColumnClass(int column) {
