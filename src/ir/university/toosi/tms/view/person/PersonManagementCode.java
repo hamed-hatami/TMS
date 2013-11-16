@@ -27,7 +27,7 @@ import java.util.Vector;
  */
 public class PersonManagementCode extends TMSInternalFrame {
 
-    private final int imageHeight = 120;//todo change to desire height
+    private final int imageHeight = 127;//change to desire height
     private PersonManagementPanel panel = null;
     private WebServiceInfo personService = new WebServiceInfo();
     private List<Person> personList = new ArrayList<>();
