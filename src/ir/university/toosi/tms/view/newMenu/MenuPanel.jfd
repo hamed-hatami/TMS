@@ -151,7 +151,7 @@ new FormModel {
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4
 					}
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showPersonManagment", false ) )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showPCManagment", false ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "organManagementItem"
@@ -183,7 +183,7 @@ new FormModel {
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4
 					}
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showoperationManagment", false ) )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showOperationManagment", false ) )
 				} )
 			}, new FormLayoutConstraints( null ) {
 				"title": "مدیریت"

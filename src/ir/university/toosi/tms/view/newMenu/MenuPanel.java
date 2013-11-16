@@ -44,13 +44,13 @@ public abstract class MenuPanel extends JPanel {
 
     protected abstract void showLanguageForm();
 
-    protected abstract void showOperationManagment();
-
     protected abstract void showOrganManagment();
 
-    protected abstract void showoperationManagment();
+    protected abstract void showOperationManagment();
 
     protected abstract void showPersonManagment();
+
+
 
     protected abstract void exit();
 
@@ -237,7 +237,7 @@ public abstract class MenuPanel extends JPanel {
                 pcManagementItem.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        showPersonManagment();
+                        showPCManagment();
                     }
                 });
                 managementMenu.add(pcManagementItem);
@@ -273,7 +273,7 @@ public abstract class MenuPanel extends JPanel {
                 operationManagementItem.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        showoperationManagment();
+                        showOperationManagment();
                     }
                 });
                 managementMenu.add(operationManagementItem);

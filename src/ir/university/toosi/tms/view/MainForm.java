@@ -201,7 +201,6 @@ public class MainForm extends JFrame implements WindowListener {
     public void windowDeactivated(WindowEvent e) {
     }
 
-    //define innerClass to Override its methods for handle events
     class MenuPaneActionAvailable extends MenuPanel {
         MenuPaneActionAvailable() {
             super();
@@ -234,7 +233,6 @@ public class MainForm extends JFrame implements WindowListener {
 
         @Override
         protected void showRoleManagement() {
-            //done with jform designer
             RoleManagementCode roleManagementCode = new RoleManagementCode();
             roleManagementCode.setVisible(true);
             desktopPane.add(roleManagementCode);
@@ -283,15 +281,6 @@ public class MainForm extends JFrame implements WindowListener {
 
         @Override
         protected void showPersonManagment() {
-           /* PersonManagement personManagement = new PersonManagement();
-            personManagement.setVisible(true);
-            desktopPane.add(personManagement);
-            try {
-                personManagement.setSelected(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }*/
-
             PersonManagementCode personManagementCode = new PersonManagementCode();
             personManagementCode.setVisible(true);
             desktopPane.add(personManagementCode);
@@ -304,7 +293,6 @@ public class MainForm extends JFrame implements WindowListener {
 
         @Override
         protected void showLanguageDef() {
-            //done with jform designer
             LanguageAddForm languageAddForm = new LanguageAddForm();
             languageAddForm.setVisible(true);
             desktopPane.add(languageAddForm);
@@ -317,7 +305,6 @@ public class MainForm extends JFrame implements WindowListener {
 
         @Override
         protected void showLanguageForm() {
-            //done with jform designer
             LanguageManagementCode languageManagementCode = new LanguageManagementCode();
             languageManagementCode.setVisible(true);
             desktopPane.add(languageManagementCode);
@@ -338,10 +325,6 @@ public class MainForm extends JFrame implements WindowListener {
             //todo
         }
 
-        @Override
-        protected void showOperationManagment() {
-            //todo
-        }
 
         @Override
         protected void showOrganManagment() {
@@ -349,7 +332,7 @@ public class MainForm extends JFrame implements WindowListener {
         }
 
         @Override
-        protected void showoperationManagment() {
+        protected void showOperationManagment() {
             //todo
         }
 
