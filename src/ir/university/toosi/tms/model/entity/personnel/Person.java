@@ -61,7 +61,19 @@ public class Person extends BaseEntity {
     @JsonProperty
     private String workStation;
     @JsonProperty
+    private String password;
+    @JsonProperty
     private Organ organRef;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
 
     public Person() {
     }

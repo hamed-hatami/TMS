@@ -18,10 +18,11 @@ import java.net.URL;
 public class ComponentUtil {
 
     public static ImageIcon getImageIcon(String fileName) {
-        String pathPrefix = "D:\\TMS\\TMS\\resources\\images\\";
+
         if (ThreadPoolManager.isDebugMode) {
             BufferedImage bufferedImage = null;
             try {
+                String pathPrefix = "D:\\TMS\\TMS\\resources\\images\\";
                 bufferedImage = ImageIO.read(new File(pathPrefix + fileName));
             } catch (IOException e) {
                 e.printStackTrace();

@@ -1,5 +1,7 @@
 package ir.university.toosi.tms.view;
 
+import ir.university.toosi.tms.util.ComponentUtil;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,9 +13,7 @@ public class TMSInternalFrame extends JInternalFrame  {
 
     public TMSInternalFrame() {
         super();
-      // setFrameIcon(new ImageIcon(getClass().getClassLoader().getResource("logo.png"))); //todo enable for jar deploy
-        setFrameIcon(new ImageIcon(getClass().getResource("/resources/images/logo.png")));  //todo enable for idea
-
+        setFrameIcon(ComponentUtil.getImageIcon("logo.png"));
         setIconifiable(false);
         setMaximizable(false);
         setResizable(false);

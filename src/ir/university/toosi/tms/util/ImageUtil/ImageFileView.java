@@ -6,16 +6,20 @@ package ir.university.toosi.tms.util.ImageUtil;
 
 
 
+import ir.university.toosi.tms.util.ComponentUtil;
+
 import java.io.File;
 import javax.swing.*;
 import javax.swing.filechooser.*;
 
 /* ImageFileView.java is used by FileChooserDemo2.java. */
 public class ImageFileView extends FileView {
-    ImageIcon jpgIcon = SimpleImageUtils.createImageIcon("images/jpgIcon.gif");
-    ImageIcon gifIcon = SimpleImageUtils.createImageIcon("images/gifIcon.gif");
-    ImageIcon tiffIcon = SimpleImageUtils.createImageIcon("images/tiffIcon.gif");
-    ImageIcon pngIcon = SimpleImageUtils.createImageIcon("images/pngIcon.png");
+
+    ImageIcon jpgIcon = ComponentUtil.getImageIcon("jpgIcon.gif");
+    ImageIcon gifIcon = ComponentUtil.getImageIcon("gifIcon.gif");
+    ImageIcon tiffIcon =ComponentUtil.getImageIcon("tiffIcon.gif");
+    ImageIcon pngIcon = ComponentUtil.getImageIcon("pngIcon.png");
+
 
     public String getName(File f) {
         return null; //let the L&F FileView figure this out

@@ -53,18 +53,7 @@ public class MainForm extends JFrame implements WindowListener {
             e.printStackTrace();
         }
 
-        // ThreadPoolManager.mainForm = this;
         ThreadPoolManager.mainForm = this;
-
-        webServiceInfo.setServiceName("/getAllLanguage");
-
-        try {
-            java.util.List<Languages> languageList = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(webServiceInfo.getServerUrl(), webServiceInfo.getServiceName()), new TypeReference<java.util.List<Languages>>() {
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
 
     }
 

@@ -17,7 +17,7 @@ public class Configuration {
 
     private static Properties configuration = null;
     private static Hashtable<String, String> SESSION = new Hashtable<String, String>();
-    private static Locale locale = new Locale("fa");
+    private static Locale locale = new Locale("fa");//todo why???
     private static final  String propFileName = "tms_fa.properties";
 
     public static void load() throws IOException {
@@ -100,6 +100,7 @@ public class Configuration {
             }
             FileOutputStream propFileOutputStream = new FileOutputStream(propFileName);
             configuration.setProperty(key, value);
+            configuration.store(propFileOutputStream,"Configuration file for TMS, please don't delete file or modify content."); // FileOutputStream or whatever
             propFileOutputStream.close();
         } catch (IOException ioException) {
             ioException.printStackTrace();
