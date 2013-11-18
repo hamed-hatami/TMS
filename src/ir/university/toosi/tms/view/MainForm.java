@@ -300,8 +300,8 @@ public class MainForm extends JFrame implements WindowListener {
 
         @Override
         protected void showPCManagment() {
-            //todo
-            PCManagement pcManagement = new PCManagement();
+
+            PCManagementCode pcManagement= new PCManagementCode();
             pcManagement.setVisible(true);
             desktopPane.add(pcManagement);
             try {
@@ -309,16 +309,6 @@ public class MainForm extends JFrame implements WindowListener {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-            PCManagementCode pcManagement2= new PCManagementCode();
-            pcManagement2.setVisible(true);
-            desktopPane.add(pcManagement2);
-            try {
-                pcManagement2.setSelected(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
         }
 
         @Override

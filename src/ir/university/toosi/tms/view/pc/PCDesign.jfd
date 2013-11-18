@@ -3,75 +3,51 @@ JFDML JFormDesigner: "5.1.1.0.120" Java: "1.7.0_10" encoding: "UTF-8"
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
-		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) {
-			"autoSize": false
-		} ) {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
-				name: "panel1"
+				name: "panelMain"
 				"border": new javax.swing.border.EtchedBorder( 1, null, null )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "labelStatus"
-					"text": "وضعیت"
+					name: "labelPCName"
+					"text": "نام"
 					"font": &Font0 new java.awt.Font( "Tahoma", 0, 11 )
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4
 					}
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"width": 82
-					"height": 16
-					"x": 285
-					"y": 69
-				} )
-				add( new FormComponent( "javax.swing.JCheckBox" ) {
-					name: "checkBoxStatus"
-					auxiliary() {
-						"JavaCodeGenerator.variableModifiers": 4
-					}
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 265
-					"y": 65
-				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "labelUserName"
-					"text": "نام کاربری :"
-					"font": #Font0
-					auxiliary() {
-						"JavaCodeGenerator.variableModifiers": 4
-					}
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 285
-					"y": 13
+					"y": 22
 					"width": 93
 					"height": 20
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "textFieldUserName"
+					name: "textFieldPCName"
 					"font": #Font0
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4
 					}
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 110
-					"y": 10
-					"width": 175
+					"x": 66
+					"y": 19
+					"width": 195
 					"height": 26
 				} )
-				add( new FormComponent( "javax.swing.JPasswordField" ) {
-					name: "textFieldUserPassword"
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldIP"
 					"font": #Font0
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4
 					}
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"width": 175
+					"width": 195
 					"height": 26
-					"x": 110
-					"y": 40
+					"x": 66
+					"y": 49
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "labelUserPassword"
-					"text": "گذر واژه :"
+					name: "labelIP"
+					"text": "شناسه شبکه"
 					"font": #Font0
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4
@@ -79,17 +55,42 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 93
 					"height": 20
-					"x": 285
-					"y": 43
+					"x": 265
+					"y": 52
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldPhisicalPlace"
+					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 195
+					"height": 26
+					"x": 66
+					"y": 79
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelPhisicalPlace"
+					"text": "مکان فیزیکی"
+					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 93
+					"height": 20
+					"x": 265
+					"y": 81
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 410
-				"height": 95
-				"x": 15
-				"y": 10
+				"height": 125
+				"x": 10
+				"y": 5
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
-				name: "panel3"
+				name: "panelButtons"
 				"border": new javax.swing.border.EtchedBorder( 1, null, null )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "buttonCancel"
@@ -100,7 +101,7 @@ new FormModel {
 					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cancelActionPerformed", false ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 125
+					"x": 110
 					"y": 10
 					"width": 80
 					"height": 26
@@ -114,7 +115,7 @@ new FormModel {
 					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "saveActionPerformed", false ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 215
+					"x": 200
 					"y": 10
 					"width": 80
 					"height": 26
@@ -122,12 +123,12 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 410
 				"height": 45
-				"x": 15
-				"y": 110
+				"x": 10
+				"y": 135
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 435, 165 )
+			"size": new java.awt.Dimension( 425, 190 )
 		} )
 	}
 }

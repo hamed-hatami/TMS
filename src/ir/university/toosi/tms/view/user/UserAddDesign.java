@@ -46,31 +46,31 @@ public abstract class UserAddDesign extends JPanel {
             labelStatus.setText("\u0648\u0636\u0639\u06cc\u062a");
             labelStatus.setFont(new Font("Tahoma", Font.PLAIN, 11));
             panel1.add(labelStatus);
-            labelStatus.setBounds(308, 67, 82, 16);
+            labelStatus.setBounds(285, 69, 82, 16);
             panel1.add(checkBoxStatus);
-            checkBoxStatus.setBounds(new Rectangle(new Point(285, 65), checkBoxStatus.getPreferredSize()));
+            checkBoxStatus.setBounds(new Rectangle(new Point(265, 65), checkBoxStatus.getPreferredSize()));
 
             //---- labelUserName ----
             labelUserName.setText("\u0646\u0627\u0645 \u06a9\u0627\u0631\u0628\u0631\u06cc :");
             labelUserName.setFont(new Font("Tahoma", Font.PLAIN, 11));
             panel1.add(labelUserName);
-            labelUserName.setBounds(307, 13, 93, 20);
+            labelUserName.setBounds(285, 13, 93, 20);
 
             //---- textFieldUserName ----
             textFieldUserName.setFont(new Font("Tahoma", Font.PLAIN, 11));
             panel1.add(textFieldUserName);
-            textFieldUserName.setBounds(130, 10, 175, 26);
+            textFieldUserName.setBounds(110, 10, 175, 26);
 
             //---- textFieldUserPassword ----
             textFieldUserPassword.setFont(new Font("Tahoma", Font.PLAIN, 11));
             panel1.add(textFieldUserPassword);
-            textFieldUserPassword.setBounds(130, 40, 175, 26);
+            textFieldUserPassword.setBounds(110, 40, 175, 26);
 
             //---- labelUserPassword ----
             labelUserPassword.setText("\u06af\u0630\u0631 \u0648\u0627\u0698\u0647 :");
             labelUserPassword.setFont(new Font("Tahoma", Font.PLAIN, 11));
             panel1.add(labelUserPassword);
-            labelUserPassword.setBounds(307, 42, 93, 20);
+            labelUserPassword.setBounds(285, 43, 93, 20);
 
             { // compute preferred size
                 Dimension preferredSize = new Dimension();
@@ -104,7 +104,7 @@ public abstract class UserAddDesign extends JPanel {
                 }
             });
             panel3.add(buttonCancel);
-            buttonCancel.setBounds(15, 10, 80, 26);
+            buttonCancel.setBounds(125, 10, 80, 26);
 
             //---- buttonSave ----
             buttonSave.setText("\u0630\u062e\u06cc\u0631\u0647");
@@ -116,7 +116,7 @@ public abstract class UserAddDesign extends JPanel {
                 }
             });
             panel3.add(buttonSave);
-            buttonSave.setBounds(105, 10, 80, 26);
+            buttonSave.setBounds(215, 10, 80, 26);
 
             { // compute preferred size
                 Dimension preferredSize = new Dimension();

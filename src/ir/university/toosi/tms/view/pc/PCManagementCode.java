@@ -57,8 +57,6 @@ public class PCManagementCode extends TMSInternalFrame {
         panel.labelFilter.setText(ThreadPoolManager.getLangValue("TMS_FILTER"));
         panel.labelFilterBy.setText(ThreadPoolManager.getLangValue("TMS_BY"));
 
-        panel.buttonDelete.setText(ThreadPoolManager.getLangValue("TMS_DELETE"));
-        //panel.buttonDelete.setEnabled(ThreadPoolManager.hasPermission("DELET_PERSON")); //todo
 
         panel.buttonCancel.setText(ThreadPoolManager.getLangValue("TMS_CANCEL"));
 
@@ -193,32 +191,28 @@ public class PCManagementCode extends TMSInternalFrame {
             }
 
             PC pc = pcList.get(panel.tablePC.convertRowIndexToModel(panel.tablePC.getSelectedRow()));
-            PCFormOld pcFormOld = new PCFormOld(true, pc);
-            pcFormOld.setVisible(true);
-            ThreadPoolManager.mainForm.getDesktopPane().add(pcFormOld);
+            PCCode pcForm = new PCCode(pc);
+            pcForm.setVisible(true);
+            ThreadPoolManager.mainForm.getDesktopPane().add(pcForm);
             try {
-                pcFormOld.setSelected(true);
+                pcForm.setSelected(true);
             } catch (PropertyVetoException e) {
                 e.printStackTrace();
             }
-
-            // dispose(); todo
-
+             dispose();
         }
 
         @Override
         protected void buttonAddActionPerformed() {
-            PCFormOld pcFormOld = new PCFormOld(false, null);
-            pcFormOld.setVisible(true);
-            ThreadPoolManager.mainForm.getDesktopPane().add(pcFormOld);
+            PCCode pcForm= new PCCode(null);
+            pcForm.setVisible(true);
+            ThreadPoolManager.mainForm.getDesktopPane().add(pcForm);
             try {
-                pcFormOld.setSelected(true);
+                pcForm.setSelected(true);
             } catch (PropertyVetoException e) {
                 e.printStackTrace();
             }
-
-            // dispose(); todo
-
+             dispose();
         }
 
         @Override
@@ -234,7 +228,7 @@ public class PCManagementCode extends TMSInternalFrame {
             }
 
             if (!DialogUtil.showDeleteQuestionDialog(this)) {
-                // int result = JOptionPane.showConfirmDialog(null, "DELETE_PERSON", "DELETE", JOptionPane.OK_CANCEL_OPTION);
+                // int result = JOptionPane.showConfirmDialog(null, "DELETE_PC", "DELETE", JOptionPane.OK_CANCEL_OPTION);
                 return;
             }
 
