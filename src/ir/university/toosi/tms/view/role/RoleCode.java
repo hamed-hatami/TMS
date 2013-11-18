@@ -21,7 +21,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
+/**
+ * @author a_hadadi
+ */
 public class RoleCode extends TMSInternalFrame {
     private RolePanel panel = null;
     private Role role= null;
@@ -269,17 +271,16 @@ public class RoleCode extends TMSInternalFrame {
             reloadLanguageKeys();
             //todo read from bundle
             //ThreadPoolManager.getLangValue("TMS_WORKGROUP_EDIT")
-            JOptionPane.showMessageDialog(this
+            DialogUtil.showOKDialog(this
                     , "ویرایش نقش با موفقیت انجام شد."
-                    , "پیغام"
-                    ,JOptionPane.INFORMATION_MESSAGE);
+                    , "اطلاع رسانی"
+                    );
             showRoleManagementAndExit();
         }else{
             //todo read from bundle
-            JOptionPane.showMessageDialog(this,
+            DialogUtil.showErrorDialog(this,
                     "ویرایش نقش با خطا مواجه شد.",
-                    "خطا",
-                    JOptionPane.ERROR_MESSAGE);
+                    "خطای سیستمی");
         }
 
     }

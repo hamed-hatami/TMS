@@ -22,7 +22,7 @@ public class ThreadPoolManager {
 
     public static ExecutorService executors = Executors.newCachedThreadPool();
     public static MainForm mainForm;
-    public final static boolean isDebugMode = false; //todo change when create jar file
+    public final static boolean isDebugMode = true; //todo change when create jar file
     public static User me;
     public static Languages currentLanguage = null;
     public static ComponentOrientation direction = ComponentOrientation.RIGHT_TO_LEFT;

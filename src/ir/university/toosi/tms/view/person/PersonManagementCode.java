@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * User: a_hadadi
+ * @author a_hadadi
  */
 public class PersonManagementCode extends TMSInternalFrame {
 
@@ -263,9 +263,18 @@ public class PersonManagementCode extends TMSInternalFrame {
         try {
             String result = new ObjectMapper().readValue(new RESTfulClientUtil().restFullService(personService.getServerUrl(), personService.getServiceName(), new ObjectMapper().writeValueAsString(deletedPersons)), String.class);
             if (!result.equalsIgnoreCase("true"))
-                JOptionPane.showInternalMessageDialog(this, ThreadPoolManager.getLangValue("UNSUCCESSFUL_DELETE"));
+               //ThreadPoolManager.getLangValue("UNSUCCESSFUL_DELETE")
+                //todo read from bundle
+                DialogUtil.showOKDialog(this
+                        ,"در حذف شخص مورد نظر، خطا رخ داده است."
+                        ,"خطای سیستمی"
+                );
             else
-                JOptionPane.showInternalMessageDialog(this, ThreadPoolManager.getLangValue("SUCCESSFUL_DELETE"));
+                //todo read from bundle
+                DialogUtil.showOKDialog(this
+                        ,"شخص مورد نظر حذف شد."
+                        ,"اطلاع رسانی"
+                );
             refresh();
         } catch (IOException e) {
             e.printStackTrace();

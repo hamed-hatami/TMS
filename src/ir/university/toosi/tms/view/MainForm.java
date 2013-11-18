@@ -1,18 +1,16 @@
 package ir.university.toosi.tms.view;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import ir.university.toosi.tms.model.entity.Languages;
+
 import ir.university.toosi.tms.model.entity.WebServiceInfo;
 import ir.university.toosi.tms.util.ComponentUtil;
 import ir.university.toosi.tms.util.DialogUtil;
-import ir.university.toosi.tms.util.RESTfulClientUtil;
 import ir.university.toosi.tms.util.ThreadPoolManager;
 import ir.university.toosi.tms.view.calendar.CalendarManagement;
 import ir.university.toosi.tms.view.eventlog.EventLogList;
 import ir.university.toosi.tms.view.language.LanguageAddForm;
 import ir.university.toosi.tms.view.language.LanguageManagementCode;
 import ir.university.toosi.tms.view.newMenu.MenuPanel;
+import ir.university.toosi.tms.view.pc.PCManagement;
 import ir.university.toosi.tms.view.person.PersonManagementCode;
 import ir.university.toosi.tms.view.role.RoleManagementCode;
 import ir.university.toosi.tms.view.user.UserManagementCode;
@@ -26,6 +24,9 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
 
+/**
+ * @author a_hadadi
+ */
 public class MainForm extends JFrame implements WindowListener {
 
     private TMSDesktop desktopPane;
@@ -206,7 +207,7 @@ public class MainForm extends JFrame implements WindowListener {
             personManagementItem.setIcon(ComponentUtil.getImageIcon("account-menu.png"));
             pcManagementItem.setIcon(ComponentUtil.getImageIcon("account-menu.png"));
             organManagementItem.setIcon(ComponentUtil.getImageIcon("account-menu.png"));
-            operationManagementItem.setIcon(ComponentUtil.getImageIcon("role-menu.png"));
+            //operationManagementItem.setIcon(ComponentUtil.getImageIcon("role-menu.png"));
             exit.setIcon(ComponentUtil.getImageIcon("exit.png"));
         }
 
@@ -315,6 +316,15 @@ public class MainForm extends JFrame implements WindowListener {
         @Override
         protected void showPCManagment() {
             //todo
+
+            PCManagement pcManagement = new PCManagement();
+            pcManagement.setVisible(true);
+            desktopPane.add(pcManagement);
+            try {
+                pcManagement.setSelected(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
 
@@ -323,10 +333,7 @@ public class MainForm extends JFrame implements WindowListener {
             //todo
         }
 
-        @Override
-        protected void showOperationManagment() {
-            //todo
-        }
+
 
 
     }

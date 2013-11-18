@@ -46,8 +46,6 @@ public abstract class MenuPanel extends JPanel {
 
     protected abstract void showOrganManagment();
 
-    protected abstract void showOperationManagment();
-
     protected abstract void showPersonManagment();
 
 
@@ -68,11 +66,10 @@ public abstract class MenuPanel extends JPanel {
         workGroupManagementItem = new JButton();
         roleManagementItem = new JButton();
         userManagementItem = new JButton();
-        eventLogListItem = new JButton();
         personManagementItem = new JButton();
         pcManagementItem = new JButton();
         organManagementItem = new JButton();
-        operationManagementItem = new JButton();
+        eventLogListItem = new JButton();
         exitMenu = new JPanel();
         exit = new JButton();
 
@@ -188,24 +185,6 @@ public abstract class MenuPanel extends JPanel {
                 });
                 managementMenu.add(userManagementItem);
 
-                //---- eventLogListItem ----
-                eventLogListItem.setIcon(null);
-                eventLogListItem.setMaximumSize(new Dimension(80, 80));
-                eventLogListItem.setMinimumSize(new Dimension(80, 80));
-                eventLogListItem.setVerticalTextPosition(SwingConstants.BOTTOM);
-                eventLogListItem.setHorizontalTextPosition(SwingConstants.CENTER);
-                eventLogListItem.setText("\u0631\u0648\u06cc\u062f\u0627\u062f");
-                eventLogListItem.setAlignmentX(0.5F);
-                eventLogListItem.setPreferredSize(new Dimension(80, 80));
-                eventLogListItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
-                eventLogListItem.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        showEventLogList();
-                    }
-                });
-                managementMenu.add(eventLogListItem);
-
                 //---- personManagementItem ----
                 personManagementItem.setIcon(null);
                 personManagementItem.setMaximumSize(new Dimension(80, 80));
@@ -260,23 +239,23 @@ public abstract class MenuPanel extends JPanel {
                 });
                 managementMenu.add(organManagementItem);
 
-                //---- operationManagementItem ----
-                operationManagementItem.setIcon(null);
-                operationManagementItem.setMaximumSize(new Dimension(80, 80));
-                operationManagementItem.setMinimumSize(new Dimension(80, 80));
-                operationManagementItem.setVerticalTextPosition(SwingConstants.BOTTOM);
-                operationManagementItem.setHorizontalTextPosition(SwingConstants.CENTER);
-                operationManagementItem.setText("\u0639\u0645\u0644\u06cc\u0627\u062a");
-                operationManagementItem.setAlignmentX(0.5F);
-                operationManagementItem.setPreferredSize(new Dimension(80, 80));
-                operationManagementItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
-                operationManagementItem.addActionListener(new ActionListener() {
+                //---- eventLogListItem ----
+                eventLogListItem.setIcon(null);
+                eventLogListItem.setMaximumSize(new Dimension(80, 80));
+                eventLogListItem.setMinimumSize(new Dimension(80, 80));
+                eventLogListItem.setVerticalTextPosition(SwingConstants.BOTTOM);
+                eventLogListItem.setHorizontalTextPosition(SwingConstants.CENTER);
+                eventLogListItem.setText("\u0631\u0648\u06cc\u062f\u0627\u062f");
+                eventLogListItem.setAlignmentX(0.5F);
+                eventLogListItem.setPreferredSize(new Dimension(80, 80));
+                eventLogListItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                eventLogListItem.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        showOperationManagment();
+                        showEventLogList();
                     }
                 });
-                managementMenu.add(operationManagementItem);
+                managementMenu.add(eventLogListItem);
             }
             tabbedPane1.addTab("\u0645\u062f\u06cc\u0631\u06cc\u062a", managementMenu);
 
@@ -319,11 +298,10 @@ public abstract class MenuPanel extends JPanel {
     protected JButton workGroupManagementItem;
     protected JButton roleManagementItem;
     protected JButton userManagementItem;
-    protected JButton eventLogListItem;
     protected JButton personManagementItem;
     protected JButton pcManagementItem;
     protected JButton organManagementItem;
-    protected JButton operationManagementItem;
+    protected JButton eventLogListItem;
     private JPanel exitMenu;
     protected JButton exit;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

@@ -4,6 +4,9 @@ import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import java.awt.*;
+/**
+ * @author a_hadadi
+ */
 
 public class testCellEditorForTableHeader {
 

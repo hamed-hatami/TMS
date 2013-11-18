@@ -11,7 +11,9 @@ import java.awt.event.*;
 import java.lang.Object;
 import java.util.*;
 import java.util.List;
-
+/**
+ * @author a_hadadi
+ */
 
 public class FilterJTable extends JTable {
 

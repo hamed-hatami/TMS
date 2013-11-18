@@ -1,5 +1,6 @@
 package ir.university.toosi.tms.util.ImageUtil;
 
+
 import net.coobird.thumbnailator.Thumbnails;
 
 import javax.imageio.ImageIO;
@@ -11,6 +12,9 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+/**
+ * @author a_hadadi
+ */
 
 
 public class ImageUtils {

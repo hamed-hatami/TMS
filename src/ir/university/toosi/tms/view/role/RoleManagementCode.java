@@ -21,7 +21,6 @@ import java.util.List;
 /**
  * @author a_hadadi
  */
-
 public class RoleManagementCode extends TMSInternalFrame {
 
     private RoleManagementPanel panel = null;

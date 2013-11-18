@@ -17,7 +17,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * User: a_hadadi
+ * @author a_hadadi
  */
 public class PersonCode extends TMSInternalFrame {
     private PersonPanel panel = null;

@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * User: a_hadadi
+ * @author a_hadadi
  */
 public class UserManagementCode extends TMSInternalFrame {
     private UserManagementPanel panel = null;

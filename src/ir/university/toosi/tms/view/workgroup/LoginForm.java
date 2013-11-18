@@ -22,7 +22,6 @@ import java.util.Properties;
 /**
  * @author a_hadadi
  */
-
 public class LoginForm extends JDialog {
 
     public ComponentOrientation direction;

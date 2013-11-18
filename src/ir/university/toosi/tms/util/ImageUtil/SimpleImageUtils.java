@@ -4,11 +4,7 @@ import javax.swing.*;
 import java.io.File;
 
 /**
- * Created with IntelliJ IDEA.
- * User: a_hadadi
- * Date: 9/16/13
- * Time: 9:09 AM
- * To change this template use File | Settings | File Templates.
+ * @author a_hadadi
  */
 public class SimpleImageUtils {
     public final static String jpeg = "jpeg";

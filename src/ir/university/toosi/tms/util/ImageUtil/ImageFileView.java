@@ -1,16 +1,13 @@
 package ir.university.toosi.tms.util.ImageUtil;
 
-/**
- * User: a_hadadi
- */
-
-
-
 import ir.university.toosi.tms.util.ComponentUtil;
 
 import java.io.File;
 import javax.swing.*;
 import javax.swing.filechooser.*;
+/**
+ * @author a_hadadi
+ */
 
 /* ImageFileView.java is used by FileChooserDemo2.java. */
 public class ImageFileView extends FileView {

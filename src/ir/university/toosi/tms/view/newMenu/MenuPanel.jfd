@@ -106,22 +106,6 @@ new FormModel {
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showUserManagement", false ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "eventLogListItem"
-					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
-					"maximumSize": #Dimension0
-					"minimumSize": #Dimension1
-					"verticalTextPosition": 3
-					"horizontalTextPosition": 0
-					"text": "رویداد"
-					"alignmentX": 0.5f
-					"preferredSize": new java.awt.Dimension( 80, 80 )
-					"font": #Font0
-					auxiliary() {
-						"JavaCodeGenerator.variableModifiers": 4
-					}
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showEventLogList", false ) )
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "personManagementItem"
 					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"maximumSize": #Dimension0
@@ -170,20 +154,20 @@ new FormModel {
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showOrganManagment", false ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "operationManagementItem"
+					name: "eventLogListItem"
 					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"maximumSize": #Dimension0
 					"minimumSize": #Dimension1
 					"verticalTextPosition": 3
 					"horizontalTextPosition": 0
-					"text": "عملیات"
+					"text": "رویداد"
 					"alignmentX": 0.5f
-					"preferredSize": #Dimension2
+					"preferredSize": new java.awt.Dimension( 80, 80 )
 					"font": #Font0
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4
 					}
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showOperationManagment", false ) )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showEventLogList", false ) )
 				} )
 			}, new FormLayoutConstraints( null ) {
 				"title": "مدیریت"

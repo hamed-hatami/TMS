@@ -22,7 +22,7 @@ public class ComponentUtil {
         if (ThreadPoolManager.isDebugMode) {
             BufferedImage bufferedImage = null;
             try {
-                String pathPrefix = "D:\\TMS\\TMS\\resources\\images\\";
+                String pathPrefix = "D:\\TMS\\TMS\\resources\\images\\";//todo change it to your pc address
                 bufferedImage = ImageIO.read(new File(pathPrefix + fileName));
             } catch (IOException e) {
                 e.printStackTrace();

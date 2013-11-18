@@ -5,11 +5,7 @@ import ir.university.toosi.tms.view.TMSInternalFrame;
 import java.awt.*;
 
 /**
- * Created with IntelliJ IDEA.
- * User: a_hadadi
- * Date: 10/2/13
- * Time: 8:24 PM
- * To change this template use File | Settings | File Templates.
+ * @author a_hadadi
  */
 public class PCManagementCode extends TMSInternalFrame {
    private String formTitle = "this title";

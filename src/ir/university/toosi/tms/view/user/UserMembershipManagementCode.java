@@ -22,7 +22,6 @@ import java.util.List;
 /**
  * @author a_hadadi
  */
-
 public class UserMembershipManagementCode extends TMSInternalFrame {
 
     private UserMembershipManagementDesignPanel panel = null;

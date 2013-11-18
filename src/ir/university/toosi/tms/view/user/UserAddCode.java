@@ -18,6 +18,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author a_hadadi
+ */
 public class UserAddCode extends TMSInternalFrame {
 
     private UserAddPanel panel = null;

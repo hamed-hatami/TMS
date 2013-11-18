@@ -22,7 +22,7 @@ import java.util.*;
 import java.util.List;
 
 /**
- * User: a_hadadi
+ * @author a_hadadi
  */
 public class WorkGroupManagementCode extends TMSInternalFrame {
 

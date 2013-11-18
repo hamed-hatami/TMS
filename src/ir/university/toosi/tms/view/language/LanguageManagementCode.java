@@ -19,11 +19,7 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: a_hadadi
- * Date: 10/8/13
- * Time: 10:36 AM
- * To change this template use File | Settings | File Templates.
+ * @author a_hadadi
  */
 public class LanguageManagementCode  extends TMSInternalFrame {
 

@@ -24,7 +24,7 @@ import java.util.*;
 import java.util.List;
 
 /**
- * User: a_hadadi
+ * @author a_hadadi
  */
 public class WorkGroupCode extends TMSInternalFrame {
 
@@ -258,17 +258,15 @@ public class WorkGroupCode extends TMSInternalFrame {
             reloadLanguageKeys();
             //todo read from bundle
             //ThreadPoolManager.getLangValue("TMS_WORKGROUP_EDIT")
-            JOptionPane.showMessageDialog(this
-                    , "ویرایش گروه کاری با موفقیت انجام شد"
-                    , "پیغام"
-                    ,JOptionPane.INFORMATION_MESSAGE);
+            DialogUtil.showOKDialog(this
+            ,"ویرایش گروه کاری با موفقیت انجام شد"
+            ,"اطلاع رسانی");
             showWorkGroupManagementAndExit();
         }else{
             //todo read from bundle
-            JOptionPane.showMessageDialog(this,
-                    "ویرایش گروه کاری با خطا مواجه شد",
-                    "خطا",
-                    JOptionPane.ERROR_MESSAGE);
+            DialogUtil.showErrorDialog(this
+                    ,"ویرایش گروه کاری با خطا مواجه شد"
+                    ,"خطای سیستمی");
         }
 
     }

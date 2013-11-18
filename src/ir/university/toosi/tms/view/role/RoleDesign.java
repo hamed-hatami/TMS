@@ -13,7 +13,6 @@ import javax.swing.table.*;
 /**
  * @author a_hadadi
  */
-
 public abstract class RoleDesign extends JPanel {
     public RoleDesign() {
         initComponents();
