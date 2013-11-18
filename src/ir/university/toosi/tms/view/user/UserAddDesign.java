@@ -104,7 +104,7 @@ public abstract class UserAddDesign extends JPanel {
                 }
             });
             panel3.add(buttonCancel);
-            buttonCancel.setBounds(15, 10, 80, buttonCancel.getPreferredSize().height);
+            buttonCancel.setBounds(15, 10, 80, 26);
 
             //---- buttonSave ----
             buttonSave.setText("\u0630\u062e\u06cc\u0631\u0647");
@@ -116,7 +116,7 @@ public abstract class UserAddDesign extends JPanel {
                 }
             });
             panel3.add(buttonSave);
-            buttonSave.setBounds(105, 10, 80, buttonSave.getPreferredSize().height);
+            buttonSave.setBounds(105, 10, 80, 26);
 
             { // compute preferred size
                 Dimension preferredSize = new Dimension();

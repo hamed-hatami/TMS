@@ -5,9 +5,10 @@
 package ir.university.toosi.tms.view.pc;
 
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,133 +16,210 @@ import java.awt.event.ActionListener;
 /**
  * @author a_hadadi
  */
-public abstract class PCManagementDesign extends  JPanel {
+public abstract class PCManagementDesign extends JPanel {
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    protected JPanel panelSearch;
+    protected JLabel labelFilter;
+    protected JLabel labelFilterBy;
+    protected JTextField textFieldFilter;
+    protected JComboBox comboBoxFilterBy;
+    protected JPanel panelPCList;
+    protected JScrollPane scrollPane1;
+    protected JTable tablePC;
+    protected JButton buttonCancel;
+    protected JButton buttonEdit;
+    protected JButton buttonAdd;
+    protected JButton buttonDelete;
+    private JPanel panelButton;
+
     public PCManagementDesign() {
         initComponents();
     }
 
-    protected abstract void button1ActionPerformed();
+    protected abstract void buttonCancelActionPerformed();
 
-    protected abstract void button2ActionPerformed();
+    protected abstract void buttonEditActionPerformed();
 
-    protected abstract void button4ActionPerformed();
+    protected abstract void buttonAddActionPerformed();
 
-    protected abstract void button3ActionPerformed();
+    protected abstract void buttonDeleteActionPerformed();
+
+    protected abstract void filterEvent();
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        // Generated using JFormDesigner Evaluation license - farzad sedaghatbin
-        panel1 = new JPanel();
+        panelSearch = new JPanel();
+        labelFilter = new JLabel();
+        labelFilterBy = new JLabel();
+        textFieldFilter = new JTextField();
+        comboBoxFilterBy = new JComboBox();
+        panelPCList = new JPanel();
         scrollPane1 = new JScrollPane();
-        table1 = new JTable();
-        panel2 = new JPanel();
-        button1 = new JButton();
-        button2 = new JButton();
-        button3 = new JButton();
+        tablePC = new JTable();
+        panelButton = new JPanel();
+        buttonCancel = new JButton();
+        buttonEdit = new JButton();
+        buttonAdd = new JButton();
+        buttonDelete = new JButton();
 
         //======== this ========
         setVisible(true);
-
-        // JFormDesigner evaluation mark
-        setBorder(new javax.swing.border.CompoundBorder(
-            new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
-                "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
-                javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
-                java.awt.Color.red), getBorder())); addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
-
         setLayout(null);
 
-        //======== panel1 ========
+        //======== panelSearch ========
         {
-            panel1.setBorder(new TitledBorder("defined WorkGroup"));
-            panel1.setLayout(new BoxLayout(panel1, BoxLayout.X_AXIS));
+            panelSearch.setBorder(new TitledBorder("TMS_PC_SEARCH"));
+            panelSearch.setLayout(null);
+
+            //---- labelFilter ----
+            labelFilter.setText("Filter text");
+            panelSearch.add(labelFilter);
+            labelFilter.setBounds(465, 20, 80, 25);
+
+            //---- labelFilterBy ----
+            labelFilterBy.setText("filter by");
+            panelSearch.add(labelFilterBy);
+            labelFilterBy.setBounds(200, 20, 80, 25);
+
+            //---- textFieldFilter ----
+
+            //filter text typing event
+            textFieldFilter.getDocument().addDocumentListener(new DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    filterEvent();
+                }
+
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    filterEvent();
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    filterEvent();
+                }
+            });
+            panelSearch.add(textFieldFilter);
+            textFieldFilter.setBounds(330, 20, 130, textFieldFilter.getPreferredSize().height);
+            panelSearch.add(comboBoxFilterBy);
+            comboBoxFilterBy.setBounds(25, 20, 165, comboBoxFilterBy.getPreferredSize().height);
+
+            { // compute preferred size
+                Dimension preferredSize = new Dimension();
+                for (int i = 0; i < panelSearch.getComponentCount(); i++) {
+                    Rectangle bounds = panelSearch.getComponent(i).getBounds();
+                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                }
+                Insets insets = panelSearch.getInsets();
+                preferredSize.width += insets.right;
+                preferredSize.height += insets.bottom;
+                panelSearch.setMinimumSize(preferredSize);
+                panelSearch.setPreferredSize(preferredSize);
+            }
+        }
+        add(panelSearch);
+        panelSearch.setBounds(7, 5, 610, 55);
+
+        //======== panelPCList ========
+        {
+            panelPCList.setBorder(new TitledBorder("TMS_PC_LIST"));
+            panelPCList.setLayout(null);
 
             //======== scrollPane1 ========
             {
-
-                //---- table1 ----
-                table1.setModel(new DefaultTableModel(
-                    new Object[][] {
-                        {"\u0645\u062f\u06cc\u0631", null},
-                    },
-                    new String[] {
-                        "name", "IP"
-                    }
-                ) {
-                    Class<?>[] columnTypes = new Class<?>[] {
-                        String.class, String.class
-                    };
-                    boolean[] columnEditable = new boolean[] {
-                        false, false
-                    };
-                    @Override
-                    public Class<?> getColumnClass(int columnIndex) {
-                        return columnTypes[columnIndex];
-                    }
-                    @Override
-                    public boolean isCellEditable(int rowIndex, int columnIndex) {
-                        return columnEditable[columnIndex];
-                    }
-                });
-                {
-                    TableColumnModel cm = table1.getColumnModel();
-                    cm.getColumn(0).setResizable(false);
-                    cm.getColumn(0).setMinWidth(100);
-                    cm.getColumn(0).setMaxWidth(300);
-                    cm.getColumn(0).setPreferredWidth(100);
-                    cm.getColumn(1).setResizable(false);
-                }
-                scrollPane1.setViewportView(table1);
+                scrollPane1.setViewportView(tablePC);
             }
-            panel1.add(scrollPane1);
-        }
-        add(panel1);
-        panel1.setBounds(5, 5, 530, 245);
+            panelPCList.add(scrollPane1);
+            scrollPane1.setBounds(10, 20, 590, 275);
 
-        //======== panel2 ========
+            { // compute preferred size
+                Dimension preferredSize = new Dimension();
+                for (int i = 0; i < panelPCList.getComponentCount(); i++) {
+                    Rectangle bounds = panelPCList.getComponent(i).getBounds();
+                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                }
+                Insets insets = panelPCList.getInsets();
+                preferredSize.width += insets.right;
+                preferredSize.height += insets.bottom;
+                panelPCList.setMinimumSize(preferredSize);
+                panelPCList.setPreferredSize(preferredSize);
+            }
+        }
+        add(panelPCList);
+        panelPCList.setBounds(7, 65, 610, 305);
+
+        //======== panelButton ========
         {
-            panel2.setBorder(new TitledBorder("available Operations"));
-            panel2.setLayout(null);
+            panelButton.setBorder(new EtchedBorder());
+            panelButton.setLayout(null);
 
-            //---- button1 ----
-            button1.setText("add");
-            button1.addActionListener(new ActionListener() {
+            //---- buttonCancel ----
+            buttonCancel.setText("Cancel");
+            buttonCancel.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    button1ActionPerformed();
+                    buttonCancelActionPerformed();
                 }
             });
-            panel2.add(button1);
-            button1.setBounds(105, 25, 76, button1.getPreferredSize().height);
+            panelButton.add(buttonCancel);
+            buttonCancel.setBounds(15, 15, 80, 26);
 
-            //---- button2 ----
-            button2.setText("delete");
-            button2.addActionListener(new ActionListener() {
+            //---- buttonEdit ----
+            buttonEdit.setText("Edit");
+            buttonEdit.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    button2ActionPerformed();
+                    buttonEditActionPerformed();
                 }
             });
-            panel2.add(button2);
-            button2.setBounds(220, 25, 76, button2.getPreferredSize().height);
+            panelButton.add(buttonEdit);
+            buttonEdit.setBounds(211, 15, 80, 26);
 
-            //---- button3 ----
-            button3.setText("modify");
-            button3.addActionListener(new ActionListener() {
+            //---- buttonAdd ----
+            buttonAdd.setText("Add");
+            buttonAdd.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    button3ActionPerformed();
+                    buttonAddActionPerformed();
                 }
             });
-            panel2.add(button3);
-            button3.setBounds(335, 25, 76, button3.getPreferredSize().height);
+            panelButton.add(buttonAdd);
+            buttonAdd.setBounds(309, 15, 80, 26);
+
+            //---- buttonDelete ----
+            buttonDelete.setText("Delete");
+            buttonDelete.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buttonDeleteActionPerformed();
+                }
+            });
+            panelButton.add(buttonDelete);
+            buttonDelete.setBounds(113, 15, 80, 26);
+
+            { // compute preferred size
+                Dimension preferredSize = new Dimension();
+                for (int i = 0; i < panelButton.getComponentCount(); i++) {
+                    Rectangle bounds = panelButton.getComponent(i).getBounds();
+                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                }
+                Insets insets = panelButton.getInsets();
+                preferredSize.width += insets.right;
+                preferredSize.height += insets.bottom;
+                panelButton.setMinimumSize(preferredSize);
+                panelButton.setPreferredSize(preferredSize);
+            }
         }
-        add(panel2);
-        panel2.setBounds(5, 250, 530, 75);
+        add(panelButton);
+        panelButton.setBounds(9, 375, 608, 55);
 
         { // compute preferred size
             Dimension preferredSize = new Dimension();
-            for(int i = 0; i < getComponentCount(); i++) {
+            for (int i = 0; i < getComponentCount(); i++) {
                 Rectangle bounds = getComponent(i).getBounds();
                 preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
                 preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
@@ -154,15 +232,5 @@ public abstract class PCManagementDesign extends  JPanel {
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    // Generated using JFormDesigner Evaluation license - farzad sedaghatbin
-    private JPanel panel1;
-    private JScrollPane scrollPane1;
-    private JTable table1;
-    private JPanel panel2;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

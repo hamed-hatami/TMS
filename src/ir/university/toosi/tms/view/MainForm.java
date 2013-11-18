@@ -9,12 +9,13 @@ import ir.university.toosi.tms.view.calendar.CalendarManagement;
 import ir.university.toosi.tms.view.eventlog.EventLogList;
 import ir.university.toosi.tms.view.language.LanguageAddForm;
 import ir.university.toosi.tms.view.language.LanguageManagementCode;
+import ir.university.toosi.tms.view.login.LoginForm;
 import ir.university.toosi.tms.view.newMenu.MenuPanel;
 import ir.university.toosi.tms.view.pc.PCManagement;
+import ir.university.toosi.tms.view.pc.PCManagementCode;
 import ir.university.toosi.tms.view.person.PersonManagementCode;
 import ir.university.toosi.tms.view.role.RoleManagementCode;
 import ir.university.toosi.tms.view.user.UserManagementCode;
-import ir.university.toosi.tms.view.workgroup.LoginForm;
 import ir.university.toosi.tms.view.workgroup.WorkGroupManagementCode;
 
 import javax.swing.*;
@@ -22,7 +23,6 @@ import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.IOException;
 
 /**
  * @author a_hadadi
@@ -55,12 +55,9 @@ public class MainForm extends JFrame implements WindowListener {
         }
 
         ThreadPoolManager.mainForm = this;
-
     }
 
     public static void main(String[] args) {
-        // LoginF
-
         MainForm mainForm = new MainForm();
         mainForm.createAndShowGUI();
     }
@@ -107,8 +104,6 @@ public class MainForm extends JFrame implements WindowListener {
             e.printStackTrace();
         }
 
-        //set Main window Properties
-        setVisible(true);
 
 
         // setMaximumSize(new Dimension(1024, 800));
@@ -135,23 +130,15 @@ public class MainForm extends JFrame implements WindowListener {
         desktopPane.setBackground(new Color(238, 238, 238));
         contentPane.add(desktopPane);
 
-        changeComonentOrientation(direction);
+        ComponentUtil.changeComonentOrientation(this.getComponents(),direction);
+
+        //set Main window Properties
+        setVisible(true);
+       /* repaint();
+        revalidate();*/
 
     }
 
-    public void changeComonentOrientationRecurcive(Component[] components, ComponentOrientation orientation) {
-        for (Component c : components) {
-            c.setComponentOrientation(orientation);
-            if (c instanceof java.awt.Container)
-                changeComonentOrientationRecurcive(((java.awt.Container) c).getComponents(), orientation);
-        }
-    }
-
-    public void changeComonentOrientation(ComponentOrientation orientation) {
-        changeComonentOrientationRecurcive(this.getComponents(), orientation);
-        repaint();
-        revalidate();
-    }
 
     public TMSDesktop getDesktopPane() {
         return desktopPane;
@@ -207,7 +194,6 @@ public class MainForm extends JFrame implements WindowListener {
             personManagementItem.setIcon(ComponentUtil.getImageIcon("account-menu.png"));
             pcManagementItem.setIcon(ComponentUtil.getImageIcon("account-menu.png"));
             organManagementItem.setIcon(ComponentUtil.getImageIcon("account-menu.png"));
-            //operationManagementItem.setIcon(ComponentUtil.getImageIcon("role-menu.png"));
             exit.setIcon(ComponentUtil.getImageIcon("exit.png"));
         }
 
@@ -221,7 +207,6 @@ public class MainForm extends JFrame implements WindowListener {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
 
         @Override
@@ -316,7 +301,6 @@ public class MainForm extends JFrame implements WindowListener {
         @Override
         protected void showPCManagment() {
             //todo
-
             PCManagement pcManagement = new PCManagement();
             pcManagement.setVisible(true);
             desktopPane.add(pcManagement);
@@ -325,15 +309,22 @@ public class MainForm extends JFrame implements WindowListener {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
 
+            PCManagementCode pcManagement2= new PCManagementCode();
+            pcManagement2.setVisible(true);
+            desktopPane.add(pcManagement2);
+            try {
+                pcManagement2.setSelected(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
 
         @Override
         protected void showOrganManagment() {
             //todo
         }
-
-
 
 
     }

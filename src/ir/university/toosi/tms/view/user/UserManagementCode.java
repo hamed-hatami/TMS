@@ -50,6 +50,12 @@ public class UserManagementCode extends TMSInternalFrame {
         panel.buttonEdit.setText(ThreadPoolManager.getLangValue("TMS_EDIT"));
         panel.buttonEdit.setEnabled(ThreadPoolManager.hasPermission("EDIT_USER"));
 
+
+        panel.buttonMembershipManagement.setText(ThreadPoolManager.getLangValue("TMS_ASSIGN"));
+       // panel.buttonEdit.setEnabled(ThreadPoolManager.hasPermission("TMS_ASSIGN"));//todo
+
+        panel.buttonCancel.setText(ThreadPoolManager.getLangValue("TMS_CANCEL"));
+
         this.add(panel);
 
 
@@ -141,6 +147,7 @@ public class UserManagementCode extends TMSInternalFrame {
 
             try {
                 User user = userList.get(panel.tableInfo.convertRowIndexToModel(tableInfo.getSelectedRow()));
+                user.setEffectorUser(ThreadPoolManager.me.getUsername());
                 WebServiceInfo serviceInfo = new WebServiceInfo();
                 serviceInfo.setServiceName("/deleteUser");
                 new RESTfulClientUtil().restFullService(serviceInfo.getServerUrl(), serviceInfo.getServiceName(), new ObjectMapper().writeValueAsString(user));

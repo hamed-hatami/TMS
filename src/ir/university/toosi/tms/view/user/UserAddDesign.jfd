@@ -103,6 +103,7 @@ new FormModel {
 					"x": 15
 					"y": 10
 					"width": 80
+					"height": 26
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "buttonSave"
@@ -116,6 +117,7 @@ new FormModel {
 					"x": 105
 					"y": 10
 					"width": 80
+					"height": 26
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"width": 410

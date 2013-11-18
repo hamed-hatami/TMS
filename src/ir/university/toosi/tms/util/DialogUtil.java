@@ -12,7 +12,8 @@ public class DialogUtil {
     public static void showOKDialog(Component parentComponent
             ,String mainMessage
             ,String titleMessage){
-        Object[] options = {"باشد"}; //and every desire text unlimited
+        String okString = "تائید"; //todo read from bundle
+        Object[] options = {okString}; //and every desire text unlimited
         JOptionPane.showOptionDialog(parentComponent,
                 mainMessage,
                 titleMessage,
@@ -26,7 +27,7 @@ public class DialogUtil {
     public static void showErrorDialog(Component parentComponent
             ,String mainMessage
             ,String titleMessage){
-        Object[] options = {"تائید"}; //todo
+        Object[] options = {"تائید"}; //todo read from bundle
         JOptionPane.showOptionDialog(parentComponent,
                 mainMessage,
                 titleMessage,
@@ -41,6 +42,15 @@ public class DialogUtil {
         //todo read from bundle
         return showYesNOQuestionDialog(parentComponent
                 ,ThreadPoolManager.getLangValue("deleteMessage")
+                ,"بله، حذف شود"
+                ,"خیر، حذف نشود"
+                , "تایید حذف");
+    }
+
+    public static boolean showDeleteQuestionDialog(Component parentComponent,String deleteMessage){
+        //todo read from bundle
+        return showYesNOQuestionDialog(parentComponent
+                ,deleteMessage
                 ,"بله، حذف شود"
                 ,"خیر، حذف نشود"
                 , "تایید حذف");

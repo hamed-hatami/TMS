@@ -105,7 +105,8 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 15
 					"y": 15
-					"width": 71
+					"width": 80
+					"height": 26
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "buttonEdit"
@@ -115,9 +116,9 @@ new FormModel {
 					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonEditActionPerformed", false ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"width": 71
+					"width": 80
 					"height": 26
-					"x": 285
+					"x": 306
 					"y": 15
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -128,9 +129,9 @@ new FormModel {
 					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonAddActionPerformed", false ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"width": 71
+					"width": 80
 					"height": 26
-					"x": 370
+					"x": 403
 					"y": 15
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -141,9 +142,9 @@ new FormModel {
 					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonAllocateActionPerformed", false ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"width": 71
+					"width": 80
 					"height": 26
-					"x": 195
+					"x": 209
 					"y": 15
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -154,9 +155,9 @@ new FormModel {
 					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonDeleteActionPerformed", false ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"width": 71
+					"width": 80
 					"height": 26
-					"x": 105
+					"x": 112
 					"y": 15
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {

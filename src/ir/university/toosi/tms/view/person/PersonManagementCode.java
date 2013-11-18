@@ -59,12 +59,8 @@ public class PersonManagementCode extends TMSInternalFrame {
 
         panel.buttonCancel.setText(ThreadPoolManager.getLangValue("TMS_CANCEL"));
 
-        //panel.buttonAllocate.setText(ThreadPoolManager.getLangValue("TMS_ALLOCATE"));//todo
-        panel.buttonAllocate.setText("تخصیص");//todo
-        // panel.buttonAllocate.setEnabled(ThreadPoolManager.hasPermission("ADD_PERSON"));//todo
-        panel.buttonAllocate.setEnabled(true);//todo
-        //panel.buttonAllocate.setVisible(false);
-
+        panel.buttonAllocate.setText(ThreadPoolManager.getLangValue("TMS_ASSIGN"));//todo
+       // panel.buttonAllocate.setEnabled(ThreadPoolManager.hasPermission("TMS_ASSIGN"));//todo
 
         this.add(panel);
 
@@ -343,7 +339,7 @@ public class PersonManagementCode extends TMSInternalFrame {
             }
 
             if (!DialogUtil.showDeleteQuestionDialog(this)) {
-                // int result = JOptionPane.showConfirmDialog(null, "DELETE_PERSON", "DELETE", JOptionPane.OK_CANCEL_OPTION);
+            //if (!DialogUtil.showDeleteQuestionDialog(this,ThreadPoolManager.getLangValue("DELETE_PERSON") )) { //todo
                 return;
             }
 

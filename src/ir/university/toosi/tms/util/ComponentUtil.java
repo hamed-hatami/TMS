@@ -114,18 +114,14 @@ public class ComponentUtil {
         }
     }
 
-    private static void changeComonentOrientationRecurcive(Component[] components, ComponentOrientation orientation) {
+    public static void changeComonentOrientation(Component[] components, ComponentOrientation orientation) {
         for (Component c : components) {
             c.setComponentOrientation(orientation);
             if (c instanceof java.awt.Container)
-                changeComonentOrientationRecurcive(((java.awt.Container) c).getComponents(), orientation);
+                changeComonentOrientation(((java.awt.Container) c).getComponents(), orientation);
         }
     }
 
-    public static void changeComonentOrientation(JInternalFrame jInternalFrame, ComponentOrientation orientation) {
-        changeComonentOrientationRecurcive(jInternalFrame.getComponents(), orientation);
-        jInternalFrame.repaint();
-        jInternalFrame.revalidate();
-    }
+
 
 }

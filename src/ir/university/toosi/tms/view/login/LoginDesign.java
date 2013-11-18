@@ -2,7 +2,7 @@
  * Created by JFormDesigner on Thu Oct 03 13:07:02 AFT 2013
  */
 
-package ir.university.toosi.tms.view.workgroup;
+package ir.university.toosi.tms.view.login;
 
 
 import java.awt.*;

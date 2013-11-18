@@ -152,7 +152,7 @@ public abstract class PersonManagementDesign extends JPanel {
                 }
             });
             panelButton.add(buttonCancel);
-            buttonCancel.setBounds(15, 15, 71, buttonCancel.getPreferredSize().height);
+            buttonCancel.setBounds(15, 15, 80, 26);
 
             //---- buttonEdit ----
             buttonEdit.setText("Edit");
@@ -163,7 +163,7 @@ public abstract class PersonManagementDesign extends JPanel {
                 }
             });
             panelButton.add(buttonEdit);
-            buttonEdit.setBounds(285, 15, 71, 26);
+            buttonEdit.setBounds(306, 15, 80, 26);
 
             //---- buttonAdd ----
             buttonAdd.setText("Add");
@@ -174,7 +174,7 @@ public abstract class PersonManagementDesign extends JPanel {
                 }
             });
             panelButton.add(buttonAdd);
-            buttonAdd.setBounds(370, 15, 71, 26);
+            buttonAdd.setBounds(403, 15, 80, 26);
 
             //---- buttonAllocate ----
             buttonAllocate.setText("Allocate");
@@ -185,7 +185,7 @@ public abstract class PersonManagementDesign extends JPanel {
                 }
             });
             panelButton.add(buttonAllocate);
-            buttonAllocate.setBounds(195, 15, 71, 26);
+            buttonAllocate.setBounds(209, 15, 80, 26);
 
             //---- buttonDelete ----
             buttonDelete.setText("Delete");
@@ -196,7 +196,7 @@ public abstract class PersonManagementDesign extends JPanel {
                 }
             });
             panelButton.add(buttonDelete);
-            buttonDelete.setBounds(105, 15, 71, 26);
+            buttonDelete.setBounds(112, 15, 80, 26);
 
             { // compute preferred size
                 Dimension preferredSize = new Dimension();

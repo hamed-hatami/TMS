@@ -42,16 +42,16 @@ import ir.university.toosi.tms.view.TMSPanel;
 import javax.swing.*;
 import java.io.IOException;
 
-public class PCForm extends TMSInternalFrame {
+public class PCFormOld extends TMSInternalFrame {
 
     /**
      * Creates new form ContactEditor
      */
 
-    public PCForm(boolean editMode, PC pc, PCManagement pcManagement) {
+    public PCFormOld(boolean editMode, PC pc) {
         this.editMode = editMode;
         this.pc = pc;
-        this.pcManagement = pcManagement;
+
         mainPanel = new TMSPanel();
         nameLabel = new JLabel();
         pcName = new JTextField();
@@ -137,11 +137,6 @@ public class PCForm extends TMSInternalFrame {
 
         cancel.setText(ThreadPoolManager.getLangValue("TMS_CANCEL"));
         cancel.setVisible(ThreadPoolManager.hasPermission("CANCLE_PC"));
-        cancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                close(evt);
-            }
-        });
 
         ok.setText(ThreadPoolManager.getLangValue("TMS_OK"));
         ok.setVisible(ThreadPoolManager.hasPermission("OK_PC"));
@@ -204,12 +199,7 @@ public class PCForm extends TMSInternalFrame {
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        this.dispose();
-        try {
-            pcManagement.refresh();
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+
     }
 
     private void edit(java.awt.event.ActionEvent evt) {
@@ -227,22 +217,10 @@ public class PCForm extends TMSInternalFrame {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
 
-        this.dispose();
-        try {
-            pcManagement.refresh();
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+
     }
 
-    private void close(java.awt.event.ActionEvent evt) {
-        this.dispose();
-        try {
-            pcManagement.refresh();
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-    }
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -258,7 +236,6 @@ public class PCForm extends TMSInternalFrame {
 
     private boolean editMode;
     private PC pc;
-    private PCManagement pcManagement;
     private WebServiceInfo pcService = new WebServiceInfo();
     // End of variables declaration//GEN-END:variables
 

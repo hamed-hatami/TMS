@@ -353,19 +353,19 @@ public class PCManagement extends TMSInternalFrame {
     }
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
-        PCForm pcForm = new PCForm(false, null, this);
+       /* PCFormOld pcForm = new PCFormOld(false, null, this);
         pcForm.setVisible(true);
         jdpDesktop.add(pcForm);
-        pcForm.setSelected(true);
+        pcForm.setSelected(true);*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) throws PropertyVetoException {//GEN-FIRST:event_jButton1ActionPerformed
-        PC pc = pcList.get(mainTable.convertRowIndexToModel(mainTable.getSelectedRow()));
-        PCForm pcForm = new PCForm(true, pc, this);
+      /*  PC pc = pcList.get(mainTable.convertRowIndexToModel(mainTable.getSelectedRow()));
+        PCFormOld pcForm = new PCFormOld(true, pc, this);
         pcForm.setVisible(true);
         jdpDesktop.add(pcForm);
-        pcForm.setSelected(true);
+        pcForm.setSelected(true);*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void assignPCActionPerformed(java.awt.event.ActionEvent evt) {
