@@ -4,6 +4,7 @@ package ir.university.toosi.tms.util;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -16,6 +17,7 @@ import java.net.URL;
  */
 
 public class ComponentUtil {
+
 
     public static ImageIcon getImageIcon(String fileName) {
 
@@ -80,6 +82,7 @@ public class ComponentUtil {
 
     }
 
+
     public static void setFont(JComponent component, Font font, ComponentOrientation componentOrientation) {
         component.setFont(font);
 
@@ -88,6 +91,10 @@ public class ComponentUtil {
         }
         if (component instanceof JComboBox) {
             component.setComponentOrientation(componentOrientation);
+            JComboBox comboBox = (JComboBox) component;
+            ((BasicComboBoxRenderer) comboBox.getRenderer()).setHorizontalAlignment(SwingConstants.RIGHT);
+            ((BasicComboBoxRenderer) comboBox.getRenderer()).setAutoscrolls(true);
+            comboBox.setMaximumRowCount(20);
         }
 
        /* if(component instanceof JLabel) {

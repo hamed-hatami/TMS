@@ -82,15 +82,15 @@ public class PCManagementCode extends TMSInternalFrame {
     }
 
     private void refresh() {
-        Font tahoma = new Font("Tahoma", Font.PLAIN, 12);
-        ComponentUtil.setFont(panel, tahoma, ThreadPoolManager.direction);
-        ComponentUtil.SetJTableAlignment(panel.tablePC, ThreadPoolManager.direction);
         try {
             getAll();
             showData();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Font tahoma = new Font("Tahoma", Font.PLAIN, 12);
+        ComponentUtil.setFont(panel, tahoma, ThreadPoolManager.direction);
+        ComponentUtil.SetJTableAlignment(panel.tablePC, ThreadPoolManager.direction);
     }
 
     private void getAll() throws IOException {

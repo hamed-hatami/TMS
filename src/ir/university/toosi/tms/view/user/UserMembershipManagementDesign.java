@@ -20,6 +20,8 @@ public abstract class UserMembershipManagementDesign extends JPanel {
 
     protected abstract  void cancelActionPerformed();
 
+    protected abstract void checkBoxPersonItemStateChanged();
+
     protected abstract  void saveActionPerformed();
 
     private void initComponents() {
@@ -27,6 +29,7 @@ public abstract class UserMembershipManagementDesign extends JPanel {
         panelPerson = new JPanel();
         scrollPane1 = new JScrollPane();
         tablePerson = new JTable();
+        checkBoxPerson = new JCheckBox();
         panelWorkgroup = new JPanel();
         scrollPane2 = new JScrollPane();
         tableWorkgroup = new JTable();
@@ -70,7 +73,20 @@ public abstract class UserMembershipManagementDesign extends JPanel {
                 scrollPane1.setViewportView(tablePerson);
             }
             panelPerson.add(scrollPane1);
-            scrollPane1.setBounds(10, 20, 630, 110);
+            scrollPane1.setBounds(10, 20, 630, 115);
+
+            //---- checkBoxPerson ----
+            checkBoxPerson.setText("\u0639\u062f\u0645 \u0627\u0646\u062a\u062e\u0627\u0628 \u0634\u062e\u0635");
+            checkBoxPerson.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+            checkBoxPerson.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            checkBoxPerson.addItemListener(new ItemListener() {
+                @Override
+                public void itemStateChanged(ItemEvent e) {
+                    checkBoxPersonItemStateChanged();
+                }
+            });
+            panelPerson.add(checkBoxPerson);
+            checkBoxPerson.setBounds(420, 135, 220, 18);
 
             { // compute preferred size
                 Dimension preferredSize = new Dimension();
@@ -87,7 +103,7 @@ public abstract class UserMembershipManagementDesign extends JPanel {
             }
         }
         add(panelPerson);
-        panelPerson.setBounds(15, 10, 650, 135);
+        panelPerson.setBounds(15, 10, 650, 160);
 
         //======== panelWorkgroup ========
         {
@@ -134,7 +150,7 @@ public abstract class UserMembershipManagementDesign extends JPanel {
                 scrollPane2.setViewportView(tableWorkgroup);
             }
             panelWorkgroup.add(scrollPane2);
-            scrollPane2.setBounds(10, 15, 630, 135);
+            scrollPane2.setBounds(10, 17, 630, 105);
 
             { // compute preferred size
                 Dimension preferredSize = new Dimension();
@@ -151,7 +167,7 @@ public abstract class UserMembershipManagementDesign extends JPanel {
             }
         }
         add(panelWorkgroup);
-        panelWorkgroup.setBounds(16, 144, 649, 155);
+        panelWorkgroup.setBounds(16, 170, 649, 129);
 
         //======== panelPC ========
         {
@@ -206,7 +222,7 @@ public abstract class UserMembershipManagementDesign extends JPanel {
                 scrollPane3.setViewportView(tablePC);
             }
             panelPC.add(scrollPane3);
-            scrollPane3.setBounds(5, 20, 640, 120);
+            scrollPane3.setBounds(10, 18, 630, 120);
 
             { // compute preferred size
                 Dimension preferredSize = new Dimension();
@@ -240,7 +256,7 @@ public abstract class UserMembershipManagementDesign extends JPanel {
                 }
             });
             panel3.add(buttonCancel);
-            buttonCancel.setBounds(15, 10, 80, 24);
+            buttonCancel.setBounds(35, 10, 95, 24);
 
             //---- buttonSave ----
             buttonSave.setText("\u0630\u062e\u06cc\u0631\u0647");
@@ -252,7 +268,7 @@ public abstract class UserMembershipManagementDesign extends JPanel {
                 }
             });
             panel3.add(buttonSave);
-            buttonSave.setBounds(105, 10, 80, 24);
+            buttonSave.setBounds(145, 10, 95, 24);
 
             { // compute preferred size
                 Dimension preferredSize = new Dimension();
@@ -269,7 +285,7 @@ public abstract class UserMembershipManagementDesign extends JPanel {
             }
         }
         add(panel3);
-        panel3.setBounds(15, 445, 650, 45);
+        panel3.setBounds(17, 445, 648, 45);
 
         { // compute preferred size
             Dimension preferredSize = new Dimension();
@@ -291,6 +307,7 @@ public abstract class UserMembershipManagementDesign extends JPanel {
     protected JPanel panelPerson;
     private JScrollPane scrollPane1;
     protected JTable tablePerson;
+    protected JCheckBox checkBoxPerson;
     protected JPanel panelWorkgroup;
     private JScrollPane scrollPane2;
     protected JTable tableWorkgroup;

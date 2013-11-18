@@ -49,8 +49,7 @@ public class UserMembershipManagementCode extends TMSInternalFrame {
         this.setTitle(ThreadPoolManager.getLangValue("TMS_USER_MANAGEMENT"));
 
         panel.buttonCancel.setText(ThreadPoolManager.getLangValue("TMS_CANCEL"));
-        //panel.buttonAllocate.setText(ThreadPoolManager.getLangValue("TMS_ALLOCATE"));//todo
-        panel.buttonSave.setText("تخصیص");//todo
+        panel.buttonSave.setText(ThreadPoolManager.getLangValue("TMS_ASSIGN"));
         panel.buttonSave.setEnabled(true);//todo
 
         this.add(panel);
@@ -174,6 +173,7 @@ public class UserMembershipManagementCode extends TMSInternalFrame {
         JTableBinding.ColumnBinding columnBindingWG = jTableBindingWG.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${descShow}"));
         columnBindingWG.setColumnName(ThreadPoolManager.getLangValue("TMS_DESC"));
         columnBindingWG.setColumnClass(String.class);
+        columnBindingWG.setEditable(false);
         columnBindingWG = jTableBindingWG.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${selected}"));
 
         columnBindingWG.setColumnName("انتخاب");//todo lang
@@ -189,18 +189,23 @@ public class UserMembershipManagementCode extends TMSInternalFrame {
         JTableBinding.ColumnBinding columnBindingPerson = jTableBindingPerson.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
         columnBindingPerson.setColumnName(ThreadPoolManager.getLangValue("TMS_NAME"));
         columnBindingPerson.setColumnClass(String.class);
+        columnBindingPerson.setEditable(false);
         columnBindingPerson = jTableBindingPerson.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${lastName}"));
         columnBindingPerson.setColumnName(ThreadPoolManager.getLangValue("TMS_LAST_NAME"));
         columnBindingPerson.setColumnClass(String.class);
+        columnBindingPerson.setEditable(false);
         columnBindingPerson = jTableBindingPerson.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${personnelNo}"));
         columnBindingPerson.setColumnName(ThreadPoolManager.getLangValue("TMS_PERSONNEL_NO"));
         columnBindingPerson.setColumnClass(String.class);
+        columnBindingPerson.setEditable(false);
         columnBindingPerson = jTableBindingPerson.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nationalCode}"));
         columnBindingPerson.setColumnName(ThreadPoolManager.getLangValue("TMS_NATIONAL_CODE"));
         columnBindingPerson.setColumnClass(String.class);
+        columnBindingPerson.setEditable(false);
         columnBindingPerson = jTableBindingPerson.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${pin}"));
         columnBindingPerson.setColumnName(ThreadPoolManager.getLangValue("TMS_PIN"));
         columnBindingPerson.setColumnClass(String.class);
+        columnBindingPerson.setEditable(false);
         BindingGroup bindingGroupPerson = new BindingGroup();
         bindingGroupPerson.addBinding(jTableBindingPerson);
         jTableBindingPerson.bind();
@@ -318,6 +323,26 @@ public class UserMembershipManagementCode extends TMSInternalFrame {
         dispose();
     }
 
+    private void checkBoxPersonEvent() {
+        if(panel.checkBoxPerson.isSelected()){
+            panel.tablePerson.setEnabled(false);
+            panel.tablePerson.getSelectionModel().clearSelection();
+        }else{
+            panel.tablePerson.setEnabled(true);
+            //  select current person
+            if(user.getPerson()!=null){
+                for(int i = 0 ; i<panel.tablePerson.getRowCount();i++){
+                    Person person = personList.get(panel.tablePerson.convertRowIndexToModel(i));
+                    if(person.getId() == user.getPerson().getId()){
+                        panel.tablePerson.setRowSelectionInterval(i,i);
+                        break;
+                    }
+                }
+            }
+        }
+
+    }
+
     private class UserMembershipManagementDesignPanel extends  UserMembershipManagementDesign {
 
         @Override
@@ -326,9 +351,17 @@ public class UserMembershipManagementCode extends TMSInternalFrame {
         }
 
         @Override
+        protected void checkBoxPersonItemStateChanged() {
+            checkBoxPersonEvent();
+
+        }
+
+        @Override
         protected void saveActionPerformed() {
             save();
 
         }
     }
+
+
 }

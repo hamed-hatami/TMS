@@ -17,7 +17,6 @@ import java.security.PrivilegedAction;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * @author a_hadadi
@@ -36,10 +35,18 @@ public class LoginForm extends JDialog {
     private int prop_favoritLAF = 0;
     private String prop_userName = "";
 
+    private final String LAF_motif = "com.sun.java.swing.plaf.motif.MotifLookAndFeel";
+    private final String LAF_system = UIManager.getSystemLookAndFeelClassName();
+
     public LoginForm() {
         super();
 
-        setDefaultLookAndFeelDecorated(true);
+        try {
+            setDefaultLookAndFeelDecorated(true);
+            UIManager.setLookAndFeel(LAF_system);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         panel = new LoginFormPanel();
         panel.setLocation(0, 0);
@@ -66,7 +73,7 @@ public class LoginForm extends JDialog {
     private void fillLookAndFeelCombo() {
 
 
-        ComboSelectItem selectItems[] = new ComboSelectItem[9];
+        ComboSelectItem selectItems[] = new ComboSelectItem[11];
         selectItems[0] = new ComboSelectItem("black and orange", "com.jtattoo.plaf.graphite.GraphiteLookAndFeel");//black and orange
         selectItems[1] = new ComboSelectItem("black and blue", "com.jtattoo.plaf.acryl.AcrylLookAndFeel"); //black and blue
         selectItems[2] = new ComboSelectItem("black and silver", "com.jtattoo.plaf.noire.NoireLookAndFeel");//black and silver
@@ -76,6 +83,8 @@ public class LoginForm extends JDialog {
         selectItems[6] = new ComboSelectItem("mcwin", "com.jtattoo.plaf.mcwin.McWinLookAndFeel");
         selectItems[7] = new ComboSelectItem("texture", "com.jtattoo.plaf.texture.TextureLookAndFeel");
         selectItems[8] = new ComboSelectItem("aluminium", "com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+        selectItems[9] = new ComboSelectItem("os depend", LAF_system);
+        selectItems[10] = new ComboSelectItem("motif", LAF_motif);
 
         //selectItems[13]= new ComboSelectItem("bernstein","com.jtattoo.plaf.bernstein.BernsteinLookAndFeel");//yellow
         //selectItems[12]= new ComboSelectItem("luna","com.jtattoo.plaf.luna.LunaLookAndFeel");
@@ -192,8 +201,15 @@ public class LoginForm extends JDialog {
 
         @Override
         void buttonLoginActionPerformed() {
-            setLogin(false);
+           /* DialogUtil.showOKDialog(this
+                    , "رایانه مورد نظر حذف شد."
+                    , "اطلاع رسانی"
+            );
+            return;*/
 
+
+
+            setLogin(false);
             loginService.setServiceName("/authenticate");
 
             user = new User();
@@ -291,7 +307,6 @@ public class LoginForm extends JDialog {
             setLogin(true);
             saveSettings();
             closeDialog();
-
         }
 
         @Override

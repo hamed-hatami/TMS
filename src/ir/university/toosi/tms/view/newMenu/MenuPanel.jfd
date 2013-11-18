@@ -28,6 +28,7 @@ new FormModel {
 					"horizontalTextPosition": 0
 					"preferredSize": new java.awt.Dimension( 80, 80 )
 					"font": #Font0
+					"visible": false
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4
 					}
@@ -148,6 +149,7 @@ new FormModel {
 					"alignmentX": 0.5f
 					"preferredSize": #Dimension2
 					"font": #Font0
+					"visible": false
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4
 					}

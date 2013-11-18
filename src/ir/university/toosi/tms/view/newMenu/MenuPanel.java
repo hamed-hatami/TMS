@@ -98,6 +98,7 @@ public abstract class MenuPanel extends JPanel {
                 languageDefItem.setHorizontalTextPosition(SwingConstants.CENTER);
                 languageDefItem.setPreferredSize(new Dimension(80, 80));
                 languageDefItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                languageDefItem.setVisible(false);
                 languageDefItem.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -231,6 +232,7 @@ public abstract class MenuPanel extends JPanel {
                 organManagementItem.setAlignmentX(0.5F);
                 organManagementItem.setPreferredSize(new Dimension(80, 80));
                 organManagementItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                organManagementItem.setVisible(false);
                 organManagementItem.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
