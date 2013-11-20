@@ -9,7 +9,11 @@ import ir.university.toosi.tms.util.Configuration;
 public class WebServiceInfo {
 
 
-    private final String serverUrl = "http://" + Configuration.getProperty("server.ip") + ":8080/kernel/restful/TMSService";
+    private final String serverUrl = "http://"
+            + Configuration.getProperty("server.ip")
+            + ":"
+            + Configuration.getProperty("server.port")
+            + "/kernel/restful/TMSService";
  //   private final String serverUrl = "http://192.168.240.27:8080/kernel/restful/TMSService";
     private String serviceName;
 
