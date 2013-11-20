@@ -12,6 +12,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+
 /**
  * @author a_hadadi
  */
@@ -77,9 +78,36 @@ public class ImageUtils {
         }
     }
 
-    public static float calculateScaleRatio(int originalWidth, int targetWidth) {
+    public static float calculateMinimizingWidthScaleRatio(int originalWidth, int targetWidth) {
         //calculate  ratio for scaling
         return (float) targetWidth / originalWidth;
+    }
+
+    public static BufferedImage changeImageFormat(BufferedImage bufferedImage) {
+        BufferedImage changedBufferedImage = new BufferedImage(bufferedImage.getWidth(), bufferedImage.getHeight(), BufferedImage.TYPE_USHORT_565_RGB);
+        changedBufferedImage.getGraphics().drawImage(bufferedImage, 0, 0, null);
+        return changedBufferedImage;
+    }
+
+    public static float calculateBestScaleRatio(int originalWidth, int targetWidth, int originalHeight, int targetHeight) {
+        //calculate  ratio for scaling
+        float widthScaleRatio = 0;
+        float heightScaleRatio = 0;
+
+        if (originalWidth > targetWidth || originalHeight > targetHeight) {
+            //original is bigger
+            widthScaleRatio = (float) targetWidth / originalWidth;
+            heightScaleRatio = (float) targetHeight / originalHeight;
+            return Math.min(widthScaleRatio, heightScaleRatio);
+        }
+
+        if (originalWidth < targetWidth && originalHeight < targetHeight) {
+            //original is little
+            widthScaleRatio = (float) targetWidth / originalWidth;
+            heightScaleRatio = (float) targetHeight / originalHeight;
+            return Math.min(widthScaleRatio, heightScaleRatio);
+        }
+        return 1;
     }
 
     public static BufferedImage scaleImage(BufferedImage bufferedImage, float scaleRatio) throws IOException {

@@ -11,15 +11,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 
 /**
  * @author a_hadadi
  */
 public class PersonCode extends TMSInternalFrame {
+
     private PersonPanel panel = null;
     private Person person = null;
     private WebServiceInfo personService = new WebServiceInfo();
@@ -102,7 +100,6 @@ public class PersonCode extends TMSInternalFrame {
 
     }
 
-
     protected void showPersonManagementAndExit() {
         PersonManagementCode personManagementCode = new PersonManagementCode();
         personManagementCode.setVisible(true);
@@ -112,7 +109,7 @@ public class PersonCode extends TMSInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Configuration.saveSettings("prop_openDirectory",prop_openDirectory);
+        Configuration.saveSettings("prop_openDirectory", prop_openDirectory);
         dispose();
     }
 
@@ -165,14 +162,19 @@ public class PersonCode extends TMSInternalFrame {
             //panelPreview.repaint();
             //validate();
             //initImageInfo(true);
-            float scaleRatio = ImageUtils.calculateScaleRatio(sourceBufferedImage.getWidth(), panel.labelPicPanel.getWidth());
-            if (scaleRatio > 0 && scaleRatio < 1) {
+            //float scaleRatio = ImageUtils.calculateScaleRatio(sourceBufferedImage.getWidth(), panel.labelPicPanel.getWidth());
+            float scaleRatio = ImageUtils.calculateBestScaleRatio(sourceBufferedImage.getWidth()
+                    , panel.labelPicPanel.getWidth()
+                    , sourceBufferedImage.getHeight()
+                    , panel.labelPicPanel.getHeight());
+            if (scaleRatio > 0 && scaleRatio != 1) {
                 try {
                     sourceBufferedImage = ImageUtils.scaleImage(sourceBufferedImage, scaleRatio);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
+           //sourceBufferedImage = ImageUtils.changeImageFormat(sourceBufferedImage);//todo use it or no?
             panel.labelPicPanel.setIcon(new ImageIcon(sourceBufferedImage));
             panel.textFieldPicAddress.setText(sourceFile.getPath());
         }

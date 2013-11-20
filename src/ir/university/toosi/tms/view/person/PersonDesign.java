@@ -166,7 +166,7 @@ public  abstract class PersonDesign extends JPanel {
             }
         }
         add(panelButton);
-        panelButton.setBounds(10, 273, 505, 45);
+        panelButton.setBounds(10, 300, 505, 45);
 
         //======== panel1 ========
         {
@@ -182,25 +182,25 @@ public  abstract class PersonDesign extends JPanel {
                 }
             });
             panel1.add(buttonPicBrowse);
-            buttonPicBrowse.setBounds(140, 75, 65, 21);
+            buttonPicBrowse.setBounds(135, 125, 70, 20);
 
             //---- textFieldPicAddress ----
             textFieldPicAddress.setEditable(false);
             textFieldPicAddress.setBackground(new Color(253, 253, 216));
             panel1.add(textFieldPicAddress);
-            textFieldPicAddress.setBounds(210, 75, 195, 20);
+            textFieldPicAddress.setBounds(210, 125, 195, 20);
 
             //---- labelPicAddress ----
             labelPicAddress.setText("text");
             panel1.add(labelPicAddress);
-            labelPicAddress.setBounds(409, 78, 90, 16);
+            labelPicAddress.setBounds(410, 127, 90, 16);
 
             //---- labelPicPanel ----
             labelPicPanel.setIcon(null);
             labelPicPanel.setHorizontalAlignment(SwingConstants.CENTER);
             labelPicPanel.setBorder(new BevelBorder(BevelBorder.LOWERED));
             panel1.add(labelPicPanel);
-            labelPicPanel.setBounds(15, 5, 115, 125);
+            labelPicPanel.setBounds(15, 5, 108, 146);
 
             { // compute preferred size
                 Dimension preferredSize = new Dimension();
@@ -217,7 +217,7 @@ public  abstract class PersonDesign extends JPanel {
             }
         }
         add(panel1);
-        panel1.setBounds(10, 135, 505, 135);
+        panel1.setBounds(10, 137, 505, 160);
 
         { // compute preferred size
             Dimension preferredSize = new Dimension();
