@@ -11,6 +11,7 @@ import ir.university.toosi.tms.view.language.LanguageAddForm;
 import ir.university.toosi.tms.view.language.LanguageManagementCode;
 import ir.university.toosi.tms.view.login.LoginForm;
 import ir.university.toosi.tms.view.newMenu.MenuPanel;
+import ir.university.toosi.tms.view.organ.OrganManagementCode;
 import ir.university.toosi.tms.view.pc.PCManagement;
 import ir.university.toosi.tms.view.pc.PCManagementCode;
 import ir.university.toosi.tms.view.person.PersonManagementCode;
@@ -313,7 +314,14 @@ public class MainForm extends JFrame implements WindowListener {
 
         @Override
         protected void showOrganManagment() {
-            //todo
+            OrganManagementCode organManagementCode= new OrganManagementCode();
+            organManagementCode.setVisible(true);
+            desktopPane.add(organManagementCode);
+            try {
+                organManagementCode.setSelected(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
 

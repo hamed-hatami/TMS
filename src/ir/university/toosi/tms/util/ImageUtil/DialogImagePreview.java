@@ -39,20 +39,23 @@ package ir.university.toosi.tms.util.ImageUtil;
 
 
 import javax.swing.*;
-import javax.swing.border.EtchedBorder;
-import java.beans.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.io.IOException;
 
 public class DialogImagePreview extends JComponent implements PropertyChangeListener {
+    final int previewWidth = 450;
+    final int previewHeight = 300;
     ImageIcon thumbnail = null;
     File file = null;
-    final int previewWidth = 450;
-    final int previewHeight= 300;
 
     public DialogImagePreview(JFileChooser fc) {
         setPreferredSize(new Dimension(previewWidth, previewHeight));
         fc.addPropertyChangeListener(this);
+        setBorder(new BevelBorder(BevelBorder.LOWERED));
     }
 
     public void loadImage() {
@@ -61,31 +64,22 @@ public class DialogImagePreview extends JComponent implements PropertyChangeList
             return;
         }
 
-        //Don't use createImageIcon (which is a wrapper for getResource)
-        //because the image we're trying to load is probably not one
-        //of this program's own resources.
         ImageIcon tmpIcon = new ImageIcon(file.getPath());
-        if (tmpIcon != null) {
-            if (tmpIcon.getIconWidth() > previewWidth) {
-                tmpIcon = new ImageIcon(tmpIcon.getImage().
-                        getScaledInstance(previewWidth, -1,
-                                Image.SCALE_DEFAULT));
-                thumbnail = tmpIcon;
-                return;
+
+        thumbnail = tmpIcon;
+        float scaleRatio = ImageUtils.calculateBestScaleRatio(tmpIcon.getIconWidth()
+                , previewWidth
+                , tmpIcon.getIconHeight()
+                , previewHeight);
+        if (scaleRatio > 0 && scaleRatio != 1) {
+            try {
+                thumbnail = ImageUtils.convertToImageIcon(ImageUtils.scaleImage(ImageUtils.getBufferedImage(file)
+                        , scaleRatio));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-            if (tmpIcon.getIconHeight() > previewHeight) {
-                tmpIcon = new ImageIcon(tmpIcon.getImage().
-                        getScaledInstance(previewHeight, -1,
-                                Image.SCALE_DEFAULT));
-                thumbnail = tmpIcon;
-                return;
-            }
-
-            //no need to miniaturize or minimized before
-            thumbnail = tmpIcon;
-
         }
+
     }
 
     public void propertyChange(PropertyChangeEvent e) {
@@ -118,8 +112,8 @@ public class DialogImagePreview extends JComponent implements PropertyChangeList
             loadImage();
         }
         if (thumbnail != null) {
-            int x = getWidth()/2 - thumbnail.getIconWidth()/2;
-            int y = getHeight()/2 - thumbnail.getIconHeight()/2;
+            int x = getWidth() / 2 - thumbnail.getIconWidth() / 2;
+            int y = getHeight() / 2 - thumbnail.getIconHeight() / 2;
 
             if (y < 0) {
                 y = 0;

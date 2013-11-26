@@ -174,7 +174,7 @@ public class PersonCode extends TMSInternalFrame {
                     e.printStackTrace();
                 }
             }
-           //sourceBufferedImage = ImageUtils.changeImageFormat(sourceBufferedImage);//todo use it or no?
+           //sourceBufferedImage = ImageUtils.changeImageFormat(sourceBufferedImage);
             panel.labelPicPanel.setIcon(new ImageIcon(sourceBufferedImage));
             panel.textFieldPicAddress.setText(sourceFile.getPath());
         }

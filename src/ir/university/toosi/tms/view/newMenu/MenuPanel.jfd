@@ -149,7 +149,6 @@ new FormModel {
 					"alignmentX": 0.5f
 					"preferredSize": #Dimension2
 					"font": #Font0
-					"visible": false
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4
 					}

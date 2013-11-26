@@ -232,7 +232,6 @@ public abstract class MenuPanel extends JPanel {
                 organManagementItem.setAlignmentX(0.5F);
                 organManagementItem.setPreferredSize(new Dimension(80, 80));
                 organManagementItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
-                organManagementItem.setVisible(false);
                 organManagementItem.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
