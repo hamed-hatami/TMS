@@ -13,51 +13,64 @@ new FormModel {
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
 				"axis": 2
 			} ) {
-				name: "languageMenu"
+				name: "managementMenu"
 				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
-				"componentOrientation": sfield java.awt.ComponentOrientation LEFT_TO_RIGHT
 				"font": &Font0 new java.awt.Font( "Tahoma", 0, 11 )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "languageDefItem"
+					name: "personManagementItem"
 					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
-					"maximumSize": new java.awt.Dimension( 80, 80 )
-					"minimumSize": new java.awt.Dimension( 80, 80 )
-					"text": "ایجاد"
-					"alignmentX": 0.5f
+					"maximumSize": &Dimension0 new java.awt.Dimension( 80, 80 )
+					"minimumSize": &Dimension1 new java.awt.Dimension( 80, 80 )
 					"verticalTextPosition": 3
 					"horizontalTextPosition": 0
-					"preferredSize": new java.awt.Dimension( 80, 80 )
+					"text": "اشخاص"
+					"alignmentX": 0.5f
+					"preferredSize": &Dimension2 new java.awt.Dimension( 80, 80 )
 					"font": #Font0
-					"visible": false
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4
 					}
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showLanguageDef", false ) )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showPersonManagment", false ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "importLanguage"
+					name: "organManagementItem"
 					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
-					"maximumSize": new java.awt.Dimension( 80, 80 )
-					"minimumSize": new java.awt.Dimension( 80, 80 )
-					"horizontalTextPosition": 0
+					"maximumSize": #Dimension0
+					"minimumSize": #Dimension1
 					"verticalTextPosition": 3
-					"text": "ویرایش"
-					"preferredSize": new java.awt.Dimension( 80, 80 )
+					"horizontalTextPosition": 0
+					"text": "سازمان"
+					"alignmentX": 0.5f
+					"preferredSize": #Dimension2
 					"font": #Font0
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4
 					}
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showLanguageForm", false ) )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showOrganManagment", false ) )
 				} )
 			}, new FormLayoutConstraints( null ) {
-				"title": "زبان"
+				"title": "مدیریت اشخاص"
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
 				"axis": 2
 			} ) {
-				name: "managementMenu"
-				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
-				"font": #Font0
+				name: "userManagementMenu"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "userManagementItem"
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"maximumSize": #Dimension0
+					"minimumSize": #Dimension1
+					"verticalTextPosition": 3
+					"horizontalTextPosition": 0
+					"text": "کاربران"
+					"alignmentX": 0.5f
+					"preferredSize": new java.awt.Dimension( 80, 80 )
+					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showUserManagement", false ) )
+				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "workGroupManagementItem"
 					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
@@ -91,38 +104,6 @@ new FormModel {
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showRoleManagement", false ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "userManagementItem"
-					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
-					"maximumSize": &Dimension0 new java.awt.Dimension( 80, 80 )
-					"minimumSize": &Dimension1 new java.awt.Dimension( 80, 80 )
-					"verticalTextPosition": 3
-					"horizontalTextPosition": 0
-					"text": "کاربران"
-					"alignmentX": 0.5f
-					"preferredSize": new java.awt.Dimension( 80, 80 )
-					"font": #Font0
-					auxiliary() {
-						"JavaCodeGenerator.variableModifiers": 4
-					}
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showUserManagement", false ) )
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "personManagementItem"
-					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
-					"maximumSize": #Dimension0
-					"minimumSize": #Dimension1
-					"verticalTextPosition": 3
-					"horizontalTextPosition": 0
-					"text": "اشخاص"
-					"alignmentX": 0.5f
-					"preferredSize": &Dimension2 new java.awt.Dimension( 80, 80 )
-					"font": #Font0
-					auxiliary() {
-						"JavaCodeGenerator.variableModifiers": 4
-					}
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showPersonManagment", false ) )
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "pcManagementItem"
 					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
 					"maximumSize": #Dimension0
@@ -138,21 +119,31 @@ new FormModel {
 					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showPCManagment", false ) )
 				} )
+			}, new FormLayoutConstraints( null ) {
+				"title": "مدیریت کاربران"
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
+				"axis": 2
+			} ) {
+				name: "exitMenu"
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"font": #Font0
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "organManagementItem"
+					name: "languageDefItem"
 					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
-					"maximumSize": #Dimension0
-					"minimumSize": #Dimension1
+					"maximumSize": new java.awt.Dimension( 80, 80 )
+					"minimumSize": new java.awt.Dimension( 80, 80 )
+					"text": "ایجاد"
+					"alignmentX": 0.5f
 					"verticalTextPosition": 3
 					"horizontalTextPosition": 0
-					"text": "سازمان"
-					"alignmentX": 0.5f
-					"preferredSize": #Dimension2
+					"preferredSize": new java.awt.Dimension( 80, 80 )
 					"font": #Font0
+					"visible": false
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4
 					}
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showOrganManagment", false ) )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showLanguageDef", false ) )
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "eventLogListItem"
@@ -170,15 +161,21 @@ new FormModel {
 					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showEventLogList", false ) )
 				} )
-			}, new FormLayoutConstraints( null ) {
-				"title": "مدیریت"
-			} )
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
-				"axis": 2
-			} ) {
-				name: "exitMenu"
-				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
-				"font": #Font0
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "importLanguage"
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"maximumSize": new java.awt.Dimension( 80, 80 )
+					"minimumSize": new java.awt.Dimension( 80, 80 )
+					"horizontalTextPosition": 0
+					"verticalTextPosition": 3
+					"text": "ویرایش زبان"
+					"preferredSize": new java.awt.Dimension( 80, 80 )
+					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showLanguageForm", false ) )
+				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "exit"
 					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
