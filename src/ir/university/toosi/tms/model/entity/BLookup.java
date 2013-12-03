@@ -10,33 +10,24 @@ public class BLookup extends BaseEntity {
     private long id;
 
     @JsonProperty
-    private String code;
-
-    @JsonProperty
-    private String name;
-
-    @JsonProperty
-    private String description;
-
-    @JsonProperty
-    private String persianName;
+    private String title;
 
     @JsonProperty
     private Lookup lookup;
 
+    @JsonProperty
+    private String titleText;
+
+
     public BLookup() {
     }
 
-    public BLookup(int id) {
+    public BLookup(long id, String title, Lookup lookup) {
         this.id = id;
-    }
-
-    public BLookup(String code, String name, String description, Lookup lookup) {
-        this.code = code;
-        this.name = name;
-        this.description = description;
+        this.title = title;
         this.lookup = lookup;
     }
+
 
     public long getId() {
         return id;
@@ -46,36 +37,12 @@ public class BLookup extends BaseEntity {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
+    public String getTitle() {
+        return title;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPersianName() {
-        return persianName;
-    }
-
-    public void setPersianName(String persianName) {
-        this.persianName = persianName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Lookup getLookup() {
@@ -86,8 +53,15 @@ public class BLookup extends BaseEntity {
         this.lookup = lookup;
     }
 
+    public String getTitleText() {
+        return titleText;
+    }
+
+    public void setTitleText(String titleText) {
+        this.titleText = titleText;
+    }
     @Override
-    public String toString() {
-        return name;
+    public String toString(){
+        return title;
     }
 }

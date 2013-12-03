@@ -54,7 +54,7 @@ public class BLookupForm extends TMSInternalFrame {
 
         codeLabel.setText("CODE");
 
-        if (editMode)
+       /* if (editMode)
             codeField.setText(bLookup.getCode());
         else
             codeField.setText("");
@@ -71,7 +71,7 @@ public class BLookupForm extends TMSInternalFrame {
         if (editMode)
             descField.setText(bLookup.getDescription());
         else
-            descField.setText("");
+            descField.setText("");*/
 
         org.jdesktop.layout.GroupLayout TMSPanel1Layout = new org.jdesktop.layout.GroupLayout(mainPanel);
         mainPanel.setLayout(TMSPanel1Layout);
@@ -163,9 +163,9 @@ public class BLookupForm extends TMSInternalFrame {
     private void add(java.awt.event.ActionEvent evt) {
 
         BLookup bLookup1 = new BLookup();
-        bLookup1.setName(nameField.getText());
+       /* bLookup1.setName(nameField.getText());
         bLookup1.setCode(codeField.getText());
-        bLookup1.setDescription(descField.getText());
+        bLookup1.setDescription(descField.getText());*/
         bLookup1.setLookup(lookup);
         bLookup1.setEffectorUser(ThreadPoolManager.me.getUsername());
 
@@ -186,9 +186,9 @@ public class BLookupForm extends TMSInternalFrame {
 
     private void edit(java.awt.event.ActionEvent evt) {
 
-        bLookup.setName(nameField.getText());
+       /* bLookup.setName(nameField.getText());
         bLookup.setCode(codeField.getText());
-        bLookup.setDescription(descField.getText());
+        bLookup.setDescription(descField.getText());*/
         bLookup.setLookup(lookup);
         bLookup.setEffectorUser(ThreadPoolManager.me.getUsername());
 

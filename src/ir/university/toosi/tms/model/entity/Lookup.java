@@ -10,37 +10,24 @@ import java.util.Set;
 @JsonIgnoreProperties(value = "@id")
 public class Lookup extends BaseEntity {
 
+
     @JsonProperty
     private long id;
 
     @JsonProperty
-    private String code;
-
-    @JsonProperty
-    private String name;
-
-    @JsonProperty
-    private String description;
-
-    @JsonProperty
-    private String persianName;
+    private String title;
 
     @JsonProperty
     private boolean definable;
 
-    public Lookup(String code, String name, String description) {
-        this.code = code;
-        this.name = name;
-        this.description = description;
-    }
+    @JsonProperty
+    private String titleText;
+
 
 
     public Lookup() {
     }
 
-    public Lookup(int id) {
-        this.id = id;
-    }
 
     public long getId() {
         return id;
@@ -50,37 +37,6 @@ public class Lookup extends BaseEntity {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getPersianName() {
-        return persianName;
-    }
-
-    public void setPersianName(String persianName) {
-        this.persianName = persianName;
-    }
 
     public boolean isDefinable() {
         return definable;
@@ -88,5 +44,21 @@ public class Lookup extends BaseEntity {
 
     public void setDefinable(boolean definable) {
         this.definable = definable;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getTitleText() {
+        return titleText;
+    }
+
+    public void setTitleText(String titleText) {
+        this.titleText = titleText;
     }
 }

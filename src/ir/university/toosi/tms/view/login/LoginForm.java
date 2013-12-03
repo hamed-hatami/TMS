@@ -156,7 +156,6 @@ public class LoginForm extends JDialog {
         panel.repaint();
         validate();
 
-
     }
 
     private void fillSearchCombo() {

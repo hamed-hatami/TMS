@@ -228,7 +228,7 @@ public abstract class MenuPanel extends JPanel {
                 organManagementItem.setMinimumSize(new Dimension(80, 80));
                 organManagementItem.setVerticalTextPosition(SwingConstants.BOTTOM);
                 organManagementItem.setHorizontalTextPosition(SwingConstants.CENTER);
-                organManagementItem.setText("\u0627\u0631\u06af\u0627\u0646");
+                organManagementItem.setText("\u0633\u0627\u0632\u0645\u0627\u0646");
                 organManagementItem.setAlignmentX(0.5F);
                 organManagementItem.setPreferredSize(new Dimension(80, 80));
                 organManagementItem.setFont(new Font("Tahoma", Font.PLAIN, 11));

@@ -185,6 +185,7 @@ public class MainForm extends JFrame implements WindowListener {
     class MenuPaneActionAvailable extends MenuPanel {
         MenuPaneActionAvailable() {
             super();
+
             //todo change icons
             languageDefItem.setIcon(ComponentUtil.getImageIcon("lang.png"));
             importLanguage.setIcon(ComponentUtil.getImageIcon("lang.png"));
@@ -196,6 +197,18 @@ public class MainForm extends JFrame implements WindowListener {
             pcManagementItem.setIcon(ComponentUtil.getImageIcon("account-menu.png"));
             organManagementItem.setIcon(ComponentUtil.getImageIcon("account-menu.png"));
             exit.setIcon(ComponentUtil.getImageIcon("exit.png"));
+
+            //todo bundle
+           /* languageDefItem.setText(ThreadPoolManager.getLangValue("TMS_"));
+            importLanguage.setText(ThreadPoolManager.getLangValue("TMS_"));
+            workGroupManagementItem.setText(ThreadPoolManager.getLangValue("TMS_"));
+            roleManagementItem.setText(ThreadPoolManager.getLangValue("TMS_"));
+            userManagementItem.setText(ThreadPoolManager.getLangValue("TMS_"));
+            eventLogListItem.setText(ThreadPoolManager.getLangValue("TMS_"));
+            personManagementItem.setText(ThreadPoolManager.getLangValue("TMS_"));
+            pcManagementItem.setText(ThreadPoolManager.getLangValue("TMS_"));
+            organManagementItem.setText(ThreadPoolManager.getLangValue("TMS_"));
+            exit.setText(ThreadPoolManager.getLangValue("TMS_"));*/
         }
 
         @Override
@@ -314,7 +327,7 @@ public class MainForm extends JFrame implements WindowListener {
 
         @Override
         protected void showOrganManagment() {
-            OrganManagementCode organManagementCode= new OrganManagementCode();
+            OrganManagementCode organManagementCode= new OrganManagementCode(null);
             organManagementCode.setVisible(true);
             desktopPane.add(organManagementCode);
             try {

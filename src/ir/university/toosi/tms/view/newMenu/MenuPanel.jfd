@@ -145,7 +145,7 @@ new FormModel {
 					"minimumSize": #Dimension1
 					"verticalTextPosition": 3
 					"horizontalTextPosition": 0
-					"text": "ارگان"
+					"text": "سازمان"
 					"alignmentX": 0.5f
 					"preferredSize": #Dimension2
 					"font": #Font0

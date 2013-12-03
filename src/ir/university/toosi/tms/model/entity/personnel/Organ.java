@@ -23,7 +23,7 @@ public class Organ extends BaseEntity {
     private String name;
     @JsonProperty
     private String code;
-    @JsonProperty
+    @JsonProperty(required = false)
     private String title;
     @JsonProperty
     private BLookup organType;
@@ -146,5 +146,9 @@ public class Organ extends BaseEntity {
 
     public void setRulePackage(RulePackage rulePackage) {
         this.rulePackage = rulePackage;
+    }
+    @Override
+    public String toString() {
+        return this.title;
     }
 }

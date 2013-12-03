@@ -161,12 +161,12 @@ public class BasicInfoManagement extends TMSInternalFrame {
 
         lookupPanel.setBorder(BorderFactory.createTitledBorder("LOOKUP"));
 
-        codeField.setEditable(false);
+       /* codeField.setEditable(false);   //todo
         codeField.setText(lookup.getCode());
         nameField.setEditable(false);
         nameField.setText(lookup.getName());
         descField.setEditable(false);
-        descField.setText(lookup.getDescription());
+        descField.setText(lookup.getDescription());*/
 
 
         codeLabel.setText("CODE");

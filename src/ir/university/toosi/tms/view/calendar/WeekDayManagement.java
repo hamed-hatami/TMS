@@ -90,7 +90,7 @@ public class WeekDayManagement extends TMSInternalFrame {
         weekDayItems = new String[weekDayItemList.size()];
         int i = 0;
         for (BLookup blookup : weekDayItemList) {
-            weekDayItems[i++] = blookup.getCode();
+           // weekDayItems[i++] = blookup.getCode(); //todo
         }
     }
 

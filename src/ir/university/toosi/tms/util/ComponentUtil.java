@@ -89,6 +89,25 @@ public class ComponentUtil {
         if (component instanceof JTextField) {
             component.setComponentOrientation(componentOrientation);
         }
+
+        if (component instanceof JTextArea) {
+            component.setComponentOrientation(componentOrientation);
+        }
+
+        if (component instanceof JTextPane) {
+            component.setComponentOrientation(componentOrientation);
+        }
+
+        if (component instanceof JScrollPane) {
+            for (Component cmp : component.getComponents()) {
+                setFont((JComponent) cmp, font, componentOrientation);
+            }
+        }
+
+        if (component instanceof JTree) {
+            component.setComponentOrientation(componentOrientation);
+        }
+
         if (component instanceof JComboBox) {
             component.setComponentOrientation(componentOrientation);
             JComboBox comboBox = (JComboBox) component;
