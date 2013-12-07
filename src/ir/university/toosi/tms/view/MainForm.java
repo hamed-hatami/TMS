@@ -12,7 +12,6 @@ import ir.university.toosi.tms.view.language.LanguageManagementCode;
 import ir.university.toosi.tms.view.login.LoginForm;
 import ir.university.toosi.tms.view.newMenu.MenuPanel;
 import ir.university.toosi.tms.view.organ.OrganManagementCode;
-import ir.university.toosi.tms.view.pc.PCManagement;
 import ir.university.toosi.tms.view.pc.PCManagementCode;
 import ir.university.toosi.tms.view.person.PersonManagementCode;
 import ir.university.toosi.tms.view.role.RoleManagementCode;
@@ -106,7 +105,6 @@ public class MainForm extends JFrame implements WindowListener {
         }
 
 
-
         // setMaximumSize(new Dimension(1024, 800));
         setBackground(new Color(234, 234, 255));
         Container contentPane = getContentPane();
@@ -131,7 +129,7 @@ public class MainForm extends JFrame implements WindowListener {
         desktopPane.setBackground(new Color(238, 238, 238));
         contentPane.add(desktopPane);
 
-        ComponentUtil.changeComonentOrientation(this.getComponents(),direction);
+        ComponentUtil.changeComonentOrientation(this.getComponents(), direction);
 
         //set Main window Properties
         setVisible(true);
@@ -139,7 +137,6 @@ public class MainForm extends JFrame implements WindowListener {
         revalidate();*/
 
     }
-
 
     public TMSDesktop getDesktopPane() {
         return desktopPane;
@@ -194,12 +191,25 @@ public class MainForm extends JFrame implements WindowListener {
             userManagementItem.setIcon(ComponentUtil.getImageIcon("users-menu.png"));
             eventLogListItem.setIcon(ComponentUtil.getImageIcon("event.png"));
             personManagementItem.setIcon(ComponentUtil.getImageIcon("account-menu.png"));
-            pcManagementItem.setIcon(ComponentUtil.getImageIcon("account-menu.png"));
-            organManagementItem.setIcon(ComponentUtil.getImageIcon("account-menu.png"));
+            pcManagementItem.setIcon(ComponentUtil.getImageIcon("pc-menu.png"));
+            organManagementItem.setIcon(ComponentUtil.getImageIcon("organ.png"));
             exit.setIcon(ComponentUtil.getImageIcon("exit.png"));
 
-            //todo bundle
-           /* languageDefItem.setText(ThreadPoolManager.getLangValue("TMS_"));
+            cameraItem.setIcon(ComponentUtil.getImageIcon("camera_add.png"));
+            cardItem.setIcon(ComponentUtil.getImageIcon("Payment-Methods-Card-inserting-icon.png"));
+            gatewayItem.setIcon(ComponentUtil.getImageIcon("gate.png"));
+            zoneItem.setIcon(ComponentUtil.getImageIcon("zone.png"));
+            pdpItem.setIcon(ComponentUtil.getImageIcon("pdp.png"));
+            dayItem.setIcon(ComponentUtil.getImageIcon("day-icon.png"));
+            calendarItem.setIcon(ComponentUtil.getImageIcon("calendar.png"));
+            ruleItem.setIcon(ComponentUtil.getImageIcon("rule.png"));
+            exceptionRuleItem.setIcon(ComponentUtil.getImageIcon("exception.png"));
+
+
+
+            /*
+            todo bundle
+            languageDefItem.setText(ThreadPoolManager.getLangValue("TMS_"));
             importLanguage.setText(ThreadPoolManager.getLangValue("TMS_"));
             workGroupManagementItem.setText(ThreadPoolManager.getLangValue("TMS_"));
             roleManagementItem.setText(ThreadPoolManager.getLangValue("TMS_"));
@@ -208,7 +218,19 @@ public class MainForm extends JFrame implements WindowListener {
             personManagementItem.setText(ThreadPoolManager.getLangValue("TMS_"));
             pcManagementItem.setText(ThreadPoolManager.getLangValue("TMS_"));
             organManagementItem.setText(ThreadPoolManager.getLangValue("TMS_"));
-            exit.setText(ThreadPoolManager.getLangValue("TMS_"));*/
+            exit.setText(ThreadPoolManager.getLangValue("TMS_"));
+
+
+            cameraItem.setText(ThreadPoolManager.getLangValue("TMS_"));
+            cardItem.setText(ThreadPoolManager.getLangValue("TMS_"));
+            gatewayItem.setText(ThreadPoolManager.getLangValue("TMS_"));
+            zoneItem.setText(ThreadPoolManager.getLangValue("TMS_"));
+            pdpItem.setText(ThreadPoolManager.getLangValue("TMS_"));
+            dayItem.setText(ThreadPoolManager.getLangValue("TMS_"));
+            calendarItem.setText(ThreadPoolManager.getLangValue("TMS_"));
+            ruleItem.setText(ThreadPoolManager.getLangValue("TMS_"));
+            exceptionRuleItem.setText(ThreadPoolManager.getLangValue("TMS_"));
+            */
         }
 
         @Override
@@ -283,6 +305,8 @@ public class MainForm extends JFrame implements WindowListener {
             }
         }
 
+
+
         @Override
         protected void showLanguageDef() {
             LanguageAddForm languageAddForm = new LanguageAddForm();
@@ -315,7 +339,7 @@ public class MainForm extends JFrame implements WindowListener {
         @Override
         protected void showPCManagment() {
 
-            PCManagementCode pcManagement= new PCManagementCode();
+            PCManagementCode pcManagement = new PCManagementCode();
             pcManagement.setVisible(true);
             desktopPane.add(pcManagement);
             try {
@@ -327,7 +351,7 @@ public class MainForm extends JFrame implements WindowListener {
 
         @Override
         protected void showOrganManagment() {
-            OrganManagementCode organManagementCode= new OrganManagementCode(null);
+            OrganManagementCode organManagementCode = new OrganManagementCode(null);
             organManagementCode.setVisible(true);
             desktopPane.add(organManagementCode);
             try {
@@ -337,6 +361,46 @@ public class MainForm extends JFrame implements WindowListener {
             }
         }
 
+        @Override
+        protected void showDayManagment() {
+            //todo
+        }
+
+        @Override
+        protected void showRuleManagment() {
+
+            //todo
+        }
+
+        @Override
+        protected void showExceptionRuleManagment() {
+            //todo
+        }
+
+        @Override
+        protected void showCameraManagment() {
+            //todo
+        }
+
+        @Override
+        protected void showCardManagment() {
+            //todo
+        }
+
+        @Override
+        protected void showGatewayManagment() {
+            //todo
+        }
+
+        @Override
+        protected void showZoneManagment() {
+            //todo
+        }
+
+        @Override
+        protected void showPDPManagment() {
+            //todo
+        }
 
     }
 

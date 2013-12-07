@@ -43,7 +43,7 @@ public class CalendarManagement extends TMSInternalFrame {
         try {
             initComponents();
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
     }
 

@@ -28,6 +28,7 @@ public class ComponentUtil {
                 bufferedImage = ImageIO.read(new File(pathPrefix + fileName));
             } catch (IOException e) {
                 e.printStackTrace();
+                System.out.println("desire image not fund : " + fileName);
             }
             ImageIcon imageIcon = new ImageIcon(bufferedImage);
             return imageIcon;

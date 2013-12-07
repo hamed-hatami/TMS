@@ -125,7 +125,165 @@ new FormModel {
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
 				"axis": 2
 			} ) {
-				name: "exitMenu"
+				name: "regionsMenu"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "cameraItem"
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"maximumSize": &Dimension3 new java.awt.Dimension( 80, 80 )
+					"minimumSize": &Dimension4 new java.awt.Dimension( 80, 80 )
+					"text": "دوربین"
+					"alignmentX": 0.5f
+					"verticalTextPosition": 3
+					"horizontalTextPosition": 0
+					"preferredSize": &Dimension5 new java.awt.Dimension( 80, 80 )
+					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showCameraManagment", false ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "cardItem"
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"maximumSize": #Dimension3
+					"minimumSize": #Dimension4
+					"text": "کارت"
+					"alignmentX": 0.5f
+					"verticalTextPosition": 3
+					"horizontalTextPosition": 0
+					"preferredSize": #Dimension5
+					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showCardManagment", false ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "gatewayItem"
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"maximumSize": #Dimension3
+					"minimumSize": #Dimension4
+					"text": "گذرگاه"
+					"alignmentX": 0.5f
+					"verticalTextPosition": 3
+					"horizontalTextPosition": 0
+					"preferredSize": #Dimension5
+					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showGatewayManagment", false ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "zoneItem"
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"maximumSize": #Dimension3
+					"minimumSize": #Dimension4
+					"text": "ناحیه"
+					"alignmentX": 0.5f
+					"verticalTextPosition": 3
+					"horizontalTextPosition": 0
+					"preferredSize": #Dimension5
+					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showZoneManagment", false ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "pdpItem"
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"maximumSize": #Dimension3
+					"minimumSize": #Dimension4
+					"text": "پی دی پی"
+					"alignmentX": 0.5f
+					"verticalTextPosition": 3
+					"horizontalTextPosition": 0
+					"preferredSize": #Dimension5
+					"font": new java.awt.Font( "Tahoma", 0, 9 )
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showPDPManagment", false ) )
+				} )
+			}, new FormLayoutConstraints( null ) {
+				"title": "نواحی"
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
+				"axis": 2
+			} ) {
+				name: "calendarMenu"
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "dayItem"
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"maximumSize": #Dimension3
+					"minimumSize": #Dimension4
+					"text": "روزکاری"
+					"alignmentX": 0.5f
+					"verticalTextPosition": 3
+					"horizontalTextPosition": 0
+					"preferredSize": #Dimension5
+					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showDayManagment", false ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "calendarItem"
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"maximumSize": #Dimension3
+					"minimumSize": #Dimension4
+					"text": "تقویم"
+					"alignmentX": 0.5f
+					"verticalTextPosition": 3
+					"horizontalTextPosition": 0
+					"preferredSize": #Dimension5
+					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showCalendarManagment", false ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "ruleItem"
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"maximumSize": #Dimension3
+					"minimumSize": #Dimension4
+					"text": "ثبت قانون جدید"
+					"alignmentX": 0.5f
+					"verticalTextPosition": 3
+					"horizontalTextPosition": 0
+					"preferredSize": #Dimension5
+					"font": &Font1 new java.awt.Font( "Tahoma", 0, 8 )
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showRuleManagment", false ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "exceptionRuleItem"
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"maximumSize": #Dimension3
+					"minimumSize": #Dimension4
+					"text": "ثبت استثناء"
+					"alignmentX": 0.5f
+					"verticalTextPosition": 3
+					"horizontalTextPosition": 0
+					"preferredSize": #Dimension5
+					"font": #Font1
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "showExceptionRuleManagment", false ) )
+				} )
+			}, new FormLayoutConstraints( null ) {
+				"title": "تقویم"
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
+				"axis": 2
+			} ) {
+				name: "operationMenu"
 				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 				"font": #Font0
 				add( new FormComponent( "javax.swing.JButton" ) {
@@ -179,13 +337,13 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "exit"
 					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
-					"maximumSize": new java.awt.Dimension( 80, 80 )
-					"minimumSize": new java.awt.Dimension( 80, 80 )
+					"maximumSize": #Dimension3
+					"minimumSize": #Dimension4
 					"text": "خروج"
 					"alignmentX": 0.5f
 					"verticalTextPosition": 3
 					"horizontalTextPosition": 0
-					"preferredSize": new java.awt.Dimension( 80, 80 )
+					"preferredSize": #Dimension5
 					"font": #Font0
 					auxiliary() {
 						"JavaCodeGenerator.variableModifiers": 4

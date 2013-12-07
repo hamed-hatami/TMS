@@ -48,7 +48,21 @@ public abstract class MenuPanel extends JPanel {
 
     protected abstract void showPersonManagment();
 
+    protected abstract void showDayManagment();
 
+    protected abstract void showRuleManagment();
+
+    protected abstract void showExceptionRuleManagment();
+
+    protected abstract void showCameraManagment();
+
+    protected abstract void showCardManagment();
+
+    protected abstract void showGatewayManagment();
+
+    protected abstract void showZoneManagment();
+
+    protected abstract void showPDPManagment();
 
     protected abstract void exit();
 
@@ -67,7 +81,18 @@ public abstract class MenuPanel extends JPanel {
         workGroupManagementItem = new JButton();
         roleManagementItem = new JButton();
         pcManagementItem = new JButton();
-        exitMenu = new JPanel();
+        regionsMenu = new JPanel();
+        cameraItem = new JButton();
+        cardItem = new JButton();
+        gatewayItem = new JButton();
+        zoneItem = new JButton();
+        pdpItem = new JButton();
+        calendarMenu = new JPanel();
+        dayItem = new JButton();
+        calendarItem = new JButton();
+        ruleItem = new JButton();
+        exceptionRuleItem = new JButton();
+        operationMenu = new JPanel();
         languageDefItem = new JButton();
         eventLogListItem = new JButton();
         importLanguage = new JButton();
@@ -203,11 +228,185 @@ public abstract class MenuPanel extends JPanel {
             }
             tabbedPane1.addTab("\u0645\u062f\u06cc\u0631\u06cc\u062a \u06a9\u0627\u0631\u0628\u0631\u0627\u0646", userManagementMenu);
 
-            //======== exitMenu ========
+            //======== regionsMenu ========
             {
-                exitMenu.setBorder(null);
-                exitMenu.setFont(new Font("Tahoma", Font.PLAIN, 11));
-                exitMenu.setLayout(new BoxLayout(exitMenu, BoxLayout.LINE_AXIS));
+                regionsMenu.setLayout(new BoxLayout(regionsMenu, BoxLayout.LINE_AXIS));
+
+                //---- cameraItem ----
+                cameraItem.setIcon(null);
+                cameraItem.setMaximumSize(new Dimension(80, 80));
+                cameraItem.setMinimumSize(new Dimension(80, 80));
+                cameraItem.setText("\u062f\u0648\u0631\u0628\u06cc\u0646");
+                cameraItem.setAlignmentX(0.5F);
+                cameraItem.setVerticalTextPosition(SwingConstants.BOTTOM);
+                cameraItem.setHorizontalTextPosition(SwingConstants.CENTER);
+                cameraItem.setPreferredSize(new Dimension(80, 80));
+                cameraItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                cameraItem.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        showCameraManagment();
+                    }
+                });
+                regionsMenu.add(cameraItem);
+
+                //---- cardItem ----
+                cardItem.setIcon(null);
+                cardItem.setMaximumSize(new Dimension(80, 80));
+                cardItem.setMinimumSize(new Dimension(80, 80));
+                cardItem.setText("\u06a9\u0627\u0631\u062a");
+                cardItem.setAlignmentX(0.5F);
+                cardItem.setVerticalTextPosition(SwingConstants.BOTTOM);
+                cardItem.setHorizontalTextPosition(SwingConstants.CENTER);
+                cardItem.setPreferredSize(new Dimension(80, 80));
+                cardItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                cardItem.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        showCardManagment();
+                    }
+                });
+                regionsMenu.add(cardItem);
+
+                //---- gatewayItem ----
+                gatewayItem.setIcon(null);
+                gatewayItem.setMaximumSize(new Dimension(80, 80));
+                gatewayItem.setMinimumSize(new Dimension(80, 80));
+                gatewayItem.setText("\u06af\u0630\u0631\u06af\u0627\u0647");
+                gatewayItem.setAlignmentX(0.5F);
+                gatewayItem.setVerticalTextPosition(SwingConstants.BOTTOM);
+                gatewayItem.setHorizontalTextPosition(SwingConstants.CENTER);
+                gatewayItem.setPreferredSize(new Dimension(80, 80));
+                gatewayItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                gatewayItem.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        showGatewayManagment();
+                    }
+                });
+                regionsMenu.add(gatewayItem);
+
+                //---- zoneItem ----
+                zoneItem.setIcon(null);
+                zoneItem.setMaximumSize(new Dimension(80, 80));
+                zoneItem.setMinimumSize(new Dimension(80, 80));
+                zoneItem.setText("\u0646\u0627\u062d\u06cc\u0647");
+                zoneItem.setAlignmentX(0.5F);
+                zoneItem.setVerticalTextPosition(SwingConstants.BOTTOM);
+                zoneItem.setHorizontalTextPosition(SwingConstants.CENTER);
+                zoneItem.setPreferredSize(new Dimension(80, 80));
+                zoneItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                zoneItem.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        showZoneManagment();
+                    }
+                });
+                regionsMenu.add(zoneItem);
+
+                //---- pdpItem ----
+                pdpItem.setIcon(null);
+                pdpItem.setMaximumSize(new Dimension(80, 80));
+                pdpItem.setMinimumSize(new Dimension(80, 80));
+                pdpItem.setText("\u067e\u06cc \u062f\u06cc \u067e\u06cc");
+                pdpItem.setAlignmentX(0.5F);
+                pdpItem.setVerticalTextPosition(SwingConstants.BOTTOM);
+                pdpItem.setHorizontalTextPosition(SwingConstants.CENTER);
+                pdpItem.setPreferredSize(new Dimension(80, 80));
+                pdpItem.setFont(new Font("Tahoma", Font.PLAIN, 9));
+                pdpItem.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        showPDPManagment();
+                    }
+                });
+                regionsMenu.add(pdpItem);
+            }
+            tabbedPane1.addTab("\u0646\u0648\u0627\u062d\u06cc", regionsMenu);
+
+            //======== calendarMenu ========
+            {
+                calendarMenu.setLayout(new BoxLayout(calendarMenu, BoxLayout.LINE_AXIS));
+
+                //---- dayItem ----
+                dayItem.setIcon(null);
+                dayItem.setMaximumSize(new Dimension(80, 80));
+                dayItem.setMinimumSize(new Dimension(80, 80));
+                dayItem.setText("\u0631\u0648\u0632\u06a9\u0627\u0631\u06cc");
+                dayItem.setAlignmentX(0.5F);
+                dayItem.setVerticalTextPosition(SwingConstants.BOTTOM);
+                dayItem.setHorizontalTextPosition(SwingConstants.CENTER);
+                dayItem.setPreferredSize(new Dimension(80, 80));
+                dayItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                dayItem.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        showDayManagment();
+                    }
+                });
+                calendarMenu.add(dayItem);
+
+                //---- calendarItem ----
+                calendarItem.setIcon(null);
+                calendarItem.setMaximumSize(new Dimension(80, 80));
+                calendarItem.setMinimumSize(new Dimension(80, 80));
+                calendarItem.setText("\u062a\u0642\u0648\u06cc\u0645");
+                calendarItem.setAlignmentX(0.5F);
+                calendarItem.setVerticalTextPosition(SwingConstants.BOTTOM);
+                calendarItem.setHorizontalTextPosition(SwingConstants.CENTER);
+                calendarItem.setPreferredSize(new Dimension(80, 80));
+                calendarItem.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                calendarItem.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        showCalendarManagment();
+                    }
+                });
+                calendarMenu.add(calendarItem);
+
+                //---- ruleItem ----
+                ruleItem.setIcon(null);
+                ruleItem.setMaximumSize(new Dimension(80, 80));
+                ruleItem.setMinimumSize(new Dimension(80, 80));
+                ruleItem.setText("\u062b\u0628\u062a \u0642\u0627\u0646\u0648\u0646 \u062c\u062f\u06cc\u062f");
+                ruleItem.setAlignmentX(0.5F);
+                ruleItem.setVerticalTextPosition(SwingConstants.BOTTOM);
+                ruleItem.setHorizontalTextPosition(SwingConstants.CENTER);
+                ruleItem.setPreferredSize(new Dimension(80, 80));
+                ruleItem.setFont(new Font("Tahoma", Font.PLAIN, 8));
+                ruleItem.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        showRuleManagment();
+                    }
+                });
+                calendarMenu.add(ruleItem);
+
+                //---- exceptionRuleItem ----
+                exceptionRuleItem.setIcon(null);
+                exceptionRuleItem.setMaximumSize(new Dimension(80, 80));
+                exceptionRuleItem.setMinimumSize(new Dimension(80, 80));
+                exceptionRuleItem.setText("\u062b\u0628\u062a \u0627\u0633\u062a\u062b\u0646\u0627\u0621");
+                exceptionRuleItem.setAlignmentX(0.5F);
+                exceptionRuleItem.setVerticalTextPosition(SwingConstants.BOTTOM);
+                exceptionRuleItem.setHorizontalTextPosition(SwingConstants.CENTER);
+                exceptionRuleItem.setPreferredSize(new Dimension(80, 80));
+                exceptionRuleItem.setFont(new Font("Tahoma", Font.PLAIN, 8));
+                exceptionRuleItem.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        showExceptionRuleManagment();
+                    }
+                });
+                calendarMenu.add(exceptionRuleItem);
+            }
+            tabbedPane1.addTab("\u062a\u0642\u0648\u06cc\u0645", calendarMenu);
+
+            //======== operationMenu ========
+            {
+                operationMenu.setBorder(null);
+                operationMenu.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                operationMenu.setLayout(new BoxLayout(operationMenu, BoxLayout.LINE_AXIS));
 
                 //---- languageDefItem ----
                 languageDefItem.setIcon(null);
@@ -226,7 +425,7 @@ public abstract class MenuPanel extends JPanel {
                         showLanguageDef();
                     }
                 });
-                exitMenu.add(languageDefItem);
+                operationMenu.add(languageDefItem);
 
                 //---- eventLogListItem ----
                 eventLogListItem.setIcon(null);
@@ -244,7 +443,7 @@ public abstract class MenuPanel extends JPanel {
                         showEventLogList();
                     }
                 });
-                exitMenu.add(eventLogListItem);
+                operationMenu.add(eventLogListItem);
 
                 //---- importLanguage ----
                 importLanguage.setIcon(null);
@@ -261,7 +460,7 @@ public abstract class MenuPanel extends JPanel {
                         showLanguageForm();
                     }
                 });
-                exitMenu.add(importLanguage);
+                operationMenu.add(importLanguage);
 
                 //---- exit ----
                 exit.setIcon(null);
@@ -279,9 +478,9 @@ public abstract class MenuPanel extends JPanel {
                         exit();
                     }
                 });
-                exitMenu.add(exit);
+                operationMenu.add(exit);
             }
-            tabbedPane1.addTab("\u0639\u0645\u0644\u06cc\u0627\u062a", exitMenu);
+            tabbedPane1.addTab("\u0639\u0645\u0644\u06cc\u0627\u062a", operationMenu);
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
         add(tabbedPane1);
@@ -297,7 +496,18 @@ public abstract class MenuPanel extends JPanel {
     protected JButton workGroupManagementItem;
     protected JButton roleManagementItem;
     protected JButton pcManagementItem;
-    private JPanel exitMenu;
+    private JPanel regionsMenu;
+    protected JButton cameraItem;
+    protected JButton cardItem;
+    protected JButton gatewayItem;
+    protected JButton zoneItem;
+    protected JButton pdpItem;
+    private JPanel calendarMenu;
+    protected JButton dayItem;
+    protected JButton calendarItem;
+    protected JButton ruleItem;
+    protected JButton exceptionRuleItem;
+    private JPanel operationMenu;
     protected JButton languageDefItem;
     protected JButton eventLogListItem;
     protected JButton importLanguage;

@@ -20,8 +20,8 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 				"x": 10
 				"y": 10
-				"width": 520
-				"height": 325
+				"width": 540
+				"height": 290
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 				name: "panelButton"
@@ -34,8 +34,8 @@ new FormModel {
 					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "buttonCancelActionPerformed", false ) )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-					"x": 25
-					"y": 15
+					"x": 15
+					"y": 7
 					"width": 95
 					"height": 26
 				} )
@@ -50,7 +50,7 @@ new FormModel {
 					"width": 95
 					"height": 26
 					"x": 261
-					"y": 15
+					"y": 7
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "buttonAdd"
@@ -62,8 +62,8 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 95
 					"height": 26
-					"x": 379
-					"y": 15
+					"x": 384
+					"y": 7
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "buttonAllocate"
@@ -89,18 +89,137 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 95
 					"height": 26
-					"x": 143
-					"y": 15
+					"x": 138
+					"y": 7
 				} )
 			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-				"width": 520
-				"height": 55
+				"width": 540
+				"height": 40
 				"x": 10
-				"y": 345
+				"y": 385
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+				name: "panelOrganInfo"
+				"border": new javax.swing.border.EtchedBorder( 1, null, null )
+				auxiliary() {
+					"JavaCodeGenerator.variableModifiers": 4
+				}
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelOrganName"
+					"text": "نام سازمان"
+					"font": &Font0 new java.awt.Font( "Tahoma", 0, 11 )
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 420
+					"y": 14
+					"width": 70
+					"height": 20
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldOrganName"
+					"font": #Font0
+					"editable": false
+					"background": &Color0 new java.awt.Color( 204, 204, 204, 255 )
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 260
+					"y": 10
+					"width": 155
+					"height": 26
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldOrganCode"
+					"font": #Font0
+					"editable": false
+					"background": #Color0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 155
+					"height": 26
+					"x": 15
+					"y": 10
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelOrganCode"
+					"text": "کد سازمان"
+					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 70
+					"height": 20
+					"x": 175
+					"y": 14
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textFieldOrganTitle"
+					"font": #Font0
+					"editable": false
+					"background": #Color0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 155
+					"height": 26
+					"x": 260
+					"y": 40
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelOrganTitle"
+					"text": "عنوان سازمان"
+					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 70
+					"height": 20
+					"x": 420
+					"y": 44
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "labelOrganType"
+					"text": "نوع سازمان"
+					"font": #Font0
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"width": 70
+					"height": 20
+					"x": 175
+					"y": 44
+				} )
+				add( new FormComponent( "javax.swing.JComboBox" ) {
+					name: "comboBoxOrganType"
+					"background": new java.awt.Color( 240, 240, 240, 255 )
+					"enabled": false
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 4
+					}
+				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+					"x": 15
+					"y": 40
+					"width": 155
+					"height": 26
+				} )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"width": 540
+				"height": 75
+				"x": 10
+				"y": 305
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 540, 410 )
+			"location": new java.awt.Point( 5, 0 )
+			"size": new java.awt.Dimension( 560, 430 )
 		} )
 	}
 }

@@ -38,6 +38,15 @@ public abstract class OrganManagementDesign extends JPanel {
         buttonAdd = new JButton();
         buttonAllocate = new JButton();
         buttonDelete = new JButton();
+        panelOrganInfo = new JPanel();
+        labelOrganName = new JLabel();
+        textFieldOrganName = new JTextField();
+        textFieldOrganCode = new JTextField();
+        labelOrganCode = new JLabel();
+        textFieldOrganTitle = new JTextField();
+        labelOrganTitle = new JLabel();
+        labelOrganType = new JLabel();
+        comboBoxOrganType = new JComboBox();
 
         //======== this ========
         setLayout(null);
@@ -50,7 +59,7 @@ public abstract class OrganManagementDesign extends JPanel {
             scrollPane.setViewportView(tree);
         }
         add(scrollPane);
-        scrollPane.setBounds(10, 10, 520, 325);
+        scrollPane.setBounds(10, 10, 540, 290);
 
         //======== panelButton ========
         {
@@ -66,7 +75,7 @@ public abstract class OrganManagementDesign extends JPanel {
                 }
             });
             panelButton.add(buttonCancel);
-            buttonCancel.setBounds(25, 15, 95, 26);
+            buttonCancel.setBounds(15, 7, 95, 26);
 
             //---- buttonEdit ----
             buttonEdit.setText("Edit");
@@ -77,7 +86,7 @@ public abstract class OrganManagementDesign extends JPanel {
                 }
             });
             panelButton.add(buttonEdit);
-            buttonEdit.setBounds(261, 15, 95, 26);
+            buttonEdit.setBounds(261, 7, 95, 26);
 
             //---- buttonAdd ----
             buttonAdd.setText("Add");
@@ -88,7 +97,7 @@ public abstract class OrganManagementDesign extends JPanel {
                 }
             });
             panelButton.add(buttonAdd);
-            buttonAdd.setBounds(379, 15, 95, 26);
+            buttonAdd.setBounds(384, 7, 95, 26);
 
             //---- buttonAllocate ----
             buttonAllocate.setText("Allocate");
@@ -111,7 +120,7 @@ public abstract class OrganManagementDesign extends JPanel {
                 }
             });
             panelButton.add(buttonDelete);
-            buttonDelete.setBounds(143, 15, 95, 26);
+            buttonDelete.setBounds(138, 7, 95, 26);
 
             { // compute preferred size
                 Dimension preferredSize = new Dimension();
@@ -128,7 +137,80 @@ public abstract class OrganManagementDesign extends JPanel {
             }
         }
         add(panelButton);
-        panelButton.setBounds(10, 345, 520, 55);
+        panelButton.setBounds(10, 385, 540, 40);
+
+        //======== panelOrganInfo ========
+        {
+            panelOrganInfo.setBorder(new EtchedBorder());
+            panelOrganInfo.setLayout(null);
+
+            //---- labelOrganName ----
+            labelOrganName.setText("\u0646\u0627\u0645 \u0633\u0627\u0632\u0645\u0627\u0646");
+            labelOrganName.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            panelOrganInfo.add(labelOrganName);
+            labelOrganName.setBounds(420, 14, 70, 20);
+
+            //---- textFieldOrganName ----
+            textFieldOrganName.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            textFieldOrganName.setEditable(false);
+            textFieldOrganName.setBackground(new Color(204, 204, 204));
+            panelOrganInfo.add(textFieldOrganName);
+            textFieldOrganName.setBounds(260, 10, 155, 26);
+
+            //---- textFieldOrganCode ----
+            textFieldOrganCode.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            textFieldOrganCode.setEditable(false);
+            textFieldOrganCode.setBackground(new Color(204, 204, 204));
+            panelOrganInfo.add(textFieldOrganCode);
+            textFieldOrganCode.setBounds(15, 10, 155, 26);
+
+            //---- labelOrganCode ----
+            labelOrganCode.setText("\u06a9\u062f \u0633\u0627\u0632\u0645\u0627\u0646");
+            labelOrganCode.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            panelOrganInfo.add(labelOrganCode);
+            labelOrganCode.setBounds(175, 14, 70, 20);
+
+            //---- textFieldOrganTitle ----
+            textFieldOrganTitle.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            textFieldOrganTitle.setEditable(false);
+            textFieldOrganTitle.setBackground(new Color(204, 204, 204));
+            panelOrganInfo.add(textFieldOrganTitle);
+            textFieldOrganTitle.setBounds(260, 40, 155, 26);
+
+            //---- labelOrganTitle ----
+            labelOrganTitle.setText("\u0639\u0646\u0648\u0627\u0646 \u0633\u0627\u0632\u0645\u0627\u0646");
+            labelOrganTitle.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            panelOrganInfo.add(labelOrganTitle);
+            labelOrganTitle.setBounds(420, 44, 70, 20);
+
+            //---- labelOrganType ----
+            labelOrganType.setText("\u0646\u0648\u0639 \u0633\u0627\u0632\u0645\u0627\u0646");
+            labelOrganType.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            panelOrganInfo.add(labelOrganType);
+            labelOrganType.setBounds(175, 44, 70, 20);
+
+            //---- comboBoxOrganType ----
+            comboBoxOrganType.setBackground(new Color(240, 240, 240));
+            comboBoxOrganType.setEnabled(false);
+            panelOrganInfo.add(comboBoxOrganType);
+            comboBoxOrganType.setBounds(15, 40, 155, 26);
+
+            { // compute preferred size
+                Dimension preferredSize = new Dimension();
+                for(int i = 0; i < panelOrganInfo.getComponentCount(); i++) {
+                    Rectangle bounds = panelOrganInfo.getComponent(i).getBounds();
+                    preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
+                    preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
+                }
+                Insets insets = panelOrganInfo.getInsets();
+                preferredSize.width += insets.right;
+                preferredSize.height += insets.bottom;
+                panelOrganInfo.setMinimumSize(preferredSize);
+                panelOrganInfo.setPreferredSize(preferredSize);
+            }
+        }
+        add(panelOrganInfo);
+        panelOrganInfo.setBounds(10, 305, 540, 75);
 
         { // compute preferred size
             Dimension preferredSize = new Dimension();
@@ -155,5 +237,14 @@ public abstract class OrganManagementDesign extends JPanel {
     protected JButton buttonAdd;
     protected JButton buttonAllocate;
     protected JButton buttonDelete;
+    protected JPanel panelOrganInfo;
+    protected JLabel labelOrganName;
+    protected JTextField textFieldOrganName;
+    protected JTextField textFieldOrganCode;
+    protected JLabel labelOrganCode;
+    protected JTextField textFieldOrganTitle;
+    protected JLabel labelOrganTitle;
+    protected JLabel labelOrganType;
+    protected JComboBox comboBoxOrganType;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
